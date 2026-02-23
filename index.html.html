@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading Companion — The Genesis Genealogies</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Upright:wght@300;400;500;600&family=Cormorant+SC:wght@400;500&display=swap');
+
+:root {
+  --ink: #18140e;
+  --parchment: #f7f1e6;
+  --parchment-dark: #ede4cf;
+  --gold: #8b6914;
+  --gold-light: #c4972a;
+  --gold-faint: rgba(139,105,20,0.09);
+  --gold-border: rgba(139,105,20,0.28);
+  --rust: #7a3320;
+  --dim: #6b5f4e;
+  --mid: #4a3e2e;
+  --blue-calm: #2c4a6e;
+  --green-calm: #2d5a3d;
+  --part1: #5a3a1e;
+  --part2: #1e3d5a;
+  --part3: #5a1e2e;
+  --part4: #1e4a2d;
+  --part5: #3a1e5a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  line-height: 1.7;
+}
+
+/* ============ PRINT ============ */
+@media print {
+  .no-print { display:none !important; }
+  .chapter-block { page-break-inside: avoid; }
+  body { background: white; font-size: 11pt; }
+  .cover { height: auto; padding: 60px 40px; }
+}
+
+/* ============ COVER ============ */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 32px;
+  position: relative;
+  border-bottom: 1px solid var(--gold-border);
+  background: radial-gradient(ellipse 90% 70% at 50% 30%, rgba(139,105,20,0.05), transparent);
+}
+
+.cover-ornament {
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 8px;
+  margin-bottom: 40px;
+  opacity: 0.5;
+}
+
+.cover-pretitle {
+  font-family: 'Cormorant SC', serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.cover-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(32px, 6vw, 68px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.cover-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cover-subtitle {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 300;
+  color: var(--dim);
+  margin-bottom: 44px;
+  font-style: italic;
+}
+
+.cover-line { width: 80px; height: 1px; background: var(--gold-border); margin: 0 auto 28px; }
+
+.cover-desc {
+  max-width: 480px;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--dim);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.cover-instruction {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.cover-nav {
+  margin-top: 48px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cover-nav a {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid var(--gold-border);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.cover-nav a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ============ HOW TO USE ============ */
+.howto {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  border-bottom: 1px solid var(--gold-border);
+}
+
+.section-eyebrow {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.howto h2 {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.howto p {
+  font-size: 15px;
+  color: var(--mid);
+  margin-bottom: 16px;
+  line-height: 1.85;
+}
+
+.howto-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+@media(max-width:560px) { .howto-icons { grid-template-columns: 1fr; } }
+
+.howto-icon-box {
+  padding: 20px 16px;
+  border: 1px solid var(--gold-border);
+  border-radius: 3px;
+  background: var(--gold-faint);
+  text-align: center;
+}
+
+.howto-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.howto-icon-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+  text-transform: uppercase;
+}
+
+.howto-icon-text {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ============ PART HEADER ============ */
+.part-header {
+  padding: 56px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.part-header::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: var(--gold-border);
+  margin: 32px auto 0;
+}
+
+.part-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.part-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.part-thesis {
+  max-width: 500px;
+  margin: 16px auto 0;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--dim);
+  line-height: 1.8;
+}
+
+/* ============ CHAPTER BLOCK ============ */
+.chapter-block {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+
+.chapter-card {
+  border: 1px solid rgba(139,105,20,0.18);
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(247,241,230,0.6);
+  transition: box-shadow 0.3s;
+}
+
+.chapter-card:hover {
+  box-shadow: 0 2px 24px rgba(139,105,20,0.1);
+}
+
+/* chapter header */
+.ch-header {
+  padding: 22px 24px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+  user-select: none;
+}
+.chapter-card.open .ch-header {
+  border-bottom-color: rgba(139,105,20,0.15);
+}
+
+.ch-num {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+  min-width: 40px;
+  padding-top: 4px;
+}
+
+.ch-header-text { flex: 1; }
+
+.ch-tag {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.ch-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(17px, 3vw, 24px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.ch-park-aim {
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--dim);
+  line-height: 1.65;
+}
+
+.ch-chev {
+  font-size: 11px;
+  color: var(--dim);
+  transition: transform 0.4s;
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+.chapter-card.open .ch-chev { transform: rotate(180deg); color: var(--gold); }
+
+/* chapter body */
+.ch-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s cubic-bezier(.16,1,.3,1);
+}
+.chapter-card.open .ch-body { max-height: 2400px; }
+
+.ch-inner { padding: 24px; }
+
+/* diagram */
+.diagram-wrap {
+  margin-bottom: 24px;
+}
+
+.diagram-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.diagram-svg-wrap {
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(247,241,230,0.9);
+}
+
+/* questions */
+.questions-before {
+  margin-bottom: 20px;
+}
+
+.q-section-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--blue-calm);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.85;
+}
+
+.q-section-label.after { color: var(--rust); }
+
+.q-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.q-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.q-dot.before {
+  background: rgba(44,74,110,0.08);
+  border: 1px solid rgba(44,74,110,0.2);
+  color: var(--blue-calm);
+}
+
+.q-dot.after {
+  background: rgba(122,51,32,0.08);
+  border: 1px solid rgba(122,51,32,0.2);
+  color: var(--rust);
+  width: 28px; height: 28px; font-size: 14px;
+}
+
+.q-text {
+  font-size: 14.5px;
+  color: var(--mid);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.q-text strong { color: var(--ink); font-weight: 500; }
+
+.q-after-box {
+  padding: 16px 18px;
+  background: rgba(122,51,32,0.05);
+  border-left: 3px solid rgba(122,51,32,0.35);
+  border-radius: 0 3px 3px 0;
+  margin-top: 16px;
+}
+
+.reflection-prompt {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.75;
+}
+
+.reflection-prompt strong { font-style: normal; color: var(--rust); }
+
+.ch-divider {
+  height: 1px;
+  background: var(--gold-border);
+  margin: 18px 0;
+  opacity: 0.5;
+}
+
+/* ============ CONCLUSION ============ */
+.conclusion-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 72px 24px 100px;
+  text-align: center;
+  border-top: 1px solid var(--gold-border);
+}
+
+.conc-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+.conc-title em { font-style: italic; color: var(--gold); }
+
+.conc-text {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.85;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.conc-quote {
+  padding: 24px 28px;
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  background: var(--gold-faint);
+  margin: 32px 0;
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--mid);
+  line-height: 1.8;
+  text-align: left;
+}
+.conc-quote cite {
+  display: block;
+  font-style: normal;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* ============ STICKY PROGRESS BAR ============ */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(139,105,20,0.15);
+  z-index: 100;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.2s;
+  width: 0%;
+}
+
+/* print button */
+.print-btn {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: var(--parchment);
+  border: 1px solid var(--gold-border);
+  padding: 10px 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  z-index: 50;
+}
+.print-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+/* expand all button */
+.expand-all-btn {
+  display: block;
+  margin: 0 auto 32px;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--gold-border);
+  padding: 10px 22px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.expand-all-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+/* part color accents */
+.part1 .ch-tag, .part1 .section-eyebrow, .part1 .part-label { color: var(--part1); }
+.part2 .ch-tag, .part2 .section-eyebrow, .part2 .part-label { color: var(--part2); }
+.part3 .ch-tag, .part3 .section-eyebrow, .part3 .part-label { color: var(--part3); }
+.part4 .ch-tag, .part4 .section-eyebrow, .part4 .part-label { color: var(--part4); }
+.part5 .ch-tag, .part5 .section-eyebrow, .part5 .part-label { color: var(--part5); }
+
+/* responsive */
+@media(max-width: 600px) {
+  .ch-header { gap: 12px; }
+  .ch-num { font-size: 22px; min-width: 28px; }
+  .ch-inner { padding: 16px; }
+  .print-btn { display: none; }
+}
+
+/* SVG styles */
+svg text { font-family: 'EB Garamond', Georgia, serif; }
+
+/* ============ READ STATUS ============ */
+.ch-read-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px 12px;
+  background: rgba(247,241,230,0.4);
+  border-top: 1px solid rgba(139,105,20,0.10);
+  gap: 12px;
+}
+
+.read-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  transition: color 0.25s;
+  user-select: none;
+}
+.read-label:hover { color: var(--gold); }
+
+.read-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border: 1px solid var(--gold-border);
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+.read-checkbox:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.read-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--parchment);
+  font-size: 10px;
+  font-family: sans-serif;
+  line-height: 1;
+}
+
+.chapter-card.read-done .ch-num {
+  color: var(--gold);
+  opacity: 1;
+}
+.chapter-card.read-done {
+  background: rgba(139,105,20,0.04);
+}
+
+/* ============ NOTES AREA ============ */
+.notes-toggle-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--gold-border);
+  padding: 5px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.notes-toggle-btn:hover { color: var(--gold); border-color: var(--gold); }
+.notes-toggle-btn.active { color: var(--gold); border-color: var(--gold); background: var(--gold-faint); }
+
+.notes-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.16,1,.3,1);
+  background: rgba(237,228,207,0.5);
+  border-top: 1px solid transparent;
+}
+.notes-panel.open {
+  max-height: 320px;
+  border-top-color: rgba(139,105,20,0.12);
+}
+
+.notes-inner {
+  padding: 16px 24px 20px;
+}
+
+.notes-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 110px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: rgba(247,241,230,0.85);
+  border: 1px solid var(--gold-border);
+  border-radius: 3px;
+  padding: 12px 14px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.notes-textarea:focus {
+  border-color: var(--gold);
+}
+.notes-textarea::placeholder {
+  color: var(--dim);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.notes-saved-badge {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--green-calm);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.4s;
+  margin-top: 6px;
+  display: block;
+}
+.notes-saved-badge.show { opacity: 1; }
+
+/* ============ OVERALL PROGRESS ============ */
+.reading-progress-panel {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  background: var(--parchment);
+  border: 1px solid var(--gold-border);
+  border-radius: 3px;
+  padding: 12px 16px;
+  z-index: 50;
+  min-width: 140px;
+}
+.rp-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  display: block;
+}
+.rp-bar-bg {
+  width: 100%;
+  height: 3px;
+  background: rgba(139,105,20,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.rp-bar-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width 0.4s;
+}
+.rp-count {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+@media(max-width:600px) {
+  .reading-progress-panel { display: none; }
+  .ch-read-row { padding: 10px 16px; }
+  .notes-inner { padding: 12px 16px 16px; }
+}
+@media print {
+  .notes-panel, .ch-read-row, .reading-progress-panel { display: none !important; }
+}
+
+
+/* ============ TOOL LINKS ============ */
+.tool-links {
+  margin: 18px 0 0;
+  padding: 14px 18px;
+  background: rgba(13,107,99,0.04);
+  border: 1px solid rgba(13,107,99,0.18);
+  border-radius: 4px;
+}
+
+.tool-links-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  color: var(--teal, #0d6b63);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.tool-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tool-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal, #0d6b63);
+  background: rgba(13,107,99,0.07);
+  border: 1px solid rgba(13,107,99,0.25);
+  border-radius: 3px;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.tool-link-btn:hover {
+  background: rgba(13,107,99,0.14);
+  border-color: rgba(13,107,99,0.45);
+  color: var(--teal-dk, #0a4f48);
+}
+.tool-link-btn .tl-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.tool-link-btn .tl-text { line-height: 1.3; }
+.tool-link-btn .tl-sub {
+  display: block;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-style: italic;
+  color: var(--dim);
+  opacity: 0.8;
+  margin-top: 1px;
+}
+
+/* appendix link khusus */
+.appendix-link-wrap {
+  margin: 28px 24px 0;
+  padding: 14px 18px;
+  border-top: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.appendix-link-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+.appendix-link-btn {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--gold-border);
+  border-radius: 2px;
+  padding: 7px 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.appendix-link-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ============ PARK SECTION ============ */
+.park-section {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 80px 24px 72px;
+  border-bottom: 1px solid var(--gold-border);
+}
+
+.park-pull {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(19px, 3.5vw, 28px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink);
+  font-style: italic;
+  margin: 32px 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--gold-border);
+}
+
+.park-body {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.park-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 36px 0;
+  position: relative;
+  padding-left: 28px;
+}
+
+.park-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--gold-border);
+}
+
+.pt-item {
+  position: relative;
+  padding: 0 0 24px 16px;
+}
+
+.pt-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--parchment);
+  border: 1.5px solid var(--gold);
+}
+
+.pt-year {
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.pt-text {
+  font-size: 14.5px;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.park-closing-quote {
+  padding: 24px 28px;
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  background: var(--gold-faint);
+  margin-top: 36px;
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--mid);
+  line-height: 1.85;
+}
+.park-closing-quote cite {
+  display: block;
+  font-style: normal;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+/* ============ SLOW GATE ============ */
+.slow-gate {
+  margin: 24px 0 0;
+  background: rgba(90,58,30,0.04);
+  border: 1.5px solid rgba(90,58,30,0.22);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.slow-gate-header {
+  padding: 14px 18px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.gate-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.gate-label-wrap { flex: 1; }
+
+.gate-eyebrow {
+  font-family: 'Cormorant SC', serif;
+  font-size: 8.5px;
+  letter-spacing: 3px;
+  color: var(--rust);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.gate-question {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(15px, 2.5vw, 19px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.gate-sub {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--dim);
+  margin-top: 5px;
+  line-height: 1.6;
+}
+
+.gate-body {
+  padding: 0 18px 18px;
+}
+
+.gate-textarea {
+  width: 100%;
+  min-height: 90px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: rgba(247,241,230,0.9);
+  border: 1px solid rgba(90,58,30,0.22);
+  border-radius: 3px;
+  padding: 12px 14px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.gate-textarea:focus { border-color: var(--rust); }
+.gate-textarea::placeholder { color: var(--dim); opacity: 0.5; font-style: italic; }
+
+.gate-unlock-btn {
+  margin-top: 10px;
+  width: 100%;
+  font-family: 'Cormorant SC', serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--rust);
+  border: none;
+  padding: 11px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.gate-unlock-btn.ready {
+  opacity: 1;
+  pointer-events: all;
+}
+.gate-unlock-btn.ready:hover { background: var(--part1); }
+.gate-unlock-btn.unlocked { background: var(--green-calm); opacity: 1; pointer-events: none; }
+
+.gate-unlocked-msg {
+  display: none;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: rgba(45,90,61,0.07);
+  border-left: 3px solid var(--green-calm);
+  border-radius: 0 3px 3px 0;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--green-calm);
+  line-height: 1.7;
+}
+.gate-unlocked-msg.show { display: block; }
+
+.gate-saved { font-family: 'Cormorant SC', serif; font-size: 8px; letter-spacing: 1.5px; color: var(--green-calm); opacity: 0; transition: opacity 0.4s; display: block; margin-top: 5px; text-transform: uppercase; }
+.gate-saved.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar no-print"><div class="progress-fill" id="prog"></div></div>
+<button class="print-btn no-print" onclick="window.print()">⎙ Cetak / Simpan PDF</button>
+
+<!-- ============ COVER ============ -->
+<div class="cover" id="top">
+  <div class="cover-ornament">✦ ✦ ✦</div>
+  <div class="cover-pretitle">Reading Companion</div>
+  <h1 class="cover-title"><em>The Genesis Genealogies</em></h1>
+  <div class="cover-subtitle">Abraham Park</div>
+  <div class="cover-line"></div>
+  <p class="cover-desc">Bukan untuk menggantikan buku. Untuk menemani. Setiap bab: satu peta argumen, tiga pertanyaan sebelum membaca, satu pertanyaan penghenti setelah membaca.</p>
+  <div class="cover-instruction">↓ Buka bab yang sedang kamu baca ↓</div>
+  <nav class="cover-nav no-print">
+    <a href="two-rivers-timeline.html" target="_blank" style="color:var(--gold);border-color:var(--gold);background:rgba(139,105,20,0.08);">↗ Peta Besar</a>
+    <a href="#part1">Part 1</a>
+    <a href="#part2">Part 2</a>
+    <a href="#part3">Part 3</a>
+    <a href="#part4">Part 4</a>
+    <a href="#part5">Part 5</a>
+    <a href="#tentang-park">Tentang Park</a>
+    <a href="#howto">Cara Pakai</a>
+  </nav>
+</div>
+
+
+<!-- ============ PARK SECTION ============ -->
+<div class="park-section" id="tentang-park">
+  <span class="section-eyebrow">Sebelum kamu mulai membaca</span>
+  <h2 style="font-family:'Cormorant Upright',serif;font-size:clamp(24px,4vw,38px);font-weight:400;margin-bottom:8px;">Siapa Abraham Park — dan mengapa ini penting</h2>
+
+  <p class="park-body">Buku ini bisa dengan mudah dibaca sebagai karya teologi — analisis akademis tentang silsilah Kejadian oleh seorang sarjana Korea. Tapi jika kamu membacanya seperti itu, kamu akan melewatkan apa yang paling penting di dalamnya.</p>
+
+  <div class="park-pull">Park tidak menulis ini dari perpustakaan. Ia menulisnya dari kamar doa — setelah menangis di hadapan teks selama bertahun-tahun sampai ia tidak bisa tidur.</div>
+
+  <p class="park-body">Lahir pada 1928, Abraham Park melayani sebagai gembala jemaat di Korea — sebuah negara yang keluar dari perang saudara dengan luka yang dalam dan identitas yang hancur. Jemaatnya bukan orang-orang yang punya waktu untuk studi akademis. Mereka adalah orang-orang yang bertanya: <em>di mana Allah dalam reruntuhan ini?</em></p>
+
+  <p class="park-body">Park membawa pertanyaan itu ke Alkitab. Bukan untuk mencari jawaban cepat — tapi untuk duduk bersama teks selama bertahun-tahun, sampai teks itu mulai berbicara dengan cara yang tidak pernah ia duga.</p>
+
+  <div class="park-timeline">
+    <div class="pt-item">
+      <span class="pt-year">1957</span>
+      <span class="pt-text">Park mulai berkhotbah tentang silsilah Kejadian kepada jemaatnya. Bukan sebagai seri akademis — tapi sebagai pesan pastoral kepada orang-orang yang sedang dalam krisis.</span>
+    </div>
+    <div class="pt-item">
+      <span class="pt-year">1968</span>
+      <span class="pt-text">Park mengalami momen yang ia gambarkan hanya dengan dua kalimat: <em>"Air mata mengalir dan tidur pun tak bisa saya lakukan."</em> Ia berlutut di kamar doa dan menerima pemahaman yang tidak datang dari buku lain manapun.</span>
+    </div>
+    <div class="pt-item">
+      <span class="pt-year">1983</span>
+      <span class="pt-text">Retreat khusus enam bulan di Pusat Retreat Pyung Kang Che-il. Park mengajar silsilah ini secara intensif kepada jemaatnya — dalam komunitas, dengan waktu, dengan pertanggungjawaban bersama. Pengalaman dulu. Komunitas dulu. Waktu dulu.</span>
+    </div>
+    <div class="pt-item">
+      <span class="pt-year">2007</span>
+      <span class="pt-text">Empat puluh tahun setelah ia mulai berkhotbah, Park menerbitkan buku ini. Bukan karena ia akhirnya punya cukup pengetahuan. Tapi karena jemaatnya sudah cukup lama hidup di dalam kebenaran ini untuk membuktikan bahwa itu nyata.</span>
+    </div>
+  </div>
+
+  <p class="park-body">Park sendiri menulis: <em>"Saya hanya mengorganisir apa yang saya khotbahkan melalui pencerahan Roh Kudus setelah berulang kali berlutut dalam doa dan membaca Alkitab berulang-ulang."</em></p>
+
+  <p class="park-body">Kalimat itu bukan kerendahan hati retoris. Itu adalah kunci untuk membaca buku ini dengan benar. Ketika kamu membaca analisis Park tentang umur para patriark, atau makna nama-nama dalam silsilah — kamu bukan sedang membaca argumen seorang akademisi. Kamu sedang mendengar kesaksian seorang gembala yang menemukan sesuatu yang mengubah cara ia memandang Allah, sejarah, dan jemaatnya — dan yang kemudian menghabiskan empat puluh tahun memverifikasi bahwa temuan itu benar.</p>
+
+  <div class="park-closing-quote">
+    Baca buku ini seperti seseorang yang menerima surat dari bapak rohani yang sudah menua — bukan seperti seseorang yang mengevaluasi disertasi doktor. Pertanyaannya bukan <em>"apakah argumen ini valid?"</em> Pertanyaannya adalah <em>"apa yang ia lihat yang selama ini tersembunyi dari saya?"</em>
+    <cite>Catatan editorial — Reading Companion ini</cite>
+  </div>
+</div>
+
+<div style="max-width:700px;margin:0 auto;padding:0 24px 48px;text-align:center;">
+  <p style="font-family:'EB Garamond',Georgia,serif;font-size:15px;font-style:italic;color:var(--dim);line-height:1.8;margin-bottom:20px;">Sebelum membuka bab pertama — ada satu hal yang membantu banyak pembaca: melihat peta keseluruhan dulu. Dua garis yang berjalan paralel sejak Adam. Kamu akan tahu ke mana buku ini menuju.</p>
+  <a href="two-rivers-timeline.html" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant SC',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);background:rgba(139,105,20,0.08);border:1px solid var(--gold-border);border-radius:3px;padding:13px 24px;text-decoration:none;transition:all 0.25s;">
+    <span style="font-size:16px;">↗</span>
+    <span>Buka Two Rivers — Peta Dua Jalur<br><span style="font-family:'EB Garamond',Georgia,serif;font-size:12px;letter-spacing:0;text-transform:none;font-style:italic;opacity:0.75;">Timeline interaktif · Grafik umur · Empat Pemisahan Abraham</span></span>
+  </a>
+</div>
+
+<!-- ============ HOW TO USE ============ -->
+<div class="howto" id="howto">
+  <span class="section-eyebrow">Cara Menggunakan</span>
+  <h2>Companion, bukan pengganti</h2>
+  <p>Park menulis dengan kedalaman yang tidak bisa diringkas. Companion ini dirancang untuk <em>dibuka bersamaan</em> dengan buku — bukan dibaca sendirian.</p>
+  <p>Setiap bab punya tiga lapisan: peta visual argumen Park, tiga pertanyaan orientasi <em>sebelum</em> membaca, dan satu pertanyaan penghenti <em>setelah</em> membaca yang bersifat personal.</p>
+  <div class="howto-icons">
+    <div class="howto-icon-box">
+      <span class="howto-icon">◈</span>
+      <span class="howto-icon-title">Sebelum Membaca</span>
+      <div class="howto-icon-text">Buka bagian orientasi. Baca 3 pertanyaan. Biarkan mereka membangun rasa ingin tahu, bukan menjawab lebih dulu.</div>
+    </div>
+    <div class="howto-icon-box">
+      <span class="howto-icon">⊕</span>
+      <span class="howto-icon-title">Saat Membaca</span>
+      <div class="howto-icon-text">Lihat diagram argumen sebagai panduan arah. Ini peta — bukan ringkasan. Park-lah yang menceritakan isinya.</div>
+    </div>
+    <div class="howto-icon-box">
+      <span class="howto-icon">✦</span>
+      <span class="howto-icon-title">Setelah Membaca</span>
+      <div class="howto-icon-text">Baca pertanyaan penghenti. Jangan terburu-buru menjawab. Ini undangan untuk diam sebentar bersama apa yang baru kamu baca.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART 1 ============ -->
+<div id="part1" class="part-header part1">
+  <span class="part-label">Bagian Pertama</span>
+  <h2 class="part-title">Consider the Years of All Generations</h2>
+  <p class="part-thesis">Park membuka dengan sebuah perintah dari Musa (Ul 32:7) — tiga kata kerja yang menjadi fondasi seluruh buku: <em>ingat, renungkan, tanyakan.</em></p>
+</div>
+
+<button class="expand-all-btn no-print" onclick="expandPart('p1')">Buka semua bab Part 1</button>
+
+<div class="chapter-block part1" data-part="p1">
+  <div class="chapter-card" id="c1">
+    <div class="ch-header" onclick="toggleChapter('c1')">
+      <div class="ch-num">1</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 1 · Bab 1</div>
+        <div class="ch-title">Perintah Pertama: Ingat Hari-Hari Dahulu Kala</div>
+        <div class="ch-park-aim">Park menunjukkan bahwa "hari-hari dahulu kala" bukan sekadar masa lalu — melainkan sejarah yang ditandai oleh penggenapan janji Allah.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="160" fill="#f7f1e6"/>
+            <!-- nodes -->
+            <rect x="20" y="50" width="140" height="60" rx="4" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.3)" stroke-width="1"/>
+            <text x="90" y="74" text-anchor="middle" font-size="10" fill="#5a3a1e">Ul. 32:7</text>
+            <text x="90" y="90" text-anchor="middle" font-size="12" fill="#18140e" font-style="italic">"Ingat hari-hari</text>
+            <text x="90" y="104" text-anchor="middle" font-size="12" fill="#18140e" font-style="italic">dahulu kala"</text>
+            <line x1="160" y1="80" x2="210" y2="80" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+            <rect x="210" y="50" width="150" height="60" rx="4" fill="rgba(139,105,20,0.08)" stroke="rgba(139,105,20,0.25)" stroke-width="1"/>
+            <text x="285" y="74" text-anchor="middle" font-size="10" fill="#8b6914">Bukan sekadar nostalgia</text>
+            <text x="285" y="90" text-anchor="middle" font-size="12" fill="#18140e">Sejarah penuh</text>
+            <text x="285" y="106" text-anchor="middle" font-size="12" fill="#18140e">penggenapan janji Allah</text>
+            <line x1="360" y1="80" x2="410" y2="80" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr)"/>
+            <rect x="410" y="50" width="150" height="60" rx="4" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.3)" stroke-width="1"/>
+            <text x="485" y="74" text-anchor="middle" font-size="10" fill="#5a3a1e">Implikasi</text>
+            <text x="485" y="90" text-anchor="middle" font-size="12" fill="#18140e">Silsilah adalah</text>
+            <text x="485" y="106" text-anchor="middle" font-size="12" fill="#18140e">memori sejarah keselamatan</text>
+            <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(139,105,20,0.5)"/></marker></defs>
+          </svg>
+        </div>
+
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item">
+            <div class="q-dot before">1</div>
+            <div class="q-text">Apa bedanya "mengingat masa lalu secara umum" dengan "mengingat sejarah keselamatan Allah"? Mengapa Park mulai dengan perbedaan ini?</div>
+          </div>
+          <div class="q-item">
+            <div class="q-dot before">2</div>
+            <div class="q-text">Musa memberikan perintah ini kepada Israel di padang gurun. <strong>Apa yang sedang terjadi pada Israel saat itu</strong> — dan mengapa perintah "ingat" menjadi penting justru di momen itu?</div>
+          </div>
+          <div class="q-item">
+            <div class="q-dot before">3</div>
+            <div class="q-text">Kata "ingat" menyiratkan bahwa ada sesuatu yang bisa terlupakan. <strong>Apa yang paling mudah terlupakan</strong> dari sejarah keselamatan Allah dalam kehidupan sehari-hari?</div>
+          </div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt"><strong>Sejarah mana dalam hidupmu</strong> — momen ketika Allah menepati janji-Nya — yang paling mudah kamu lupakan saat keadaan menjadi sulit?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part1" data-part="p1">
+  <div class="chapter-card" id="c2">
+    <div class="ch-header" onclick="toggleChapter('c2')">
+      <div class="ch-num">2</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 1 · Bab 2</div>
+        <div class="ch-title">Perintah Kedua: Renungkan Tahun-Tahun Segala Generasi</div>
+        <div class="ch-park-aim">Park membedakan "hari-hari dahulu" (umum) dari "tahun-tahun segala generasi" (spesifik) — dan menunjukkan bahwa Allah bekerja dalam waktu yang terukur dan dapat dilacak.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="170" fill="#f7f1e6"/>
+            <rect x="20" y="45" width="140" height="80" rx="4" fill="rgba(139,105,20,0.06)" stroke="rgba(139,105,20,0.2)" stroke-width="1"/>
+            <text x="90" y="72" text-anchor="middle" font-size="10" fill="#8b6914">Perintah 1</text>
+            <text x="90" y="90" text-anchor="middle" font-size="12" fill="#5a4e3e" font-style="italic">"Hari-hari dahulu"</text>
+            <text x="90" y="107" text-anchor="middle" font-size="11" fill="#8b6914">→ Umum / luas</text>
+            <line x1="160" y1="85" x2="200" y2="85" stroke="rgba(139,105,20,0.35)" stroke-width="1.5" marker-end="url(#arr2)"/>
+            <text x="180" y="75" text-anchor="middle" font-size="10" fill="#8b6914">vs.</text>
+            <rect x="200" y="45" width="160" height="80" rx="4" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.3)" stroke-width="1"/>
+            <text x="280" y="72" text-anchor="middle" font-size="10" fill="#5a3a1e">Perintah 2</text>
+            <text x="280" y="90" text-anchor="middle" font-size="12" fill="#18140e" font-style="italic">"Tahun-tahun generasi"</text>
+            <text x="280" y="107" text-anchor="middle" font-size="11" fill="#5a3a1e">→ Spesifik / terukur</text>
+            <line x1="360" y1="85" x2="400" y2="85" stroke="rgba(139,105,20,0.35)" stroke-width="1.5" marker-end="url(#arr2)"/>
+            <rect x="400" y="40" width="240" height="90" rx="4" fill="rgba(139,105,20,0.08)" stroke="rgba(139,105,20,0.25)" stroke-width="1"/>
+            <text x="520" y="68" text-anchor="middle" font-size="10" fill="#8b6914">Kesimpulan Park</text>
+            <text x="520" y="86" text-anchor="middle" font-size="12" fill="#18140e">Allah bekerja dalam waktu</text>
+            <text x="520" y="102" text-anchor="middle" font-size="12" fill="#18140e">nyata yang bisa direnungkan</text>
+            <text x="520" y="118" text-anchor="middle" font-size="11" fill="#5a4e3e">dan dihitung generasinya</text>
+            <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(139,105,20,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Apa artinya Allah "bekerja dalam waktu yang terukur"? Mengapa ini penting — bukan sekadar fakta teologis abstrak?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menekankan kata kerja <em>"pertimbangkan / renungkan"</em> — bukan sekadar tahu. <strong>Apa bedanya mengetahui sejarah generasi dengan sungguh-sungguh merenungkannya?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Silsilah mencatat tahun-tahun hidup setiap patriark dengan presisi. Menurut kamu, mengapa Allah mau kita mengetahui angka-angka itu — bukan hanya nama-namanya saja?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Jika kamu merenungkan <strong>"tahun-tahun generasimu"</strong> — orang tua, kakek-nenek, leluhur iman — warisan iman apa yang kamu terima yang belum pernah kamu benar-benar hargai?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part1" data-part="p1">
+  <div class="chapter-card" id="c3">
+    <div class="ch-header" onclick="toggleChapter('c3')">
+      <div class="ch-num">3</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 1 · Bab 3</div>
+        <div class="ch-title">Perintah Ketiga: Tanyakan kepada Bapamu, Ia Akan Memberitahumu</div>
+        <div class="ch-park-aim">Perintah ketiga menutup tritunggal perintah Musa: iman tidak cukup hanya direnungkan — ia harus dipindahkan, dari generasi ke generasi, melalui tindakan bertanya dan bercerita.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="180" fill="#f7f1e6"/>
+            <!-- three commands summary -->
+            <rect x="20" y="30" width="180" height="50" rx="3" fill="rgba(139,105,20,0.06)" stroke="rgba(139,105,20,0.2)" stroke-width="1"/>
+            <text x="110" y="52" text-anchor="middle" font-size="11" fill="#8b6914">Perintah 1: Ingat</text>
+            <text x="110" y="68" text-anchor="middle" font-size="11" fill="#5a4e3e">Memori personal</text>
+            <rect x="20" y="90" width="180" height="50" rx="3" fill="rgba(139,105,20,0.06)" stroke="rgba(139,105,20,0.2)" stroke-width="1"/>
+            <text x="110" y="112" text-anchor="middle" font-size="11" fill="#8b6914">Perintah 2: Renungkan</text>
+            <text x="110" y="128" text-anchor="middle" font-size="11" fill="#5a4e3e">Refleksi generasional</text>
+            <rect x="220" y="60" width="190" height="60" rx="3" fill="rgba(90,58,30,0.1)" stroke="rgba(90,58,30,0.35)" stroke-width="1.5"/>
+            <text x="315" y="84" text-anchor="middle" font-size="11" fill="#5a3a1e" font-weight="bold">Perintah 3: Tanyakan</text>
+            <text x="315" y="100" text-anchor="middle" font-size="12" fill="#18140e">Transmisi aktif iman</text>
+            <text x="315" y="116" text-anchor="middle" font-size="11" fill="#5a4e3e">dari generasi ke generasi</text>
+            <line x1="200" y1="55" x2="220" y2="80" stroke="rgba(139,105,20,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="200" y1="115" x2="220" y2="105" stroke="rgba(139,105,20,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+            <line x1="410" y1="90" x2="455" y2="90" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr3)"/>
+            <rect x="455" y="55" width="195" height="70" rx="3" fill="rgba(139,105,20,0.08)" stroke="rgba(139,105,20,0.25)" stroke-width="1"/>
+            <text x="552" y="80" text-anchor="middle" font-size="10" fill="#8b6914">Implikasi bagi kita</text>
+            <text x="552" y="96" text-anchor="middle" font-size="12" fill="#18140e">Silsilah adalah bukti</text>
+            <text x="552" y="112" text-anchor="middle" font-size="12" fill="#18140e">bahwa iman itu diteruskan</text>
+            <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(139,105,20,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Mengapa Park menekankan bahwa yang diperintahkan bukan hanya "baca catatan" — tapi <strong>"tanyakan kepada bapamu"?</strong> Apa yang hilang jika iman hanya diwariskan lewat teks, tanpa percakapan?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menulis bahwa "bapak" dan "penatua" di sini bukan sekadar orang tua kandung — tapi para leluhur iman. <strong>Siapa "bapak iman" yang berbicara kepadamu melalui silsilah ini?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Firman Allah disebut "tidak berubah." Apa hubungan antara kekekalan Firman dengan kewajiban meneruskan iman secara aktif kepada generasi berikutnya?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Kepada siapa kamu <strong>belum pernah menceritakan</strong> apa yang Allah lakukan dalam hidupmu — padahal mereka perlu mendengarnya?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART 2 ============ -->
+<div id="part2" class="part-header part2">
+  <span class="part-label">Bagian Kedua</span>
+  <h2 class="part-title">God's Administration of Redemption and the Genesis Genealogies</h2>
+  <p class="part-thesis">Park membangun kerangka teologis: silsilah Genesis bukan daftar nama — melainkan arsip karya Allah dalam sejarah keselamatan, dengan Kristus sebagai puncaknya.</p>
+</div>
+
+<button class="expand-all-btn no-print" onclick="expandPart('p2')">Buka semua bab Part 2</button>
+
+<div class="chapter-block part2" data-part="p2">
+  <div class="chapter-card" id="c4">
+    <div class="ch-header" onclick="toggleChapter('c4')">
+      <div class="ch-num">4</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 2 · Bab 4</div>
+        <div class="ch-title">Administrasi Penebusan Allah</div>
+        <div class="ch-park-aim">Park memperkenalkan konsep kunci: Allah memiliki "administrasi" — rencana terstruktur yang bekerja dalam sejarah, berpusat pada Kristus sebagai apex.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 190" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="190" fill="#f7f1e6"/>
+            <!-- pyramid of redemption -->
+            <polygon points="340,20 80,160 600,160" fill="rgba(44,74,110,0.05)" stroke="rgba(44,74,110,0.25)" stroke-width="1.5"/>
+            <text x="340" y="48" text-anchor="middle" font-size="11" fill="#2c4a6e" font-weight="500">KRISTUS</text>
+            <text x="340" y="64" text-anchor="middle" font-size="10" fill="#2c4a6e">Apex Sejarah Penebusan</text>
+            <line x1="340" y1="72" x2="340" y2="100" stroke="rgba(44,74,110,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="340" y="115" text-anchor="middle" font-size="11" fill="#18140e">Sejarah PL + PB</text>
+            <text x="340" y="131" text-anchor="middle" font-size="11" fill="#5a4e3e">memperkenalkan Mesias secara progresif</text>
+            <text x="340" y="155" text-anchor="middle" font-size="10" fill="#8b6914">Adam → Abraham → Daud → Kristus</text>
+            <text x="100" y="178" text-anchor="middle" font-size="10" fill="#5a4e3e">Awal: Kejatuhan</text>
+            <text x="580" y="178" text-anchor="middle" font-size="10" fill="#5a4e3e">Akhir: Pengenapan</text>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Kata "administrasi" terdengar seperti istilah kantor. Tapi Park menggunakannya untuk Allah. <strong>Apa yang ingin ia sampaikan</strong> dengan menyebut karya Allah sebagai "administrasi penebusan"?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menyebut Kristus sebagai "apex" — puncak — dari seluruh sejarah penebusan. Jika itu benar, <strong>bagaimana kita seharusnya membaca seluruh Perjanjian Lama?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Alkitab "memperkenalkan Mesias secara progresif." Artinya wahyu Allah bersifat bertahap. Mengapa Allah memilih cara ini — bukan langsung mengumumkan Kristus sejak Adam?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Apakah kamu membaca Alkitab <strong>dengan Kristus sebagai pusat</strong> — atau masih membacanya sebagai kumpulan kisah dan aturan yang terpisah-pisah?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part2" data-part="p2">
+  <div class="chapter-card" id="c5">
+    <div class="ch-header" onclick="toggleChapter('c5')">
+      <div class="ch-num">5</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 2 · Bab 5</div>
+        <div class="ch-title">Karya Allah dalam Sejarah Penebusan dan Silsilah</div>
+        <div class="ch-park-aim">Park menghubungkan silsilah secara langsung dengan sejarah penebusan: setiap generasi yang tercatat adalah bukti bahwa Allah terus menjaga benang keselamatan-Nya.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="160" fill="#f7f1e6"/>
+            <!-- flow: genealogy = redemptive history record -->
+            <rect x="20" y="50" width="150" height="60" rx="4" fill="rgba(44,74,110,0.07)" stroke="rgba(44,74,110,0.25)" stroke-width="1"/>
+            <text x="95" y="74" text-anchor="middle" font-size="11" fill="#2c4a6e">Silsilah Genesis</text>
+            <text x="95" y="91" text-anchor="middle" font-size="12" fill="#18140e">Daftar nama</text>
+            <text x="95" y="106" text-anchor="middle" font-size="11" fill="#8b6914">+ tahun hidup</text>
+            <path d="M170,80 Q210,60 240,80" stroke="rgba(44,74,110,0.4)" stroke-width="1.5" fill="none" marker-end="url(#arr4)"/>
+            <text x="205" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Makna sebenarnya</text>
+            <rect x="240" y="40" width="180" height="80" rx="4" fill="rgba(44,74,110,0.1)" stroke="rgba(44,74,110,0.3)" stroke-width="1.5"/>
+            <text x="330" y="66" text-anchor="middle" font-size="11" fill="#2c4a6e" font-weight="500">Arsip Karya Allah</text>
+            <text x="330" y="84" text-anchor="middle" font-size="12" fill="#18140e">Setiap nama = generasi</text>
+            <text x="330" y="100" text-anchor="middle" font-size="12" fill="#18140e">di mana iman dijaga hidup</text>
+            <line x1="420" y1="80" x2="460" y2="80" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr4)"/>
+            <rect x="460" y="45" width="190" height="70" rx="4" fill="rgba(139,105,20,0.08)" stroke="rgba(139,105,20,0.25)" stroke-width="1"/>
+            <text x="555" y="70" text-anchor="middle" font-size="11" fill="#8b6914">Jaminan bagi kita</text>
+            <text x="555" y="87" text-anchor="middle" font-size="12" fill="#18140e">Allah tidak pernah</text>
+            <text x="555" y="103" text-anchor="middle" font-size="12" fill="#18140e">kehilangan benang-Nya</text>
+            <defs><marker id="arr4" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(44,74,110,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park berargumen bahwa silsilah bukan hanya catatan biologis tapi <em>"catatan redemptif."</em> Apa perbedaan cara membacanya jika kita memegang perspektif itu?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Di setiap generasi dalam silsilah, ada pilihan manusia — ada yang setia, ada yang tidak. <strong>Bagaimana Allah menjaga rencana-Nya tetap berjalan meski manusia gagal?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menyebut silsilah sebagai "struktur dan aliran sejarah penebusan." Apa yang dimaksud dengan "aliran" — apakah sejarah penebusan linier, atau ada gelombang naik-turun?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Dalam "silsilah imanmu" sendiri — cerita keluargamu, komunitasmu — <strong>di mana kamu melihat tangan Allah yang menjaga benang iman tetap hidup?</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part2" data-part="p2">
+  <div class="chapter-card" id="c6">
+    <div class="ch-header" onclick="toggleChapter('c6')">
+      <div class="ch-num">6</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 2 · Bab 6</div>
+        <div class="ch-title">Silsilah dalam Kitab Kejadian</div>
+        <div class="ch-park-aim">Park memetakan 10 silsilah dalam Kejadian dan memperkenalkan konsep <em>sepher toledoth</em> — menunjukkan bahwa struktur Kejadian sendiri sudah berbentuk silsilah keselamatan.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="200" fill="#f7f1e6"/>
+            <text x="340" y="28" text-anchor="middle" font-size="13" fill="#18140e" font-style="italic">10 Silsilah dalam Kejadian (Sepher Toledoth)</text>
+            <!-- 10 boxes in 2 rows -->
+            <rect x="20" y="45" width="90" height="40" rx="3" fill="rgba(44,74,110,0.06)" stroke="rgba(44,74,110,0.2)" stroke-width="1"/>
+            <text x="65" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Langit &amp; bumi</text>
+            <text x="65" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">2:4</text>
+            <rect x="120" y="45" width="90" height="40" rx="3" fill="rgba(44,74,110,0.06)" stroke="rgba(44,74,110,0.2)" stroke-width="1"/>
+            <text x="165" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Adam</text>
+            <text x="165" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">5:1</text>
+            <rect x="220" y="45" width="90" height="40" rx="3" fill="rgba(44,74,110,0.06)" stroke="rgba(44,74,110,0.2)" stroke-width="1"/>
+            <text x="265" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Nuh</text>
+            <text x="265" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">6:9</text>
+            <rect x="320" y="45" width="90" height="40" rx="3" fill="rgba(44,74,110,0.06)" stroke="rgba(44,74,110,0.2)" stroke-width="1"/>
+            <text x="365" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Anak-anak Nuh</text>
+            <text x="365" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">10:1</text>
+            <rect x="420" y="45" width="90" height="40" rx="3" fill="rgba(44,74,110,0.06)" stroke="rgba(44,74,110,0.2)" stroke-width="1"/>
+            <text x="465" y="62" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Sem</text>
+            <text x="465" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">11:10</text>
+            <rect x="20" y="100" width="90" height="40" rx="3" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.25)" stroke-width="1"/>
+            <text x="65" y="117" text-anchor="middle" font-size="9.5" fill="#5a3a1e">Terah</text>
+            <text x="65" y="131" text-anchor="middle" font-size="9" fill="#5a4e3e">11:27</text>
+            <rect x="120" y="100" width="90" height="40" rx="3" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.25)" stroke-width="1"/>
+            <text x="165" y="117" text-anchor="middle" font-size="9.5" fill="#5a3a1e">Ismael</text>
+            <text x="165" y="131" text-anchor="middle" font-size="9" fill="#5a4e3e">25:12</text>
+            <rect x="220" y="100" width="90" height="40" rx="3" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.25)" stroke-width="1"/>
+            <text x="265" y="117" text-anchor="middle" font-size="9.5" fill="#5a3a1e">Ishak</text>
+            <text x="265" y="131" text-anchor="middle" font-size="9" fill="#5a4e3e">25:19</text>
+            <rect x="320" y="100" width="90" height="40" rx="3" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.25)" stroke-width="1"/>
+            <text x="365" y="117" text-anchor="middle" font-size="9.5" fill="#5a3a1e">Esau</text>
+            <text x="365" y="131" text-anchor="middle" font-size="9" fill="#5a4e3e">36:1,9</text>
+            <rect x="420" y="100" width="90" height="40" rx="3" fill="rgba(90,58,30,0.08)" stroke="rgba(90,58,30,0.25)" stroke-width="1"/>
+            <text x="465" y="117" text-anchor="middle" font-size="9.5" fill="#5a3a1e">Yakub</text>
+            <text x="465" y="131" text-anchor="middle" font-size="9" fill="#5a4e3e">37:2</text>
+            <text x="340" y="175" text-anchor="middle" font-size="11" fill="#8b6914" font-style="italic">Genesis = buku silsilah yang membentuk fondasi seluruh Alkitab</text>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Istilah <em>sepher toledoth</em> ("kitab silsilah") muncul 10 kali dalam Kejadian. Park mengatakan ini bukan kebetulan. <strong>Apa yang ingin Allah sampaikan melalui struktur ini?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menjelaskan bahwa dalam 50 pasal, Allah "memampatkan 2.300 tahun sejarah ke dalam silsilah." Mengapa Allah memilih format silsilah sebagai cara merangkum sejarah sebesar itu?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Ada silsilah Ismael dan Esau — mereka yang bukan jalur pilihan. Mengapa Park berpikir Allah tetap memasukkan mereka dalam catatan Kejadian?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Kejadian memampatkan 2.300 tahun dalam 50 pasal. <strong>Apa yang Allah pilih untuk dicatat — dan apa yang itu katakan tentang apa yang paling penting bagi-Nya?</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part2" data-part="p2">
+  <div class="chapter-card" id="c7">
+    <div class="ch-header" onclick="toggleChapter('c7')">
+      <div class="ch-num">7</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 2 · Bab 7</div>
+        <div class="ch-title">Tahun-Tahun Generasi dalam Kejadian</div>
+        <div class="ch-park-aim">Park membela ineransi Alkitab dan angka-angka silsilah — menunjukkan bahwa angka-angka itu dapat dipercaya dan menghitung kronologi nyata dari Adam sampai Abraham.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="170" fill="#f7f1e6"/>
+            <rect x="20" y="50" width="170" height="70" rx="4" fill="rgba(122,51,32,0.06)" stroke="rgba(122,51,32,0.2)" stroke-width="1"/>
+            <text x="105" y="74" text-anchor="middle" font-size="10" fill="#7a3320">Keberatan modern</text>
+            <text x="105" y="92" text-anchor="middle" font-size="12" fill="#5a4e3e">"Alkitab mengandung</text>
+            <text x="105" y="108" text-anchor="middle" font-size="12" fill="#5a4e3e">kesalahan / celah"</text>
+            <line x1="190" y1="85" x2="240" y2="85" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr7)"/>
+            <rect x="240" y="40" width="180" height="90" rx="4" fill="rgba(44,74,110,0.08)" stroke="rgba(44,74,110,0.28)" stroke-width="1.5"/>
+            <text x="330" y="64" text-anchor="middle" font-size="11" fill="#2c4a6e" font-weight="500">Jawaban Park</text>
+            <text x="330" y="82" text-anchor="middle" font-size="12" fill="#18140e">Ineransi penuh berlaku</text>
+            <text x="330" y="98" text-anchor="middle" font-size="12" fill="#18140e">termasuk angka-angka</text>
+            <text x="330" y="114" text-anchor="middle" font-size="11" fill="#5a4e3e">Gen 5 + Gen 11: tanpa celah</text>
+            <line x1="420" y1="85" x2="460" y2="85" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" marker-end="url(#arr7)"/>
+            <rect x="460" y="50" width="195" height="70" rx="4" fill="rgba(139,105,20,0.08)" stroke="rgba(139,105,20,0.25)" stroke-width="1"/>
+            <text x="557" y="74" text-anchor="middle" font-size="10" fill="#8b6914">Hasil perhitungan</text>
+            <text x="557" y="91" text-anchor="middle" font-size="12" fill="#18140e">Adam → Banjir: 1.656 thn</text>
+            <text x="557" y="107" text-anchor="middle" font-size="12" fill="#18140e">Adam → Abraham: ±2.000 thn</text>
+            <defs><marker id="arr7" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(139,105,20,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Banyak teolog modern percaya silsilah Kejadian mengandung "celah generasi." Park tidak setuju. <strong>Apa yang dipertaruhkan</strong> dalam perdebatan ini — secara teologis?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Jika angka-angka itu akurat, Adam dan Nuh hidup di generasi yang tumpang tindih. Jika akurat, Metusalah meninggal di tahun banjir. <strong>Apa yang berubah</strong> dalam cara kita membaca kisah-kisah ini?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park berargumen bahwa ineransi Alkitab berlaku untuk seluruh bagian, termasuk yang teknis seperti angka-angka ini. Bagaimana pendirianmu sendiri tentang ineransi — dan mengapa?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Adakah bagian Alkitab yang kamu "tunda kepercayaannya" karena terasa sulit atau tidak masuk akal? <strong>Apa yang menghambatmu untuk sungguh-sungguh mempercayainya?</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART 3 ============ -->
+<div id="part3" class="part-header part3">
+  <span class="part-label">Bagian Ketiga</span>
+  <h2 class="part-title">The Genealogy According to the Line of Cain</h2>
+  <p class="part-thesis">Jalur Kain bukan hanya kisah kejahatan — melainkan cermin yang menunjukkan ke mana peradaban manusia pergi ketika dibangun tanpa Allah.</p>
+</div>
+
+<button class="expand-all-btn no-print" onclick="expandPart('p3')">Buka semua bab Part 3</button>
+
+<div class="chapter-block part3" data-part="p3">
+  <div class="chapter-card" id="c8">
+    <div class="ch-header" onclick="toggleChapter('c8')">
+      <div class="ch-num">8</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 3 · Bab 8</div>
+        <div class="ch-title">Keturunan Kain</div>
+        <div class="ch-park-aim">Park menelusuri enam generasi jalur Kain — dari nama Kain yang mengungkapkan kekeliruan Eve, sampai Lamekh dan anak-anaknya yang membangun peradaban tanpa Allah.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 190" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="190" fill="#f7f1e6"/>
+            <!-- downward spiral -->
+            <text x="340" y="22" text-anchor="middle" font-size="11" fill="#5a1e2e" font-style="italic">Jalur Kain: Peradaban tanpa Allah</text>
+            <rect x="270" y="30" width="140" height="32" rx="3" fill="rgba(90,30,46,0.08)" stroke="rgba(90,30,46,0.25)" stroke-width="1"/>
+            <text x="340" y="52" text-anchor="middle" font-size="11" fill="#18140e">Kain: pembunuh, pelarian</text>
+            <line x1="340" y1="62" x2="340" y2="78" stroke="rgba(90,30,46,0.3)" stroke-width="1.5" marker-end="url(#arrd)"/>
+            <rect x="240" y="78" width="200" height="32" rx="3" fill="rgba(90,30,46,0.08)" stroke="rgba(90,30,46,0.25)" stroke-width="1"/>
+            <text x="340" y="100" text-anchor="middle" font-size="11" fill="#18140e">Henokh: kota / dedikasi pada manusia</text>
+            <line x1="340" y1="110" x2="340" y2="126" stroke="rgba(90,30,46,0.3)" stroke-width="1.5" marker-end="url(#arrd)"/>
+            <rect x="200" y="126" width="280" height="32" rx="3" fill="rgba(90,30,46,0.1)" stroke="rgba(90,30,46,0.3)" stroke-width="1"/>
+            <text x="340" y="148" text-anchor="middle" font-size="11" fill="#18140e">Lamekh: poligami + kekerasan + kesombongan</text>
+            <line x1="340" y1="158" x2="340" y2="172" stroke="rgba(90,30,46,0.3)" stroke-width="1.5" marker-end="url(#arrd)"/>
+            <text x="340" y="182" text-anchor="middle" font-size="11" fill="#8b6914" font-style="italic">Ekonomi, seni, teknologi — tanpa Allah</text>
+            <defs><marker id="arrd" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(90,30,46,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Eve menamakan anak pertamanya "Kain" sebagai ekspresi sukacita: "Aku telah mendapat seorang anak dari Tuhan!" Park mengatakan ini adalah <strong>kekeliruan yang berakibat besar.</strong> Apa maksudnya?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Anak-anak Lamekh dari jalur Kain — Jabal, Jubal, Tubal-kain, Naamah — membangun ekonomi, musik, teknologi, dan industri. <strong>Mengapa Park melihat ini sebagai hal yang mengkhawatirkan,</strong> bukan sebagai kemajuan?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Jalur Kain dan jalur Set hidup bersamaan. Semakin peradaban Kain maju, semakin tekanan terhadap jalur Set. Bagaimana tekanan dari dunia yang "maju tanpa Allah" memengaruhi imanmu sekarang?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Di bidang apa dalam hidupmu — pekerjaan, hobi, ambisi — kamu membangun sesuatu yang baik secara manusiawi, <strong>tapi Allah belum benar-benar menjadi pusat dan tujuannya?</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part3" data-part="p3">
+  <div class="chapter-card" id="c9">
+    <div class="ch-header" onclick="toggleChapter('c9')">
+      <div class="ch-num">9</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 3 · Bab 9</div>
+        <div class="ch-title">Keturunan Dosa dalam Jalur Kain</div>
+        <div class="ch-park-aim">Park menunjukkan bahwa Nimrod, Ismail, dan Esau adalah perpanjangan semangat Kain — dan bahwa silsilah Kain dihentikan oleh Alkitab sebagai peringatan: hidup tanpa Allah berakhir pada keheningan.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="170" fill="#f7f1e6"/>
+            <rect x="20" y="45" width="170" height="80" rx="4" fill="rgba(90,30,46,0.07)" stroke="rgba(90,30,46,0.22)" stroke-width="1"/>
+            <text x="105" y="70" text-anchor="middle" font-size="10" fill="#5a1e2e">Silsilah Kain</text>
+            <text x="105" y="88" text-anchor="middle" font-size="12" fill="#18140e">Berhenti tiba-tiba</text>
+            <text x="105" y="106" text-anchor="middle" font-size="11" fill="#5a4e3e">setelah Lamekh gen. 7</text>
+            <line x1="190" y1="85" x2="230" y2="85" stroke="rgba(139,105,20,0.35)" stroke-width="1.5" marker-end="url(#arr9)"/>
+            <rect x="230" y="40" width="190" height="90" rx="4" fill="rgba(139,105,20,0.07)" stroke="rgba(139,105,20,0.22)" stroke-width="1.5"/>
+            <text x="325" y="65" text-anchor="middle" font-size="10" fill="#8b6914" font-weight="500">Pesan Park</text>
+            <text x="325" y="83" text-anchor="middle" font-size="12" fill="#18140e">Peradaban tanpa Allah</text>
+            <text x="325" y="99" text-anchor="middle" font-size="12" fill="#18140e">bisa berhenti kapan saja</text>
+            <text x="325" y="115" text-anchor="middle" font-size="11" fill="#5a4e3e">Nimrod, Ismail, Esau: pola sama</text>
+            <line x1="420" y1="85" x2="460" y2="85" stroke="rgba(139,105,20,0.35)" stroke-width="1.5" marker-end="url(#arr9)"/>
+            <rect x="460" y="50" width="195" height="70" rx="4" fill="rgba(90,30,46,0.06)" stroke="rgba(90,30,46,0.2)" stroke-width="1"/>
+            <text x="557" y="74" text-anchor="middle" font-size="10" fill="#5a1e2e">Kontras</text>
+            <text x="557" y="91" text-anchor="middle" font-size="12" fill="#18140e">Silsilah Set berlanjut</text>
+            <text x="557" y="107" text-anchor="middle" font-size="12" fill="#18140e">sampai ke Kristus</text>
+            <defs><marker id="arr9" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(139,105,20,0.5)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Alkitab menghentikan silsilah Kain tanpa penjelasan. Park membaca ini sebagai <em>peringatan sastra yang disengaja.</em> Peringatan apa yang ingin Allah sampaikan melalui penghentian tiba-tiba itu?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Nimrod dikenal sebagai "pahlawan" dan pembangun Babel. Mengapa Park menghubungkannya dengan semangat Kain — bukan hanya sebagai "orang jahat" tapi sebagai simbol suatu pola?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Ismail dan Esau adalah "yang tidak terpilih" — tapi mereka tetap dicatat dalam Alkitab. Apa yang itu sampaikan tentang cara Allah melihat mereka yang tidak berada dalam jalur perjanjian?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Apa yang kamu bangun sekarang yang akan <strong>terus menghasilkan buah</strong> setelah kamu tiada — dan apa yang hanya akan "berhenti" ketika kamu pergi?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART 4 ============ -->
+<div id="part4" class="part-header part4">
+  <span class="part-label">Bagian Keempat</span>
+  <h2 class="part-title">The Genealogy According to the Line of Seth</h2>
+  <p class="part-thesis">Inti buku. Dua puluh generasi dari Adam ke Abraham — setiap nama adalah saksi, setiap hidup adalah bab dalam satu kisah keselamatan yang Allah tulis sendiri.</p>
+</div>
+
+<button class="expand-all-btn no-print" onclick="expandPart('p4')">Buka semua bab Part 4</button>
+
+<div class="chapter-block part4" data-part="p4">
+  <div class="chapter-card" id="c10">
+    <div class="ch-header" onclick="toggleChapter('c10')">
+      <div class="ch-num">10</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 4 · Bab 10</div>
+        <div class="ch-title">Silsilah dari Adam sampai Nuh (Generasi 1–10)</div>
+        <div class="ch-park-aim">Sepuluh nama dari Adam ke Nuh — Park menunjukkan bahwa makna setiap nama membawa "harapan dan antisipasi" tentang bagaimana janji penebusan akan terungkap, generasi demi generasi, hingga digenapi dalam Kristus.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="200" fill="#f7f1e6"/>
+            <!-- 10 names in a chain -->
+            <text x="340" y="20" text-anchor="middle" font-size="11" fill="#1e4a2d" font-style="italic">Sepuluh saksi — satu benang penebusan</text>
+            <!-- row 1 -->
+            <rect x="10" y="35" width="60" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="40" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Adam</text>
+            <text x="40" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Perjanjian</text>
+            <text x="40" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">pertama</text>
+            <line x1="70" y1="60" x2="82" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="82" y="35" width="60" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="112" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Set</text>
+            <text x="112" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Benih</text>
+            <text x="112" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">baru</text>
+            <line x1="142" y1="60" x2="154" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="154" y="35" width="60" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="184" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Enosh</text>
+            <text x="184" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Ibadah</text>
+            <text x="184" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">mulai</text>
+            <line x1="214" y1="60" x2="226" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="226" y="35" width="60" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="256" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Kenan</text>
+            <text x="256" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Rahmat</text>
+            <text x="256" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">tak terduga</text>
+            <line x1="286" y1="60" x2="298" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="298" y="35" width="60" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="328" y="52" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Mahala-</text>
+            <text x="328" y="64" text-anchor="middle" font-size="9.5" fill="#1e4a2d">lel</text>
+            <text x="328" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">Pujian</text>
+            <text x="328" y="87" text-anchor="middle" font-size="9" fill="#5a4e3e">kepada Allah</text>
+            <line x1="358" y1="60" x2="370" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <!-- row continues -->
+            <rect x="370" y="35" width="55" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="397" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Yared</text>
+            <text x="397" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Turun /</text>
+            <text x="397" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">Inkarnasi</text>
+            <line x1="425" y1="60" x2="437" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="437" y="35" width="55" height="50" rx="3" fill="rgba(30,74,45,0.1)" stroke="rgba(30,74,45,0.3)" stroke-width="1.5"/>
+            <text x="464" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Henokh</text>
+            <text x="464" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Didedika-</text>
+            <text x="464" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">sikan</text>
+            <line x1="492" y1="60" x2="504" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="504" y="35" width="55" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="531" y="52" text-anchor="middle" font-size="9" fill="#1e4a2d">Metusa-</text>
+            <text x="531" y="64" text-anchor="middle" font-size="9" fill="#1e4a2d">lah</text>
+            <text x="531" y="76" text-anchor="middle" font-size="9" fill="#5a4e3e">Penghakiman</text>
+            <text x="531" y="87" text-anchor="middle" font-size="9" fill="#5a4e3e">akan datang</text>
+            <line x1="559" y1="60" x2="571" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="571" y="35" width="52" height="50" rx="3" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.22)" stroke-width="1"/>
+            <text x="597" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Lamekh</text>
+            <text x="597" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Doa &amp;</text>
+            <text x="597" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">harapan</text>
+            <line x1="623" y1="60" x2="635" y2="60" stroke="rgba(30,74,45,0.3)" stroke-width="1.2" marker-end="url(#arrg)"/>
+            <rect x="635" y="35" width="40" height="50" rx="3" fill="rgba(30,74,45,0.12)" stroke="rgba(30,74,45,0.35)" stroke-width="1.5"/>
+            <text x="655" y="56" text-anchor="middle" font-size="10" fill="#1e4a2d">Nuh</text>
+            <text x="655" y="71" text-anchor="middle" font-size="9" fill="#5a4e3e">Istirahat</text>
+            <text x="655" y="82" text-anchor="middle" font-size="9" fill="#5a4e3e">&amp; penghibur</text>
+            <!-- bottom text -->
+            <text x="340" y="120" text-anchor="middle" font-size="11.5" fill="#18140e" font-style="italic">"Makna nama-nama mengandung harapan dan antisipasi bagaimana janji penebusan</text>
+            <text x="340" y="138" text-anchor="middle" font-size="11.5" fill="#18140e" font-style="italic">akan terungkap dari generasi ke generasi hingga digenapi dalam Kristus."</text>
+            <text x="340" y="158" text-anchor="middle" font-size="10" fill="#8b6914">— Abraham Park</text>
+            <defs><marker id="arrg" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(30,74,45,0.4)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park berargumen bahwa setiap nama dalam generasi ini membawa "nubuatan individual" tentang Kristus — bukan satu kalimat tersembunyi, tapi sepuluh kesaksian terpisah. <strong>Apa bedanya dua pendekatan ini</strong> dalam cara kita membaca silsilah?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Henokh adalah satu-satunya dalam daftar ini yang "tidak mati" — ia diangkat oleh Allah. Di tengah delapan pengulangan "dan ia pun mati," ini mengejutkan. <strong>Apa yang Park katakan tentang apa yang Henokh demonstrasikan?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Adam masih hidup ketika Lamekh — generasi ke-9 — lahir, dan meninggal hanya beberapa tahun sebelum Nuh lahir. Jika ini benar, <strong>apa dampaknya</strong> terhadap cara kita memahami transmisi iman dari Adam ke Nuh?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Sepuluh orang ini hidup dalam kegelapan dan dosa dunia yang makin parah — namun mereka tetap setia. <strong>Apa yang memampukan mereka bertahan — dan apa yang kamu butuhkan dari sumber yang sama itu sekarang?</strong></div>
+        </div>
+
+        <div class="tool-links no-print">
+          <span class="tool-links-label">↗ Tools pendamping untuk bab ini</span>
+          <div class="tool-links-row">
+            <a class="tool-link-btn" href="names-as-prophecies.html" target="_blank">
+              <span class="tl-icon">✦</span>
+              <span class="tl-text">Ten Names, One Story
+                <span class="tl-sub">Buka sepuluh nama satu per satu — setiap nama saksi Kristus</span>
+              </span>
+            </a>
+            <a class="tool-link-btn" href="kejadian-5-silsilah-adam.html" target="_blank">
+              <span class="tl-icon">⏱</span>
+              <span class="tl-text">Silsilah Adam — Kejadian 5
+                <span class="tl-sub">Siapa yang masih hidup di tahun berapa? Lihat overlap umur.</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="slow-gate no-print" id="gate-c10">
+          <div class="slow-gate-header">
+            <span class="gate-icon">⊕</span>
+            <div class="gate-label-wrap">
+              <span class="gate-eyebrow">Pintu Berhenti · Bab 10</span>
+              <div class="gate-question">Sepuluh nama — satu kalimat pesan. Kalimat pesan apa dalam hidupmu?</div>
+              <div class="gate-sub">Park menunjukkan bahwa sepuluh nama dari Adam ke Nuh, dibaca berurutan, membentuk satu kalimat nubuatan. Sebelum kamu lanjut, tuliskan ini: jika hidupmu adalah satu nama dalam silsilah iman — <strong>nama apa yang paling jujur menggambarkan musimmu sekarang, dan apa harapan yang kamu bawa ke generasi sesudahmu?</strong></div>
+            </div>
+          </div>
+          <div class="gate-body">
+            <textarea class="gate-textarea" id="gate-ta-c10" placeholder="Tuliskan di sini — tidak ada jawaban yang benar atau salah. Ini bukan tes teologi, ini percakapan dengan dirimu sendiri..." oninput="onGateInput('c10', this)"></textarea>
+            <span class="gate-saved" id="gate-saved-c10">✓ Tersimpan</span>
+            <button class="gate-unlock-btn" id="gate-btn-c10" onclick="unlockGate('c10')">Saya sudah menulis — lanjutkan ke bab berikutnya ↓</button>
+            <div class="gate-unlocked-msg" id="gate-msg-c10">Terima kasih sudah berhenti. Yang kamu tulis baru saja adalah bagian dari silsilah imanmu sendiri. Lanjutkan membaca dengan kesadaran itu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part4" data-part="p4">
+  <div class="chapter-card" id="c11">
+    <div class="ch-header" onclick="toggleChapter('c11')">
+      <div class="ch-num">11</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 4 · Bab 11</div>
+        <div class="ch-title">Silsilah dari Sem sampai Abraham (Generasi 11–20)</div>
+        <div class="ch-park-aim">Sepuluh generasi pasca-banjir — Park menunjukkan bagaimana, satu per satu, setiap patriark gagal menghidupi makna namanya sendiri, sampai Eber yang setia, dan akhirnya Allah memanggil Abraham.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 195" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="195" fill="#f7f1e6"/>
+            <text x="340" y="20" text-anchor="middle" font-size="11" fill="#1e4a2d" font-style="italic">Generasi 11–20: Pemisahan yang semakin mendesak</text>
+            <!-- faith line -->
+            <rect x="10" y="35" width="55" height="44" rx="2" fill="rgba(30,74,45,0.1)" stroke="rgba(30,74,45,0.3)" stroke-width="1.2"/>
+            <text x="37" y="52" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Sem</text>
+            <text x="37" y="65" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Allah Sem</text>
+            <text x="37" y="76" text-anchor="middle" font-size="8.5" fill="#8b6914">Gen 9:26</text>
+            <line x1="65" y1="57" x2="77" y2="57" stroke="rgba(30,74,45,0.3)" stroke-width="1" marker-end="url(#arrg2)"/>
+            <rect x="77" y="35" width="55" height="44" rx="2" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.2)" stroke-width="1"/>
+            <text x="104" y="52" text-anchor="middle" font-size="9" fill="#1e4a2d">Arpak-</text>
+            <text x="104" y="62" text-anchor="middle" font-size="9" fill="#1e4a2d">sad</text>
+            <text x="104" y="74" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Batas baru</text>
+            <line x1="132" y1="57" x2="144" y2="57" stroke="rgba(30,74,45,0.3)" stroke-width="1" marker-end="url(#arrg2)"/>
+            <rect x="144" y="35" width="50" height="44" rx="2" fill="rgba(30,74,45,0.07)" stroke="rgba(30,74,45,0.2)" stroke-width="1"/>
+            <text x="169" y="55" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Selah</text>
+            <text x="169" y="70" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Peluru</text>
+            <text x="169" y="79" text-anchor="middle" font-size="8.5" fill="#5a4e3e">/ penyambung</text>
+            <line x1="194" y1="57" x2="206" y2="57" stroke="rgba(30,74,45,0.3)" stroke-width="1" marker-end="url(#arrg2)"/>
+            <!-- Eber highlighted -->
+            <rect x="206" y="28" width="55" height="56" rx="2" fill="rgba(30,74,45,0.15)" stroke="rgba(30,74,45,0.45)" stroke-width="2"/>
+            <text x="233" y="49" text-anchor="middle" font-size="9.5" fill="#1e4a2d" font-weight="600">Eber ✦</text>
+            <text x="233" y="62" text-anchor="middle" font-size="8.5" fill="#1e4a2d">Menyeberang</text>
+            <text x="233" y="73" text-anchor="middle" font-size="8.5" fill="#1e4a2d">Hidup terpanjang</text>
+            <text x="233" y="81" text-anchor="middle" font-size="8" fill="#8b6914">karena setia</text>
+            <line x1="261" y1="57" x2="273" y2="57" stroke="rgba(30,74,45,0.3)" stroke-width="1" marker-end="url(#arrg2)"/>
+            <!-- decline begins -->
+            <rect x="273" y="35" width="50" height="44" rx="2" fill="rgba(122,51,32,0.07)" stroke="rgba(122,51,32,0.22)" stroke-width="1"/>
+            <text x="298" y="52" text-anchor="middle" font-size="9.5" fill="#7a3320">Peleg</text>
+            <text x="298" y="66" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Babel</text>
+            <text x="298" y="75" text-anchor="middle" font-size="8.5" fill="#5a4e3e">& perpecahan</text>
+            <line x1="323" y1="57" x2="335" y2="57" stroke="rgba(122,51,32,0.3)" stroke-width="1" marker-end="url(#arrd2)"/>
+            <rect x="335" y="35" width="45" height="44" rx="2" fill="rgba(122,51,32,0.07)" stroke="rgba(122,51,32,0.22)" stroke-width="1"/>
+            <text x="357" y="52" text-anchor="middle" font-size="9.5" fill="#7a3320">Reu</text>
+            <text x="357" y="67" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Relasi</text>
+            <text x="357" y="76" text-anchor="middle" font-size="8.5" fill="#5a4e3e">duniawi</text>
+            <line x1="380" y1="57" x2="392" y2="57" stroke="rgba(122,51,32,0.3)" stroke-width="1" marker-end="url(#arrd2)"/>
+            <rect x="392" y="35" width="50" height="44" rx="2" fill="rgba(122,51,32,0.07)" stroke="rgba(122,51,32,0.22)" stroke-width="1"/>
+            <text x="417" y="52" text-anchor="middle" font-size="9.5" fill="#7a3320">Serug</text>
+            <text x="417" y="67" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Kekuatan</text>
+            <text x="417" y="76" text-anchor="middle" font-size="8.5" fill="#5a4e3e">sendiri</text>
+            <line x1="442" y1="57" x2="454" y2="57" stroke="rgba(122,51,32,0.3)" stroke-width="1" marker-end="url(#arrd2)"/>
+            <rect x="454" y="35" width="50" height="44" rx="2" fill="rgba(122,51,32,0.09)" stroke="rgba(122,51,32,0.28)" stroke-width="1.2"/>
+            <text x="479" y="52" text-anchor="middle" font-size="9.5" fill="#7a3320">Nahor</text>
+            <text x="479" y="67" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Serakah</text>
+            <text x="479" y="76" text-anchor="middle" font-size="8.5" fill="#5a4e3e">mati muda</text>
+            <line x1="504" y1="57" x2="516" y2="57" stroke="rgba(122,51,32,0.3)" stroke-width="1" marker-end="url(#arrd2)"/>
+            <rect x="516" y="35" width="50" height="44" rx="2" fill="rgba(122,51,32,0.1)" stroke="rgba(122,51,32,0.3)" stroke-width="1.5"/>
+            <text x="541" y="52" text-anchor="middle" font-size="9.5" fill="#7a3320">Terah</text>
+            <text x="541" y="67" text-anchor="middle" font-size="8.5" fill="#5a4e3e">Penyembah</text>
+            <text x="541" y="76" text-anchor="middle" font-size="8.5" fill="#5a4e3e">berhala</text>
+            <line x1="566" y1="57" x2="578" y2="57" stroke="rgba(30,74,45,0.5)" stroke-width="2" marker-end="url(#arrg2)"/>
+            <rect x="578" y="28" width="90" height="56" rx="2" fill="rgba(30,74,45,0.18)" stroke="rgba(30,74,45,0.55)" stroke-width="2"/>
+            <text x="623" y="49" text-anchor="middle" font-size="11" fill="#1e4a2d" font-weight="600">Abraham</text>
+            <text x="623" y="64" text-anchor="middle" font-size="8.5" fill="#1e4a2d">Dipanggil keluar</text>
+            <text x="623" y="75" text-anchor="middle" font-size="8.5" fill="#1e4a2d">dari Ur / dari kegelapan</text>
+            <!-- bottom note -->
+            <text x="340" y="125" text-anchor="middle" font-size="11" fill="#18140e" font-style="italic">Setiap nama menyimpan harapan yang tidak dihidupi —</text>
+            <text x="340" y="142" text-anchor="middle" font-size="11" fill="#18140e" font-style="italic">sampai Allah sendiri turun tangan memanggil Abraham.</text>
+            <text x="340" y="165" text-anchor="middle" font-size="10" fill="#8b6914">✦ Eber = satu-satunya yang menghidupi makna namanya dengan setia ✦</text>
+            <defs>
+              <marker id="arrg2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(30,74,45,0.4)"/></marker>
+              <marker id="arrd2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(122,51,32,0.4)"/></marker>
+            </defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Dalam bab ini, Park menunjukkan pola yang mencolok: hampir setiap patriark <em>tidak</em> menghidupi makna namanya sendiri. Peleg berharap anaknya hidup kudus — tapi Peleg sendiri ikut Babel. Apa yang ini katakan tentang <strong>jarak antara harapan orang tua dan realita hidup anak?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Eber adalah pengecualian — ia setia, dan Park berargumen itulah mengapa umurnya lebih panjang dari semua keturunannya. <strong>Apa yang dilakukan Eber yang tidak dilakukan oleh yang lain?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Seri kemunduran ini berakhir pada Abraham — dipanggil Allah dari Ur, kota penuh penyembahan berhala. Mengapa menurut Park, Allah menunggu sampai titik segelap ini sebelum memulai era baru?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Apakah ada <strong>nama, identitas, atau panggilan</strong> yang Allah letakkan dalam hidupmu — yang belum kamu hidupi sepenuhnya? Apa yang menghentikanmu?</div>
+        </div>
+
+        <div class="tool-links no-print">
+          <span class="tool-links-label">↗ Tools pendamping untuk bab ini</span>
+          <div class="tool-links-row">
+            <a class="tool-link-btn" href="kejadian-11-silsilah-nuh.html" target="_blank">
+              <span class="tl-icon">⏱</span>
+              <span class="tl-text">Silsilah Nuh — Kejadian 11
+                <span class="tl-sub">Kurva umur yang jatuh setelah Babel — anomali Eber terlihat visual</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART 5 ============ -->
+<div id="part5" class="part-header part5">
+  <span class="part-label">Bagian Kelima</span>
+  <h2 class="part-title">A New Work of Salvation</h2>
+  <p class="part-thesis">Park menutup buku dengan tiga gerakan: perbedaan dua jalur, prinsip pemisahan sebagai jantung iman, dan Abraham sebagai awal era baru keselamatan.</p>
+</div>
+
+<button class="expand-all-btn no-print" onclick="expandPart('p5')">Buka semua bab Part 5</button>
+
+<div class="chapter-block part5" data-part="p5">
+  <div class="chapter-card" id="c12">
+    <div class="ch-header" onclick="toggleChapter('c12')">
+      <div class="ch-num">12</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 5 · Bab 12</div>
+        <div class="ch-title">Perbedaan Jalur Kain dan Jalur Set</div>
+        <div class="ch-park-aim">Park merangkum empat perbedaan mendasar antara dua silsilah — untuk menunjukkan bahwa perbedaan itu bukan tentang orang baik vs orang jahat, tapi tentang dua cara manusia merespons Allah.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 185" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="185" fill="#f7f1e6"/>
+            <text x="340" y="22" text-anchor="middle" font-size="12" fill="#18140e" font-style="italic">Dua jalur — empat perbedaan</text>
+            <!-- headers -->
+            <rect x="40" y="32" width="240" height="28" rx="3" fill="rgba(90,30,46,0.1)" stroke="rgba(90,30,46,0.3)" stroke-width="1"/>
+            <text x="160" y="51" text-anchor="middle" font-size="12" fill="#5a1e2e" font-weight="500">Jalur Kain</text>
+            <rect x="400" y="32" width="240" height="28" rx="3" fill="rgba(30,74,45,0.1)" stroke="rgba(30,74,45,0.3)" stroke-width="1"/>
+            <text x="520" y="51" text-anchor="middle" font-size="12" fill="#1e4a2d" font-weight="500">Jalur Set</text>
+            <!-- divider -->
+            <line x1="338" y1="30" x2="338" y2="175" stroke="rgba(139,105,20,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+            <!-- 4 differences -->
+            <text x="160" y="82" text-anchor="middle" font-size="10" fill="#5a4e3e">Dimulai dari pembunuhan</text>
+            <text x="520" y="82" text-anchor="middle" font-size="10" fill="#5a4e3e">Dimulai dari kasih karunia</text>
+            <line x1="40" y1="90" x2="630" y2="90" stroke="rgba(139,105,20,0.12)" stroke-width="1"/>
+            <text x="160" y="112" text-anchor="middle" font-size="10" fill="#5a4e3e">Gaya hidup: manusia sebagai pusat</text>
+            <text x="520" y="112" text-anchor="middle" font-size="10" fill="#5a4e3e">Gaya hidup: Allah sebagai pusat</text>
+            <line x1="40" y1="120" x2="630" y2="120" stroke="rgba(139,105,20,0.12)" stroke-width="1"/>
+            <text x="160" y="140" text-anchor="middle" font-size="10" fill="#5a4e3e">Catatan: prestasi peradaban</text>
+            <text x="520" y="140" text-anchor="middle" font-size="10" fill="#5a4e3e">Catatan: hidup + umur (iman)</text>
+            <line x1="40" y1="148" x2="630" y2="148" stroke="rgba(139,105,20,0.12)" stroke-width="1"/>
+            <text x="160" y="168" text-anchor="middle" font-size="10" fill="#7a3320">Umur: makin pendek → berhenti</text>
+            <text x="520" y="168" text-anchor="middle" font-size="10" fill="#1e4a2d">Umur: panjang → berlanjut ke Kristus</text>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park merangkum perbedaan dua jalur ini bukan sebagai "orang baik vs orang jahat" — tapi sebagai dua cara merespons Allah. <strong>Apa bedanya dua perspektif itu</strong> dalam cara kita menilai diri sendiri?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Silsilah Set mencatat umur panjang setiap patriark — bukan prestasi atau penemuan mereka. Park melihat ini signifikan. <strong>Apa yang Allah nilai</strong> dalam mencatat berapa lama seseorang hidup, bukan apa yang ia ciptakan?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Kedua jalur ini berasal dari orang tua yang sama: Adam dan Hawa. Mereka berbagi leluhur, berbagi trauma, berbagi dunia. <strong>Apa yang membuat satu jalur terus dan yang lain berhenti?</strong></div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Jika hidupmu dicatat dalam sebuah silsilah — <strong>apa yang akan dicatat?</strong> Prestasi dan pencapaianmu, atau kesetiaan dan pertumbuhanmu dalam iman?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part5" data-part="p5">
+  <div class="chapter-card" id="c13">
+    <div class="ch-header" onclick="toggleChapter('c13')">
+      <div class="ch-num">13</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 5 · Bab 13</div>
+        <div class="ch-title">Karya Pemisahan</div>
+        <div class="ch-park-aim">Park menyatakan bahwa seluruh sejarah Israel — dan inti dari iman Kristen — dimulai dengan satu kata: <em>pisah.</em> Pemisahan dari dunia adalah syarat untuk menjadi alat dalam tangan Allah.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 175" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="175" fill="#f7f1e6"/>
+            <!-- center command -->
+            <rect x="220" y="20" width="240" height="50" rx="4" fill="rgba(58,30,90,0.1)" stroke="rgba(58,30,90,0.3)" stroke-width="2"/>
+            <text x="340" y="42" text-anchor="middle" font-size="13" fill="#3a1e5a" font-style="italic">"Keluarlah..."</text>
+            <text x="340" y="60" text-anchor="middle" font-size="10.5" fill="#5a4e3e">Kej 12:1 — Perintah kepada Abraham</text>
+            <!-- branches -->
+            <line x1="270" y1="70" x2="180" y2="105" stroke="rgba(58,30,90,0.3)" stroke-width="1.5" marker-end="url(#arrp)"/>
+            <line x1="340" y1="70" x2="340" y2="105" stroke="rgba(58,30,90,0.3)" stroke-width="1.5" marker-end="url(#arrp)"/>
+            <line x1="410" y1="70" x2="500" y2="105" stroke="rgba(58,30,90,0.3)" stroke-width="1.5" marker-end="url(#arrp)"/>
+            <rect x="80" y="105" width="170" height="45" rx="3" fill="rgba(58,30,90,0.06)" stroke="rgba(58,30,90,0.2)" stroke-width="1"/>
+            <text x="165" y="122" text-anchor="middle" font-size="10" fill="#3a1e5a">Dari negerimu</text>
+            <text x="165" y="137" text-anchor="middle" font-size="10" fill="#5a4e3e">Pisah dari lingkungan</text>
+            <rect x="255" y="105" width="170" height="45" rx="3" fill="rgba(58,30,90,0.1)" stroke="rgba(58,30,90,0.3)" stroke-width="1.5"/>
+            <text x="340" y="122" text-anchor="middle" font-size="10" fill="#3a1e5a">Dari sanak saudaramu</text>
+            <text x="340" y="137" text-anchor="middle" font-size="10" fill="#5a4e3e">Pisah dari relasi penghambat</text>
+            <rect x="430" y="105" width="170" height="45" rx="3" fill="rgba(58,30,90,0.06)" stroke="rgba(58,30,90,0.2)" stroke-width="1"/>
+            <text x="515" y="122" text-anchor="middle" font-size="10" fill="#3a1e5a">Dari rumah bapamu</text>
+            <text x="515" y="137" text-anchor="middle" font-size="10" fill="#5a4e3e">Pisah dari kenyamanan lama</text>
+            <text x="340" y="168" text-anchor="middle" font-size="11" fill="#8b6914" font-style="italic">"Sejarah Israel dimulai dengan perintah pemisahan."</text>
+            <defs><marker id="arrp" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(58,30,90,0.4)"/></marker></defs>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menulis bahwa "dalam realitas, sejarah Israel dimulai dengan perintah pemisahan." Dalam konteks silsilah yang baru kita baca, <strong>mengapa pemisahan menjadi begitu mendesak</strong> pada titik di mana Allah memanggil Abraham?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Eber menyeberangi sungai Efrat sebagai tindakan iman — memisahkan diri dari tanah dosa. Abraham melakukan hal yang sama, dalam skala lebih besar. <strong>Apa pola yang Park lihat dalam kedua tindakan ini?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Pemisahan terdengar keras dan menyakitkan. Tapi Park menunjukkan bahwa itu justru untuk perlindungan dan penggunaan oleh Allah. <strong>Apa yang harus dilepaskan</strong> agar seseorang bisa benar-benar dipakai Allah?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Adakah sesuatu yang Allah sudah lama memanggil kamu untuk <strong>"keluar darinya"</strong> — tapi kamu belum benar-benar merespons? Apa yang membuatmu masih di sana?</div>
+        </div>
+
+        <div class="slow-gate no-print" id="gate-c13">
+          <div class="slow-gate-header">
+            <span class="gate-icon">⊘</span>
+            <div class="gate-label-wrap">
+              <span class="gate-eyebrow">Pintu Berhenti · Bab 13</span>
+              <div class="gate-question">Tulis nama "Haran"-mu sebelum lanjut.</div>
+              <div class="gate-sub">Haran adalah tempat di mana Terah berhenti — nyaman, cukup baik, bukan Ur tapi juga bukan Kanaan. Park menunjukkan bahwa Allah tidak memanggil Abraham dari Ur ke Haran. Ia memanggil Abraham dari Haran ke Kanaan — meninggalkan tempat yang sudah nyaman itu. <strong>Apa "Haran"-mu?</strong> Tempat mana dalam hidupmu yang terasa seperti kemajuan — tapi kamu tahu bukan tempat yang Allah tuju?</div>
+            </div>
+          </div>
+          <div class="gate-body">
+            <textarea class="gate-textarea" id="gate-ta-c13" placeholder="Namakan Haran-mu. Boleh satu kata, boleh satu paragraf. Tapi jangan lewati ini tanpa menulis sesuatu yang jujur..." oninput="onGateInput('c13', this)"></textarea>
+            <span class="gate-saved" id="gate-saved-c13">✓ Tersimpan</span>
+            <button class="gate-unlock-btn" id="gate-btn-c13" onclick="unlockGate('c13')">Saya sudah menulis nama Haran saya — lanjutkan ↓</button>
+            <div class="gate-unlocked-msg" id="gate-msg-c13">Kamu baru saja melakukan sesuatu yang Abraham juga harus lakukan — menamakannya. Langkah pertama keluar dari Haran bukan fisik. Itu kejujuran. Kamu sudah mengambil langkah itu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-block part5" data-part="p5">
+  <div class="chapter-card" id="c14">
+    <div class="ch-header" onclick="toggleChapter('c14')">
+      <div class="ch-num">14</div>
+      <div class="ch-header-text">
+        <div class="ch-tag">Part 5 · Bab 14 — Penutup</div>
+        <div class="ch-title">Abraham dari Perspektif Sejarah Penebusan</div>
+        <div class="ch-park-aim">Park menutup buku dengan gambar besar: dua ribu tahun dari Adam ke Abraham adalah fondasi. Dari Abraham, Allah memulai babak baru yang akan berakhir pada Kristus. Silsilah adalah janji yang sedang bergerak.</div>
+      </div>
+      <div class="ch-chev">▾</div>
+    </div>
+    <div class="ch-body">
+      <div class="ch-inner">
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 175" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="175" fill="#f7f1e6"/>
+            <!-- timeline arc -->
+            <text x="340" y="20" text-anchor="middle" font-size="11.5" fill="#18140e" font-style="italic">Satu garis panjang keselamatan</text>
+            <!-- boxes on timeline -->
+            <line x1="30" y1="85" x2="650" y2="85" stroke="rgba(139,105,20,0.3)" stroke-width="1.5"/>
+            <!-- points -->
+            <circle cx="60" cy="85" r="5" fill="rgba(30,74,45,0.5)" stroke="rgba(30,74,45,0.7)" stroke-width="1.5"/>
+            <text x="60" y="105" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Adam</text>
+            <text x="60" y="118" text-anchor="middle" font-size="9" fill="#8b6914">Janji 1.</text>
+            <circle cx="200" cy="85" r="5" fill="rgba(30,74,45,0.5)" stroke="rgba(30,74,45,0.7)" stroke-width="1.5"/>
+            <text x="200" y="105" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Nuh</text>
+            <text x="200" y="118" text-anchor="middle" font-size="9" fill="#8b6914">Janji 2. / Banjir</text>
+            <circle cx="340" cy="85" r="8" fill="rgba(58,30,90,0.6)" stroke="rgba(58,30,90,0.8)" stroke-width="2"/>
+            <text x="340" y="108" text-anchor="middle" font-size="10.5" fill="#3a1e5a" font-weight="600">Abraham</text>
+            <text x="340" y="122" text-anchor="middle" font-size="9" fill="#8b6914">Karya Keselamatan Baru</text>
+            <circle cx="490" cy="85" r="5" fill="rgba(44,74,110,0.5)" stroke="rgba(44,74,110,0.7)" stroke-width="1.5"/>
+            <text x="490" y="105" text-anchor="middle" font-size="9.5" fill="#2c4a6e">Daud</text>
+            <text x="490" y="118" text-anchor="middle" font-size="9" fill="#8b6914">Janji Kerajaan</text>
+            <circle cx="630" cy="85" r="8" fill="rgba(139,105,20,0.7)" stroke="rgba(139,105,20,0.9)" stroke-width="2"/>
+            <text x="630" y="108" text-anchor="middle" font-size="10.5" fill="#8b6914" font-weight="600">Kristus</text>
+            <text x="630" y="122" text-anchor="middle" font-size="9" fill="#8b6914">Penggenapan</text>
+            <!-- brace for genealogy scope -->
+            <path d="M60,55 Q200,40 340,55" stroke="rgba(30,74,45,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+            <text x="200" y="38" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Cakupan buku Park</text>
+            <path d="M340,55 Q490,40 630,55" stroke="rgba(139,105,20,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+            <text x="485" y="38" text-anchor="middle" font-size="9.5" fill="#8b6914">Sisa kanon Alkitab</text>
+          </svg>
+        </div>
+        <div class="ch-divider"></div>
+        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menyatakan bahwa "dosa terus berkembang biak sampai kelahiran Abraham" — dan justru di saat itulah Allah memulai karya keselamatan yang baru. <strong>Apa yang itu katakan tentang cara Allah bekerja?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Sepanjang dua ribu tahun dari Adam ke Abraham, Allah menjaga iman tetap hidup melalui orang-orang yang sering kali tidak kita kenal namanya. <strong>Apa yang itu sampaikan tentang peran "orang-orang biasa" dalam rencana Allah?</strong></div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menutup buku di Abraham — bukan di Kristus. Tapi ia menunjukkan arah menuju Kristus. <strong>Apa yang "belum selesai" dalam buku ini</strong> yang hanya bisa diselesaikan oleh sisa kanon Alkitab?</div></div>
+        </div>
+        <div class="q-after-box">
+          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
+          <div class="reflection-prompt">Setelah membaca seluruh buku Park — <strong>apa satu hal yang paling mengubah cara kamu memandang sejarah, hidupmu sendiri, atau Allah?</strong> Biarkan pertanyaan itu tinggal bersamamu.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONCLUSION ============ -->
+<div class="conclusion-wrap">
+  <div class="section-eyebrow" style="text-align:center">Kesimpulan</div>
+  <h2 class="conc-title">Satu kisah.<br><em>Belum selesai.</em></h2>
+  <p class="conc-text">Park menutup bukunya bukan dengan jawaban — tapi dengan undangan. Sejarah penebusan yang ia lacak dari Adam sampai Abraham tidak berhenti di halaman terakhir. Ia berlanjut. Melalui Abraham, melalui Kristus — dan melalui setiap orang yang menerima Injil dan ditempatkan dalam silsilah iman yang sama.</p>
+  <div class="conc-quote">
+    "Sejarah penebusan Allah tidak terpisah dari sejarah dunia ini. Keduanya saling jalin. Sejarah penebusan telah berkembang dan terbuka sejak sebelum permulaan waktu sesuai kehendak Allah yang berkenan dan oleh kedaulatan-Nya yang mutlak."
+    <cite>Abraham Park, Kesimpulan</cite>
+  </div>
+  <p class="conc-text">Silsilah yang kamu baca adalah bukti bahwa tidak satu pun generasi terlupakan oleh Allah. Tidak satu pun nama yang dicatat sia-sia. Dan tidak satu pun masa di mana Allah kehilangan kendali atas benang yang Ia pegang.</p>
+  <p class="conc-text" style="font-style:italic; color:var(--gold);">Kamu adalah bagian dari silsilah itu.</p>
+</div>
+
+<script>
+// ============ STORAGE HELPERS ============
+var STORE_KEY = 'genesis-companion-v1';
+
+function loadData() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    return raw ? JSON.parse(raw) : { read: {}, notes: {}, open: {} };
+  } catch(e) { return { read: {}, notes: {}, open: {} }; }
+}
+
+function saveData(data) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+var appData = loadData();
+
+// ============ PROGRESS BAR (scroll) ============
+window.addEventListener('scroll', function() {
+  var scrollTop = window.scrollY;
+  var docHeight = document.body.scrollHeight - window.innerHeight;
+  var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('prog').style.width = progress + '%';
+});
+
+// ============ TOGGLE CHAPTER ============
+function toggleChapter(id) {
+  var card = document.getElementById(id);
+  card.classList.toggle('open');
+  appData.open[id] = card.classList.contains('open');
+  saveData(appData);
+}
+
+// ============ EXPAND ALL IN PART ============
+function expandPart(partId) {
+  var blocks = document.querySelectorAll('[data-part="' + partId + '"] .chapter-card');
+  var allOpen = Array.from(blocks).every(function(b) { return b.classList.contains('open'); });
+  blocks.forEach(function(b) {
+    if (allOpen) { b.classList.remove('open'); appData.open[b.id] = false; }
+    else { b.classList.add('open'); appData.open[b.id] = true; }
+  });
+  saveData(appData);
+}
+
+// ============ READ TOGGLE ============
+function toggleRead(chapterId, checkbox) {
+  appData.read[chapterId] = checkbox.checked;
+  saveData(appData);
+  var card = document.getElementById(chapterId);
+  if (checkbox.checked) card.classList.add('read-done');
+  else card.classList.remove('read-done');
+  updateReadingProgress();
+}
+
+// ============ NOTES TOGGLE ============
+function toggleNotes(chapterId, btn) {
+  var panel = document.getElementById('notes-panel-' + chapterId);
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open');
+  btn.classList.toggle('active');
+  btn.textContent = panel.classList.contains('open') ? '✦ Tutup Catatan' : '✦ Catatan Saya';
+  if (!isOpen) {
+    // focus textarea
+    setTimeout(function() {
+      var ta = panel.querySelector('.notes-textarea');
+      if (ta) ta.focus();
+    }, 300);
+  }
+}
+
+// ============ NOTES SAVE (debounced) ============
+var saveTimers = {};
+function onNotesInput(chapterId, textarea) {
+  clearTimeout(saveTimers[chapterId]);
+  saveTimers[chapterId] = setTimeout(function() {
+    appData.notes[chapterId] = textarea.value;
+    saveData(appData);
+    var badge = document.getElementById('saved-badge-' + chapterId);
+    if (badge) {
+      badge.classList.add('show');
+      setTimeout(function() { badge.classList.remove('show'); }, 1800);
+    }
+  }, 600);
+}
+
+// ============ UPDATE READING PROGRESS ============
+function updateReadingProgress() {
+  var allCards = document.querySelectorAll('.chapter-card[id]');
+  var total = allCards.length;
+  var done = Object.values(appData.read).filter(Boolean).length;
+  // cap at total
+  done = Math.min(done, total);
+  var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  var fill = document.getElementById('rp-fill');
+  var count = document.getElementById('rp-count');
+  if (fill) fill.style.width = pct + '%';
+  if (count) count.textContent = done + ' / ' + total + ' bab dibaca';
+}
+
+// ============ INJECT NOTES + READ UI INTO EACH CHAPTER ============
+function buildChapterExtras() {
+  var cards = document.querySelectorAll('.chapter-card[id]');
+  cards.forEach(function(card) {
+    var id = card.id;
+    var isRead = !!appData.read[id];
+    var savedNote = appData.notes[id] || '';
+
+    // ---- Read row ----
+    var readRow = document.createElement('div');
+    readRow.className = 'ch-read-row no-print';
+    readRow.innerHTML =
+      '<label class="read-label">' +
+        '<input type="checkbox" class="read-checkbox" id="read-' + id + '"' + (isRead ? ' checked' : '') + ' onchange="toggleRead(\'' + id + '\', this)">' +
+        'Tandai sudah dibaca' +
+      '</label>' +
+      '<button class="notes-toggle-btn" id="notes-btn-' + id + '" onclick="toggleNotes(\'' + id + '\', this)">✦ Catatan Saya</button>';
+
+    // ---- Notes panel ----
+    var notesPanel = document.createElement('div');
+    notesPanel.className = 'notes-panel no-print';
+    notesPanel.id = 'notes-panel-' + id;
+    notesPanel.innerHTML =
+      '<div class="notes-inner">' +
+        '<span class="notes-label">Catatan Pribadi — Bab ini</span>' +
+        '<textarea class="notes-textarea" id="notes-ta-' + id + '" placeholder="Tulis refleksimu di sini — apa yang tergerak, apa yang menantang, apa pertanyaan yang tersisa…" oninput="onNotesInput(\'' + id + '\', this)">' + savedNote.replace(/</g,'&lt;') + '</textarea>' +
+        '<span class="notes-saved-badge" id="saved-badge-' + id + '">✓ Tersimpan</span>' +
+      '</div>';
+
+    // Append after .ch-body
+    card.appendChild(readRow);
+    card.appendChild(notesPanel);
+
+    // Restore read state
+    if (isRead) card.classList.add('read-done');
+
+    // Restore open state
+    if (appData.open[id]) card.classList.add('open');
+  });
+}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', function() {
+  buildChapterExtras();
+  updateReadingProgress();
+  restoreGates();
+
+
+// ============ SLOW GATES ============
+var gateTimers = {};
+
+function onGateInput(chapterId, textarea) {
+  var btn = document.getElementById('gate-btn-' + chapterId);
+  var hasText = textarea.value.trim().length >= 10;
+  if (btn) {
+    if (hasText) btn.classList.add('ready');
+    else btn.classList.remove('ready');
+  }
+  // autosave
+  clearTimeout(gateTimers[chapterId]);
+  gateTimers[chapterId] = setTimeout(function() {
+    appData.notes['gate-' + chapterId] = textarea.value;
+    saveData(appData);
+    var badge = document.getElementById('gate-saved-' + chapterId);
+    if (badge) { badge.classList.add('show'); setTimeout(function(){ badge.classList.remove('show'); }, 1800); }
+  }, 700);
+}
+
+function unlockGate(chapterId) {
+  var btn = document.getElementById('gate-btn-' + chapterId);
+  var msg = document.getElementById('gate-msg-' + chapterId);
+  var gate = document.getElementById('gate-' + chapterId);
+  if (!btn || !msg) return;
+  btn.classList.add('unlocked');
+  btn.textContent = '✓ Kamu sudah merespons';
+  msg.classList.add('show');
+  appData.notes['gate-unlocked-' + chapterId] = true;
+  saveData(appData);
+  // smooth scroll to next chapter after short delay
+  setTimeout(function() {
+    gate.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, 500);
+}
+
+function restoreGates() {
+  ['c10', 'c13'].forEach(function(chapterId) {
+    var savedText = appData.notes['gate-' + chapterId] || '';
+    var isUnlocked = appData.notes['gate-unlocked-' + chapterId];
+    var ta = document.getElementById('gate-ta-' + chapterId);
+    var btn = document.getElementById('gate-btn-' + chapterId);
+    var msg = document.getElementById('gate-msg-' + chapterId);
+    if (ta && savedText) {
+      ta.value = savedText;
+      if (savedText.trim().length >= 10 && btn) btn.classList.add('ready');
+    }
+    if (isUnlocked && btn && msg) {
+      btn.classList.add('unlocked');
+      btn.textContent = '✓ Kamu sudah merespons';
+      msg.classList.add('show');
+    }
+  });
+}
+
+  // Inject reading progress panel
+  var rpanel = document.createElement('div');
+  rpanel.className = 'reading-progress-panel no-print';
+  rpanel.innerHTML =
+    '<span class="rp-label">Progress Membaca</span>' +
+    '<div class="rp-bar-bg"><div class="rp-bar-fill" id="rp-fill" style="width:0%"></div></div>' +
+    '<span class="rp-count" id="rp-count">0 / 14 bab dibaca</span>';
+  document.body.appendChild(rpanel);
+  updateReadingProgress();
+});
+</script>
+
+<!-- ============ APPENDIX ============ -->
+<div class="appendix-link-wrap no-print" style="flex-direction:column;align-items:flex-start;gap:16px;border-top:1px solid var(--gold-border);margin-top:60px;">
+  <span class="appendix-link-label" style="font-size:9px;">Setelah selesai membaca</span>
+  <a href="self-assessment.html" style="display:inline-flex;align-items:center;gap:12px;font-family:'Cormorant SC',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--parchment);background:var(--rust, #7a3320);border:none;border-radius:3px;padding:14px 28px;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.background='#5a2216'" onmouseout="this.style.background='#7a3320'">
+    <span style="font-size:18px;">✦</span>
+    <span>Di Mana Kamu? — Self-Assessment<br><span style="font-family:'EB Garamond',Georgia,serif;font-size:12px;letter-spacing:0;text-transform:none;font-style:italic;opacity:0.85;">Empat pertanyaan · Empat pemisahan Abraham · Tanpa skor</span></span>
+  </a>
+  <div style="border-top:1px solid var(--gold-border);width:100%;padding-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+    <span class="appendix-link-label">Appendix · Untuk yang ingin menelusuri angka</span>
+    <a class="appendix-link-btn" href="kalkulator-kronologi.html" target="_blank">
+      Kalkulator Kronologi — dari Salomo mundur ke Abraham ↗
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

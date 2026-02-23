@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator Kronologi — Adam hingga Abraham</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ VARIABLES ═══════════ */
+:root {
+  --teal: #17a79d; --teal-dk: #0d6b63; --teal-lt: #e8f8f7; --teal-mid: #b2e4e1;
+  --green: #2bb673; --green-lt: #e8f8ef;
+  --gold: #c9a84c; --gold-lt: #fef8ec; --gold-dk: #7a5c1e;
+  --red: #c0392b; --red-lt: #fdf0ef;
+  --bg: #faf8f4; --card: #fffcf7; --white: #fff;
+  --text: #1a1a1a; --sub: #5a5a5a; --dim: #999;
+  --border: #ddd; --border-lt: #f0f0f0;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.09);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.13);
+  --r: 10px;
+}
+
+/* ═══════════ RESET ═══════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;font-size:16px;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+button{font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* ═══════════ HEADER ═══════════ */
+.site-header{background:linear-gradient(135deg,#f0fbfa 0%,#faf8f4 60%,#fef8ec 100%);border-bottom:1px solid var(--teal-mid);padding:0 20px 28px}
+.header-stripe{height:4px;background:linear-gradient(90deg,var(--teal) 0%,var(--green) 45%,var(--gold) 85%);margin-bottom:22px}
+.header-inner{max-width:880px;margin:0 auto}
+.site-logo{height:50px;width:auto;display:block;margin-bottom:14px}
+.header-badge{display:inline-block;padding:3px 12px;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:20px;font-size:11px;font-weight:600;color:var(--teal-dk);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+h1{font-size:clamp(20px,4vw,30px);font-weight:700;line-height:1.2;margin-bottom:6px}
+h1 span{color:var(--teal)}
+.header-sub{font-size:14px;color:var(--sub);max-width:560px;margin-bottom:18px}
+
+/* Controls row */
+.ctrl-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mode-sw{display:flex;border:1.5px solid var(--teal);border-radius:8px;overflow:hidden}
+.mode-btn{padding:9px 18px;background:none;border:none;font-size:13px;font-weight:600;color:var(--teal);transition:background .15s,color .15s;white-space:nowrap;border-right:1px solid var(--teal);-webkit-tap-highlight-color:transparent}
+.mode-btn:last-child{border-right:none}
+.mode-btn.active{background:var(--teal);color:#fff}
+.toggle-am{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);font-size:13px;font-weight:500;color:var(--sub);transition:all .2s;user-select:none}
+.toggle-am.on{border-color:var(--gold);color:var(--gold-dk);background:var(--gold-lt)}
+.sw-track{width:32px;height:18px;background:var(--border);border-radius:9px;position:relative;transition:background .2s;flex-shrink:0}
+.sw-track::after{content:'';position:absolute;width:12px;height:12px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle-am.on .sw-track{background:var(--gold)}
+.toggle-am.on .sw-track::after{left:17px}
+.am-hint{font-size:10px;opacity:.7}
+
+/* ═══════════ LAYOUT ═══════════ */
+.container{max-width:880px;margin:0 auto;padding:0 20px 80px;min-width:0}
+.panel{display:none}.panel.active{display:block}
+.sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border-lt)}
+
+/* ═══════════ CHAIN BOX ═══════════ */
+.chain-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:var(--shadow-sm);overflow:hidden}
+.chain-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.chain-title{font-size:16px;font-weight:700}
+.chain-sub{font-size:12px;color:var(--sub);margin-top:2px}
+.chain-ref{display:inline-flex;padding:3px 10px;background:var(--teal-lt);border:1px solid var(--teal-mid);border-radius:6px;font-size:10px;font-weight:700;color:var(--teal-dk);white-space:nowrap;flex-shrink:0}
+
+/* Calc rows */
+.calc-chain{display:flex;flex-direction:column}
+.calc-row{display:grid;grid-template-columns:1fr 52px 90px;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border-lt);font-size:13px}
+.calc-row:last-child{border-bottom:none}
+.calc-row.total{border-top:2px solid var(--border);border-bottom:none;padding-top:12px;margin-top:4px;font-weight:700}
+.calc-lbl{color:var(--sub);line-height:1.4;word-break:break-word}
+.calc-lbl strong{color:var(--text);display:block;margin-bottom:2px}
+.calc-lbl small{font-size:10px;color:var(--dim)}
+.calc-op{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;color:var(--teal);text-align:center;background:var(--teal-lt);border-radius:4px;padding:2px 4px;white-space:nowrap}
+.calc-val{font-family:'DM Mono',monospace;font-weight:700;color:var(--text);text-align:right;font-size:14px;white-space:nowrap}
+.calc-row.total .calc-val{color:var(--teal);font-size:20px}
+.calc-row.total .calc-op{background:none;color:transparent}
+
+/* Accordion */
+.accordion{margin-top:12px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.acc-btn{width:100%;text-align:left;background:#f5f5f5;border:none;padding:12px 15px;font-size:12px;font-weight:600;color:var(--sub);display:flex;justify-content:space-between;align-items:center;transition:background .15s,color .15s;-webkit-tap-highlight-color:transparent}
+.acc-btn:hover,.acc-btn.open{background:var(--teal-lt);color:var(--teal-dk)}
+.acc-chev{width:14px;height:14px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;flex-shrink:0;margin-top:-4px}
+.acc-btn.open .acc-chev{transform:rotate(-135deg);margin-top:2px}
+.acc-body{display:none;padding:14px 16px;background:var(--card);font-size:12px;color:var(--sub);line-height:1.8}
+.acc-body.open{display:block}
+.acc-step{display:flex;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-lt)}
+.acc-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.acc-num{width:22px;height:22px;background:var(--teal);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.acc-text strong{color:var(--text)}
+.verse{display:block;background:var(--teal-lt);border-left:3px solid var(--teal);padding:6px 10px;border-radius:0 4px 4px 0;margin:5px 0;font-style:italic;color:var(--text);font-size:11px}
+.formula{display:block;font-family:'DM Mono',monospace;background:#f0f0f0;padding:5px 10px;border-radius:4px;margin:5px 0;color:var(--text);font-size:10px}
+.acc-note{background:var(--gold-lt);border:1px solid #e8d5a3;border-radius:6px;padding:9px 13px;font-size:11px;color:var(--gold-dk);margin-top:10px}
+
+/* ═══════════ TABEL — DESKTOP ═══════════ */
+.tbl-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.tbl-filters{display:flex;gap:6px;flex-wrap:wrap}
+.f-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--white);font-size:11px;font-weight:600;color:var(--sub);transition:all .15s}
+.f-btn:hover{border-color:var(--teal);color:var(--teal)}
+.f-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.f-btn.fk11.active{background:var(--green);border-color:var(--green)}
+.f-btn.fev.active{background:var(--gold);border-color:var(--gold)}
+.tbl-hint{font-size:10px;color:var(--dim)}
+
+.tbl-desktop-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:var(--shadow-sm)}
+.kron-tbl{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);font-size:13px}
+.kron-tbl thead{background:#f5f5f5}
+.kron-tbl th{padding:9px 11px;text-align:left;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);border-bottom:1.5px solid var(--border);white-space:nowrap}
+.kron-tbl th.c{text-align:center}
+.kron-tbl td{padding:9px 11px;border-bottom:1px solid var(--border-lt);vertical-align:middle;line-height:1.35}
+.kron-tbl tr:last-child td{border-bottom:none}
+.kron-tbl tr:hover td{background:rgba(23,167,157,.03)}
+.tr-k5{border-left:3px solid var(--teal)}
+.tr-k11{border-left:3px solid var(--green)}
+.tr-ev{border-left:3px solid var(--gold);background:var(--gold-lt)!important}
+.tr-ev:hover td{background:#fef0c0!important}
+.td-no{font-size:10px;color:var(--dim);font-weight:500}
+.td-name{font-weight:700}
+.td-mng{font-weight:400;font-style:italic;color:var(--dim);font-size:10px;display:block;margin-top:1px}
+.td-num{font-family:'DM Mono',monospace;font-weight:600;text-align:center;white-space:nowrap;color:var(--teal-dk)}
+.td-am{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;text-align:center;color:var(--gold-dk)}
+.td-age{text-align:center}
+.age-wrap{display:flex;align-items:center;gap:6px}
+.age-bar{height:5px;border-radius:3px;background:var(--teal);min-width:2px}
+.tr-k11 .age-bar{background:var(--green)}
+.tr-ev .age-bar{background:var(--gold)}
+.age-txt{font-family:'DM Mono',monospace;font-size:11px;color:var(--sub);white-space:nowrap}
+.tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:700;margin-top:2px}
+.tag-e{background:var(--teal-lt);color:var(--teal-dk)}
+.tag-f{background:#fde8e8;color:var(--red)}
+.tag-b{background:var(--gold-lt);color:var(--gold-dk)}
+.tag-a{background:var(--green-lt);color:var(--teal-dk)}
+
+/* AM col hidden by default */
+.am-col{display:none}
+body.show-am .am-col{display:table-cell}
+
+/* ═══════════ MOBILE CARDS ═══════════ */
+.tbl-mobile-wrap{display:flex;flex-direction:column;gap:8px}
+.m-hint{font-size:10px;color:var(--dim);text-align:center;padding:4px 0 6px;letter-spacing:.3px}
+.m-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:13px 15px;cursor:pointer;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.m-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.m-card.k5::before{background:var(--teal)}
+.m-card.k11::before{background:var(--green)}
+.m-card.ev{background:var(--gold-lt);border-color:#e8d5a3}
+.m-card.ev::before{background:var(--gold)}
+.m-card:active{opacity:.88}
+.m-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+.m-left{flex:1;min-width:0}
+.m-gen{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+.m-name{font-size:16px;font-weight:700;line-height:1.2}
+.m-mng{font-size:11px;font-style:italic;color:var(--dim);margin-top:2px}
+.m-right{text-align:right;flex-shrink:0}
+.m-sm{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--teal-dk)}
+.m-am{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold-dk);display:none}
+body.show-am .m-am{display:block}
+.m-bot{display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--border-lt)}
+.m-bar-wrap{flex:1;display:flex;align-items:center;gap:6px}
+.m-bar{height:5px;border-radius:3px;background:var(--teal);min-width:2px}
+.m-card.k11 .m-bar{background:var(--green)}
+.m-card.ev .m-bar{background:var(--gold)}
+.m-age{font-family:'DM Mono',monospace;font-size:11px;color:var(--sub)}
+.m-child{font-size:10px;color:var(--dim);white-space:nowrap;flex-shrink:0}
+
+/* ═══════════ INSIGHT METUSALAH ═══════════ */
+.insight{background:linear-gradient(135deg,#fff8e1,#fffcf7);border:1px solid var(--gold);border-radius:var(--r);padding:18px 20px;margin:16px 0}
+.insight-title{font-size:13px;font-weight:700;color:var(--gold-dk);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.insight-title::before{content:'✦'}
+.insight-body{font-size:13px;color:var(--sub);line-height:1.75}
+.insight-body strong{color:var(--text)}
+/* formula jalur */
+.jalur-wrap{background:var(--gold-lt);border:1px solid #e8d5a3;border-radius:7px;padding:12px 14px;margin-top:10px}
+.jalur-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.jalur-eq{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px;font-family:'DM Mono',monospace}
+.jeq-item{text-align:center}
+.jeq-num{font-size:15px;font-weight:700;color:var(--gold-dk);display:block;line-height:1.2}
+.jeq-num.result{color:var(--red)}
+.jeq-lbl{font-size:9px;color:var(--sub);font-family:'DM Sans',sans-serif;display:block;margin-top:2px;line-height:1.3;max-width:70px}
+.jeq-op{font-size:18px;color:var(--dim);padding-top:4px;flex-shrink:0}
+.jalur-note{font-size:11px;color:var(--gold-dk);font-style:italic;margin-top:8px}
+.jalur-sep{border-top:1px solid #e8d5a3;margin:12px 0}
+
+/* ═══════════ DETAIL CARD POPUP ═══════════ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;align-items:flex-end;justify-content:center;padding:0;backdrop-filter:blur(3px)}
+.overlay.open{display:flex}
+.dc{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:slideUp .22s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.dc-stripe{height:4px;width:100%;position:sticky;top:0}
+.dc-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.9);border:none;width:30px;height:30px;border-radius:50%;font-size:18px;color:var(--sub);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);z-index:10}
+.dc-body{padding:18px 20px 24px}
+.dc-gen{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:3px}
+.dc-name{font-size:24px;font-weight:700;margin-bottom:2px}
+.dc-mng{font-size:13px;font-style:italic;color:var(--sub);margin-bottom:14px}
+.dc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+.dc-stat{background:var(--bg);border:1px solid var(--border-lt);border-radius:7px;padding:9px 6px;text-align:center}
+.dc-sv{font-family:'DM Mono',monospace;font-size:16px;font-weight:700;color:var(--teal);display:block;margin-bottom:1px}
+.dc-sl{font-size:10px;color:var(--dim)}
+.dc-div{height:1px;background:var(--border-lt);margin:10px 0}
+.dc-note{font-size:13px;color:var(--sub);line-height:1.8}
+.dc-note p{margin-bottom:8px}
+.dc-note .hl{background:var(--teal-lt);border-left:3px solid var(--teal);padding:8px 12px;border-radius:0 5px 5px 0;margin:7px 0;color:var(--text);font-style:italic;font-size:12px}
+.dc-note .hl-gold{background:var(--gold-lt);border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 5px 5px 0;margin:7px 0;font-size:12px}
+.dc-note .hl-red{background:var(--red-lt);border-left:3px solid var(--red);padding:8px 12px;border-radius:0 5px 5px 0;margin:7px 0;font-size:12px}
+.dc-ref{font-size:10px;color:var(--teal);font-weight:700;margin-top:10px}
+
+/* ═══════════ HITUNG PANEL ═══════════ */
+.hitung-intro{background:linear-gradient(135deg,var(--teal-lt),var(--green-lt));border:1px solid var(--teal-mid);border-radius:var(--r);padding:18px 20px;margin-bottom:18px}
+.hitung-intro h3{font-size:16px;font-weight:700;color:var(--teal-dk);margin-bottom:5px}
+.hitung-intro p{font-size:13px;color:var(--sub);line-height:1.65}
+.h-sec{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.h-sec h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.h-sub{font-size:12px;color:var(--sub);margin-bottom:14px;line-height:1.6}
+.h-sub em{color:var(--teal-dk);font-style:normal;font-weight:600}
+
+.inp-rows{display:flex;flex-direction:column;gap:10px}
+.inp-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px;padding:11px 13px;border-radius:8px;background:var(--bg);border:1px solid var(--border-lt)}
+.inp-row.hi{background:var(--teal-lt);border-color:var(--teal-mid)}
+.ir-lbl{font-size:12px;color:var(--sub);line-height:1.4}
+.ir-lbl strong{color:var(--text);display:block;margin-bottom:2px;font-size:13px}
+.ir-lbl .ref{font-size:10px;color:var(--teal);font-weight:600}
+.ir-wrap{display:flex;align-items:center;gap:6px}
+.ir-inp{width:84px;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;font-family:'DM Mono',monospace;font-size:16px;font-weight:600;color:var(--text);text-align:center;background:var(--white);transition:border-color .15s,box-shadow .15s;-moz-appearance:textfield}
+.ir-inp::-webkit-outer-spin-button,.ir-inp::-webkit-inner-spin-button{-webkit-appearance:none}
+.ir-inp:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(23,167,157,.1)}
+.ir-inp.ok{border-color:var(--green);background:var(--green-lt)}
+.ir-inp.ng{border-color:var(--red);background:var(--red-lt);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.ir-unit{font-size:11px;color:var(--dim);white-space:nowrap}
+
+.h-result{margin-top:14px;padding:14px;border-radius:8px;background:#f5f5f5;border:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.hr-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:3px}
+.hr-lbl{color:var(--sub)}
+.hr-val{font-family:'DM Mono',monospace;font-weight:700;color:var(--text)}
+.hr-val.pend{color:var(--dim);font-style:italic;font-family:'DM Sans',sans-serif;font-weight:400}
+.hr-total{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:2px solid var(--border);flex-wrap:wrap;gap:5px}
+.hr-total-lbl{font-weight:700;font-size:14px}
+.hr-total-val{font-family:'DM Mono',monospace;font-size:26px;font-weight:700;color:var(--dim);transition:color .35s}
+.hr-total-val.lit{color:var(--teal)}
+
+.vbtn{width:100%;padding:13px;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;margin-top:14px;transition:background .15s,transform .1s;letter-spacing:.2px}
+.vbtn:hover{background:var(--teal-dk)}
+.vbtn:active{transform:scale(.98)}
+.vbtn.gold{background:var(--gold-dk)}
+.vbtn.gold:hover{background:#5a3f12}
+.banner{display:none;margin-top:12px;padding:12px 15px;border-radius:8px;font-size:12px;font-weight:600;line-height:1.6}
+.banner.show{display:block}
+.banner.ok{background:var(--green-lt);border:1px solid var(--green);color:#1a6e3a}
+.banner.part{background:var(--gold-lt);border:1px solid var(--gold);color:var(--gold-dk)}
+.banner.err{background:var(--red-lt);border:1px solid var(--red);color:var(--red)}
+.rbtn{display:none;align-items:center;gap:5px;margin-top:10px;padding:7px 14px;background:none;border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:600;color:var(--sub);transition:all .15s}
+.rbtn:hover{border-color:var(--teal);color:var(--teal)}
+.rbtn.show{display:inline-flex}
+
+/* ═══════════ FOOTER NAV ═══════════ */
+.footer-nav{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-link{display:inline-flex;align-items:center;gap:5px;padding:8px 15px;border:1.5px solid var(--border);border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);text-decoration:none;background:var(--white);transition:all .15s}
+.nav-link:hover{border-color:var(--teal);color:var(--teal)}
+.footer-ref{font-size:10px;color:var(--dim);font-style:italic}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:600px){
+  .site-header{padding:0 14px 20px}
+  .site-logo{height:42px}
+  h1{font-size:19px}
+  .header-sub{font-size:13px}
+  .ctrl-row{flex-direction:column;align-items:stretch}
+  .mode-sw{width:100%}
+  .mode-btn{flex:1;text-align:center;padding:12px 8px;font-size:13px;min-height:44px}
+  .toggle-am{width:100%;justify-content:flex-start;font-size:13px;min-height:44px}
+  .am-hint{display:none}
+  .container{padding:0 12px 60px}
+  .chain-box{padding:12px}
+  .chain-hdr{flex-direction:column;gap:6px}
+  /* calc-row: label full width, op dan val inline */
+  .calc-row{grid-template-columns:1fr auto auto;gap:3px 6px;align-items:center}
+  .calc-lbl{grid-column:1/-1;padding-bottom:2px}
+  .calc-op{font-size:11px;padding:2px 5px;align-self:center}
+  .calc-val{font-size:13px;align-self:center}
+  .calc-row.total .calc-lbl{grid-column:1;font-size:14px}
+  .calc-row.total .calc-val{font-size:16px}
+  .calc-row.total .calc-op{visibility:hidden}
+  /* Accordion tap area */
+  .acc-btn{padding:14px 15px;font-size:13px;min-height:44px}
+  /* Tabel: sembunyikan di mobile, tampilkan card */
+  .tbl-desktop-wrap{display:none}
+  .tbl-mobile-wrap{display:flex}
+  /* Mobile toolbar */
+  .tbl-toolbar{flex-direction:column;align-items:stretch;gap:8px}
+  .tbl-filters{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+  .f-btn{text-align:center;padding:10px 4px;font-size:11px;min-height:44px}
+  .tbl-hint{text-align:center;font-size:11px}
+  /* Mobile cards */
+  .m-card{padding:14px 13px}
+  .m-name{font-size:15px}
+  .m-sm{font-size:14px}
+  /* Insight */
+  .insight{padding:12px}
+  .insight-title{font-size:12px}
+  .insight-body{font-size:13px}
+  /* Jalur formula */
+  .jalur-wrap{padding:10px 10px}
+  .jalur-eq{gap:4px;flex-wrap:wrap;justify-content:center}
+  .jeq-item{min-width:52px;max-width:64px}
+  .jeq-num{font-size:13px}
+  .jeq-lbl{font-size:8px;max-width:64px}
+  .jeq-op{font-size:15px;padding-top:6px}
+  /* Hitung panel */
+  .h-sec{padding:12px}
+  .inp-row{grid-template-columns:1fr;gap:8px}
+  .ir-wrap{justify-content:flex-start}
+  .ir-inp{width:88px;font-size:16px}
+  .hr-total-val{font-size:22px}
+  /* Detail card bottom sheet */
+  .overlay{align-items:flex-end;padding:0}
+  .dc{border-radius:16px 16px 0 0;max-width:100%}
+  .dc-stats{grid-template-columns:repeat(2,1fr)}
+  .dc-name{font-size:21px}
+  .dc-close{width:34px;height:34px;font-size:20px}
+  /* Footer */
+  .footer-nav{flex-direction:column;align-items:stretch}
+  .nav-links{flex-direction:column}
+  .nav-link{justify-content:center;min-height:44px}
+  .footer-ref{text-align:center}
+  .sec-title{font-size:10px;margin:22px 0 10px}
+}
+@media(max-width:360px){
+  .tbl-filters{grid-template-columns:repeat(2,1fr)}
+  .f-btn{font-size:12px}
+  .jalur-eq{gap:2px}
+  .jeq-num{font-size:12px}
+  .mode-btn{font-size:12px;padding:10px 4px}
+}
+@media(min-width:601px){
+  .tbl-desktop-wrap{display:block}
+  .tbl-mobile-wrap{display:none}
+  .overlay{align-items:center;padding:20px}
+  .dc{border-radius:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAE0A5wDACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwCCiiivSPzwKKKKACiiigAooooAKK2NM8N6jq+nzXdkscgibaU3YcnGcjIx0PrmsyWGS3laKaN45FOGR1IIPuD0qb62TNJU5xipNOz69CKiiiqMwro9M8FavqkCzqkcETYKtMxBYeuACfzxmqfhi0iv/EtjbzAGNnJYHocAnB+pGPxr2wAAYA4rGrU5dEetluAjiU5TeiPG9X8Iato8JnmjSWEfekhJbb9QQP5fjWBX0C8ayRsrgFWBBB6GvDNXto7PWb23ix5cc7qvOcDJAH4DiilU5rpjzLL44ZKcHo9LFGiivTfBPhe3hsotUu41kuJgHjDchF7YHqeufyq5SUFdnBhcNPET5If8McvovgvU9W2SyJ9ltjz5kg+Yj2X/ABxXX3nhjS9C8MajJHCJJvs7jzpeWyQenpye1dhiue8bziDwpd88vtQfiwz+ma5XUc3Y+lp5dRw1KU3q0meOUUUV2nyb3CiiigQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAGjoH/Ix6X/19xf+hivda8K0D/kY9L/6+4v/AEMV7rXNiOh9FkP/AC8+X6hRRRXMfQnzzRRRXpH54FFFFABRRRQAUUUUAejfDGTMGoxf3WRvzyP6V1uqaHp+sRbLy3WQj7rjhl+h61wnw1uAmrXkB/5aQhh/wFsf+zV6Z/OuKrdTuj67K1Grg1GSutTyzW/AF7Y7ptPJu4Bzt6SKPp0P4c+1cgysjFWBVgSCCMEEdQRX0Eelcd438OQ32ny6hBGEu4BuYgY8xQOQfoOR9MVpTrPaRx43KIqLqUfuPM7S6lsruK6hYLLE4dcjI455HcV6vpfjfSL+BTPOtpNj5klPH4N0P+eK8horWdNTPLweOqYVtR1T3PWNa8c6ZZW7rZyi6uSCFCcqD6k+n0/SvKpZHmleWRizuxZmPUknJP50yiiFNQHjMfPFW5tEgr3rTIRBpdrF02QouPoAK8Fr0jUfiLawJ5OmWzTMowJJflX8B1P44qK0XJJI6sorU6MpzqOx3MsqQxtJI6oijJZjgD615Z408TprMyWdoc2kLZL/APPRumR7YP4/lWLqviDUtZf/AEu4Yx5yIl+VB+A6/jk1l0qdGzuzTH5t7SLp0tnuwoooroPCCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoo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iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKANHQP+Rj0v/r7i/wDQxXuteFaB/wAjHpf/AF9xf+hivda5sR0Posh/5efL9QooormPoSjpH/IGsv8Argn/AKCKr+Jf+RZ1L/r3f+RqxpH/ACBrL/rgn/oIqv4l/wCRZ1L/AK93/kar7RhL+C/Q8Pr0/wCGn/IHu/8Ar4/9lWvMK9P+Gn/IHu/+vj/2Va6q3wM+Wyr/AHtfM7aiiiuM+wCiiigAooooAKKKKACq+o/8g65/65N/I1YqvqP/ACDrn/rk38jQKWx4FWr4b/5GXTv+vhf51lVq+G/+Rl07/r4X+deg/hPhKf8AGXr+p7h2oo7UV5592tgooooGFFFFABRRRQAUUUUAeUfEX/kZl/691/m1c1Yf8hG1/wCuq/zFdL8Rf+RmX/r3X+bVzVh/yEbX/rqv8xXbT+BHxmP/AN8l6nvY6VzXj3/kU7n/AH4//QhXSjpXNePf+RTuf9+P/wBCFckfiXqfV4j+BL0f5HkFFFFegfCBRRRQAUUUUAFFbdlo1lLpKahfaobVHlaJVFuZMkc54P8ASpE0nQ5XEaeIsO3A32bKuT0yd3A9+1Rzo6FhajV0lr5owKKtahYzabfS2dwoEsbYOO4IyD+III+taz6HplvBbNea20Ms8CTiMWhbAYdMg9uRTckiY4epKTiltuc/RW4dN0EKSPEDkjt9hfn2+9Ufh/Qjr1xNCtysDRx71LLkMc4weR1OPX6UKa1Y/q9TmUer21Rj0VLPBLbXEkEyFJI22sp7HOKtWun/AGnTL+983b9kEZ2bc79zbeueMfQ5p3VrmahJy5balCitHTdM/tCG9k87y/ssBmxtzux26jH15+lN0vTv7SuJYvN8vZC8udu7O0ZxjI6+tF0VGlN2styhRRV+y077ZZX9z5u37JGr7dud2TjrkY9e9HS5MYSk+VLUoUUUUyAoroLHQoLrwnfau8kizW8mxVGNpGF68Z/iPfsKytP0+51O8S1tY98j/kB3JPYD1qVJP5G0qM4qOnxbFSitrXtN0/SXjtLe6kuLxR/pDDAjU45UcZzn34+vTatvC+iJoNpqOpajPb/aFHTBGfQcHsKTmkrmscHVlNw6pX9Di6K7I6N4Oxxr05/4D/8AY1kWWlWV/wCKk02C4ke0kcqsoxuICk9xjqPShTi+4TwdSFr2180YlFdtceHvCdrcyQT61cJLGxVlxyCOo4Ws/VfC8UGlnVNKvlvbRTh+PmTtn9eRgEcdqSqRbKngK0U3bbzRzNFdD4W0K11ye6W7nkijgjD7o8dM85yD2rR/sbwd/wBB6f8A75/+xpyqJaE08HVqQU1a3qcbRW7rljolpDE2lajJdSM2HVh0GOvQd6vaj4Q+z+F7XV7WSSRmiSWeNiMAMvJGB2J/L6Uc6F9Uq3aWtlfocpRVixgW6v7a3YkLLKqEjqASASPzrR8S6TFomrtZwu7oEVsvjOT9AKbaTsYqlJwdRbIxqK2fDOiDXtWFq7MkSxl5GXrgcDH4kfrT/E+hDQNTW3jd3heMOjN17gj04x+RFHMr8vUtYeo6Tqpe6YdFa3hzS4tZ1qKynkdEdWO5MZ4HuD6VvzaB4St55IJdbnSSNijqRyCDgj7vqKUppaF0sJUqx542scVRXVah4ThGlSano+oLfW8WfMXGGUD/AOtzggcc81ytOMlLYzrUKlF2mgortI/A6v4VGpGWX7WYDMI+NpHUDpnO3361xdCknt0HVw9SkoymrX2Ciutj8HC58JJq1rJI1zs3mI4wQCQQOM5/njFclQpJ7dAq0KlNRlNWvsFFbvibRINDuraKCWRxLD5hL4zn2wBxWFTTT1RFWlKnLlkFFFdLf+H9I029ktLnX2SaPG4CyY4yARyGx0IpOSWjHTozqJuPTc5qit86DZXVvM+l6ut3NChkaBoGiZlHUrknJ9qz9H07+1dTisvN8rzAx37d2NqlumR6evehST1HKhUi0mtXoUKKKvadp/28Xf73y/s9s8/3c7tpHHbrnr+lPzZmotvlS1KNFFbumeG5tS0i4v1mCGPd5URXJlKjJA5Ht2PNDaSuyqdKdSXLFXZhUUVfh07ztGutQ83b9nkRNm3O7dnvnjH0NDaW4owlN8qXf/glCiir8mnbNEh1Hzc+ZM0Wzb0wOuc859MUadRRjKWy/wCGKFFFFMkKK3tY0OHTtE0u+jkkZ7tNzK3QcA8YGe/eodB0GfW7ohT5VrEN007cKg69+M47fieKnmVr9Dd4eopqFrt2/Ex6K0dQh09dT+z6dLNJb7gvmyYyxzg4wBx6Zrqr7wt4Y02cQXmsXEUpUNtIBODn/Z9jSdRK3maQwdSbklbTc4SiuwfR/CAjJXXZy2Dgbfy/hrP8N6DBrUWoNPLKn2aIOoTHPB65B9KFNO/kDwdVSUdNdtUc/RRW9FocL+D5tZMkgmjmEYQY2nkD0znk96baVrmMKU5tqPS/4bmDRW9o+iQ6jomqX0ksiyWibkVeh4J5yM07wnoMGv380FxJJGsce8GPGeoHOQfWjnWvkXHDVJctl8Wxz9Fdj/YXhOZhHB4hdXPGZFGM/XAxWNr3h660GdRKRLBJ/q5kHyt7H0Pt+RNSqifqVUwdWnFyaul21Meit+x0KC68J32rvJKJreQoqgjaeF68Z/i9fSsCrTT0RjOlKMYyl12Cit7U9EgsvDum6iksjSXX3lbG0cdsDNaOleG9Hm8ORarqWoT2wd2Q7cYGCQB0J6Cp50lc2jhKsp8i3tf5HIUV2aeG/DN7KtvY683nvwokUHJ9Og/LNc1qulz6RqElncY3pghl6MD0P40RmntuKrhKtKPNLYo0V0HhTw8viC9mjmd44Yo9zMmOpOB1GOeT+FVfEWkf2JrMtmGZowA0bNjLAjvj3yPwp8y5uXqT9Xqey9tb3djJorb8L6NDrurNaTySIgiZ8x4zwQO4PrVbW9Jm0TVJbOXJCnKPjG9T0P8AQ+4NHMr26i9jP2ftbe73E0D/AJGPS/8Ar7i/9DFe615T4J0K31FxqEksiyWlzGVVcYOGB5r1aueu07I+hySjOEJTls7W/EKKKK5z3CjpH/IGsv8Argn/AKCKr+Jf+RZ1L/r3f+RqxpH/ACBrL/rgn/oIqv4l/wCRZ1L/AK93/kar7RhL+C/Q8Pr0/wCGn/IHu/8Ar4/9lWvMK9P+Gn/IHu/+vj/2Va6q3wM+Wyr/AHtfM7aiiiuM+wCiiigAooooAKKKKACq+o/8g65/65N/I1YqvqH/ACDrn/rk38jQKWx4FWr4b/5GXTv+vhf51lVq+G/+Rl07/r4X+deg/hPhKf8AGXr+p7h2oo7UV5592tgooooGFFFFABRRRQAUUUUAeUfEX/kZl/691/m1c1Yf8hG1/wCuq/zFdL8Rf+RmX/r3X+bVzVh/yEbX/rqv8xXbT+BHxmP/AN8l6nvY6VzXj3/kU7n/AH4//QhXSjpXNePf+RTuf9+P/wBCFckfiXqfV4j+BL0f5HkFFFFegfCBRRRQAUUUUAdTbaVeap4Ptks4hIyXblgXVcDAHViP0qC38F61PPHG8EcSsRlzMjbR3OAxJ/Korj/kS7P/AK/H/wDQRWIrMjhlJDAggg4IPYis1zO9j0KjopQ5072WzX+Rr+KLhZ/EFxsVwke2Ib1IY7VxyCAR61q6toGpalBpU9pbrJGNPhXJlRTnHoxB7iqXire0unNcj/TWs0M+Rhs843e+OvfpUXiT72lf9g2D+RqVdpWNKnKp1HK9nZ6bkdx4Y1e2t3nmtVWONSzHzozgDqfvGpvD7FLLWmUkMLPgjrncOlYNbug/8eGtf9eZ/wDQhVNPl1MKLp+2i4J9d/Qs6mB4g0cavGB9utgI71QPvDosmP8APT0FVtK/5FjX/wDdt/8A0ZVPR9TfSdQW4C74j8ksfZ0PBH+e4FdBcaYlhoeuyW532VzHbyWz5zlTJ0+o9Pp61L93Tob0/wB9L2q3V7/c9TP8Nf8AHnrn/Xg/9KTwlG0uqzxrjc9pKoye5XAyegpfDX/Hnrn/AF4P/So/C3/H/df9ec3/AKDTf2iaH/Ln1/UX/hE9T9bT/wACU/xq/a6Nd6ZoOtSXHk4aBANkoc5DDqBnFclW7ov/ACBdd/690/8AQxRLmtqwoyoe192Lvrrfy9DCooorU85ne+GLKXUfAWpWkGPNlucLk8DiPJ/nU2qwHwj4aVdJUPLO3l3N6pyVPTt05yB6Y9TmqugXEtr8OtXlgkZJFnOGU4I4TpWf4T1qGHzdH1LD6deZU7v4GPfPYHjnseeMGudp3fY92nOnGnTi9JONk+xy5JJJJJJOST3r0iTQrrXvA2kQWjwoyAOTKxAxgjsDzzXFa7o82h6m9rJlk+9HIejqT/PsfcV0utQSzfD/AEURRvIdwJCKSQMN6VU3dKxz4OLhOrGom9Ne5VPw61gDJuLH/v43/wATWf4RQp4wsUY8rI4OOnCmsr7Be/8APpP/AN+z/hWr4RR4/F9ijqysHYEEYx8p7U/es7mCdN1Yezi1qtzc1jwPq19rN3dQvbCOWVnXc5B56Z4qd7A+E/Bd/DeHzbi9JQCMEouRgZPQdz+QGcVy/iOCZvEmokROQZ25Ckg810fhZLz/AIRzVhqYf+zvIPlifPXBzt746fjjHOazd1FNvQ9CDpPFSjGL5ndX6Ff4exNPNqkSkBnttoJ7ZJAzUQ+HWsH/AJeLH/v43/xNO8BcnVwOSbXAHr1rl/sF7/z6T/8Afs/4VevM7aHPemsLD2kW9ZbepY1nRrjQrxLW6eJpGjEgMRJGCSMcjrxXePrS6RY+GY7nBsrm08ucEcAbY8Mfpk/gTXm8ttPAAZYZIwTgF1IBP411Xi7/AJF3wx/16n/0GOiSvZMnC1PZ+1qU1ayW/qVtQ0Q6J4vso48m1luI3gb/AGSw4z6g8fTB707x/wD8jQ//AFyT+ta/he6i8RabBpd2+LywkWa3c9Sqnp74HB9iDWT4+Ut4rdVGSY0AA6k1MW+dJ9DWrTgsLKpT+GTTt2fYu+HD/Yvg7VNYPyyzfuYD344BH4k/lRrJGteAtP1IfNPZt5Uh68fdJP1IU/jWhrOq2vhnTdN0aXToL4rCHkSXGAemeQRyd3+TRoWs2fiKC+0VNNt7FZYWYeVjBPTOAByOPy9qTbvz2OmEYRisM5Lbbzepz3gQZ8WW/wDuP/6DT9W8Ka5cazfTRWDtHJcSOjB1GQWJB5PoaTwRG0PjCKN1KugkVgexAIxUOseIdXh1u/jj1G5REuZFVRJgABiAAPQCrd+f3TjpxprCNVbr3nt6G5o9jN4V0HVLnVtsLXMflxQFgSxAOOhI5z+HJOK47SrJtS1W1s1z++kCnHYZ5P4DJ/Cusju5fEXgS+k1ArLc2T5jlIG7HB/xBqt4Ct44ru91acfubKAnJ7E8kj8AfzpRdrtlVaUajo0qfw+e/mdDJrqxePodMUgWqwfZtvYMQGH8gK8/1ywOma3d2eMLHIduf7p5X9CK6BvG1m1x9pPhyyM+7f5nBbdnOc7c5zzmneOokul07W4VxHdwgNjsQMjPvgn/AL5pQvFq63NMY4V6UnGV3F39Fsa0GsyaJ4K0O6UEx+fslX1TD5H4dfqK5zxfoyWN4moWeG0+9HmRsvRSRkj2Bzke3HatDWP+SZ6P/wBfH9JKZ4Wu4tY02bw1fN8rgtau3VWHOB+PI9sihaNyXcdZxqxhh59Ypp+f/BE+IX/IRsP+vUfzNcbXZ/EVNmqWSnqtsAfTgmuMq6XwnBmaaxEl6fkFdr4p8OarfeJLu5t7ZXifZtYzIucIo7sPQ9q4qug8a/8AI3X3/bP/ANFrVSvdWIocnsZ897XW3zNDRtCv9Da41i+i2pbQvtRHDlmIK87ScAZOSTxWZ4Q/5Ge1/wB2X/0W1N8KNdjxFapa5O98Sr2Mf8Wfw5+uKm0GS3g8ax7HCwGWWONu2CGVf5io11v2N6bg1S5LpKXX5HPVueHPu6v/ANg2X+a1k3FvLaXElvOhSWNtrKa2dCjaHTNYvpAVg+yG3DdAzsRge+MZOOgNW2rHNRT9va3cw1RndURSzMQAAMkk9BXU3upf2Hrel2kTZi0xQsu3kM7cyfmDj2qj4Vgj/tGTUbhd1tp8ZnYHu38I+ueR9KdL4gsJ5nml0C2eSRizMZXySTkk8+tTLV2tdG9BckHPmUW3pfy1/OxU8Raeuma3cQxj9wx8yEjpsbkY9hnH4Vo6LYzah4X1OCDZv8+Ije4UYGe5wKfrM0WueHLbUoLdYJLJxbSxoSQqY+TnrgdPqap2X/Inap/18Q/1oveNupooRjiXJfC03p6MP+ET1P1tf/AlP8as6tYTad4RsobjZvN27fI4YY2juK5mt24/5Euz/wCvx/8A0EUNS0uzKlKk1NQTvZ7v/gGFRRRWp556TPoT654d8PqZFhtoYd9xKxA2rtHTP0PsO9ZfjK4uNKSLRLOH7NpuwMGX/lse+T7HqPxPUU/xJdTw+CdCt45GWOaIeYo43YUEA+2e3+FN0W6h8UaI2g3zgXsKlrOZuuB2PrjofUe4zXMk93tc+hnKDfs4aTcVr8tvmcfb/wDHzD/vj+Yr0bxV4R1HW9XW6tpbZYxEqYkYg5BJ7KeOa89+zy2upLbzoUkjlCsp+tdR4/tbibxCjRQSuv2dRlUJGcnuKud3JWOLCpRo1VUTdmtinqXgnU9LsJryea0aOIZYI7EnnHA2itP4dx+curxAgF4VUE++4ZNcf9gvAMm0nAH/AEzP+Fdb4B/49tb/AOvdf/ZqJX5XdjwjpvFQ5ItLXf0I/wDhXt3j/kJWX/fR/wAK0dR0eTRfh3dWss0UzGdX3R5xgsvr34rzyuyt/wDkl93/ANfQ/wDQlpSUrK7NcPOg5TUIWfK9bh4X/wCRR8Rf9cv/AGVqk+G3/IYvP+vf+oqPwv8A8ij4i/65f+ytUnw2/wCQxef9e/8AUUP7Q8P8WH+f6nE121hKdT+G+oQXB3tZODEx6qBgj/2YfQ4rkY7K7mkWOK2md24CqhJz9MV2V3EPDPgV7C4IF/fvuMec7Rxnp6AAfU96c7WVtznwakqk2/hs79iLR/8Akmmsf9d/6R1xVdv4aQ3/AII1fTrfDXRk8wJnGRhcfntIrkBZ3LXP2YW8vn5x5ew7s+mMZqoaSkRik3RpNLS36nVeIf8AkRdB/H+VWYNPu9T+G1rb2cJlkFwW2ggcZbnkj1qHxbH9h8M6Jp8xH2pFLOoOcDHP6nHvzT1vLmx+GlpLazyQyG5I3I2DjLZGRWf2dO53RSVdqfSH6IzLLwVrst5EklqYE3AtKzr8gB5IwSSfTFP8e3kN54kIgcP5ESxOR03AsSM/iPxzWTLr+rzpsk1O7ZTwR5pAPtweap21u91dRW8f35XCL9SQB/OrUZN80uhwSrUo0nSo3d+/kdhZsdE+HU9yCVuNRk2IRwdvT+QY/jSeLcat4e0nXFALFfJmI9f8AQ35itLxFr9ho09vpB0q3vo7aFMedg7TjAGCDzgA596TT9Rt/FXh7U9Lh0+KzeOMSRRxYwxySOAB3Az9azu781up6nJDl+q8y+G1vPcxvh3/AMjK3/Xu381rQuMeMPD8oGDq2nEgY6yp/XI/Uds1n/Dz/kZH/wCvZ/5rWRpurTaLrpvIskByJFzgOpPI/wAPQgGqlFuV10OShVVPDRhP4W2n+B2Hw5H/ABLL3/r4j/pXoFYWk2dpEk99Yspt76WOdQBgAkjP59ceua3a56jvK57+BpeyoqF7/wBMKKKKg7CjpH/IGsf+uCf+giq/iX/kWtR/693/AJGrGkf8gax/64J/6CKg8RI8vh3UEjRncwOFVRkk47Cq+0YP+C/Q8Orq/DHi2Lw/YzQPaPM0km/IcKBwB6H0rnGs7pAC9tMoPqhH9Kr13OKkrM+LpVp4epzx3PR/+FnQ/wDQMk/7+j/Cp4/iXpx/1tldL/u7W/qK8xorP2EDuWc4lb2PX7fx5oE2A1y8TekkTD9RkVsWusade4FtfW8rH+FZAT+VeEUVLw66M6IZ5NfHH7j6Eorw+z8Q6vp+Ps1/OoHRWbcB+Bz/ACrpdP8AiTexELf2kcy92jyjfXByD+lZyoyR30c4w89Je6z0ykNc/p3jPRdRIUXPkSH+Ccbf16H8631IYZBBB7g1k01uelCpCorwdxc1V1JlTTLpmICiFySe3Bqae4itoWmmlSOJRlndgAPqTXmXi/xgNURtP09iLXP7yXHMmOw9Fz69fp1qEXJ2RlisTChTcpM4ytTw4QviTTiTj9+nX6isulBIIIJBByCDyDXc1pY+JjO01LzufQVLXFeF/G0F5ClnqcoiugAFlcgLJ9fQ/wA+3pXaggjiuCUXF2Z9xQrwrwU4O4tIajnuIbaIyTypEg6s7AAfnXMaj8QNIsyUt/Mu3H/PMYXPux/pmkot7F1KtOmrzaR1dBYKMkgV5Vf/ABD1e4yLZYrVD02je35nj9BXOXmqX9+xN3eTTZ7O5IH0HQfhWsaMnueZVznDw0hqey3XiLR7PIn1G3UjqocMfyHNZM/xC0OLPlvPP/1ziI/9CxXklFaLDrqzgqZ5U+xFHpknxMsh/qrC4Yf7TKv+NRf8LOh/6Bj/APf0f4V5xRVexgc7zjFd0bPiXWk17VFvEhaICIIVZgTkEnOR9az7D/kI2v8A11X+YqAAsQqgknoAMk1e06yu31C2ZbWcjzVORGSOCM9q0SUVZHFKpOtV53uz3QdK5rx7/wAinc/78f8A6EK6UdK5rx7/AMinc/78f/oQrhj8SPs8R/Al6P8AI8gooor0D4QKKKKACiiigDUtNcuLSyFoILWaIMXCzwh8E9xnpxU8fiW5hcSQ2WnRSDlXS0UEH1B9axKKnlRusTUSST2Jrm5mvLh57iRpJXOWZu/+fStIeIrgwwxyWlhMIY1jRpbZXIUDAGTWPRRyoSr1E3K+r3Nc69IQR/Z2l8jGfsacVStr6a0iuY4tu24j8uTIz8vt6GqtFHKgdabad9UFaKa1ex6LJpIkBtJGDFSMkEEHg9hkA4+vrWdRTaT3JhUlBtxe/wCpbtNQnso7lISu24iMUmRn5T1x6Gksr6awleSDbueNojkZ+Vuv41VoosmCqSVrPbYKtW99NbW9zBHt2XCBJMjJwDkY9Kq0UNLqTGTTunqFFFFMRowazd22kT6XGUFtO25wVySeOh/4DWdRRSSS2LlUlJJN7bGne65e6jYQWd0UkSDHluV+ccY6/TH5Cr1l401fT7KK1geERRLtUGPPHvXPUUnCLVmaRxVaMuZS1tY6n/hP9dznfB/36rHXWrtNb/tZSn2rcXzt+XJGDx9DWdRSUIoqeLrT+KX/AA51P/Cf67nO+D/v1WbqviTVNYj8q7uP3Wc+WihVOPXHX8ayKKPZxTHLG4iSalLc09I1y80SWSSzKBpFCtvXPTmtb/hP9d/vwf8AfquWoocIt3ZNPF1qceWErI2NX8R6hrcUcV40ZWNty7EAOcYqtf6vdaja2dvcFDHaJ5cW1cHGB1Pf7oqhRTUUrWJnias23J77lmxvZ9OvIru2cpLE2VP6EEdwRkEe9WbvW7y+1aPUp/La4QqR8ny5U5GR3rNoocU3exMa04x5E9L7F3U9SudWvWu7tg0rADgYAAGAAO3/ANem6fqFxpd9HeWrBZUzgkZHIIII78GqlFOytboJ1ZOftL6mlBrd3baw+qReWLlyzH5Ply2cnHvzVO5nkurqa4lx5kzs7YGBkkngfU1DRSUUndDlWqSTTd1e/wAzQs9Yu7GwurKIoYLoYkVlz2IyPfn9BS2+s3drpE+mxMi287bpCF+YnjjP4Yx9fWs6ijlXYca9SNrPa/4hWjJrN3Lo0elOUa2ifemV+YHJPB/E1nUU2k9yYVJQvyu11Z+hoz6zd3OjwaXIUNtA25AFwQeep7/eqlDNJbzJNE5SSNgysOoIOQajooSS0QSqyk029tEaOrazea1Ok14ULou1Si4GMk1nUUUJJKyCpUlUlzT1YVuTeJrm5laWez06WRvvPJaqzH0yTyeAB+FYdFJxuOnVnBNRe5sSeI75raS3gS2tUk4f7NCIyw7jI5rIpKKEkgnVnUtzPY218SzyRot9Z2d8UAVZLiPL4HQFh1FVdR1i51JY45BHFBH/AKuCFdiKe+B/+us6ijlV7lyxNRx5W/69S3Hfzw6dNYoVWGZlaTjlivQE+gPOPWqlFFNJIxc3JJN7bFy11Gezt7q3j2mK5QJIrDI46Ee47Gmx300Wnz2S7fJmdXfI5yvTB7VVoosilUmkkntf8Qq017M2npYnb5KSGQcc7j7+mKq0UNJkqTjewUUUUyTRvdYu7+xtLOZk8m1XbGAuDjAHJ79BVOCeW1nSeFyksbBlYHoR0NRUUkklZGkqs5NNvVGhqWsXOqXqXlwIvOUAbkTbnHTPqR/Ktn/hP9dxjzIMf9cq5aipcItJM2ji60ZOUZavc6hvHuuMjKXgwwwf3VZGma1d6StwtqyAXChH3Lnjnp6dTWdRRyRWgpYutKSblqtgrQTWLtNGfSgU+yu+8jbznOev4Vn0VTSe5lCpKLvF7/qaFnq93YWN1ZwlPJul2yZXJxgjg/iadpGtXmiXDz2ZQO67WLrkYyDWbRRyp3uVGvUjaz22Oobx9rrKR5sAJ6ERDj865+7vbm/uGnu5mmlbjcx7eg9B7Diq9FSoRWxdTFVqi5ZyuizZX1zp1ytxaTNFKv8AEvcdwQeCPY10X/Cwdc8rYPs2f7/l8/Xrj9K5Sim4xk9UKlia1JWhKyLF3eXF/ctcXUzyyt1Zv5ew9hVh9Yu30ZNKJT7Kj7wNvOc56/iaz6KOVaaEe2qXcr6vT7wqzY3kun3sV3CFMsZ3LuGQOMZx+NVqKb2syE2mmt0Wb29m1G8lu7ggyyNubAwOmOB6YAqXS9VutHvPtVo6rJtKncMgg4yCPwH5VRoosrW6Fe1nz+0vr3NKw1m703UZb628tZpAwOVyoBOSAO3SqDsXdmbqxJP1NMoosk7hKpOS5W9N/mdN4X8QahaXtjpkcim1luowVK5Iy4zg9vX869grwrQP+Rj0v/r7i/8AQxXutc1dJWsfRZJVnOM4yeitb8QooornPdKOkEf2PZc/8sE/9BFPn1Gytc/aLyCL/rpIF/nWRceEYrqJIpdX1QxIoRY1lRVAHA4Cc1n/APCtNG/5+b//AL+J/wDE1paPc4ZVsRFJQpX+aX6m0/ibQ4x82p2p/wB2QN/KoH8SeHJRiS9tX/3hmsz/AIVpo3/Pzf8A/fxP/iaP+FaaN/z83/8A38T/AOJqrQ/mMHVxr/5cr71/mTy33gufmT+zWJ7mIZ/lVWXTfAtwTmayQjnK3Oz/ANmp/wDwrTRv+fm//wC/if8AxNH/AArTRv8An5v/APv4n/xNO8VtIxcMRL4sOvvX+ZSk8F+Grnm11YoT0Czo4/x/WqNx8N7jbus9SgmHYSKV/UE1t/8ACtNG/wCfm/8A+/if/E05PhxpMbbkvNRU+qyqP/ZapTt9r8DKWDc98Pb0kjh73wfrlllmsmlUfxQsH/Qc/pWI6PG5R1ZXBwQwIIPuDXr8Xg6KD/Va1rKj0FyMfltp9z4Rtr2PZd397cL280RMR9G2ZH4Gmqy6nPPKJvWEWvK6f6njVaFnrep6fGY7W+miQ/wKxwPoDwPwr0T/AIVpo3/Pzf8A/fxP/iaP+FaaN/z83/8A38T/AOJqnUpvdmEMux1N3gmvRr/M81u9QvL5gbq6mnx03uWA+g7VVr1T/hWmjf8APzf/APfxP/iaP+FaaN/z83//AH8T/wCJoVWmtmE8tx03eUbv1X+Z5XRXqn/CtNG/5+b/AP7+J/8AE0f8K00b/n5v/wDv4n/xNP20O5H9lYz+T8V/meV1oWmt6nYoEtr+4jQdFDnaPoDxXon/AArTRv8An5v/APv4n/xNH/CtNG/5+b//AL+J/wDE0nUpvdlwy7H09YJr0a/zPNbzULzUJBJeXMszDpvYkD6DoPwqrXqn/CtNG/5+b/8A7+J/8TSr8NtGVw32i+ODnBdMH/x2j2tNLRhPLcdN3lG/zX+Z5hBbT3Uvl28Mkr/3Y1LH8hW7aeB9cusFrdLdT0MzgfoMn9K9FTwukUIhh1S/gjH8MHlRj/x1BVaXwTbz583WNZk/3rkH/wBlqXWXQ3hlM1rOLb9Uv1Oei+HAjAa91aNB1wif1J/pVuPwl4UtObnU1cjr5lyi/wAsH9auH4baOxJa6vyT1JkT/wCJpP8AhWmjf8/N/wD9/E/+Jqee/wBo6Y4Pk+HD/fJCR2ngW2zh7Fsf3pvM/mTmrUWp+DoP9U+nJjusQH9Krf8ACtNG/wCfm/8A+/if/E0f8K00b/n5v/8Av4n/AMTS917yNFHER+HDr71/maq+J/DyDCX9sB6LUyeJNEkA26naDPrKB/OsT/hWmjf8/N//AN/E/wDiaP8AhWmjf8/N/wD9/E/+JpWh/MbKrjV/y5X3r/M6qG7t7hcwTxSD1Rw38qwPHn/Ip3P++n/oQqqvw30hGDLd6grDkESJn/0Gr8nhCCawexm1XU5bd8ZSSVGxg5GCUyOlTaKd0zWVTEVKcoypNXVt1/meN0V6p/wrTRv+fm//AO/if/E0f8K00b/n5v8A/v4n/wATXT7aHc+d/srF/wAn4r/M8ror1T/hWmjf8/N//wB/E/8AiaP+FaaN/wA/N/8A9/E/+Jo9tDuH9lYz+T8V/meV0V6p/wAK00b/AJ+b/wD7+J/8TR/wrTRv+fm//wC/if8AxNHtodw/srGfyfiv8zyuivVP+FaaN/z83/8A38T/AOJo/wCFaaN/z83/AP38T/4mj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b/AP7+J/8AE0f8K00b/n5v/wDv4n/xNHtodw/srGfyfiv8zyuivVP+FaaN/wA/N/8A9/E/+Jo/4Vpo3/Pzf/8AfxP/AImj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b//AL+J/wDE0f8ACtNG/wCfm/8A+/if/E0e2h3D+ysZ/J+K/wAzyuivVP8AhWmjf8/N/wD9/E/+Jo/4Vpo3/Pzf/wDfxP8A4mj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b/8A7+J/8TR/wrTRv+fm/wD+/if/ABNHtodw/srGfyfiv8zyuivVP+FaaN/z83//AH8T/wCJo/4Vpo3/AD83/wD38T/4mj20O4f2VjP5PxX+Z5XRXqn/AArTRv8An5v/APv4n/xNH/CtNG/5+b//AL+J/wDE0e2h3D+ysZ/J+K/zPK6K9U/4Vpo3/Pzf/wDfxP8A4mj/AIVpo3/Pzf8A/fxP/iaPbQ7h/ZWM/k/Ff5nldFeqf8K00b/n5v8A/v4n/wATR/wrTRv+fm//AO/if/E0e2h3D+ysX/J+K/zPK6K9U/4Vpo3/AD83/wD38T/4mj/hWmjf8/N//wB/E/8AiaPbQ7h/ZWL/AJPxX+Z5XRXqn/CtNG/5+b//AL+J/wDE0f8ACtNG/wCfm/8A+/if/E0e2h3D+ysZ/J+K/wAzyuivVP8AhWmjf8/N/wD9/E/+Jo/4Vpo3/Pzf/wDfxP8A4mj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b/8A7+J/8TR/wrTRv+fm/wD+/if/ABNHtodw/srGfyfiv8zyuivVP+FaaN/z83//AH8T/wCJo/4Vpo3/AD83/wD38T/4mj20O4f2VjP5PxX+Z5XRXqn/AArTRv8An5v/APv4n/xNH/CtNG/5+b//AL+J/wDE0e2h3D+ysZ/J+K/zPK6K9U/4Vpo3/Pzf/wDfxP8A4mj/AIVpo3/Pzf8A/fxP/iaPbQ7h/ZWM/k/Ff5nldFeqf8K00b/n5v8A/v4n/wATR/wrTRv+fm//AO/if/E0e2h3D+ysZ/J+K/zPK6K9U/4Vpo3/AD83/wD38T/4mj/hWmjf8/N//wB/E/8AiaPbQ7h/ZWM/k/Ff5nldFeqf8K00b/n5v/8Av4n/AMTR/wAK00b/AJ+b/wD7+J/8TR7aHcP7Kxn8n4r/ADPK6K9U/wCFaaN/z83/AP38T/4mj/hWmjf8/N//AN/E/wDiaPbQ7h/ZWM/k/Ff5nldFeqf8K00b/n5v/wDv4n/xNH/CtNG/5+b/AP7+J/8AE0e2h3D+ysZ/J+K/zPK6K9U/4Vpo3/Pzf/8AfxP/AImj/hWmjf8APzf/APfxP/iaPbQ7h/ZWM/k/Ff5nldFeqf8ACtNG/wCfm/8A+/if/E0f8K00b/n5v/8Av4n/AMTR7aHcP7Kxn8n4r/M8ror1T/hWmjf8/N//AN/E/wDiaP8AhWmjf8/N/wD9/E/+Jo9tDuH9lYz+T8V/meV0V6p/wrTRv+fm/wD+/if/ABNH/CtNG/5+b/8A7+J/8TR7aHcP7Kxn8n4r/M8ror1T/hWmjf8APzf/APfxP/iaP+FaaN/z83//AH8T/wCJo9tDuH9lYz+T8V/meV0V6p/wrTRv+fm//wC/if8AxNH/AArTRv8An5v/APv4n/xNHtodw/srGfyfiv8AM8ror1T/AIVpo3/Pzf8A/fxP/iaP+FaaN/z83/8A38T/AOJo9tDuH9lYv+T8V/meV0V6p/wrTRv+fm//AO/if/E0f8K00b/n5v8A/v4n/wATR7aHcP7Kxn8n4r/M8ror1T/hWmjf8/N//wB/E/8AiaP+FaaN/wA/N/8A9/E/+Jo9tDuH9lYz+T8V/meV0V6p/wAK00b/AJ+b/wD7+J/8TR/wrTRv+fm//wC/if8AxNHtodw/srGfyfiv8zyuivVP+FaaN/z83/8A38T/AOJo/wCFaaN/z83/AP38T/4mj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b/AP7+J/8AE0f8K00b/n5v/wDv4n/xNHtodw/srGfyfiv8zyuivVP+FaaN/wA/N/8A9/E/+Jo/4Vpo3/Pzf/8AfxP/AImj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b//AL+J/wDE0f8ACtNG/wCfm/8A+/if/E0e2h3D+ysZ/J+K/wAzyuivVP8AhWmjf8/N/wD9/E/+Jo/4Vpo3/Pzf/wDfxP8A4mj20O4f2VjP5PxX+Z5XRXqn/CtNG/5+b/8A7+J/8TR/wrTRv+fm/wD+/if/ABNHtodw/srGfyfiv8zzzQP+Rj0v/r7i/wDQxXutcnZ/D7SbK9guo7i9MkEiyKGdMEqcjPy+1dZWNacZWsezlGErYfn9qrXt28+wUUUVgeyFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH//Z" alt="Sejarah Penebusan" class="site-logo">
+    <div class="header-badge">Alat Bantu Belajar · The Genesis Genealogies</div>
+    <h1>Kalkulator Kronologi<br><span>Adam hingga Abraham</span></h1>
+    <p class="header-sub">Bagaimana Alkitab sendiri memberi kita tahun kelahiran Abraham — dihitung mundur dari satu titik sejarah yang terverifikasi.</p>
+    <div class="ctrl-row">
+      <div class="mode-sw">
+        <button class="mode-btn active" onclick="switchMode('lihat')">📖 Lihat Kronologi</button>
+        <button class="mode-btn" onclick="switchMode('hitung')">✏️ Hitung Sendiri</button>
+      </div>
+      <button class="toggle-am" id="toggleAM" onclick="toggleAM()">
+        <div class="sw-track"></div>
+        Tampilkan AM <span class="am-hint">(Anno Mundi = tahun sejak Adam)</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ══════════════════ PANEL LIHAT ══════════════════ -->
+<div class="panel active" id="panel-lihat">
+
+  <div class="sec-title">Titik Acuan — Dari Salomo Mundur ke Abraham</div>
+
+  <div class="chain-box">
+    <div class="chain-hdr">
+      <div>
+        <div class="chain-title">Tujuh Langkah Mundur</div>
+        <div class="chain-sub">Semua angka tersurat langsung di Alkitab</div>
+      </div>
+      <div class="chain-ref">Abraham Park, hal. 140–142</div>
+    </div>
+
+    <div class="calc-chain">
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>Salomo naik tahta</strong><small>970 SM — pandangan umum para ahli sejarah</small></div>
+        <div class="calc-op">=</div>
+        <div class="calc-val">970 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>Tahun ke-4 Salomo: Bait mulai dibangun</strong><small>1 Raja-raja 6:1</small></div>
+        <div class="calc-op">→ -4</div>
+        <div class="calc-val">966 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>480 tahun sebelum Bait = Keluaran</strong><small>"empat ratus delapan puluh tahun..." — 1 Raj. 6:1</small></div>
+        <div class="calc-op">+480</div>
+        <div class="calc-val">1446 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>430 tahun Israel di Mesir</strong><small>"empat ratus tiga puluh tahun" — Kel. 12:40</small></div>
+        <div class="calc-op">+430</div>
+        <div class="calc-val">1876 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>Umur Yakub saat masuk Mesir</strong><small>"seratus tiga puluh tahun" — Kej. 47:9</small></div>
+        <div class="calc-op">+130</div>
+        <div class="calc-val">2006 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>Umur Ishak saat Yakub lahir</strong><small>"enam puluh tahun" — Kej. 25:26</small></div>
+        <div class="calc-op">+60</div>
+        <div class="calc-val">2066 SM</div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-lbl"><strong>Umur Abraham saat Ishak lahir</strong><small>"seratus tahun" — Kej. 21:5</small></div>
+        <div class="calc-op">+100</div>
+        <div class="calc-val">2166 SM</div>
+      </div>
+      <div class="calc-row total">
+        <div class="calc-lbl" style="color:var(--text);font-size:15px">Abraham lahir</div>
+        <div class="calc-op"></div>
+        <div class="calc-val">2166 SM</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        Mengapa 970 SM? — penjelasan titik acuan
+        <span class="acc-chev"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-step">
+          <div class="acc-num">1</div>
+          <div class="acc-text"><strong>970 SM adalah pandangan umum para ahli sejarah.</strong> Angka ini dipakai sebagai titik acuan dalam studi kronologi Alkitab.</div>
+        </div>
+        <div class="acc-step">
+          <div class="acc-num">2</div>
+          <div class="acc-text">
+            <strong>Dari 970 SM, Alkitab sendiri yang memberi langkah berikutnya:</strong>
+            <span class="verse">"Pada tahun keempat pemerintahan Salomo... ia mulai mendirikan rumah TUHAN." (1 Raja-raja 6:1)</span>
+            <span class="formula">970 SM − 4 tahun = 966 SM (tahun Bait mulai dibangun)</span>
+          </div>
+        </div>
+        <div class="acc-step">
+          <div class="acc-num">3</div>
+          <div class="acc-text">
+            <strong>Lanjutan ayat yang sama — jarak ke Keluaran:</strong>
+            <span class="verse">"...empat ratus delapan puluh tahun setelah orang Israel keluar dari tanah Mesir." (1 Raja-raja 6:1)</span>
+            <span class="formula">966 SM + 480 tahun = 1446 SM (Keluaran dari Mesir)</span>
+          </div>
+        </div>
+        <div class="acc-note">✦ Metode ini disebut <em>backward calculation</em> — mulai dari titik yang bisa diverifikasi, lalu hitung mundur ke era Patriark. Abraham Park menggunakannya sebagai fondasi seluruh kronologi buku ini.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABEL -->
+  <div class="sec-title">Kronologi Lengkap — Abraham hingga Adam (mundur)</div>
+
+  <div class="tbl-toolbar">
+    <div class="tbl-filters">
+      <button class="f-btn active" onclick="filterTbl('all',this)">Semua</button>
+      <button class="f-btn" onclick="filterTbl('k5',this)">Kej. 5</button>
+      <button class="f-btn fk11" onclick="filterTbl('k11',this)">Kej. 11</button>
+      <button class="f-btn fev" onclick="filterTbl('ev',this)">Peristiwa</button>
+    </div>
+    <div class="tbl-hint">Ketuk baris untuk detail</div>
+  </div>
+
+  <!-- Desktop table -->
+  <div class="tbl-desktop-wrap">
+    <table class="kron-tbl">
+      <thead>
+        <tr>
+          <th style="width:36px">No.</th>
+          <th>Tokoh / Peristiwa</th>
+          <th class="c" style="width:80px">Anak lahir<br>saat umur</th>
+          <th class="c am-col" style="width:72px">AM<br><span style="font-size:8px;font-weight:400;opacity:.7;letter-spacing:0">(sejak Adam)</span></th>
+          <th class="c" style="width:80px">Tahun SM</th>
+          <th class="c" style="width:130px">Umur hidup</th>
+        </tr>
+      </thead>
+      <tbody id="tblBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Mobile cards -->
+  <div class="tbl-mobile-wrap" id="mobileCards"></div>
+
+  <!-- Insight Metusalah -->
+  <div class="insight">
+    <div class="insight-title">Metusalah: "Ketika Ia Mati, Akhir Dikirim" — Dua Jalur Bukti</div>
+    <div class="insight-body">
+      <em>Meth</em> (mati) + <em>shalach</em> (dikirim) — nama yang Henokh tanamkan sebagai nubuatan. Dua jalur independen membuktikannya:
+
+      <div class="jalur-wrap" style="margin-top:12px">
+        <div class="jalur-label">Jalur 1 — Langsung dari angka Alkitab (Kej 5:25–27)</div>
+        <div class="jalur-eq">
+          <div class="jeq-item"><span class="jeq-num">187</span><span class="jeq-lbl">Metusalah saat<br>Lamekh lahir</span></div>
+          <div class="jeq-op">+</div>
+          <div class="jeq-item"><span class="jeq-num">182</span><span class="jeq-lbl">Lamekh saat<br>Nuh lahir</span></div>
+          <div class="jeq-op">+</div>
+          <div class="jeq-item"><span class="jeq-num">600</span><span class="jeq-lbl">Nuh saat<br>air bah</span></div>
+          <div class="jeq-op">=</div>
+          <div class="jeq-item"><span class="jeq-num result">969</span><span class="jeq-lbl">= tepat umur<br>Metusalah ✓</span></div>
+        </div>
+        <div class="jalur-note">Metusalah mati tepat tahun air bah. Namanya terbukti.</div>
+        <div class="jalur-sep"></div>
+        <div class="jalur-label">Jalur 2 — Konfirmasi lewat Anno Mundi</div>
+        <div class="jalur-eq">
+          <div class="jeq-item"><span class="jeq-num">AM 687</span><span class="jeq-lbl">Metusalah<br>lahir</span></div>
+          <div class="jeq-op">+</div>
+          <div class="jeq-item"><span class="jeq-num">969</span><span class="jeq-lbl">umur<br>hidup</span></div>
+          <div class="jeq-op">=</div>
+          <div class="jeq-item"><span class="jeq-num result">AM 1656</span><span class="jeq-lbl">tahun ia<br>mati</span></div>
+        </div>
+        <div class="jalur-eq" style="margin-top:8px">
+          <div class="jeq-item"><span class="jeq-num">AM 1056</span><span class="jeq-lbl">Nuh<br>lahir</span></div>
+          <div class="jeq-op">+</div>
+          <div class="jeq-item"><span class="jeq-num">600</span><span class="jeq-lbl">umur Nuh<br>saat air bah</span></div>
+          <div class="jeq-op">=</div>
+          <div class="jeq-item"><span class="jeq-num result">AM 1656 ✓</span><span class="jeq-lbl">tahun<br>air bah</span></div>
+        </div>
+        <div class="jalur-note">AM = Anno Mundi (tahun sejak Adam). Kedua jalur bertemu di angka yang sama.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end panel-lihat -->
+
+<!-- ══════════════════ PANEL HITUNG ══════════════════ -->
+<div class="panel" id="panel-hitung">
+
+  <div class="hitung-intro">
+    <h3>Coba Hitung Sendiri</h3>
+    <p>Isi angka-angka dari Alkitab sesuai ayat yang tertera. Sistem memeriksa dan menghitung hasilnya. Semua angka tersurat langsung di Kitab Suci.</p>
+  </div>
+
+  <!-- Bagian A -->
+  <div class="h-sec">
+    <h3>Bagian A — Dari Salomo ke Keluaran</h3>
+    <p class="h-sub">Mulai dari 970 SM (tahun Salomo naik tahta). Dari sana, Alkitab sendiri yang memberi angka berikutnya.</p>
+    <div class="inp-rows">
+      <div class="inp-row hi">
+        <div class="ir-lbl">
+          <strong>Tahun ke-4 Salomo = tahun berapa Bait mulai dibangun?</strong>
+          <span class="ref">970 SM − 4 tahun = ? SM &nbsp;·&nbsp; 1 Raja-raja 6:1</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-salomo" placeholder="___" min="900" max="1000">
+          <span class="ir-unit">SM</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Berapa tahun setelah Keluaran Bait dibangun?</strong>
+          <span class="ref">"empat ratus delapan puluh tahun..." — 1 Raja-raja 6:1</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-480" placeholder="___" min="400" max="600">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-result">
+      <div class="hr-row"><span class="hr-lbl">Salomo naik tahta</span><span class="hr-val">970 SM</span></div>
+      <div class="hr-row"><span class="hr-lbl">Tahun ke-4 → Bait dibangun</span><span class="hr-val pend" id="rA-bait">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ jarak ke Keluaran</span><span class="hr-val pend" id="rA-480">—</span></div>
+      <div class="hr-total">
+        <span class="hr-total-lbl">= Tahun Keluaran</span>
+        <span class="hr-total-val" id="rA-tot">? SM</span>
+      </div>
+    </div>
+    <button class="vbtn" onclick="verifyA()">Periksa Bagian A</button>
+    <div class="banner" id="bnA"></div>
+    <button class="rbtn" id="rbA" onclick="resetA()">↺ Ulangi</button>
+  </div>
+
+  <!-- Bagian B -->
+  <div class="h-sec">
+    <h3>Bagian B — Dari Keluaran Mundur ke Abraham</h3>
+    <p class="h-sub">Dari tahun Keluaran, hitung mundur tiga langkah menggunakan data Alkitab.</p>
+    <div class="inp-rows">
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Berapa tahun Israel tinggal di Mesir?</strong>
+          <span class="ref">Keluaran 12:40</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-mesir" placeholder="___" min="300" max="500">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Yakub saat masuk Mesir?</strong>
+          <span class="ref">Kejadian 47:9</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-yakub" placeholder="___" min="50" max="200">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Ishak saat Yakub lahir?</strong>
+          <span class="ref">Kejadian 25:26</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-ishak" placeholder="___" min="30" max="150">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Abraham saat Ishak lahir?</strong>
+          <span class="ref">Kejadian 21:5</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-abr" placeholder="___" min="50" max="200">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-result">
+      <div class="hr-row"><span class="hr-lbl">Keluaran dari Mesir</span><span class="hr-val">1446 SM</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ Israel di Mesir</span><span class="hr-val pend" id="rB-mesir">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">= Yakub masuk Mesir</span><span class="hr-val pend" id="rB-yakub-in">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ umur Yakub saat itu</span><span class="hr-val pend" id="rB-yakub-age">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">= Yakub lahir</span><span class="hr-val pend" id="rB-yakub-born">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ umur Ishak saat Yakub lahir</span><span class="hr-val pend" id="rB-ishak-age">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">= Ishak lahir</span><span class="hr-val pend" id="rB-ishak-born">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ umur Abraham saat Ishak lahir</span><span class="hr-val pend" id="rB-abr-age">—</span></div>
+      <div class="hr-total">
+        <span class="hr-total-lbl">= Abraham lahir</span>
+        <span class="hr-total-val" id="rB-tot">? SM</span>
+      </div>
+    </div>
+    <button class="vbtn" onclick="verifyB()">Hitung & Periksa Bagian B</button>
+    <div class="banner" id="bnB"></div>
+    <button class="rbtn" id="rbB" onclick="resetB()">↺ Ulangi</button>
+  </div>
+
+  <!-- Bagian C -->
+  <div class="h-sec">
+    <h3>Bagian C — Bonus: Rahasia Metusalah</h3>
+    <p class="h-sub">Gunakan tiga angka dari Kejadian 5. Lihat apa yang terjadi saat kamu menjumlahkannya.</p>
+    <div class="inp-rows">
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Metusalah saat Lamekh lahir</strong>
+          <span class="ref">Kejadian 5:25</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-ml" placeholder="___" min="100" max="300">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Lamekh saat Nuh lahir</strong>
+          <span class="ref">Kejadian 5:28–29</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-ln" placeholder="___" min="100" max="300">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+      <div class="inp-row">
+        <div class="ir-lbl">
+          <strong>Umur Nuh saat air bah datang</strong>
+          <span class="ref">Kejadian 7:6</span>
+        </div>
+        <div class="ir-wrap">
+          <input type="number" class="ir-inp" id="inp-nab" placeholder="___" min="400" max="800">
+          <span class="ir-unit">thn</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-result">
+      <div class="hr-row"><span class="hr-lbl">Metusalah saat Lamekh lahir</span><span class="hr-val pend" id="rC-ml">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ Lamekh saat Nuh lahir</span><span class="hr-val pend" id="rC-ln">—</span></div>
+      <div class="hr-row"><span class="hr-lbl">+ Nuh saat air bah</span><span class="hr-val pend" id="rC-nab">—</span></div>
+      <div class="hr-total">
+        <span class="hr-total-lbl">= Total</span>
+        <span class="hr-total-val" id="rC-tot">? thn</span>
+      </div>
+    </div>
+    <button class="vbtn gold" onclick="verifyC()">Temukan Rahasia Metusalah</button>
+    <div class="banner" id="bnC"></div>
+    <button class="rbtn" id="rbC" onclick="resetC()">↺ Ulangi</button>
+  </div>
+
+</div><!-- end panel-hitung -->
+
+<!-- Footer Nav -->
+<div class="footer-nav">
+  <div class="nav-links">
+    <a class="nav-link" href="kejadian-5-silsilah-adam.html">← Silsilah Adam</a>
+    <a class="nav-link" href="kejadian-11-silsilah-nuh.html">Silsilah Nuh →</a>
+  </div>
+  <div class="footer-ref">Berdasarkan: The Genesis Genealogies — Abraham Park</div>
+</div>
+
+</div><!-- container -->
+
+<!-- DETAIL CARD OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeCardEv(event)">
+  <div class="dc" id="dc">
+    <div class="dc-stripe" id="dcStripe"></div>
+    <button class="dc-close" onclick="closeCard()">×</button>
+    <div class="dc-body">
+      <div class="dc-gen" id="dcGen"></div>
+      <div class="dc-name" id="dcName"></div>
+      <div class="dc-mng" id="dcMng"></div>
+      <div class="dc-stats" id="dcStats"></div>
+      <div class="dc-div"></div>
+      <div class="dc-note" id="dcNote"></div>
+      <div class="dc-ref" id="dcRef"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════ DATA ═══════════ */
+function amToSM(am){return 4114-am}
+
+const DATA=[
+  {id:'adam',gen:'Kej 5 · Gen ke-1',name:'Adam',mng:'manusia; dari tanah; ciptaan',src:'Kej 5:3,5',ageChild:130,totalAge:930,am:0,kit:'k5',
+   note:`<p>Adam dibentuk langsung oleh Allah dari debu tanah (Kej 2:7). Hidup 930 tahun dan menyaksikan 9 generasi keturunannya. Ia masih hidup ketika Lamekh — generasi ke-9 — berumur 56 tahun.</p><div class="hl">"TUHAN Allah membentuk manusia itu dari debu tanah dan menghembuskan nafas hidup ke dalam hidungnya." (Kej 2:7)</div><p>Adam adalah saksi langsung dari Eden — ia bisa menceritakan kepada keturunannya tentang persekutuan dengan Allah, tentang yang hilang, dan tentang janji penebusan (Kej 3:15).</p>`},
+  {id:'set',gen:'Kej 5 · Gen ke-2',name:'Set',mng:'benih lain; yang ditetapkan; pondasi',src:'Kej 5:6,8',ageChild:105,totalAge:912,am:130,kit:'k5',
+   note:`<p>Hawa berkata saat Set lahir: "Allah telah mengaruniakan kepadaku anak yang lain sebagai pengganti Habel" (Kej 4:25). Set adalah pengharapan baru — bukan dari usaha manusia, tetapi anugerah Allah.</p><div class="hl">"Di zaman Enos, mulailah orang berseru kepada nama TUHAN." (Kej 4:26)</div><p>Kebangkitan ibadah dimulai dari keturunan Set — garis yang Allah jaga sebagai jalur menuju Mesias.</p>`},
+  {id:'enos',gen:'Kej 5 · Gen ke-3',name:'Enos',mng:'manusia fana; lemah; yang berseru',src:'Kej 5:9,11',ageChild:90,totalAge:905,am:235,kit:'k5',
+   note:`<p>Di zaman Enos, orang mulai "berseru kepada nama TUHAN" (Kej 4:26). Nama Enos sendiri mencerminkan kesadaran akan kelemahan manusia — dan dari kesadaran itulah ibadah sejati lahir.</p><p>Hidup 905 tahun. Bertemu langsung dengan Adam selama 695 tahun — generasi pertama dan ketiga saling mengenal.</p>`},
+  {id:'kenan',gen:'Kej 5 · Gen ke-4',name:'Kenan',mng:'rahmat tak terduga; harta milik Allah',src:'Kej 5:12,14',ageChild:70,totalAge:910,am:325,kit:'k5',
+   note:`<p>Kenan mencerminkan kasih karunia yang tidak layak diterima namun diberikan dengan murah hati. Hidup 910 tahun — menyaksikan dari Adam hingga Metusalah dalam satu masa hidupnya.</p>`},
+  {id:'mahalalel',gen:'Kej 5 · Gen ke-5',name:'Mahalalel',mng:'pujian Allah; kemuliaan bagi Allah',src:'Kej 5:15,17',ageChild:65,totalAge:895,am:395,kit:'k5',
+   note:`<p>Nama Mahalalel berarti "pujian kepada Allah." Dari berseru (Enos) berkembang menjadi pujian yang tulus. Hidup 895 tahun.</p>`},
+  {id:'yared',gen:'Kej 5 · Gen ke-6',name:'Yared',mng:'turun; kerinduan yang turun',src:'Kej 5:18,20',ageChild:162,totalAge:962,am:460,kit:'k5',
+   note:`<p>Yared hidup 962 tahun — tertinggi kedua setelah Metusalah. Namanya mengandung kerinduan: <em>biarlah Allah turun ke bumi ini.</em></p><p>Yared adalah ayah Henokh. Di masa Yared, generasi manusia sudah sangat jauh dari penciptaan — namun kerinduan kepada Allah tetap diwariskan kepada anaknya.</p>`},
+  {id:'henokh',gen:'Kej 5 · Gen ke-7',name:'Henokh',mng:'dipersembahkan; berjalan bersama Allah',src:'Kej 5:21,24',ageChild:65,totalAge:365,am:622,kit:'k5',special:'henokh',
+   note:`<p>Henokh adalah satu-satunya dalam silsilah ini yang <em>tidak mengalami kematian.</em> Ia diangkat Allah pada usia 365 tahun — jauh lebih muda dari patriarch lainnya.</p><div class="hl">"Henokh hidup bergaul dengan Allah, lalu ia tidak ada lagi, sebab ia telah diangkat oleh Allah." (Kej 5:24)</div><p>Setelah Metusalah lahir, Henokh menerima wahyu bahwa penghakiman akan datang — dari situlah ia memberi nama anaknya "Metusalah" (ketika ia mati, akhir dikirim). Lalu ia berjalan semakin dekat dengan Allah selama 300 tahun.</p>`},
+  {id:'metusalah',gen:'Kej 5 · Gen ke-8',name:'Metusalah',mng:'ketika ia mati, akhir dikirim',src:'Kej 5:25,27',ageChild:187,totalAge:969,am:687,kit:'k5',special:'metusalah',
+   note:`<p>Metusalah hidup <strong>969 tahun</strong> — terpanjang dalam sejarah manusia. Namanya adalah nubuatan: <em>meth</em> (mati) + <em>shalach</em> (dikirim).</p><div class="hl-gold"><strong>Jalur 1:</strong> 187 + 182 + 600 = 969 = tepat umur Metusalah → ia mati tahun air bah.<br><br><strong>Jalur 2 (AM):</strong> Lahir AM 687 + 969 = AM 1656. Nuh lahir AM 1056, air bah saat Nuh 600 thn → AM 1056 + 600 = AM 1656 ✓</div><p>Allah menahan penghakiman selama Metusalah hidup — 969 tahun kesabaran Allah (2 Ptr 3:9).</p>`},
+  {id:'lamekh',gen:'Kej 5 · Gen ke-9',name:'Lamekh',mng:'pejuang; manusia yang kuat dalam doa',src:'Kej 5:28,31',ageChild:182,totalAge:777,am:874,kit:'k5',
+   note:`<p>Lamekh adalah manusia paling jujur dalam silsilah ini:</p><div class="hl">"Anak ini akan memberi kepada kita penghiburan dalam pekerjaan kita... oleh karena tanah yang telah dikutuk TUHAN." (Kej 5:29)</div><p>Dari kejujuran tentang kelemahan diri lahir iman yang paling dalam. Ia menamakan anaknya "Nuh" (istirahat). Lamekh meninggal 5 tahun sebelum air bah.</p>`},
+  {id:'nuh',gen:'Kej 5 · Gen ke-10',name:'Nuh',mng:'istirahat; penghiburan',src:'Kej 5:32; 7:6',ageChild:502,totalAge:950,am:1056,kit:'k5',special:'nuh',
+   note:`<p>Nuh lahir AM 1056. Anak sulungnya (Sem) lahir saat Nuh berumur 502 tahun (Kej 11:10 — Sem berumur 100 tahun, dua tahun setelah air bah saat Nuh berumur 600).</p><div class="hl">"Tetapi Nuh mendapat kasih karunia di mata TUHAN." (Kej 6:8)</div><p>Air bah AM 1056 + 600 = AM 1656 — sama persis dengan tahun kematian Metusalah. Setelah air bah, Nuh hidup 350 tahun lagi, sempat bertemu Abraham selama 58 tahun.</p>`},
+  // Peristiwa
+  {id:'airbah',isEvent:true,name:'Air Bah',mng:'AM 1656 · 2458 SM',src:'Kej 7:6; 8:13',
+   note:`<p>Air bah datang AM 1656 (2458 SM), saat Nuh berumur 600 tahun. Dikonfirmasi oleh umur Metusalah: lahir AM 687 + umur 969 = AM 1656.</p><div class="hl-red">Dari ratusan juta manusia yang diperkirakan hidup — hanya 8 orang yang naik ke bahtera (Kej 7:13).</div>`},
+  // Kej 11
+  {id:'sem',gen:'Kej 11 · Gen ke-11',name:'Sem',mng:'nama; ketenaran',src:'Kej 11:10,11',ageChild:100,totalAge:600,am:1558,kit:'k11',
+   note:`<p>Sem hidup 600 tahun (AM 1558–2158) — masih hidup ketika Abraham lahir (AM 1948), bersamaan selama 150 tahun. Sem adalah penjaga memori sebelum air bah dan saksi hidup garis iman hingga zaman Abraham.</p>`},
+  {id:'arpakhsad',gen:'Kej 11 · Gen ke-12',name:'Arpakhsad',mng:'perbatasan Kasdim; pemulih',src:'Kej 11:12,13',ageChild:35,totalAge:438,am:1658,kit:'k11',
+   note:`<p>Arpakhsad lahir 2 tahun setelah air bah (Kej 11:10). Umurnya sudah jauh berkurang — 438 tahun vs rata-rata 900+ tahun sebelum air bah. Penurunan umur manusia mulai terlihat.</p>`},
+  {id:'selah',gen:'Kej 11 · Gen ke-13',name:'Selah',mng:'permintaan; pemanjatan doa',src:'Kej 11:14,15',ageChild:30,totalAge:433,am:1693,kit:'k11',
+   note:`<p>Selah hidup 433 tahun. Garis penebusan terus berjalan — Allah mempertahankan benang merah iman bahkan di tengah penurunan umur yang dramatis pasca air bah.</p>`},
+  {id:'eber',gen:'Kej 11 · Gen ke-14',name:'Eber',mng:'melintas; penyeberangan',src:'Kej 11:16,17',ageChild:34,totalAge:464,am:1723,kit:'k11',
+   note:`<p>Eber hidup 464 tahun — salah satu yang umurnya lebih panjang dari pendahulunya setelah air bah. Dari nama Eber inilah kata "Ibrani" (Hebrew) berasal. Ia adalah leluhur langsung bangsa Israel.</p>`},
+  {id:'peleg',gen:'Kej 11 · Gen ke-15',name:'Peleg',mng:'pemisahan; pembagian',src:'Kej 11:18,19',ageChild:30,totalAge:239,am:1757,kit:'k11',special:'babel',
+   note:`<p>Peleg hidup hanya 239 tahun — penurunan dramatis dari Eber (464 tahun). Namanya: <em>"sebab dalam zamannya bumi terbagi"</em> (Kej 10:25) — peristiwa Menara Babel.</p><div class="hl-gold">Eber (464 thn) → Peleg (239 thn): penurunan 48% dalam satu generasi. Abraham Park menghubungkan ini dengan peristiwa Babel.</div>`},
+  {id:'babel',isEvent:true,name:'Menara Babel',mng:'±AM 1757 · 2357 SM',src:'Kej 10:25; 11:1-9',
+   note:`<p>Babel dibangun ±100 tahun setelah air bah, di masa Peleg. Allah mengacaukan bahasa dan menyebarkan bangsa-bangsa. Tiga tujuan yang bertentangan dengan perintah Allah: membuat nama sendiri, tidak tersebar, dan menara sampai ke surga.</p><div class="hl-gold">Dampak langsung: umur Peleg turun 48% dari Eber. Abraham Park hal. 180–185.</div>`},
+  {id:'reu',gen:'Kej 11 · Gen ke-16',name:'Reu',mng:'persahabatan; teman; gembala',src:'Kej 11:20,21',ageChild:32,totalAge:239,am:1787,kit:'k11',
+   note:`<p>Reu hidup 239 tahun (sama dengan Peleg). Namanya mencerminkan awal kemunduran rohani: lebih mengutamakan hubungan manusia daripada hubungan dengan Allah. (Abraham Park)</p>`},
+  {id:'serug',gen:'Kej 11 · Gen ke-17',name:'Serug',mng:'kekuatan; cabang; ranting',src:'Kej 11:22,23',ageChild:30,totalAge:230,am:1819,kit:'k11',
+   note:`<p>Serug hidup 230 tahun. Namanya mencerminkan kepercayaan pada kekuatan sendiri — mulai menjauh dari ketergantungan kepada Allah. Abraham Park mencatat pola kemerosotan spiritual dari nama-nama Kejadian 11.</p>`},
+  {id:'nahor',gen:'Kej 11 · Gen ke-18',name:'Nahor',mng:'mendengus; bernapas keras; keserakahan',src:'Kej 11:24,25',ageChild:29,totalAge:148,am:1849,kit:'k11',
+   note:`<p>Nahor hidup hanya 148 tahun — paling pendek di antara semua patriarch. Abraham Park mengaitkan ini dengan kemerosotan rohani yang mencapai titik terendah.</p>`},
+  {id:'terah',gen:'Kej 11 · Gen ke-19',name:'Terah',mng:'pengembara; ibis (burung yang disembah)',src:'Kej 11:26,32',ageChild:70,totalAge:205,am:1878,kit:'k11',
+   note:`<p>Terah adalah ayah Abraham — namun sendiri seorang penyembah berhala (Yos 24:2).</p><div class="hl-red">Garis penebusan hampir putus. Terah memulai perjalanan ke Kanaan tetapi berhenti di Haran dan mati di sana (Kej 11:31-32). Namun Allah tidak menyerah.</div>`},
+  {id:'abraham',gen:'Kej 11–12 · Gen ke-20',name:'Abraham',mng:'bapa segala bangsa',src:'Kej 12:1; 17:5',ageChild:100,totalAge:175,am:1948,kit:'k11',special:'abraham',
+   note:`<p>Abraham lahir AM 1948 = <strong>2166 SM</strong>. Ini adalah angka yang bisa dihitung dari Alkitab sendiri, mundur dari Keluaran (1446 SM).</p><div class="hl">1446 + 430 + 130 + 60 + 100 = 2166 SM</div><p>Di tengah keluarga penyembah berhala, Allah memanggil Abraham dari Ur. Benang merah penebusan yang hampir putus — disambung kembali. Abraham adalah titik balik.</p>`}
+];
+
+/* ═══════════ BUILD LIST ═══════════ */
+function buildList(filter){
+  const k11ids=['sem','arpakhsad','selah','eber','peleg','reu','serug','nahor','terah','abraham'];
+  const tokoh=DATA.filter(d=>!d.isEvent);
+  const ev=DATA.filter(d=>d.isEvent);
+  const rev=[...tokoh].reverse();
+  const combined=[];
+  rev.forEach(d=>{
+    combined.push(d);
+    if(d.id==='nuh') combined.push(ev.find(e=>e.id==='airbah'));
+    if(d.id==='peleg') combined.push(ev.find(e=>e.id==='babel'));
+  });
+  return combined.filter(d=>{
+    if(!d) return false;
+    if(filter==='k5') return !d.isEvent && d.kit==='k5';
+    if(filter==='k11') return !d.isEvent && k11ids.includes(d.id);
+    if(filter==='ev') return d.isEvent;
+    return true;
+  });
+}
+
+function getTag(d){
+  if(d.special==='henokh') return '<span class="tag tag-e">Diangkat Allah</span>';
+  if(d.special==='metusalah') return '<span class="tag tag-f">☆ Nubuatan</span>';
+  if(d.special==='nuh') return '<span class="tag tag-f">Air Bah</span>';
+  if(d.special==='babel') return '<span class="tag tag-b">Babel</span>';
+  if(d.special==='abraham') return '<span class="tag tag-a">Titik Balik</span>';
+  if(d.id==='airbah') return '<span class="tag tag-f">Peristiwa</span>';
+  if(d.id==='babel') return '<span class="tag tag-b">Peristiwa</span>';
+  return '';
+}
+
+/* ═══════════ RENDER ═══════════ */
+let curFilter='all';
+function renderAll(filter){
+  curFilter=filter;
+  const list=buildList(filter);
+  const maxAge=969;
+  const tbody=document.getElementById('tblBody');
+  const mwrap=document.getElementById('mobileCards');
+  tbody.innerHTML='';
+  mwrap.innerHTML='';
+
+  const tokoh=DATA.filter(d=>!d.isEvent);
+  let gc=tokoh.length;
+
+  if(list.length) mwrap.innerHTML='<div class="m-hint">Ketuk kartu untuk detail lengkap</div>';
+
+  list.forEach(d=>{
+    const sm=d.am!==undefined?amToSM(d.am):null;
+    const isEv=d.isEvent;
+    const isK5=d.kit==='k5';
+    const tag=getTag(d);
+    const barW=d.totalAge?Math.round(d.totalAge/maxAge*80):0;
+    const genNum=isEv?'—':gc;
+    if(!isEv) gc--;
+    const amStr=d.am!==undefined?'AM '+d.am:'';
+    const smStr=sm?sm+' SM':(isEv?(d.mng.includes('·')?d.mng.split('·')[1].trim():''):'');
+    const rowCls=isEv?'tr-ev':(isK5?'tr-k5':'tr-k11');
+    const mCardCls=isEv?'m-card ev':(isK5?'m-card k5':'m-card k11');
+
+    // Desktop row
+    const tr=document.createElement('tr');
+    tr.className=rowCls; tr.style.cursor='pointer';
+    tr.onclick=()=>openCard(d);
+    tr.innerHTML=`
+      <td class="td-no">${genNum}</td>
+      <td class="td-name">${d.name}<span class="td-mng">${d.mng}</span>${tag}</td>
+      <td class="td-num c">${d.ageChild&&!isEv?d.ageChild:'—'}</td>
+      <td class="td-am c am-col">${amStr||'—'}</td>
+      <td class="td-num c">${smStr||'—'}</td>
+      <td class="td-age">
+        ${d.totalAge?`<div class="age-wrap"><div class="age-bar" style="width:${barW}px"></div><span class="age-txt">${d.totalAge} thn</span></div>`
+          :'<span style="color:var(--dim);font-size:11px">peristiwa</span>'}
+      </td>`;
+    tbody.appendChild(tr);
+
+    // Mobile card
+    const mc=document.createElement('div');
+    mc.className=mCardCls; mc.onclick=()=>openCard(d);
+    mc.innerHTML=`
+      <div class="m-top">
+        <div class="m-left">
+          <div class="m-gen">${d.gen||'Peristiwa'}</div>
+          <div class="m-name">${d.name} ${tag}</div>
+          <div class="m-mng">${d.mng}</div>
+        </div>
+        <div class="m-right">
+          <div class="m-sm">${smStr||'—'}</div>
+          <div class="m-am">${amStr}</div>
+        </div>
+      </div>
+      <div class="m-bot">
+        ${d.totalAge?`<div class="m-bar-wrap"><div class="m-bar" style="width:${Math.max(barW,4)}px"></div><span class="m-age">${d.totalAge} thn</span></div>`
+          :'<span style="color:var(--dim);font-size:11px;flex:1">peristiwa</span>'}
+        ${d.ageChild&&!isEv?`<span class="m-child">anak lahir saat umur ${d.ageChild} thn</span>`:''}
+      </div>`;
+    mwrap.appendChild(mc);
+  });
+}
+
+function filterTbl(f,btn){
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAll(f);
+}
+
+/* ═══════════ DETAIL CARD ═══════════ */
+function openCard(d){
+  const isK5=d.kit==='k5';
+  const isEv=d.isEvent;
+  const color=isEv?(d.id==='airbah'?'var(--red)':'var(--gold)'):(isK5?'var(--teal)':'var(--green)');
+  document.getElementById('dcStripe').style.background=color;
+  document.getElementById('dcGen').textContent=d.gen||'Peristiwa';
+  document.getElementById('dcName').textContent=d.name;
+  document.getElementById('dcMng').textContent='"'+d.mng+'"';
+  document.getElementById('dcRef').textContent=d.src||'';;
+  const sm=d.am!==undefined?amToSM(d.am):null;
+  let stats='';
+  if(!isEv){
+    stats=`
+      <div class="dc-stat"><span class="dc-sv" style="color:${color}">${sm?sm+' SM':'—'}</span><div class="dc-sl">Tahun lahir</div></div>
+      <div class="dc-stat"><span class="dc-sv" style="color:${color}">${d.totalAge||'—'}</span><div class="dc-sl">Umur (thn)</div></div>
+      <div class="dc-stat"><span class="dc-sv" style="color:var(--gold-dk);font-size:13px">${d.am!==undefined?'AM '+d.am:'—'}</span><div class="dc-sl">Anno Mundi</div></div>
+      ${d.ageChild?`<div class="dc-stat" style="grid-column:1/-1"><span class="dc-sv" style="color:var(--sub);font-size:13px">${d.ageChild} tahun</span><div class="dc-sl">Umur saat anak lahir</div></div>`:''}`;
+  }
+  document.getElementById('dcStats').innerHTML=stats;
+  document.getElementById('dcNote').innerHTML=d.note||'';;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCard(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeCardEv(e){if(e.target===document.getElementById('overlay'))closeCard();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard();});
+
+/* ═══════════ TOGGLE AM ═══════════ */
+let showAM=false;
+function toggleAM(){
+  showAM=!showAM;
+  document.body.classList.toggle('show-am',showAM);
+  document.getElementById('toggleAM').classList.toggle('on',showAM);
+}
+
+/* ═══════════ MODE ═══════════ */
+function switchMode(m){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+m).classList.add('active');
+  document.querySelectorAll('.mode-btn')[m==='lihat'?0:1].classList.add('active');
+}
+
+/* ═══════════ ACCORDION ═══════════ */
+function toggleAcc(btn){
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+/* ═══════════ HITUNG — ANSWERS ═══════════ */
+const ANS={salomo:966,x480:480,mesir:430,yakub:130,ishak:60,abr:100,ml:187,ln:182,nab:600};
+function setInp(id,ok){
+  const el=document.getElementById(id);
+  el.classList.remove('ok','ng');
+  el.classList.add(ok?'ok':'ng');
+}
+function pend(id){return document.getElementById(id)}
+function setText(id,txt,lit=false){
+  const el=document.getElementById(id);
+  el.textContent=txt;
+  el.classList.remove('pend');
+  if(lit) el.classList.add('lit');
+}
+
+/* BAGIAN A */
+function verifyA(){
+  const s=parseInt(document.getElementById('inp-salomo').value);
+  const x=parseInt(document.getElementById('inp-480').value);
+  let ok=true;
+  if(isNaN(s)||s!==ANS.salomo){setInp('inp-salomo',false);ok=false;}else setInp('inp-salomo',true);
+  if(isNaN(x)||x!==ANS.x480){setInp('inp-480',false);ok=false;}else setInp('inp-480',true);
+  if(!isNaN(s)){setText('rA-bait',s+' SM');}
+  if(!isNaN(x)){setText('rA-480','+ '+x+' thn');}
+  if(!isNaN(s)&&!isNaN(x)){const t=s+x;setText('rA-tot',t+' SM',t===1446);}
+  const bn=document.getElementById('bnA');
+  bn.classList.add('show');
+  if(ok){bn.className='banner show ok';bn.innerHTML='✓ Benar! 966 + 480 = <strong>1446 SM</strong> — Tahun Keluaran. Ini titik acuan utama seluruh kronologi.';document.getElementById('rbA').classList.add('show');}
+  else{bn.className='banner show err';bn.innerHTML='Ada yang belum tepat. <em>Petunjuk: tahun ke-4 Salomo = 970 − 4 = 966 SM.</em>';}
+}
+function resetA(){
+  ['inp-salomo','inp-480'].forEach(id=>{const e=document.getElementById(id);e.value='';e.classList.remove('ok','ng');});
+  ['rA-bait','rA-480'].forEach(id=>{const e=document.getElementById(id);e.textContent='—';e.className='hr-val pend';e.classList.remove('lit');});
+  document.getElementById('rA-tot').textContent='? SM';document.getElementById('rA-tot').classList.remove('lit');
+  document.getElementById('bnA').className='banner';document.getElementById('rbA').classList.remove('show');
+}
+
+/* BAGIAN B */
+function verifyB(){
+  const mesir=parseInt(document.getElementById('inp-mesir').value);
+  const yakub=parseInt(document.getElementById('inp-yakub').value);
+  const ishak=parseInt(document.getElementById('inp-ishak').value);
+  const abr=parseInt(document.getElementById('inp-abr').value);
+  const pairs=[['inp-mesir',mesir,ANS.mesir],['inp-yakub',yakub,ANS.yakub],['inp-ishak',ishak,ANS.ishak],['inp-abr',abr,ANS.abr]];
+  let n=0;
+  pairs.forEach(([id,v,a])=>{if(!isNaN(v)&&v===a){setInp(id,true);n++;}else if(!isNaN(v))setInp(id,false);});
+  // step-by-step
+  if(!isNaN(mesir)){setText('rB-mesir','+ '+mesir+' thn');const yi=1446+mesir;setText('rB-yakub-in',yi+' SM');}
+  if(!isNaN(mesir)&&!isNaN(yakub)){const yb=1446+mesir+yakub;setText('rB-yakub-age','+ '+yakub+' thn');setText('rB-yakub-born',yb+' SM');}
+  if(!isNaN(mesir)&&!isNaN(yakub)&&!isNaN(ishak)){const ib=1446+mesir+yakub+ishak;setText('rB-ishak-age','+ '+ishak+' thn');setText('rB-ishak-born',ib+' SM');}
+  if(!isNaN(mesir)&&!isNaN(yakub)&&!isNaN(ishak)&&!isNaN(abr)){const ab=1446+mesir+yakub+ishak+abr;setText('rB-abr-age','+ '+abr+' thn');setText('rB-tot',ab+' SM',ab===2166);}
+  const bn=document.getElementById('bnB');bn.classList.add('show');
+  if(n===4){bn.className='banner show ok';bn.innerHTML='✓ Sempurna! <strong>2166 SM</strong> — itulah tahun kelahiran Abraham, dihitung dari Alkitab sendiri. (Abraham Park, hal. 141–142)';document.getElementById('rbB').classList.add('show');}
+  else if(n>=2){bn.className='banner show part';bn.innerHTML=`${n} dari 4 benar. Cek yang masih merah.`;}
+  else{bn.className='banner show err';bn.innerHTML='Periksa kembali. Semua angka ada di ayat yang tertera.';}
+}
+function resetB(){
+  ['inp-mesir','inp-yakub','inp-ishak','inp-abr'].forEach(id=>{const e=document.getElementById(id);e.value='';e.classList.remove('ok','ng');});
+  ['rB-mesir','rB-yakub-in','rB-yakub-age','rB-yakub-born','rB-ishak-age','rB-ishak-born','rB-abr-age'].forEach(id=>{const e=document.getElementById(id);e.textContent='—';e.className='hr-val pend';});
+  document.getElementById('rB-tot').textContent='? SM';document.getElementById('rB-tot').classList.remove('lit');
+  document.getElementById('bnB').className='banner';document.getElementById('rbB').classList.remove('show');
+}
+
+/* BAGIAN C */
+function verifyC(){
+  const ml=parseInt(document.getElementById('inp-ml').value);
+  const ln=parseInt(document.getElementById('inp-ln').value);
+  const nab=parseInt(document.getElementById('inp-nab').value);
+  const pairs=[['inp-ml',ml,ANS.ml],['inp-ln',ln,ANS.ln],['inp-nab',nab,ANS.nab]];
+  let n=0;
+  pairs.forEach(([id,v,a])=>{if(!isNaN(v)&&v===a){setInp(id,true);n++;}else if(!isNaN(v))setInp(id,false);});
+  if(!isNaN(ml)){setText('rC-ml',ml+' thn');}
+  if(!isNaN(ln)){setText('rC-ln','+ '+ln+' thn');}
+  if(!isNaN(nab)){setText('rC-nab','+ '+nab+' thn');}
+  if(!isNaN(ml)&&!isNaN(ln)&&!isNaN(nab)){const t=ml+ln+nab;setText('rC-tot',t+' thn',t===969);}
+  const bn=document.getElementById('bnC');bn.classList.add('show');
+  if(n===3){bn.className='banner show ok';bn.innerHTML='✦ 187 + 182 + 600 = <strong>969 tahun</strong> — tepat umur Metusalah (Kej 5:27)! Ia mati <em>tepat tahun air bah datang</em>. Namanya terbukti: "Ketika ia mati, akhir dikirim."';document.getElementById('rbC').classList.add('show');}
+  else if(n>=1){bn.className='banner show part';bn.innerHTML=`${n} dari 3 benar.`;}
+  else{bn.className='banner show err';bn.innerHTML='Cek Kejadian 5:25, 5:28–29, dan 7:6.';}
+}
+function resetC(){
+  ['inp-ml','inp-ln','inp-nab'].forEach(id=>{const e=document.getElementById(id);e.value='';e.classList.remove('ok','ng');});
+  ['rC-ml','rC-ln','rC-nab'].forEach(id=>{const e=document.getElementById(id);e.textContent='—';e.className='hr-val pend';});
+  document.getElementById('rC-tot').textContent='? thn';document.getElementById('rC-tot').classList.remove('lit');
+  document.getElementById('bnC').className='banner';document.getElementById('rbC').classList.remove('show');
+}
+
+/* ═══════════ INIT ═══════════ */
+renderAll('all');
+</script>
+</body>
+</html>

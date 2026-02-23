@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Two Rivers — The Genesis Genealogies</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#0c0c0e;color:#e5ddd0;font-family:Georgia,serif;overflow-x:hidden;font-size:16px;line-height:1.6}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;background:#0c0c0e;border-bottom:1px solid rgba(255,255,255,0.07)}
+.brand{font-family:serif;font-size:11px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase}
+.tabs{display:flex;gap:4px}
+.tab{font-family:serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7060;padding:6px 12px;border-radius:3px;cursor:pointer;border:1px solid transparent;background:none}
+.tab:hover{color:#e5ddd0}
+.tab.on{color:#c9a84c;border-color:rgba(201,168,76,0.32);background:rgba(201,168,76,0.13)}
+
+/* VIEWS — no display:none in CSS at all */
+.view{padding-top:16px;min-height:600px}
+
+/* SECTION HEAD */
+.sh{text-align:center;padding:36px 20px 28px}
+.sh h2{font-family:serif;font-size:clamp(26px,5vw,40px);font-weight:300;color:#c9a84c;margin-bottom:5px}
+.sh p{font-size:13px;color:#7a7060;font-style:italic}
+
+/* LEGEND */
+.pills{display:flex;gap:7px;padding:12px 16px;flex-wrap:wrap}
+.pill{display:flex;align-items:center;gap:6px;font-family:serif;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid}
+.pill.c{color:#e05555;border-color:rgba(184,50,50,0.3);background:rgba(184,50,50,0.11)}
+.pill.s{color:#2ecc71;border-color:rgba(29,107,71,0.3);background:rgba(29,107,71,0.11)}
+.pill.e{color:#c9a84c;border-color:rgba(201,168,76,0.32);background:rgba(201,168,76,0.13)}
+.pdot{width:5px;height:5px;border-radius:50%}
+.pill.c .pdot{background:#e05555}.pill.s .pdot{background:#2ecc71}.pill.e .pdot{background:#c9a84c}
+
+/* TIMELINE */
+.tlw{padding:0 12px 80px;max-width:860px;margin:0 auto}
+.tlg{display:grid;grid-template-columns:1fr 40px 1fr;gap:0}
+.col-h{font-family:serif;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;text-align:center;padding:9px 6px;margin-bottom:6px;border-radius:3px}
+.col-h.c{color:#e05555;background:rgba(184,50,50,0.11);border-top:2px solid #b83232}
+.col-h.s{color:#2ecc71;background:rgba(29,107,71,0.11);border-top:2px solid #1d6b47}
+
+/* CARDS */
+.card{background:#111116;border:1px solid rgba(255,255,255,0.06);border-radius:5px;padding:13px 14px;margin:2px 0;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .28s}
+.card.cc::after{background:#b83232}.card.sc::after{background:#1d6b47}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.card:hover::after{transform:scaleX(1)}
+.card.cc:hover{border-color:rgba(184,50,50,0.3)}.card.sc:hover{border-color:rgba(29,107,71,0.3)}
+.card.hl{box-shadow:0 0 0 1px #c9a84c,0 0 18px rgba(201,168,76,0.13)}
+.cgen{font-family:serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.card.cc .cgen{color:rgba(224,85,85,.55)}.card.sc .cgen{color:rgba(46,204,113,.55)}
+.cname{font-family:serif;font-size:11.5px;font-weight:600;letter-spacing:.4px;margin-bottom:2px}
+.card.cc .cname{color:#e05555}.card.sc .cname{color:#2ecc71}
+.cmean{font-size:11px;font-style:italic;color:#7a7060;margin-bottom:5px}
+.cdesc{font-size:12px;color:#a89880;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ctap{font-family:serif;font-size:8.5px;letter-spacing:1px;color:#7a7060;margin-top:7px;opacity:.6}
+
+/* SPINE */
+.spine{display:flex;flex-direction:column;align-items:center;padding:2px 0}
+.sl{width:1px;flex:1;background:rgba(201,168,76,.13);min-height:10px}
+.sd{width:9px;height:9px;border-radius:50%;border:1px solid #c9a84c;background:#0c0c0e;flex-shrink:0;z-index:1}
+.sd.br{background:#c9a84c;box-shadow:0 0 8px #c9a84c}
+.ce{margin:2px 0;opacity:0;pointer-events:none;min-height:70px}
+.tlfull{grid-column:1/-1}
+.jud{margin:16px 0;padding:16px 22px;background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(201,168,76,.02));border:1px solid rgba(201,168,76,.22);border-radius:5px;text-align:center;cursor:pointer;transition:all .22s}
+.jud:hover{border-color:#c9a84c;background:rgba(201,168,76,.1)}
+.jt{font-family:serif;font-size:12px;letter-spacing:2.5px;color:#c9a84c;text-transform:uppercase;margin-bottom:4px}
+.js{font-size:13px;color:#7a7060;font-style:italic}
+.divr{margin:24px 0;display:flex;align-items:center;gap:10px}
+.dl{flex:1;height:1px;background:rgba(201,168,76,.1)}
+.dlb{font-family:serif;font-size:9px;letter-spacing:3.5px;color:#c9a84c;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(201,168,76,.22);border-radius:2px;white-space:nowrap}
+.cutoff{margin:2px 0;padding:12px 14px;background:rgba(184,50,50,.05);border:1px solid rgba(184,50,50,.18);border-radius:5px;text-align:center;opacity:.55}
+.ct{font-family:serif;font-size:10.5px;letter-spacing:1.5px;color:#e05555;margin-bottom:5px}
+.cx{font-size:11.5px;color:#7a7060;font-style:italic;line-height:1.5}
+
+/* CHART */
+.chw{padding:20px 16px 80px;max-width:760px;margin:0 auto}
+.chi{text-align:center;margin-bottom:36px;padding:0 16px}
+.chi p{font-size:14.5px;font-style:italic;color:#a89880;line-height:1.7;max-width:500px;margin:0 auto}
+.chs{font-family:serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#c9a84c;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(201,168,76,.18)}
+.bch{margin-bottom:48px}
+.br{display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;transition:opacity .2s}
+.br:hover{opacity:.82}
+.bl{font-family:serif;font-size:10.5px;letter-spacing:.8px;min-width:92px;text-align:right;flex-shrink:0}
+.bt{flex:1;height:26px;background:rgba(255,255,255,.03);border-radius:3px;position:relative;overflow:hidden}
+.bf{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:9px;transition:width .85s cubic-bezier(.16,1,.3,1)}
+.bv{font-family:serif;font-size:10.5px;color:rgba(255,255,255,.65);letter-spacing:.8px;white-space:nowrap}
+.ba{position:absolute;right:7px;top:50%;transform:translateY(-50%);font-size:9.5px;font-style:italic;color:#c9a84c;white-space:nowrap}
+.br.sb .bl{color:#2ecc71}.br.cb .bl{color:#e05555}.br.gb .bl{color:#c9a84c}
+.br.sb .bf{background:linear-gradient(to right,#1d6b47,rgba(29,107,71,.55))}
+.br.cb .bf{background:linear-gradient(to right,#b83232,rgba(184,50,50,.55))}
+.br.gb .bf{background:linear-gradient(to right,#c9a84c,rgba(201,168,76,.45))}
+.chn{font-size:13px;font-style:italic;color:#7a7060;line-height:1.7;padding:14px 18px;border-left:2px solid #c9a84c;background:rgba(201,168,76,0.13);border-radius:0 4px 4px 0;margin-bottom:36px}
+
+/* SEPARATION */
+.spw{padding:20px 16px 80px;max-width:680px;margin:0 auto}
+.spi{text-align:center;margin-bottom:44px}
+.spi p{font-size:14.5px;font-style:italic;color:#a89880;line-height:1.7;max-width:460px;margin:0 auto 14px}
+.spj{position:relative;margin-bottom:52px}
+.spl{position:absolute;left:28px;top:38px;bottom:38px;width:1px;background:linear-gradient(to bottom,rgba(201,168,76,0.32),rgba(201,168,76,.04))}
+.spc{position:relative;margin-left:62px;margin-bottom:22px;background:#111116;border:1px solid rgba(255,255,255,.07);border-radius:6px;overflow:hidden;transition:all .22s;cursor:pointer}
+.spc:hover{border-color:rgba(201,168,76,.28)}
+.spc.open .spb{display:block}
+.spn{position:absolute;left:-46px;top:20px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(201,168,76,0.32);background:#16161e;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:12px;color:#c9a84c;font-weight:600;z-index:1}
+.sph{padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sph-l{flex:1}
+.splv{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c9a84c;margin-bottom:4px}
+.sptitle{font-family:serif;font-size:21px;font-weight:400;color:#e5ddd0;line-height:1.2;margin-bottom:3px}
+.spref{font-size:11.5px;color:#7a7060;font-style:italic}
+.spchev{color:#7a7060;font-size:14px;transition:transform .28s;flex-shrink:0;margin-top:3px}
+.spc.open .spchev{transform:rotate(180deg)}
+.spb{display:none;padding:16px 18px 18px;border-top:1px solid rgba(255,255,255,.05)}
+.spwhat{font-size:14px;color:#e5ddd0;line-height:1.75;margin-bottom:14px}
+.sppain{padding:12px 14px;background:rgba(255,255,255,.03);border-radius:4px;margin-bottom:12px}
+.sppain-l{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#7a7060;margin-bottom:5px}
+.sppain-t{font-size:13.5px;font-style:italic;color:#a89880;line-height:1.6}
+.spq{margin-top:14px;padding:14px;background:rgba(201,168,76,0.13);border-left:2px solid #c9a84c;border-radius:0 4px 4px 0}
+.spq-l{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c9a84c;margin-bottom:7px}
+.spq p{font-size:13.5px;font-style:italic;line-height:1.65}
+.spsc{margin-top:12px;font-size:13px;font-style:italic;color:#7a7060;line-height:1.65}
+.spsc cite{display:block;font-style:normal;font-family:serif;font-size:9.5px;letter-spacing:1.5px;color:#c9a84c;margin-top:5px}
+.spcls{text-align:center;padding:36px 16px;border-top:1px solid rgba(255,255,255,.05)}
+.spcls h3{font-family:serif;font-size:clamp(19px,4vw,27px);font-weight:300;font-style:italic;color:#e5ddd0;margin-bottom:10px;line-height:1.4}
+.spcls h3 em{color:#c9a84c}
+.spcls p{font-size:13.5px;color:#7a7060;font-style:italic}
+.spattern{background:#111116;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:20px;margin-bottom:36px}
+.sp-pl{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c9a84c;margin-bottom:12px}
+.sp-pc{font-size:14px;line-height:1.85;color:#e5ddd0}
+.sp-pc span{color:#c9a84c}
+.sp-note{margin-top:14px;font-size:13.5px;font-style:italic;color:#7a7060;border-left:2px solid #c9a84c;padding-left:12px;line-height:1.65}
+
+/* PANEL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);opacity:0;pointer-events:none;transition:opacity .32s;z-index:200}
+.overlay.on{opacity:1;pointer-events:all}
+.panel{position:fixed;right:0;top:0;bottom:0;width:min(390px,100vw);background:rgba(13,13,18,0.98);border-left:1px solid rgba(255,255,255,.07);transform:translateX(100%);transition:transform .36s cubic-bezier(.16,1,.3,1);z-index:201;overflow-y:auto;padding:52px 24px 40px}
+.panel.on{transform:translateX(0)}
+.px{position:sticky;top:-52px;margin:-52px -24px 22px;height:52px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;background:rgba(13,13,18,0.98);border-bottom:1px solid rgba(255,255,255,.06)}
+.px button{background:none;border:1px solid rgba(255,255,255,.09);color:#7a7060;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center}
+.pbadge{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;display:inline-block;margin-bottom:12px}
+.pbadge.c{color:#e05555;background:rgba(184,50,50,0.11);border:1px solid rgba(184,50,50,0.3)}
+.pbadge.s{color:#2ecc71;background:rgba(29,107,71,0.11);border:1px solid rgba(29,107,71,0.3)}
+.pbadge.e{color:#c9a84c;background:rgba(201,168,76,0.13);border:1px solid rgba(201,168,76,0.32)}
+.pname{font-family:serif;font-size:clamp(30px,6vw,44px);font-weight:300;line-height:1.05;margin-bottom:3px}
+.pname.c{color:#e05555}.pname.s{color:#2ecc71}.pname.e{color:#c9a84c}
+.pmean{font-size:14.5px;font-style:italic;color:#7a7060;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.psec{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#7a7060;margin:18px 0 7px}
+.pcont{font-size:14px;line-height:1.78;color:#e5ddd0}
+.pcont p{margin-bottom:10px}
+.psc{margin-top:18px;padding:12px 14px;background:rgba(255,255,255,.03);border-radius:4px;font-size:13px;font-style:italic;color:#7a7060;line-height:1.65}
+.psc cite{display:block;font-style:normal;font-family:serif;font-size:9.5px;letter-spacing:1.5px;color:#c9a84c;margin-top:5px}
+.pq{margin-top:22px;padding:16px;background:rgba(201,168,76,0.13);border-left:2px solid #c9a84c;border-radius:0 4px 4px 0}
+.pql{font-family:serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c9a84c;margin-bottom:9px}
+.pq p{font-size:14px;font-style:italic;line-height:1.65}
+
+/* HERO */
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 80px}
+.h-tag{font-family:serif;font-size:10px;letter-spacing:4px;color:#c9a84c;text-transform:uppercase;margin-bottom:24px}
+.h-title{font-family:serif;font-size:clamp(50px,10vw,100px);font-weight:300;line-height:.95;margin-bottom:18px}
+.h-title em{font-style:italic;color:#c9a84c}
+.h-sub{font-size:clamp(14px,2.5vw,18px);color:#a89880;max-width:420px;line-height:1.7;font-style:italic;margin-bottom:44px}
+.h-verse{font-family:serif;font-size:14.5px;font-style:italic;color:#a89880;border-left:1px solid #c9a84c;padding:10px 18px;text-align:left;max-width:370px;line-height:1.8;margin-bottom:52px}
+.h-verse cite{display:block;font-size:10px;letter-spacing:2px;font-style:normal;color:#c9a84c;margin-top:7px}
+.h-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:11px 22px;border-radius:3px;cursor:pointer;transition:all .22s;border:1px solid}
+.btn-p{background:rgba(201,168,76,0.13);border-color:#c9a84c;color:#c9a84c}
+.btn-g{background:transparent;border-color:rgba(255,255,255,.1);color:#7a7060}
+.closing{text-align:center;padding:90px 24px 70px}
+.closing h2{font-family:serif;font-size:clamp(26px,5vw,52px);font-weight:300;line-height:1.2;margin-bottom:18px}
+.closing h2 em{color:#c9a84c}
+.closing p{font-size:14.5px;color:#7a7060;font-style:italic;max-width:380px;margin:0 auto 36px}
+.cline{width:48px;height:1px;background:#c9a84c;margin:0 auto 32px}
+.cdeut{font-family:serif;font-size:15px;font-style:italic;color:#7a7060;max-width:360px;margin:0 auto;line-height:1.8}
+.cdeut cite{display:block;font-size:10px;font-style:normal;color:#c9a84c;letter-spacing:2px;margin-top:9px}
+
+@media(max-width:580px){
+  .ntab,.tab{font-size:8.5px;letter-spacing:1px;padding:4px 7px}
+  .spc{margin-left:46px}
+  .spn{left:-32px;width:26px;height:26px;font-size:10px}
+  .spl{left:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="ov" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="px"><button onclick="closePanel()">&#x2715;</button></div>
+  <div id="pc"></div>
+</div>
+
+<nav>
+  <div class="brand">Two Rivers &middot; Genesis</div>
+  <div class="tabs">
+    <button class="tab on" id="tab-home" onclick="sv('home')">Overview</button>
+    <button class="tab" id="tab-tl" onclick="sv('tl')">Timeline</button>
+    <button class="tab" id="tab-ch" onclick="sv('ch')">Lifespans</button>
+    <button class="tab" id="tab-sp" onclick="sv('sp')">Separation</button>
+  </div>
+</nav>
+
+<div id="view-home">
+  <section class="hero">
+    <div class="h-tag">Genesis 4&ndash;5 &middot; 11 &middot; Abraham Park</div>
+    <h1 class="h-title">Two <em>Rivers</em></h1>
+    <p class="h-sub">Since Adam, two lines have run in parallel. One builds a name for itself. One carries the name of God.</p>
+    <div class="h-verse">
+      &ldquo;Remember the days of old, consider the years of all generations. Ask your father, and he will inform you; your elders, and they will tell you.&rdquo;
+      <cite>Deuteronomy 32:7</cite>
+    </div>
+    <div class="h-cta">
+      <button class="btn btn-p" onclick="sv('tl')">Explore the Timeline</button>
+      <button class="btn btn-g" onclick="sv('sp')">The Four Separations</button>
+    </div>
+  </section>
+  <section class="closing">
+    <h2>Which river are <em>you</em> in?</h2>
+    <p>Not a question of knowledge. A question about life.</p>
+    <div class="cline"></div>
+    <p class="cdeut">&ldquo;Stand by the ways and see and ask for the ancient paths, where the good way is, and walk in it.&rdquo;<cite>Jeremiah 6:16</cite></p>
+  </section>
+</div>
+
+<div id="view-tl" style="display:none">
+<div class="sh"><h2>The Two Genealogies</h2><p>Two lines flowing side by side — tap any name to go deeper</p></div>
+  <div style="padding:0 12px 6px">
+    <div class="pills">
+      <div class="pill c"><div class="pdot"></div>Line of Cain — civilization without God</div>
+      <div class="pill s"><div class="pdot"></div>Line of Seth — the thread of faith</div>
+      <div class="pill e"><div class="pdot"></div>Pivotal events</div>
+    </div>
+  </div>
+
+  <div class="sh" style="padding-top:20px"><h2 style="font-size:clamp(20px,4vw,28px)">Before the Flood</h2><p>Genesis 4–5 · Two rivers, nearly 1,000 years running in parallel</p></div>
+
+  <div class="tlw"><div class="tlg">
+    <div class="col-h c">Line of Cain</div><div></div><div class="col-h s">Line of Seth</div>
+
+    <!-- ADAM -->
+    <div class="card cc" onclick="op('adam-fall')">
+      <div class="cgen">Gen. 1 · Gen 3</div><div class="cname">Adam — The Fall</div>
+      <div class="cmean">"Man, mankind" — 930 years</div>
+      <div class="cdesc">The first failure of separation. One tree set apart — and man did not keep the boundary. But God clothed them with skins — grace within judgment.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sd br"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('adam-seth')">
+      <div class="cgen">Gen. 1 · Gen 5:5</div><div class="cname">Adam — The Witness</div>
+      <div class="cmean">930 years — a living chain</div>
+      <div class="cdesc">Adam lived until Lamech (gen. 9) was 56. Every patriarch from Seth to near-Noah heard the Eden account firsthand from him. The Word was never cut off.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- CAIN / SETH -->
+    <div class="card cc" onclick="op('cain')">
+      <div class="cgen">Gen. 1 · Gen 4:17</div><div class="cname">Cain</div>
+      <div class="cmean">"Gotten, received" — hope that betrayed</div>
+      <div class="cdesc">Built the city of Enoch — civilization without God. Settled in Nod: "wandering." The reversed separation — away from God, not from sin.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('seth')">
+      <div class="cgen">Gen. 2 · Gen 4:26</div><div class="cname">Seth</div>
+      <div class="cmean">"Appointed, foundation" — another seed</div>
+      <div class="cdesc">Given in place of Abel. In his days men began to call upon the name of the Lord (Gen 4:26). The foundation of the line of faith.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- ENOCH-CAIN / ENOSH -->
+    <div class="card cc" onclick="op('enoch-cain')">
+      <div class="cgen">Gen. 2 · Gen 4:17</div><div class="cname">Enoch (of Cain)</div>
+      <div class="cmean">"Dedication, initiation"</div>
+      <div class="cdesc">A city named after him — immortal in stone and architecture. Named by human hands. His name not in eternity.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('enosh')">
+      <div class="cgen">Gen. 3 · Gen 5:9-11</div><div class="cname">Enosh</div>
+      <div class="cmean">"Frail, mortal man"</div>
+      <div class="cdesc">Acknowledges weakness — and only then calls upon God. The first separation: from the illusion of self-sufficiency. Men began to call upon the Lord.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- IRAD / KENAN -->
+    <div class="card cc" onclick="op('irad')">
+      <div class="cgen">Gen. 3 · Gen 4:18</div><div class="cname">Irad</div>
+      <div class="cmean">"Fleet, runner, boastful"</div>
+      <div class="cdesc">Running from God. Living as though God does not see. The deepest pride: not arrogance before men, but life without God in practice.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('kenan')">
+      <div class="cgen">Gen. 4 · Gen 5:12-14</div><div class="cname">Kenan</div>
+      <div class="cmean">"Possession, belonging to God"</div>
+      <div class="cdesc">Not his own — God's possession. Separation from the claim of ownership over one's own life. A congregation began forming in his days.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- MEHUJAEL / MAHALALEL -->
+    <div class="card cc" onclick="op('mehujael')">
+      <div class="cgen">Gen. 4 · Gen 4:18</div><div class="cname">Mehujael</div>
+      <div class="cmean">"Blotted out by God"</div>
+      <div class="cdesc">The most fearful name in Cain's line. Erased from record and memory. Some lives God does not acknowledge — however great before men.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('mahalalel')">
+      <div class="cgen">Gen. 5 · Gen 5:15-17</div><div class="cname">Mahalalel</div>
+      <div class="cmean">"Praise of God, God who is praised"</div>
+      <div class="cdesc">His mouth consecrated to God's praise. Perfect antithesis of Irad's self-boasting and the coming Lamech's violent song.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- METHUSHAEL / JARED -->
+    <div class="card cc" onclick="op('methushael')">
+      <div class="cgen">Gen. 5 · Gen 4:18</div><div class="cname">Methushael</div>
+      <div class="cmean">"Man of Sheol" — or "Man of God"</div>
+      <div class="cdesc">Two opposite meanings. His father hoped for "man of God." But Lamech, his son, reveals which path was chosen. A name cannot save you.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('jared')">
+      <div class="cgen">Gen. 6 · Gen 5:18-20</div><div class="cname">Jared</div>
+      <div class="cmean">"Descent, he who comes down"</div>
+      <div class="cdesc">In a world always reaching upward — Jared descends. Humbles himself. From Jared came Enoch. True humility produces extraordinary fruit.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- LAMECH-CAIN / ENOCH-SETH — GENERATION 7 CONTRAST -->
+    <div class="card cc hl" onclick="op('lamech-cain')">
+      <div class="cgen">Gen. 7 · Gen 4:19-24 ⚠</div><div class="cname">Lamech (of Cain)</div>
+      <div class="cmean">"Strong youth, conqueror"</div>
+      <div class="cdesc">Generation 7 from Cain. Polygamy. Kills for a wound. Sings of his own violence. Peak of civilization without God — all boundaries destroyed.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd br"></div><div class="sl"></div></div>
+    <div class="card sc hl" onclick="op('enoch-seth')">
+      <div class="cgen">Gen. 7 · Gen 5:21-24 ✦</div><div class="cname">Enoch (of Seth)</div>
+      <div class="cmean">"Dedicated, consecrated"</div>
+      <div class="cdesc">Generation 7 from Seth. Walked with God 300 years. Did not die — taken by God. The only one in the genealogy who transcends death. Not by achievement, but by walking.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- FOUR CHILDREN / METHUSELAH -->
+    <div class="card cc" onclick="op('four')">
+      <div class="cgen">Gen. 8 · Gen 4:20-22</div><div class="cname">Four Children of Lamech</div>
+      <div class="cmean">Jabal · Jubal · Tubal-cain · Naamah</div>
+      <div class="cdesc">Economy & trade. Music & entertainment. Technology & weaponry. Erotic beauty. Four pillars of civilization without God — not just ancient history. Today.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('methuselah')">
+      <div class="cgen">Gen. 8 · Gen 5:25-27</div><div class="cname">Methuselah</div>
+      <div class="cmean">"When he dies, it shall come" · 969 years</div>
+      <div class="cdesc">Longest life in Scripture. Not one recorded deed. His function: to endure. He died the year the flood began. 969 years of divine patience.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- CUTOFF / LAMECH-SETH -->
+    <div class="cutoff"><div class="ct">— The Line Stops Here —</div><div class="cx">Cain's genealogy ends abruptly after Lamech. Civilization at its peak — suddenly cut off. No continuation.</div></div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('lamech-seth')">
+      <div class="cgen">Gen. 9 · Gen 5:28-31</div><div class="cname">Lamech (of Seth)</div>
+      <div class="cmean">"Despairing, brought low"</div>
+      <div class="cdesc">Two Lamechs — same era, opposite mouths. One sings of murder. One prophesies: "This one will bring us rest." He named his son Noah.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- FLOOD -->
+    <div class="tlfull"><div class="jud" onclick="op('flood')">
+      <div class="jt">⚡ The Flood — God's Judgment ⚡</div>
+      <div class="js">When Methuselah died, the flood came · Noah: "rest, comfort" · Genesis 6–9</div>
+    </div></div>
+
+    <div class="tlfull"><div class="divr"><div class="dl"></div><div class="dlb">After the Flood</div><div class="dl"></div></div></div>
+  </div><!-- end tlg pre-flood -->
+
+  <div class="sh" style="padding-top:8px"><h2 style="font-size:clamp(20px,4vw,28px)">After the Flood</h2><p>Genesis 11 · The falling lifespan curve — a spiritual graph, not biology</p></div>
+
+  <div class="tlw" style="padding-top:0"><div class="tlg">
+
+    <!-- BABEL / SHEM -->
+    <div class="card cc" onclick="op('babel')">
+      <div class="cgen">Ham's line · Gen 11:1-9</div><div class="cname">Tower of Babel</div>
+      <div class="cmean">"To make a name for ourselves"</div>
+      <div class="cdesc">100 years after the flood, sin rises again. Three goals: reach heaven by human power, make a name, refuse to scatter as God commanded.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+    <div class="spine"><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('shem')">
+      <div class="cgen">Gen. 11 · Gen 11:10-11</div><div class="cname">Shem</div>
+      <div class="cmean">"Name, renown" · 600 years</div>
+      <div class="cdesc">Son of Noah. "Blessed be the Lord, the God of Shem." Lived contemporaneous with 15 generations — a living bridge from Noah's flood to Abraham's call.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- EBER -->
+    <div class="ce"></div>
+    <div class="spine"><div class="sl"></div><div class="sd br"></div><div class="sl"></div></div>
+    <div class="card sc hl" onclick="op('eber')">
+      <div class="cgen">Gen. 14 · Gen 11:14-17 ✦</div><div class="cname">Eber</div>
+      <div class="cmean">"One who crosses over" · 464 years ↑</div>
+      <div class="cdesc">The only anomaly in the falling curve: his lifespan rises. Refused Babel. Crossed the Euphrates. The word "Hebrew" (Ibri) comes from his name.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- PELEG -->
+    <div class="ce"></div>
+    <div class="spine"><div class="sl"></div><div class="sd" style="border-color:#b83232"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('peleg')">
+      <div class="cgen">Gen. 15 · Gen 11:18-19 ↓</div><div class="cname">Peleg</div>
+      <div class="cmean">"Division, separation" · 239 years</div>
+      <div class="cdesc">Lifespan drops 50% from Eber. His father named him "separation" hoping for holiness — he joined Babel instead. The same word can mean consecration or destruction.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- REU-NAHOR -->
+    <div class="ce"></div>
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('decline')">
+      <div class="cgen">Gen. 16-19 · Gen 11:20-32</div><div class="cname">Reu · Serug · Nahor</div>
+      <div class="cmean">Friend · Firm tendril · Snorting/panting</div>
+      <div class="cdesc">Three stages of faith's decline: prioritize human relationships → trust own strength → breathlessly chase the world. Nahor died youngest of all.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- TERAH -->
+    <div class="ce"></div>
+    <div class="spine"><div class="sl"></div><div class="sd" style="border-color:#c9a84c"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('terah')">
+      <div class="cgen">Gen. 19 · Gen 11:31-32</div><div class="cname">Terah — Dies in Haran</div>
+      <div class="cmean">"Delay, tarrying" · 205 years</div>
+      <div class="cdesc">Knew the call. Even took the initiative to leave Ur. But stopped in Haran — prosperous, comfortable, not Ur but not Canaan. Died in "good enough."</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+    <!-- ABRAHAM -->
+    <div class="ce"></div>
+    <div class="spine"><div class="sl"></div><div class="sd" style="background:#c9a84c;border-color:#c9a84c;box-shadow:0 0 12px #c9a84c"></div><div class="sl"></div></div>
+    <div class="card sc hl" onclick="op('abraham')">
+      <div class="cgen">Gen. 20 · Gen 12–22 ✦✦</div><div class="cname">Abraham</div>
+      <div class="cmean">"Father of a multitude of nations"</div>
+      <div class="cdesc">Four separations — each deeper than the last, each opening a deeper covenant with God. The starting point of the history of salvation.</div>
+      <div class="ctap">Tap to read ›</div>
+    </div>
+
+  </div></div>
+</div>
+</div>
+
+<div id="view-ch" style="display:none">
+<div class="sh"><h2>The Lifespan Graph</h2><p>Not biological data — a spiritual chart of faith and separation</p></div>
+  <div class="chw">
+    <div class="chi"><p>"The abrupt decrease in human life span by half is directly related to sin... Eber enjoyed the blessing of longevity because he had protected his faith and distanced himself from sin even as the perverse movement to build the Tower of Babel had been well under way." — Abraham Park</p></div>
+
+    <div class="bch">
+      <div class="chs">Genesis 5 — Adam to Noah · Pre-Flood · The Age of Longevity</div>
+      <div class="br sb" onclick="op('adam-seth')"><div class="bl">Adam</div><div class="bt"><div class="bf" style="width:0%" data-w="96%"><div class="bv">930 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('seth')"><div class="bl">Seth</div><div class="bt"><div class="bf" style="width:0%" data-w="94.1%"><div class="bv">912 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('enosh')"><div class="bl">Enosh</div><div class="bt"><div class="bf" style="width:0%" data-w="93.4%"><div class="bv">905 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('kenan')"><div class="bl">Kenan</div><div class="bt"><div class="bf" style="width:0%" data-w="93.9%"><div class="bv">910 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('mahalalel')"><div class="bl">Mahalalel</div><div class="bt"><div class="bf" style="width:0%" data-w="92.4%"><div class="bv">895 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('jared')"><div class="bl">Jared</div><div class="bt"><div class="bf" style="width:0%" data-w="99.3%"><div class="bv">962 yrs</div></div></div></div>
+      <div class="br gb" onclick="op('enoch-seth')"><div class="bl">Enoch ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="37.7%"><div class="bv">365 yrs</div></div><div class="ba">Taken by God — did not die</div></div></div>
+      <div class="br sb" onclick="op('methuselah')"><div class="bl">Methuselah</div><div class="bt"><div class="bf" style="width:0%" data-w="100%"><div class="bv">969 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('lamech-seth')"><div class="bl">Lamech</div><div class="bt"><div class="bf" style="width:0%" data-w="80.2%"><div class="bv">777 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('flood')"><div class="bl">Noah</div><div class="bt"><div class="bf" style="width:0%" data-w="98%"><div class="bv">950 yrs</div></div></div></div>
+    </div>
+
+    <div class="chn">In Genesis 5, seven patriarchs lived over 900 years. These long lifespans were God's means of transmitting His Word directly — Adam himself was alive until Noah's father Lamech was 56. No generation was without a living witness.</div>
+
+    <div class="bch">
+      <div class="chs">Genesis 11 — Shem to Abraham · Post-Flood · The Falling Curve</div>
+      <div class="br sb" onclick="op('shem')"><div class="bl">Shem</div><div class="bt"><div class="bf" style="width:0%" data-w="62%"><div class="bv">600 yrs</div></div></div></div>
+      <div class="br sb"><div class="bl">Arpachshad</div><div class="bt"><div class="bf" style="width:0%" data-w="45.2%"><div class="bv">438 yrs</div></div></div></div>
+      <div class="br sb"><div class="bl">Shelah</div><div class="bt"><div class="bf" style="width:0%" data-w="44.7%"><div class="bv">433 yrs</div></div></div></div>
+      <div class="br gb" onclick="op('eber')"><div class="bl">Eber ↑ ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="47.9%"><div class="bv">464 yrs</div></div><div class="ba">Rose — crossed the Euphrates</div></div></div>
+      <div class="br cb" onclick="op('peleg')"><div class="bl">Peleg ↓</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div><div class="ba">−50% — joined Babel</div></div></div>
+      <div class="br cb" onclick="op('decline')"><div class="bl">Reu</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div></div></div>
+      <div class="br cb" onclick="op('decline')"><div class="bl">Serug</div><div class="bt"><div class="bf" style="width:0%" data-w="23.7%"><div class="bv">230 yrs</div></div></div></div>
+      <div class="br cb" onclick="op('decline')"><div class="bl">Nahor</div><div class="bt"><div class="bf" style="width:0%" data-w="15.3%"><div class="bv">148 yrs</div></div><div class="ba">Shortest — sudden death</div></div></div>
+      <div class="br sb" onclick="op('terah')"><div class="bl">Terah</div><div class="bt"><div class="bf" style="width:0%" data-w="21.2%"><div class="bv">205 yrs</div></div><div class="ba">Died in Haran</div></div></div>
+      <div class="br gb" onclick="op('abraham')"><div class="bl">Abraham ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="18.1%"><div class="bv">175 yrs</div></div></div></div>
+    </div>
+
+    <div class="chn">The Eber anomaly is the key to reading this entire chart. Every other lifespan in Genesis 11 falls — yet Eber's rises above the generation before him. He crossed the Euphrates when others built Babel. The curve is not biology. It is a spiritual graph of separation and assimilation.</div>
+  </div>
+</div>
+</div>
+
+<div id="view-sp" style="display:none">
+<div class="sh"><h2>The Four Separations</h2><p>The work of separation in Abraham's life — Ch. 13, Abraham Park</p></div>
+  <div class="spw">
+    <div class="spi">
+      <p>"In reality, the history of Israel began with God's command for separation... The work of separation, however, is always accompanied by pain. It cannot be carried out or even understood without painful tears." — Abraham Park</p>
+    </div>
+
+    <div class="spj">
+      <div class="spl"></div>
+
+      <!-- I -->
+      <div class="spc" id="sp1" onclick="tsp('sp1')">
+        <div class="spn">I</div>
+        <div class="sph"><div class="sph-l">
+          <div class="splv">First Separation · Genesis 12:1 · Acts 7:2–4</div>
+          <div class="sptitle">From his homeland &amp; Terah</div>
+          <div class="spref">Ur of the Chaldeans → Haran → Canaan</div>
+        </div><div class="spchev">▼</div></div>
+        <div class="spb">
+          <div class="spwhat">Ur of the Chaldeans was the center of ancient civilization — and the center of idolatry. Terah worshipped idols there. God commanded Abraham: <em>"Go forth from your country, and from your relatives and from your father's house."</em><br><br>Abraham first left with Terah — but Terah stopped in Haran. God called again at age 75: leave your father's house. Abraham obeyed — though Terah was still alive, 145 years old. Terah was "as good as dead to him" (Acts 7:4 — the Greek word denotes symbolic death).<br><br>This first separation represents: <strong>separation from inherited identity</strong> — family, culture, religion received without personal examination before God.</div>
+          <div class="sppain"><div class="sppain-l">The Pain</div><div class="sppain-t">Leaving a 145-year-old father behind. In a patriarchal society, the firstborn in charge of the household — walking away. "It must have been heartbreaking." (Park)</div></div>
+          <div class="spq"><div class="spq-l">A Question for You</div><p>What have you inherited from your family, culture, or religious tradition that you have never personally examined before God — that you assumed was right simply because it was always there?</p></div>
+          <div class="spsc">"By faith Abraham obeyed when he was called to go out to a place that he was to receive as an inheritance. And he went out, not knowing where he was going." <cite>Hebrews 11:8</cite></div>
+        </div>
+      </div>
+
+      <!-- II -->
+      <div class="spc" id="sp2" onclick="tsp('sp2')">
+        <div class="spn">II</div>
+        <div class="sph"><div class="sph-l">
+          <div class="splv">Second Separation · Genesis 13</div>
+          <div class="sptitle">From Lot</div>
+          <div class="spref">The Jordan Valley — "well-watered everywhere, like the garden of the Lord"</div>
+        </div><div class="spchev">▼</div></div>
+        <div class="spb">
+          <div class="spwhat">Lot was not an enemy. He was family, a fellow traveler, a man of faith — Peter calls him "righteous Lot" (2 Pet 2:7-8). He had walked with Abraham through the hardest miles from Ur to Canaan.<br><br>But when they needed to separate, Lot <em>"lifted up his eyes and saw all the valley of the Jordan, that it was well-watered everywhere."</em> He chose the best land — and moved his tents toward Sodom.<br><br>This second separation represents: <strong>separation from those who compromise within the community of faith</strong> — beloved fellow believers whose eyes are always toward the well-watered valley.</div>
+          <div class="sppain"><div class="sppain-l">The Pain</div><div class="sppain-t">Separating from someone who was faithful in the hardest times. Not leaving the obviously wicked — but leaving the "good enough." This is harder, because love is real.</div></div>
+          <div class="spq"><div class="spq-l">A Question for You</div><p>Who is the "Lot" in your life — someone you love, a fellow believer, whose vision consistently draws you toward the well-watered valley rather than toward God's actual call on your life?</p></div>
+          <div class="spsc">"Abram settled in the land of Canaan, while Lot settled in the cities of the valley, and moved his tents as far as Sodom." <cite>Genesis 13:12</cite></div>
+        </div>
+      </div>
+
+      <!-- III -->
+      <div class="spc" id="sp3" onclick="tsp('sp3')">
+        <div class="spn">III</div>
+        <div class="sph"><div class="sph-l">
+          <div class="splv">Third Separation · Genesis 21</div>
+          <div class="sptitle">From Ishmael</div>
+          <div class="spref">"Cast out the bondwoman and her son" — Galatians 4:30</div>
+        </div><div class="spchev">▼</div></div>
+        <div class="spb">
+          <div class="spwhat">Ishmael was Abraham's firstborn son — 17 years of love, investment, and hope. He was born not from sin, but from Abraham's own impatience: human scheming when God's promise seemed too slow.<br><br>When Isaac was born, God confirmed: send Ishmael away. <em>"The matter distressed Abraham greatly because of his son"</em> (Gen 21:11). He loved Ishmael. But he obeyed.<br><br>This third separation represents: <strong>separation from what we built with our own hands</strong> — our plans, programs, strategies put in motion without waiting for God, that we love because we made them.</div>
+          <div class="sppain"><div class="sppain-l">The Pain</div><div class="sppain-t">"The pain of having his flesh torn away." (Park) Seventeen years of fatherhood. Walking Ishmael and Hagar to the door. Not releasing something evil — releasing something good that was not God's way.</div></div>
+          <div class="spq"><div class="spq-l">A Question for You</div><p>What is the "Ishmael" you are holding — something you built, a plan you set in motion — that you know in your heart was not God's timing or way, but is too precious to release?</p></div>
+          <div class="spsc">"Cast out the bondwoman and her son, for the son of the bondwoman shall not be an heir with the son of the free woman." <cite>Galatians 4:30</cite></div>
+        </div>
+      </div>
+
+      <!-- IV -->
+      <div class="spc" id="sp4" onclick="tsp('sp4')">
+        <div class="spn">IV</div>
+        <div class="sph"><div class="sph-l">
+          <div class="splv">Fourth Separation · Genesis 22</div>
+          <div class="sptitle">From Isaac</div>
+          <div class="spref">"Your son, your only son, whom you love" — Genesis 22:2</div>
+        </div><div class="spchev">▼</div></div>
+        <div class="spb">
+          <div class="spwhat">Isaac was not Abraham's plan — he was God's own promise, the covenant son born to a 100-year-old man. He was purely gift, purely grace. And God said: offer him as a burnt offering.<br><br><em>"This separation was equivalent to death; it shook the very foundation of his existence."</em> (Park) The test is not: can you give up your sin? But: can you return to God even what God gave you?<br><br>This fourth separation represents: <strong>the maturity of faith — returning to God what belongs to Him, even the blessings He gave</strong>. The 24 elders cast their crowns before the throne (Rev 4:10-11) — the same confession.</div>
+          <div class="sppain"><div class="sppain-l">The Pain</div><div class="sppain-t">Not releasing sin — releasing grace itself. The covenantal son. The sole object of his affection. "The pain of having the very foundation of his existence shaken." This is the deepest separation.</div></div>
+          <div class="spq"><div class="spq-l">A Question for You</div><p>What is the "Isaac" in your life — a genuine blessing from God that you now hold so tightly it has become more central than God Himself? What would it mean to lay it on the altar?</p></div>
+          <div class="spsc">"By Myself I have sworn, declares the Lord, because you have done this thing and have not withheld your son, your only son, indeed I will greatly bless you." <cite>Genesis 22:16–17</cite></div>
+        </div>
+      </div>
+    </div><!-- end spj -->
+
+    <div class="spattern">
+      <div class="sp-pl">The Hidden Pattern</div>
+      <div class="sp-pc">
+        Each separation opened a deeper covenant:<br>
+        After separation from Terah → <span>Promise of land and descendants</span> (Gen 12)<br>
+        After separation from Lot → <span>Land expanded as far as the eye can see</span> (Gen 13)<br>
+        After separation from Ishmael → <span>Covenant renewed, Isaac confirmed</span> (Gen 21)<br>
+        After separation from Isaac → <span>God swears by Himself — incredible blessing</span> (Gen 22)
+      </div>
+      <div class="sp-note">The depth of fellowship with God corresponds to the depth of separation from the world. Every separation makes room. God does not fill what is still full of something else.</div>
+    </div>
+
+    <div class="spcls">
+      <h3>Where are you in the <em>four separations</em>?</h3>
+      <p>Not a test. An invitation.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const D = {
+  'adam-fall':{t:'e',n:'Adam — The Fall',m:'The first failure of separation',
+    c:`<p>The first sin was a failure to maintain separation. One tree set apart from all others — "of this tree you shall not eat" — and man did not keep that boundary.</p><p>But notice God's response: not only judgment. He made garments of skin and clothed them. Forced separation — but full of grace. This pattern repeats through all of redemptive history.</p>`,
+    q:'God asked Adam: "Where are you?" He knew the answer. The question was an invitation to honesty. If God asked you that same question today — what would your honest answer be?',
+    sc:'"The Lord God called to the man and said to him, Where are you?" — Genesis 3:9'},
+  'adam-seth':{t:'s',n:'Adam',m:'930 years — a living chain of witness',
+    c:`<p>Adam lived 930 years. He was alive simultaneously with every patriarch from Seth (gen. 2) through Lamech (gen. 9, father of Noah). He personally testified to them all about Eden, the fall, and the promise of the woman's seed (Gen 3:15).</p><p>For nearly 1,000 years, there was an unbroken chain of direct firsthand testimony. The Word was never cut off — even in the darkest generations, Adam was still there, still speaking.</p>`,
+    q:'Who is your "Adam" — someone who carries firsthand testimony of God\'s faithfulness across generations? And who are you passing that testimony on to?',
+    sc:'"So all the days that Adam lived were nine hundred and thirty years, and he died." — Genesis 5:5'},
+  'cain':{t:'c',n:'Cain',m:'"Gotten, received" — hope that betrayed',
+    c:`<p>Cain was born with enormous hope. Eve said: "I have gotten a man with the help of the Lord." They may have believed he was the promised seed of Genesis 3:15.</p><p>But Cain made the reversed separation — not separating himself from sin, but separating himself from God. He built the city of Enoch to perpetuate his own name. He settled in Nod: "wandering" — the condition of every life outside of God.</p><p>God had warned him: "sin is crouching at the door; its desire is for you, but you must master it." He did not heed the warning.</p>`,
+    q:'Is there something you are building in your life — not for God but to make your own name permanent? What does it feel like to name it honestly?',
+    sc:'"Cain went away from the presence of the Lord and settled in the land of Nod, east of Eden." — Genesis 4:16'},
+  'seth':{t:'s',n:'Seth',m:'"Appointed, foundation" — a new beginning',
+    c:`<p>Seth was given as "another seed" in place of Abel. The name "Seth" shares its root with "foundation" — he is the foundation of the line of faith.</p><p>And in his days: "men began to call upon the name of the Lord" (Gen 4:26). Not just one or two individuals — a community arose in a world growing darker. The Word that Cain had abandoned was being gathered again.</p>`,
+    q:'Seth was given after loss and violence. Is there something in your life that God has raised up as a "Seth" — new growth after a death or destruction?',
+    sc:'"As for Seth, to him also a son was born, and he called his name Enosh. At that time people began to call upon the name of the Lord." — Genesis 4:26'},
+  'enoch-cain':{t:'c',n:'Enoch (of Cain)',m:'"Dedication" — famous but unknown to God',
+    c:`<p>Two Enochs in Scripture — from opposite lines. The Enoch of Cain: a city named after him. Immortal in stone and architecture. Named by human hands in the foundation of a city.</p><p>The Enoch of Seth: built nothing recorded. No city, no invention, no monument. Only: "Enoch walked with God" — and he was taken by God without dying.</p><p>Two kinds of immortality. One written by human hands in stone. One written by God's hand in eternity.</p>`,
+    q:'In twenty years, what do you want to have made permanent? And permanent in whose eyes — men\'s, or God\'s?',
+    sc:'"Cain built a city and called the name of the city after the name of his son, Enoch." — Genesis 4:17'},
+  'enosh':{t:'s',n:'Enosh',m:'"Frail, mortal man"',
+    c:`<p>Enosh is not a name of honor — it is an honest acknowledgment of the human condition after the fall. Weak. Mortal. Cannot heal himself.</p><p>And precisely here something remarkable happens: when man admits his weakness, he begins to call upon God. Not before. The first separation: from the illusion that we are sufficient.</p>`,
+    q:'What have you been handling alone — out of pride or shame in admitting you cannot — that you have never brought honestly before God?',
+    sc:'"At that time people began to call upon the name of the Lord." — Genesis 4:26'},
+  'irad':{t:'c',n:'Irad',m:'"Fleet, runner, boastful"',
+    c:`<p>Irad runs from God. His life is a hidden declaration: "Where is God? He does not see me." The deepest pride is not arrogance before other people — it is living as though God does not exist or does not care.</p><p>Psalm 14:1 says: "The fool says in his heart, There is no God." Not necessarily an intellectual position — but as a way of life. Practical godlessness.</p>`,
+    q:'In what area of your life do you most often act as though God is not watching — or that what you do there does not concern Him?',
+    sc:'"The Lord looks down from heaven on the children of man, to see if there are any who understand, who seek after God." — Psalm 14:2'},
+  'kenan':{t:'s',n:'Kenan',m:'"Possession, belonging to God"',
+    c:`<p>Kenan means he is God's possession — not his own. The separation from claiming ownership over one's own life. In his days, a congregation began to form around the worship of God.</p><p>The invisible separations are often the hardest — where no one sees you release something. Surrendering control of your future, your decisions, your identity to God: this is the Kenan separation.</p>`,
+    q:'What is the thing you find hardest to surrender control of to God — a decision about your future, a relationship, a plan you have made for your own life?',
+    sc:'"You are not your own, for you were bought with a price." — 1 Corinthians 6:19–20'},
+  'mehujael':{t:'c',n:'Mehujael',m:'"Blotted out by God"',
+    c:`<p>The most fearful name in all of Cain's line. "Blotted out" — erased from memory, from record, from existence itself. Nothing remains.</p><p>The line of Seth records every name, every year, every birth — because God acknowledges each one. The line of Cain records no ages — because those years were not held in God's sight. There are lives God records. And lives He does not.</p>`,
+    q:'From the perspective of eternity — what of your life will remain? What are you building now that will outlast your death?',
+    sc:'"The memory of the righteous is a blessing, but the name of the wicked will rot." — Proverbs 10:7'},
+  'mahalalel':{t:'s',n:'Mahalalel',m:'"Praise of God, God who is praised"',
+    c:`<p>His mouth was separated from self-praise and consecrated to the praise of God. The perfect antithesis of Irad who boasts of himself — and of the coming Lamech who will sing of his own violence before his wives.</p><p>Praise is not only about worship music. It is an orientation of life — who is at the center of everything you do, say, and plan.</p>`,
+    q:'When you talk about your life — your plans, your achievements, your future — who is most often at the center of the story?',
+    sc:'"Let everything that has breath praise the Lord." — Psalm 150:6'},
+  'methushael':{t:'c',n:'Methushael',m:'"Man of Sheol" — or "Man of God"',
+    c:`<p>Two opposite meanings in one name. His father Mehujael, whose own name meant "blotted out," gave his son a name of hope: "let him be a man of God."</p><p>But from the fruit of his son — Lamech, who killed and sang of violence — we know which path was chosen. A name given by parents is not a guarantee. Every person must make their own choice before God.</p>`,
+    q:'What hope did those who raised you — parents, mentors, those who prayed over you — place on your life? How close is your life today to that hope?',
+    sc:'"See, I have set before you today life and good, death and evil." — Deuteronomy 30:15'},
+  'jared':{t:'s',n:'Jared',m:'"Descent, he who comes down"',
+    c:`<p>In a world always reaching upward — building cities, building towers, climbing toward heaven by human achievement — Jared descends. He humbles himself.</p><p>From Jared came Enoch. The most extraordinary man of faith in the entire pre-flood genealogy was born from a father whose defining quality was humility. True humility produces extraordinary fruit.</p>`,
+    q:'What needs to come down in your life right now — what ambition, self-assertion, or expectation — so that God has more room to work freely?',
+    sc:'"He brings down the haughty and lifts up those who are brought low." — Job 5:11'},
+  'lamech-cain':{t:'c',n:'Lamech (of Cain)',m:'Generation 7 — peak of civilization without God',
+    c:`<p>All boundaries gone. Lamech is the endpoint of every compromise along Cain's line:<br><br><strong>Marriage:</strong> Two wives — Adah ("ornament") chosen for beauty, Zillah ("tinkling") for the sweetness of her voice. Marriage reduced to personal satisfaction.<br><br><strong>Violence:</strong> Kills for a light wound. "If Cain is avenged sevenfold, truly Lamech seventy-sevenfold." Murder normalized, revenge elevated to virtue.<br><br><strong>The mouth:</strong> He sings of his own killing — pride in what should cause shame.<br><br><strong>His children:</strong> Economy, entertainment, technology, erotic beauty — four domains of civilization, built entirely without God.</p>`,
+    q:'Of Lamech\'s four children — economy, entertainment, technology, beauty — which domain has the most power in your life right now? Is it used for the glory of God or the glory of self?',
+    sc:'"Adah and Zillah, hear my voice; you wives of Lamech, listen to what I say: I have killed a man for wounding me." — Genesis 4:23'},
+  'enoch-seth':{t:'s',n:'Enoch (of Seth)',m:'Generation 7 — the one who transcends death',
+    c:`<p>Generation 7 from Seth. At age 65, after his son Methuselah was born, something changed: "Enoch walked with God." For 300 years he walked. In the same world as Lamech's violence and civilization's corruption — one man chose the opposite direction.</p><p>The result: he did not die. God took him. In a genealogy full of "and he died" — one sentence stands apart: "he was not, for God took him." Not because he built something great. Only because he walked with God.</p>`,
+    q:'Enoch built nothing recorded. He was not famous. He only walked with God. Is that enough for you — or do you need achievements and recognition to feel your life is meaningful?',
+    sc:'"Enoch walked with God, and he was not, for God took him." — Genesis 5:24'},
+  'four':{t:'c',n:'The Four Children of Lamech',m:'A map of civilization today',
+    c:`<p><strong>Jabal:</strong> Father of those who dwell in tents and have livestock — economy, commerce, the accumulation of wealth as life's goal.</p><p><strong>Jubal:</strong> Father of all who play the lyre and pipe — music for sensual pleasure, not worship. The Hebrew word for "pipe" derives from a verb meaning "to fall into sensual love."</p><p><strong>Tubal-cain:</strong> Forger of all cutting instruments of bronze and iron — technology that culminates in weapons and dominating power.</p><p><strong>Naamah:</strong> "Pleasant, beautiful" — the only woman named in Cain's entire genealogy. Named not for holiness, but for beauty as commodity.</p>`,
+    q:'Which of these four domains has the most power over your daily life? And do you "cross the Euphrates" from it — or are you still fully inside it, with God absent from that area?',
+    sc:'"Do not love the world or the things in the world. If anyone loves the world, the love of the Father is not in him." — 1 John 2:15'},
+  'methuselah':{t:'s',n:'Methuselah',m:'"When he dies, it shall come" · 969 years of silence',
+    c:`<p>The longest human life in all of Scripture. And not one recorded deed. Nothing he said. Nothing he built. Not one sermon, one act, one achievement of any kind.</p><p>Why? Because his function was to endure. To keep the line alive. To ensure Lamech was born, Noah was born, the ark could be built. He was the hidden infrastructure of God's salvation plan.</p><p>His name was a living prophecy of judgment — and he died in the very year the flood began. Every year he lived was one more year of God's patient grace.</p>`,
+    q:'Perhaps your calling is not to do great things — but to endure. To keep the flame alive. To be the infrastructure that makes someone else\'s ministry possible. Can you receive that as enough?',
+    sc:'"But the one who endures to the end will be saved." — Matthew 24:13'},
+  'lamech-seth':{t:'s',n:'Lamech (of Seth)',m:'Two Lamechs — two ways of using a mouth',
+    c:`<p>The deliberate contrast: two men named Lamech, from opposite lines, in the same era of history.</p><p>Lamech of Cain: stands with a blood-stained weapon and sings of his own greatness before his wives.</p><p>Lamech of Seth: exhausted and brought low, names his son Noah — "rest" — and prophesies: "This one will bring us relief from our work and from the painful toil of our hands." He speaks of comfort for others, not glory for himself.</p>`,
+    q:'When you are under pressure and exhausted — what comes out of your mouth? Complaints and self-justification, or words that give hope and life to those around you?',
+    sc:'"From the fruit of his mouth a man eats what is good." — Proverbs 13:2'},
+  'flood':{t:'e',n:'The Flood',m:'Judgment that is also grace — a new beginning',
+    c:`<p>The flood is not only judgment — it is a new beginning. Noah means "rest, comfort." God preserved one family through the waters — not because they were perfect, but because Noah "walked with God."</p><p>When Noah came out, the first thing he did was build an altar and offer burnt offerings — voluntary separation, returning something to God. God smelled the pleasing aroma and established the covenant of the rainbow.</p><p>Pattern: judgment → new beginning → deeper covenant. The water that destroys is the same water that carries the ark to safety.</p>`,
+    q:'Is there a "flood" in your life — something that destroyed what was — that you can now see as God\'s new beginning? What did He preserve through it, and what covenant did He offer on the other side?',
+    sc:'"I establish my covenant with you, that never again shall all flesh be cut off by the waters of the flood." — Genesis 9:11'},
+  'shem':{t:'s',n:'Shem',m:'"Name, renown" · 600 years — the living bridge',
+    c:`<p>Shem was the son of Noah and lived 600 years. He was contemporaneous with Methuselah (before the flood) AND with Jacob (long after) — spanning 15 generations as a living witness of God's faithfulness.</p><p>Shem heard Noah's firsthand account of the flood. He was still alive when Abraham entered Canaan, when Isaac was born, and for 35 years after Abraham's death. He was the "God of Shem" — and through him the lineage moves toward the "God of Eber" and the "God of Abraham."</p>`,
+    q:'Who is the "Shem" in your life — a spiritual elder who connects you to generations before you? And are you willing to become "Shem" for the generation after you?',
+    sc:'"Blessed be the Lord, the God of Shem." — Genesis 9:26'},
+  'eber':{t:'s',n:'Eber',m:'"One who crosses over" · Root of the word "Hebrew"',
+    c:`<p>Eber is the anomaly in the falling curve. From Shem (600) to Arpachshad (438) to Shelah (433) — then Eber: 464. His lifespan rises when every other falls.</p><p>While the Tower of Babel was being constructed, Eber crossed the Euphrates River — separating himself from the land of sin. He established the kingdom of Ebla, a city-state of spiritual reformation and orthodox faith.</p><p>From his name comes the word "Hebrew" (Ibri) — not an ethnic designation but a description of an act of faith: "one who crosses over." The "God of Shem" became the "God of Eber" — and later the "God of Abraham."</p>`,
+    q:'"Hebrew" means "one who has crossed." To be Hebrew is not about bloodline — it is about whether you have dared to cross the boundary separating you from the old world to follow God. Have you crossed? Or are you still on the old bank?',
+    sc:'"Abram the Hebrew was told this." — Genesis 14:13'},
+  'peleg':{t:'c',n:'Peleg',m:'"Division, separation" · 239 years — hope that failed',
+    c:`<p>His father Eber gave him the name "separation" — with a beautiful hope: may he live holy, consecrated from the sinful world. The name held God's desire within it.</p><p>But Peleg joined the construction of Babel. The name that should have meant holy separation became the name of judgment — "for in his days the earth was divided" (Gen 10:25) through the confusion of languages.</p><p>His lifespan dropped 50%: from 464 years (Eber) to 239 years. He died before the patriarchs older than him. The same word — separation — can mean consecration or destruction, depending entirely on who does it and for what.</p>`,
+    q:'What name or identity has been given to you by God, by parents, or by those who mentored you — and how close is your life today to the hope that name contains?',
+    sc:'"For in his days the earth was divided." — Genesis 10:25'},
+  'decline':{t:'e',n:'Reu · Serug · Nahor',m:'Three stages of faith\'s decline — after Eber',
+    c:`<p><strong>Reu ("friend, neighbor"):</strong> After Eber left, there was no spiritual leader. The community turned to human connection for security. Reu prioritized horizontal relationships over the vertical relationship with God. Not evil — just wrong priority.</p><p><strong>Serug ("firm tendril, intertwined"):</strong> Self-reliance. Trusting in one's own strength. Strong, independent, needing neither God nor others.</p><p><strong>Nahor ("snorting, panting"):</strong> Out of breath from chasing the world — wealth, honor, recognition. He died suddenly at the youngest age in all of Genesis 11: 148 years. Park: sudden death in Scripture is associated with the proud and the deceiving.</p>`,
+    q:'Which stage are you in right now — Reu (prioritizing human relationships over God), Serug (trusting your own strength), or Nahor (breathlessly pursuing the world)?',
+    sc:'"Seek first the kingdom of God and his righteousness, and all these things will be added to you." — Matthew 6:33'},
+  'terah':{t:'e',n:'Terah',m:'"Delay, tarrying" — died in Haran',
+    c:`<p>Terah is the most dangerous figure in the genealogy — not because he was evil, but because he was almost right.</p><p>He knew God's call. When Abraham received it, Terah took the initiative: "Terah took Abram his son... and they went out together from Ur of the Chaldeans." He led the departure.</p><p>But he stopped in Haran. Not Ur — full of idols. But not Canaan either. Haran was a prosperous trade city, comfortable, familiar. "Good enough" — but not God's will. And Terah died there. Genesis 11:32 records his death with emphasis — and immediately after, Abraham continued the journey Terah had begun.</p>`,
+    q:'Where is your "Haran" — a place, relationship, position, or condition that is comfortable enough that you have stopped pressing further toward what God is actually calling you to?',
+    sc:'"And the days of Terah were 205 years, and Terah died in Haran." — Genesis 11:32'},
+  'babel':{t:'c',n:'Tower of Babel',m:'"To make a name for ourselves"',
+    c:`<p>Only 100 years after the flood destroyed civilization because of sin — and humans are doing the same thing again, this time collectively.</p><p>Three stated goals of Babel: (1) Build a tower whose top reaches heaven — replacing God's path with human achievement. (2) Make a name for themselves — the same impulse as Cain's city of Enoch. (3) Refuse to scatter — directly opposing God's command to fill the earth (Gen 9:1).</p><p>Nimrod, descendant of Ham, leads. The pattern of Cain repeats — now on a national scale, now with collective human power.</p>`,
+    q:'What is the "Babel" in your life — a project, institution, or ambition that is secretly more about making your own name permanent than about God\'s glory?',
+    sc:'"Let us make a name for ourselves, lest we be dispersed over the face of the whole earth." — Genesis 11:4'},
+  'abraham':{t:'s',n:'Abraham',m:'"Father of a multitude of nations" — the four separations',
+    c:`<p>Generation 20 from Adam. From Terah who died in Haran — Abraham continued the journey his father had started and abandoned.</p><p>Four separations, each deeper than the last:<br>① From Terah: inherited identity. Faith becomes personal.<br>② From Lot: companions who compromise within the faith community. The hardest: not leaving the wicked, but the "good enough."<br>③ From Ishmael: what we built by our own scheming without waiting for God.<br>④ From Isaac: God's own blessing, held too tightly. The test is not releasing sin — but returning grace.</p><p>Each separation opened a deeper level of covenant with God.</p>`,
+    q:'Which of the four separations is God placing before you right now? And what is the specific thing that is making it hard to take the next step?',
+    sc:'"By faith Abraham obeyed when he was called to go out... And he went out, not knowing where he was going." — Hebrews 11:8'}
+};
+
+function op(id){
+  var d=D[id]; if(!d)return;
+  var lbl=d.t==='c'?'Line of Cain':d.t==='s'?'Line of Seth':'Key Event';
+  var sc='';
+  if(d.sc){
+    var em=d.sc.indexOf('\u2014');
+    sc='<div class="psc">"'+(em>-1?d.sc.slice(0,em).trim():d.sc)+'"'+(em>-1?'<cite>\u2014 '+d.sc.slice(em+1).trim()+'</cite>':'')+'</div>';
+  }
+  document.getElementById('pc').innerHTML=
+    '<div class="pbadge '+d.t+'">'+lbl+'</div>'+
+    '<div class="pname '+d.t+'">'+d.n+'</div>'+
+    '<div class="pmean">'+d.m+'</div>'+
+    '<div class="psec">What This Means</div>'+
+    '<div class="pcont">'+d.c+'</div>'+sc+
+    '<div class="pq"><div class="pql">A Question for You</div><p>'+d.q+'</p></div>';
+  document.getElementById('panel').classList.add('on');
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closePanel(){
+  document.getElementById('panel').classList.remove('on');
+  document.getElementById('ov').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+var VIEWS=['home','tl','ch','sp'];
+
+function sv(id){
+  for(var i=0;i<VIEWS.length;i++){
+    var v=document.getElementById('view-'+VIEWS[i]);
+    var t=document.getElementById('tab-'+VIEWS[i]);
+    if(v) v.style.display='none';
+    if(t) t.classList.remove('on');
+  }
+  var el=document.getElementById('view-'+id);
+  var tb=document.getElementById('tab-'+id);
+  if(el) el.style.display='block';
+  if(tb) tb.classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='ch') setTimeout(animBars,300);
+}
+
+function tsp(id){
+  var c=document.getElementById(id);
+  if(!c)return;
+  var was=c.classList.contains('open');
+  var all=document.querySelectorAll('.spc');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('open');
+  if(!was) c.classList.add('open');
+}
+
+function animBars(){
+  var bars=document.querySelectorAll('#view-ch .bf');
+  for(var i=0;i<bars.length;i++){
+    (function(b,n){
+      var w=b.getAttribute('data-w');
+      b.style.width='0%';
+      setTimeout(function(){b.style.width=w;},100+n*60);
+    })(bars[i],i);
+  }
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePanel();});
+</script>
+</body>
+</html>

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Ten Names, One Story — Adam to Noah</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Upright:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink: #1a1610;
+  --parchment: #f5efe3;
+  --parchment-dark: #ede4d0;
+  --gold: #9a7b3a;
+  --gold-light: #c9a95e;
+  --gold-faint: rgba(154,123,58,0.12);
+  --gold-border: rgba(154,123,58,0.3);
+  --rust: #7a3b28;
+  --dim: #7a6e5e;
+  --mid: #5a4e3e;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* subtle paper texture */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(154,123,58,0.06), transparent),
+    radial-gradient(ellipse 60% 80% at 80% 90%, rgba(122,59,40,0.04), transparent);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* HEADER */
+header {
+  position: relative;
+  text-align: center;
+  padding: 72px 24px 48px;
+  z-index: 1;
+  border-bottom: 1px solid var(--gold-border);
+}
+
+.htag {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.htitle {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(36px, 6vw, 62px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.htitle em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hsub {
+  font-size: 17px;
+  font-style: italic;
+  color: var(--dim);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+.hquote {
+  display: inline-block;
+  max-width: 520px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.75;
+  padding: 16px 20px;
+  border-left: 2px solid var(--gold-border);
+  border-right: 2px solid var(--gold-border);
+  text-align: center;
+}
+
+.hquote cite {
+  display: block;
+  font-style: normal;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+.inst {
+  margin-top: 32px;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:.7} }
+
+/* MAIN GRID */
+.names-wrap {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 20px 0;
+  z-index: 1;
+}
+
+/* connector line */
+.conn {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 34px;
+  height: 28px;
+  align-items: center;
+}
+.conn-line {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--gold-border), rgba(154,123,58,0.06));
+}
+
+/* name row */
+.name-row {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 0 0;
+  cursor: pointer;
+}
+
+.gnum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 0;
+}
+
+.gcircle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(154,123,58,0.25);
+  background: var(--parchment);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--dim);
+  transition: all 0.45s;
+  flex-shrink: 0;
+}
+
+.name-row.open .gcircle {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-faint);
+}
+
+/* card */
+.ncard {
+  border: 1px solid rgba(154,123,58,0.18);
+  border-radius: 4px;
+  background: rgba(245,239,227,0.7);
+  overflow: hidden;
+  transition: border-color 0.4s, box-shadow 0.4s;
+  margin-left: 0;
+}
+
+.name-row.open .ncard {
+  border-color: var(--gold-border);
+  box-shadow: 0 2px 20px rgba(154,123,58,0.1);
+  background: rgba(245,239,227,0.95);
+}
+
+.ncard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.ncard-left { flex: 1; }
+
+.nname {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 5px;
+  transition: color 0.4s;
+}
+.name-row.open .nname { color: var(--rust); }
+
+.nmeaning {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--dim);
+  letter-spacing: 0.5px;
+}
+
+.nchev {
+  font-size: 10px;
+  color: var(--dim);
+  transition: transform 0.4s, color 0.4s;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+.name-row.open .nchev { transform:rotate(180deg); color:var(--gold); }
+
+/* expanded panel */
+.ncard-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(.16,1,.3,1);
+}
+.name-row.open .ncard-body { max-height: 600px; }
+
+.ncard-inner {
+  padding: 0 20px 20px;
+  border-top: 1px solid rgba(154,123,58,0.15);
+}
+
+/* three-column layout inside */
+.ncols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  padding-top: 16px;
+}
+
+@media(max-width:560px){
+  .ncols { grid-template-columns: 1fr; }
+}
+
+.ncol-label {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 9.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+.ncol-text {
+  font-size: 14.5px;
+  color: var(--mid);
+  line-height: 1.78;
+}
+.ncol-text strong { color: var(--ink); font-weight: 500; }
+.ncol-text em { font-style: italic; color: var(--rust); }
+
+/* prophecy block — full width */
+.nprophecy {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: var(--gold-faint);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 3px 3px 0;
+}
+
+.nprophecy-label {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.nprophecy-text {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.72;
+}
+.nprophecy-text strong { font-style: normal; color: var(--ink); }
+
+.npark-quote {
+  margin-top: 10px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--dim);
+  padding-left: 12px;
+  border-left: 1px solid var(--gold-border);
+  line-height: 1.65;
+}
+.npark-quote cite {
+  display: block;
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-family: 'Cormorant Upright', serif;
+  color: var(--gold);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* CLOSING REFLECTION */
+.reflection-wrap {
+  max-width: 860px;
+  margin: 56px auto 0;
+  padding: 0 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.ref-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  opacity: 0;
+  transition: opacity 1.2s;
+}
+.ref-divider.show { opacity: 1; }
+.ref-line { flex: 1; height: 1px; background: var(--gold-border); }
+.ref-label {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.ref-box {
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 44px 52px;
+  background: rgba(245,239,227,0.9);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s, transform 1s cubic-bezier(.16,1,.3,1);
+}
+.ref-box.show { opacity: 1; transform: translateY(0); }
+
+@media(max-width:560px){
+  .ref-box { padding: 28px 22px; }
+}
+
+.ref-title {
+  font-family: 'Cormorant Upright', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+.ref-title em { color: var(--gold); font-style: italic; }
+
+.ref-body {
+  font-size: 16px;
+  color: var(--mid);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+.ref-body + .ref-body { margin-top: -8px; }
+
+/* revealed names list */
+.ref-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gold-border);
+}
+
+.ref-name-tag {
+  font-family: 'Cormorant Upright', serif;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 3px 10px;
+  border: 1px solid rgba(154,123,58,0.2);
+  border-radius: 2px;
+  transition: all 0.4s;
+}
+.ref-name-tag.lit {
+  color: var(--gold);
+  border-color: var(--gold-border);
+  background: var(--gold-faint);
+}
+
+.ref-progress {
+  margin-top: 20px;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.reset-btn {
+  display: none;
+  margin: 28px auto 0;
+  font-family: 'Cormorant Upright', serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid rgba(154,123,58,0.25);
+  padding: 10px 26px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.reset-btn.show { display: block; }
+.reset-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* mobile */
+@media(max-width:600px){
+  .name-row { grid-template-columns: 52px 1fr; }
+  .gcircle { width: 36px; height: 36px; font-size: 10px; }
+  .conn { padding-left: 25px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htag">The Genesis Genealogies · Abraham Park · Chapter 10</div>
+  <h1 class="htitle">Ten Names,<br><em>One Story</em></h1>
+  <p class="hsub">From Adam to Noah — each name a witness. Each meaning, a glimpse of the One to come.</p>
+  <div class="hquote">
+    "The format of the genealogies and the meanings of the recorded names contain the hope and anticipation of how the redemptive promise would unfold with each successive generation and eventually be fulfilled through Jesus Christ."
+    <cite>Abraham Park, The Genesis Genealogies</cite>
+  </div>
+  <p class="inst">↓ Open each name to read its witness ↓</p>
+</header>
+
+<div class="names-wrap">
+
+  <!-- 1. ADAM -->
+  <div class="name-row" id="r0" onclick="tog(0)">
+    <div class="gnum"><div class="gcircle" id="gc0">I</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Adam</div>
+          <div class="nmeaning">man · mankind · human</div>
+        </div>
+        <div class="nchev" id="ch0">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Adam comes from the Assyrian root <em>adamu</em>, meaning "to make" or "to create." Man can never be the creator; he is only the creation and the creature. Adam was formed from the dust. Without the breath of God, the essence of man is only dust.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Adam received God's promise — that the seed of the woman would bruise the head of the serpent. He <strong>cherished the garments of skin</strong> as his confirmation of the covenant, and testified to his descendants about the world before and after sin. He firmly believed the promised seed would come.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The sacrifice required to make garments of skin for Adam foreshadowed <strong>Jesus Christ's sacrifice on the cross.</strong> Adam's faith in the promised seed — "the seed of the woman" — was the first human witness to the coming Messiah. <em>(Gen 3:15, 21)</em></div>
+          </div>
+          <div class="npark-quote">"Adam cherished the garments of skin because they were his confirmation of the covenant. He firmly believed that the day would come when the promised seed would bruise the head of the serpent."<cite>Abraham Park, p. 95</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 2. SETH -->
+  <div class="name-row" id="r1" onclick="tog(1)">
+    <div class="gnum"><div class="gcircle" id="gc1">II</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Seth</div>
+          <div class="nmeaning">substitute · granted · appointed one · foundation</div>
+        </div>
+        <div class="nchev" id="ch1">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Seth is derived from a word meaning "to put" and "to set." Adam recognized that God had <strong>granted</strong> him another seed as part of His redemptive purpose. Seth was truly an expression of God's abounding grace — a gift of overflowing hope and comfort.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Seth bore <strong>the image and likeness of Adam</strong> — demonstrating that God's image continued to pass through the line of faith, not the line of Cain. Through Seth, God's work was reestablished and deeply rooted. The promise would continue through his line.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">Seth was "another seed" granted by God to replace Abel — a picture of <strong>Christ, the second Adam,</strong> who came to do what the first Adam could not. Just as Seth carried forward the image of God, Christ restores that image in all who believe. <em>(Gen 4:25; 5:3; 1 Cor 15:45–47)</em></div>
+          </div>
+          <div class="npark-quote">"Seth was truly an expression of God's abounding grace and a gift of overflowing hope and comfort."<cite>Abraham Park, p. 99</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 3. ENOSH -->
+  <div class="name-row" id="r2" onclick="tog(2)">
+    <div class="gnum"><div class="gcircle" id="gc2">III</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Enosh</div>
+          <div class="nmeaning">man · mortal frailty · incurable</div>
+        </div>
+        <div class="nchev" id="ch2">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Enosh is derived from a word meaning <strong>"incurable"</strong> and "very sick." It communicates man's total helplessness and predetermined frailty — like one groaning from an incurable illness. Seth named his son Enosh, recognizing man's frailty without God.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">During Enosh's time, <strong>men began to call upon the name of the Lord.</strong> Out of acknowledged weakness came true worship. The name Enosh was a confession of faith — and from that confession, the practice of calling upon God spread even to far regions.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The act of calling upon the name of the Lord, born from Enosh's generation, points directly to salvation through Christ — <strong>"Whoever will call upon the name of the Lord will be saved."</strong> Man's incurable condition requires a healer only God can send. <em>(Gen 4:26; Acts 2:21; Rom 10:13)</em></div>
+          </div>
+          <div class="npark-quote">"The name communicates man's total helplessness and predetermined frailty. It likens the state of sinful man to the condition of one groaning in sickness and affliction from an incurable illness."<cite>Abraham Park, p. 102</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 4. KENAN -->
+  <div class="name-row" id="r3" onclick="tog(3)">
+    <div class="gnum"><div class="gcircle" id="gc3">IV</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Kenan</div>
+          <div class="nmeaning">a child begotten · possession · nest</div>
+        </div>
+        <div class="nchev" id="ch3">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Kenan shares the root with the word "nest" — to make a nest. His time was when the people finally <strong>built a nest of faith.</strong> Kenan probably was an unexpected gift from God, a son of great joy born through His providence.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Park states: <strong>"Kenan means 'mercy unexpectedly found.'"</strong> The movement of worship begun by Enosh's generation found its settled home — a community of faith rooted in the mercy of God. What was scattered became gathered.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The unexpected mercy found in Kenan points to <strong>Jesus Christ — God's unexpected gift to mankind.</strong> "God had mercy on us and gave a great gift called Jesus Christ." It is unexpected because salvation is granted without merit, entirely by grace. <em>(Gen 5:9–14)</em></div>
+          </div>
+          <div class="npark-quote">"Kenan probably was an unexpected gift from God, a son of great joy born through His providence. God had mercy on us and gave a great gift called Jesus Christ."<cite>Abraham Park, p. 105</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 5. MAHALALEL -->
+  <div class="name-row" id="r4" onclick="tog(4)">
+    <div class="gnum"><div class="gcircle" id="gc4">V</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Mahalalel</div>
+          <div class="nmeaning">praise of God · God be praised · glory to God</div>
+        </div>
+        <div class="nchev" id="ch4">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">Mahalalel is a compound word: <em>mahalal</em> (praise) + <em>El</em> (God). It means <strong>"praise of God"</strong> or <strong>"God be praised."</strong> The act of formal worship begun by Enosh evolved further into congregational praise — worship filled with glory in which God may dwell.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Only God, who governs all history, is worthy to receive true praise. <strong>Praise is a force that unleashes God's power</strong> — it brought down the walls of Jericho, drove out evil spirits, opened prison gates. Mahalalel's name confesses that God alone deserves all glory.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The praise woven into this name finds its ultimate object in Christ. Revelation 5:12 — <strong>"Worthy is the Lamb that was slain to receive power and riches and wisdom and strength and honor and glory and blessing."</strong> All praise leads to Him. <em>(Rev 5:12; 19:1–5)</em></div>
+          </div>
+          <div class="npark-quote">"Only God, who governs all history, is worthy to receive true praise and worship."<cite>Abraham Park, p. 107</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 6. JARED -->
+  <div class="name-row" id="r5" onclick="tog(5)">
+    <div class="gnum"><div class="gcircle" id="gc5">VI</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Jared</div>
+          <div class="nmeaning">descent · to carry down · to come down from a higher place</div>
+        </div>
+        <div class="nchev" id="ch5">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Jared originates from the Hebrew word meaning <strong>"to carry down," "to transport,"</strong> or "to put down." The spiritual movement to praise God had not been limited to a few, but was widespread — the practice of worship had been successfully passed down through the generations.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">The alternative meaning of Jared is <strong>"descendant"</strong> — pointing to the longing for the seed of the woman. The name carries a hope embedded in its very root: that God, worthy of all praise, <em>would come down</em> into this world and save mankind from below.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The meaning "to come down" anticipates the Incarnation — <strong>"The Word became flesh and dwelt among us."</strong> God came down. The hope embedded in Jared's name was fulfilled when Jesus Christ, the Word incarnate, came into this world. <em>(John 1:14; Gen 5:15–20)</em></div>
+          </div>
+          <div class="npark-quote">"The longing for the woman's seed is also evident from the alternative meaning of the name Jared: 'descendant.' As the fulfillment of this hope, Jesus Christ, the Word incarnate, came into this world and dwelt among the people."<cite>Abraham Park, p. 110</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 7. ENOCH -->
+  <div class="name-row" id="r6" onclick="tog(6)">
+    <div class="gnum"><div class="gcircle" id="gc6">VII</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Enoch</div>
+          <div class="nmeaning">dedicated · offered · initiated · teacher</div>
+        </div>
+        <div class="nchev" id="ch6">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Enoch is the noun form of a verb meaning "to offer." The most common rendering is <strong>"offered"</strong> and <strong>"dedicated one."</strong> Its root means "to inspire" or "to teach." Jared named his son "dedicated" out of the desire to fully dedicate him to God as the first fruit of his godly life.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Enoch walked with God 300 years and <strong>did not see death</strong> — "God took him." In a genealogy marked eight times by the phrase "and he died," Enoch alone broke the pattern. He demonstrated the eternal life that would have been possible if Adam had not sinned.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">Enoch was <strong>a foreshadow of Jesus Christ, the Lamb who was fully dedicated before God</strong> to die on the cross as an atoning sacrifice. And his defeat of death points to Christ's resurrection — the one who forever overcame the power of death for all who believe. <em>(Gen 5:21–24; John 1:29; 1 Cor 5:7)</em></div>
+          </div>
+          <div class="npark-quote">"Enoch was a foreshadow of Jesus Christ, the Lamb who was fully dedicated before God to die on the cross as an atoning sacrifice for the sins of mankind."<cite>Abraham Park, p. 113</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 8. METHUSELAH -->
+  <div class="name-row" id="r7" onclick="tog(7)">
+    <div class="gnum"><div class="gcircle" id="gc7">VIII</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Methuselah</div>
+          <div class="nmeaning">when he dies, judgment shall come</div>
+        </div>
+        <div class="nchev" id="ch7">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">Methuselah's name means <strong>"when he is dead, it shall come."</strong> Enoch received this as divine revelation at his son's birth — the flood would come after Methuselah's death. He lived 969 years, the longest of any human, and died in the very year the flood came.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Enoch named his son according to the Word <strong>to prepare faith that is ready for the end.</strong> The awareness of coming judgment — carried in the very name Methuselah called upon daily — prompted Enoch to walk with God. Methuselah's birth was God's revelation and sign of the judgment by flood.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">The judgment written into Methuselah's name ultimately pointed to the <strong>final judgment</strong> that Christ would bear on the cross — and to the coming day when He will judge all. His longevity speaks of God's patience: every year was grace extended. <strong>God is not slow, but patient toward all.</strong> <em>(2 Pet 3:9; Gen 5:25–27; 7:11)</em></div>
+          </div>
+          <div class="npark-quote">"Methuselah's birth was God's revelation and sign of the judgment by flood."<cite>Abraham Park, p. 120</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 9. LAMECH -->
+  <div class="name-row" id="r8" onclick="tog(8)">
+    <div class="gnum"><div class="gcircle" id="gc8">IX</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Lamech</div>
+          <div class="nmeaning">powerful one · strong youth · a man of prayer</div>
+        </div>
+        <div class="nchev" id="ch8">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">Lamech of Seth's line was <strong>a godly man — a man of prayer.</strong> He did not rebel against God under the duress of suffering and affliction; rather, these things motivated his faith. He trusted solely in God and hoped that the curse would be lifted through his son.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">Lamech <strong>earnestly anticipated the coming of the Messiah.</strong> He longed for the end of man's sorrowful fallen state and the restoration of Eden. He hoped that someone would lift the death sentence declared upon man and open the path back to God — and named his son accordingly.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">Lamech's confession — "This one shall give us rest from our work and from the toil of our hands" — is a <strong>direct Messianic prophecy.</strong> Park notes he may have thought his son Noah was the Messiah. He was mistaken in the person, but not in the longing — which was finally fulfilled in Christ. <em>(Gen 5:29; Isa 9:6; John 14:27)</em></div>
+          </div>
+          <div class="npark-quote">"This Lamech was a godly man. He did not rebel against God or give up under the duress of suffering and affliction; rather, these things motivated his faith. He trusted solely in God and hoped that the curse would be lifted through his son."<cite>Abraham Park, p. 123</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="conn"><div class="conn-line"></div></div>
+
+  <!-- 10. NOAH -->
+  <div class="name-row" id="r9" onclick="tog(9)">
+    <div class="gnum"><div class="gcircle" id="gc9">X</div></div>
+    <div class="ncard">
+      <div class="ncard-top">
+        <div class="ncard-left">
+          <div class="nname">Noah</div>
+          <div class="nmeaning">rest · comfort · consolation</div>
+        </div>
+        <div class="nchev" id="ch9">▾</div>
+      </div>
+      <div class="ncard-body">
+        <div class="ncard-inner">
+          <div class="ncols">
+            <div>
+              <div class="ncol-label">The Name</div>
+              <div class="ncol-text">The name Noah derives from a Hebrew word meaning <strong>"to settle down," "appease,"</strong> or <strong>"rest."</strong> The derived meanings are "Sabbath," "rest," and "comfort." The godly descendants longed earnestly for God's comfort through the birth of this son.</div>
+            </div>
+            <div>
+              <div class="ncol-label">His Witness</div>
+              <div class="ncol-text">The name is <strong>"a reflection of a newly revealed providence of redemption from God."</strong> The end to the long period of suffering had come; it was now time for God's comfort and rest. Noah was a type — a foreshadow — of the Savior who gives true comfort to this earth.</div>
+            </div>
+          </div>
+          <div class="nprophecy">
+            <span class="nprophecy-label">Points toward Christ</span>
+            <div class="nprophecy-text">Noah was <strong>a type of Jesus Christ, whom God had sent.</strong> As Noah bore his family through judgment into a new world, Christ bears all who trust Him through judgment into eternal life. "Jesus Christ is the one who gives true comfort and rest to this earth." <em>(Gen 5:29; Isa 9:6; John 14:27)</em></div>
+          </div>
+          <div class="npark-quote">"The name is a reflection of a newly revealed providence of redemption from God. The end to the long period of suffering had come; it was now time for God's comfort and rest."<cite>Abraham Park, p. 127</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- REFLECTION -->
+<div class="reflection-wrap">
+  <div class="ref-divider" id="rdiv">
+    <div class="ref-line"></div>
+    <div class="ref-label">What the Genealogy Carries</div>
+    <div class="ref-line"></div>
+  </div>
+
+  <div class="ref-box" id="rbox">
+    <div class="ref-title">Ten generations.<br><em>One unbroken witness.</em></div>
+    <div class="ref-body">
+      These are not merely the records of men who lived and died. Park writes that the genealogies were composed so that the meanings of the recorded names would carry "the hope and anticipation of how the redemptive promise would unfold with each successive generation."
+    </div>
+    <div class="ref-body">
+      Each name is a word spoken across centuries — from a father's faith, into his son's identity, toward a coming Savior none of them fully saw. Together they form an unbroken chain of witnesses from Adam to the flood, testifying that God never lost hold of the thread.
+    </div>
+
+    <div class="ref-names" id="rnames">
+      <span class="ref-name-tag" id="rn0">Adam</span>
+      <span class="ref-name-tag" id="rn1">Seth</span>
+      <span class="ref-name-tag" id="rn2">Enosh</span>
+      <span class="ref-name-tag" id="rn3">Kenan</span>
+      <span class="ref-name-tag" id="rn4">Mahalalel</span>
+      <span class="ref-name-tag" id="rn5">Jared</span>
+      <span class="ref-name-tag" id="rn6">Enoch</span>
+      <span class="ref-name-tag" id="rn7">Methuselah</span>
+      <span class="ref-name-tag" id="rn8">Lamech</span>
+      <span class="ref-name-tag" id="rn9">Noah</span>
+    </div>
+
+    <div class="ref-progress" id="rprog">0 of 10 witnesses opened</div>
+    <button class="reset-btn" id="rbtn" onclick="resetAll()">↺ Start Again</button>
+  </div>
+</div>
+
+<script>
+var state = [];
+
+function tog(i) {
+  var row = document.getElementById('r' + i);
+  var isOpen = row.classList.contains('open');
+  if (isOpen) {
+    row.classList.remove('open');
+    var idx = state.indexOf(i);
+    if (idx > -1) state.splice(idx, 1);
+  } else {
+    row.classList.add('open');
+    if (state.indexOf(i) === -1) state.push(i);
+  }
+  update();
+}
+
+function update() {
+  var n = state.length;
+
+  if (n > 0) {
+    document.getElementById('rdiv').classList.add('show');
+    document.getElementById('rbox').classList.add('show');
+  } else {
+    document.getElementById('rdiv').classList.remove('show');
+    document.getElementById('rbox').classList.remove('show');
+  }
+
+  for (var i = 0; i < 10; i++) {
+    var on = state.indexOf(i) > -1;
+    var rn = document.getElementById('rn' + i);
+    if (rn) { if(on) rn.classList.add('lit'); else rn.classList.remove('lit'); }
+  }
+
+  var prog = document.getElementById('rprog');
+  var btn = document.getElementById('rbtn');
+  if (n === 10) {
+    prog.textContent = '✦ All ten witnesses heard ✦';
+    btn.classList.add('show');
+  } else if (n === 0) {
+    prog.textContent = '0 of 10 witnesses opened';
+    btn.classList.remove('show');
+  } else {
+    prog.textContent = n + ' of 10 witnesses opened';
+    btn.classList.remove('show');
+  }
+}
+
+function resetAll() {
+  state = [];
+  for (var i = 0; i < 10; i++) {
+    var row = document.getElementById('r' + i);
+    if (row) row.classList.remove('open');
+  }
+  update();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
