@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Jurnal Padang Gurun — The Genesis Genealogies</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --teal: #17a79d;
+  --teal-dark: #0f8078;
+  --teal-dim: rgba(23,167,157,0.1);
+  --teal-b: rgba(23,167,157,0.25);
+  --green: #2bb673;
+  --green-dark: #1f9058;
+  --green-dim: rgba(43,182,115,0.1);
+  --grey: #6d6e70;
+  --grey-light: #a0a1a3;
+  --grey-dim: rgba(109,110,112,0.1);
+  --white: #ffffff;
+  --bg: #f4f5f6;
+  --bg2: #eaebec;
+  --ink: #1a1a1b;
+  --ink2: #3a3b3c;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 56px;
+  background: var(--white);
+  border-bottom: 1px solid var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--teal);
+}
+
+.nav-weeks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--bg2);
+  border: 1.5px solid transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav-dot.done { background: var(--green); border-color: var(--green); }
+.nav-dot.active { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-dim); }
+.nav-dot.locked { background: var(--bg2); border-color: var(--bg2); cursor: default; }
+
+/* ─── VIEWS ─── */
+.view { display: none; }
+.view.on { display: block; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  text-align: center;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--teal-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--green-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(42px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 12px;
+  letter-spacing: -2px;
+}
+
+.hero-title span { color: var(--teal); }
+
+.hero-sub-title {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 300;
+  color: var(--grey);
+  margin-bottom: 28px;
+  letter-spacing: -0.5px;
+}
+
+.hero-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--grey);
+  max-width: 480px;
+  margin: 0 auto 40px;
+}
+
+.hero-verse {
+  max-width: 420px;
+  margin: 0 auto 48px;
+  padding: 18px 24px;
+  border-left: 3px solid var(--teal);
+  background: var(--teal-dim);
+  border-radius: 0 6px 6px 0;
+  text-align: left;
+}
+
+.hero-verse p {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink2);
+  margin-bottom: 8px;
+}
+
+.hero-verse cite {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-style: normal;
+}
+
+/* HOW CARD */
+.how-card {
+  max-width: 480px;
+  margin: 0 auto 48px;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 24px 28px;
+  text-align: left;
+}
+
+.how-card h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+
+.how-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--grey);
+  margin-bottom: 8px;
+}
+
+.how-card p:last-child { margin-bottom: 0; }
+.how-card strong { color: var(--ink); font-weight: 600; }
+
+.btn-primary {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--white);
+  background: var(--teal);
+  border: none;
+  padding: 14px 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(23,167,157,0.3); }
+
+/* ─── JOURNEY VIEW ─── */
+.journey-view {
+  padding-top: 56px;
+  min-height: 100vh;
+}
+
+/* PHASE BANNER */
+.phase-banner {
+  background: var(--white);
+  border-bottom: 1px solid var(--bg2);
+  padding: 32px 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-banner::after {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.phase-banner.phase-1::after { background: var(--teal); }
+.phase-banner.phase-2::after { background: var(--teal); }
+.phase-banner.phase-3::after { background: var(--green); }
+.phase-banner.phase-4::after { background: var(--green); }
+
+.phase-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.phase-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+
+.phase-ref {
+  font-size: 14px;
+  color: var(--grey);
+  margin-bottom: 16px;
+}
+
+.phase-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--grey);
+  max-width: 520px;
+}
+
+/* WEEK TABS */
+.week-tabs {
+  background: var(--white);
+  border-bottom: 1px solid var(--bg2);
+  display: flex;
+  padding: 0 24px;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.week-tab {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--grey);
+  padding: 14px 20px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.week-tab:hover { color: var(--teal); }
+.week-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.week-tab.done { color: var(--green); }
+.week-tab.done.active { border-bottom-color: var(--green); }
+.week-tab.locked { color: var(--bg2); cursor: default; }
+.week-tab.locked:hover { color: var(--bg2); }
+
+.tab-check {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tab-lock {
+  font-size: 11px;
+  color: var(--grey-light);
+}
+
+/* ─── WEEK CONTENT ─── */
+.week-content {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+/* WEEK HEADER */
+.week-header {
+  margin-bottom: 32px;
+}
+
+.week-number {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.week-title {
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+
+.week-subtitle {
+  font-size: 15px;
+  color: var(--grey);
+  margin-bottom: 20px;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid var(--bg2);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 12px;
+}
+
+.section-label.teal { color: var(--teal); }
+.section-label.green { color: var(--green); }
+
+.section-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink2);
+}
+
+.section-text p { margin-bottom: 12px; }
+.section-text p:last-child { margin-bottom: 0; }
+
+/* SCRIPTURE BLOCK */
+.scripture {
+  background: var(--teal-dim);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.scripture p {
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+
+.scripture cite {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-style: normal;
+}
+
+/* QUESTION CARD */
+.question-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 2px solid var(--teal-b);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.question-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.question-text {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 0;
+}
+
+/* JOURNAL AREA */
+.journal-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--bg2);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.journal-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.journal-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.journal-count {
+  font-size: 12px;
+  color: var(--grey-light);
+}
+
+.journal-count.ok { color: var(--green); font-weight: 600; }
+
+.journal-textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 16px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+}
+
+.journal-textarea::placeholder { color: var(--grey-light); }
+
+.journal-footer {
+  padding: 10px 20px;
+  border-top: 1px solid var(--bg2);
+  background: var(--bg);
+}
+
+.journal-save-msg {
+  font-size: 12px;
+  color: var(--green);
+  display: none;
+}
+
+.journal-save-msg.show { display: block; }
+
+/* SLOW GATE */
+.slow-gate {
+  background: var(--bg);
+  border: 2px dashed var(--bg2);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.slow-gate-icon { font-size: 28px; margin-bottom: 12px; }
+
+.slow-gate-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--grey);
+  margin-bottom: 8px;
+}
+
+.slow-gate-text {
+  font-size: 14px;
+  color: var(--grey-light);
+  line-height: 1.6;
+}
+
+/* WEEK COMPLETE */
+.week-complete {
+  background: linear-gradient(135deg, var(--green-dim), var(--teal-dim));
+  border: 1px solid var(--teal-b);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.complete-icon { font-size: 32px; margin-bottom: 12px; }
+
+.complete-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.complete-text {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.btn-next {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--green);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-next:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+/* LOCKED WEEK */
+.locked-week {
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.locked-icon { font-size: 40px; margin-bottom: 16px; }
+.locked-title { font-size: 20px; font-weight: 700; color: var(--grey); margin-bottom: 10px; }
+.locked-text { font-size: 15px; color: var(--grey-light); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+
+/* PROGRESS BAR */
+.progress-bar-wrap {
+  background: var(--bg2);
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--teal), var(--green));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* CLOSING */
+.closing-view {
+  padding-top: 56px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.closing-card {
+  max-width: 560px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+}
+
+.closing-icon { font-size: 48px; margin-bottom: 20px; }
+
+.closing-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.closing-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.closing-text {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--grey);
+  margin-bottom: 32px;
+}
+
+.closing-verse {
+  background: var(--teal-dim);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.closing-verse p {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.closing-verse cite {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-style: normal;
+}
+
+.community-block {
+  margin: 8px 0 28px;
+  background: linear-gradient(135deg, #fdf8f2 0%, #fdf4ec 100%);
+  border: 1px solid #e8ddd0;
+  border-radius: 14px;
+  padding: 28px 24px 24px;
+  text-align: center;
+}
+.community-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.community-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.community-desc {
+  font-size: 13px;
+  color: var(--grey);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.community-btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #c97d3a;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+.community-btn:hover {
+  background: #b06a2b;
+  transform: translateY(-1px);
+}
+
+.closing-links {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal);
+  background: transparent;
+  border: 2px solid var(--teal-b);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover { background: var(--teal-dim); border-color: var(--teal); }
+
+/* MOBILE */
+@media(max-width:580px) {
+  .closing-card { padding: 32px 24px; }
+  .week-content { padding: 24px 16px 80px; }
+  .phase-banner { padding: 24px 16px 20px; }
+  .week-tabs { padding: 0 12px; }
+  .week-tab { padding: 12px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">Jurnal Padang Gurun</div>
+  <div class="nav-weeks" id="navDots"></div>
+  <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:var(--grey);background:transparent;border:1px solid var(--bg2);padding:5px 12px;border-radius:6px;cursor:pointer;margin-left:12px">← Beranda</button>
+</nav>
+
+<!-- ══════ HERO VIEW ══════ -->
+<div class="view on" id="view-hero">
+  <section class="hero">
+    <div class="hero-tag">The Genesis Genealogies · Abraham Park</div>
+    <h1 class="hero-title">Jurnal<br><span>Padang Gurun</span></h1>
+    <p class="hero-sub-title">8 Minggu Perjalanan Iman</p>
+    <p class="hero-desc">Ini bukan reading plan yang efisien. Ini dirancang untuk memperlambatmu di tempat yang tepat — seperti Israel yang tidak bisa berlari melewati padang gurun.</p>
+
+    <div class="hero-verse">
+      <p>"Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan demi keturunan. Tanyakanlah kepada bapamu, maka ia akan memberitahukan kepadamu."</p>
+      <cite>Ulangan 32:7</cite>
+    </div>
+
+    <div class="how-card">
+      <h3>Bagaimana ini bekerja</h3>
+      <p><strong>8 minggu, 4 fase perjalanan.</strong> Setiap minggu ada teks Alkitab, satu bagian dari buku Park, dan ruang untuk menulis.</p>
+      <p><strong>Tidak bisa di-skip.</strong> Minggu berikutnya hanya terbuka setelah kamu menulis di minggu sebelumnya. Bukan tes — tapi jarak yang harus ditempuh.</p>
+      <p><strong>Jurnalmu tersimpan.</strong> Semua yang kamu tulis tersimpan di perangkat ini dan bisa dibaca kembali kapan saja.</p>
+    </div>
+
+    <button class="btn-primary" onclick="startJourney()">Mulai Perjalanan</button>
+  </section>
+</div>
+
+<!-- ══════ JOURNEY VIEW ══════ -->
+<div class="view" id="view-journey">
+
+  <!-- PHASE BANNER -->
+  <div class="phase-banner" id="phaseBanner">
+    <div class="phase-inner">
+      <div class="phase-eyebrow" id="phaseEyebrow"></div>
+      <h2 class="phase-title" id="phaseTitle"></h2>
+      <p class="phase-ref" id="phaseRef"></p>
+      <p class="phase-desc" id="phaseDesc"></p>
+    </div>
+  </div>
+
+  <!-- WEEK TABS -->
+  <div class="week-tabs" id="weekTabs"></div>
+
+  <!-- PROGRESS BAR -->
+  <div style="max-width:680px;margin:20px auto 0;padding:0 24px">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- WEEK CONTENT -->
+  <div class="week-content" id="weekContent"></div>
+
+</div>
+
+<!-- ══════ CLOSING VIEW ══════ -->
+<div class="view" id="view-closing">
+  <div class="closing-view">
+    <div class="closing-card">
+      <div class="closing-icon">🏔️</div>
+      <h2 class="closing-title">Kamu sudah sampai</h2>
+      <p class="closing-sub">Di depan Kanaan</p>
+      <p class="closing-text">Delapan minggu. Bukan karena kamu berhasil menjawab semua pertanyaan — tapi karena kamu tidak berhenti berjalan. Seperti Eber yang menyeberangi sungai ketika semua orang membangun menara. Seperti Abraham yang terus melangkah tanpa tahu di mana ia akan berhenti.</p>
+      <div class="closing-verse">
+        <p>"Dan dari situlah, setelah bapanya mati, Allah menyuruh dia pindah ke negeri ini, yang kamu diami sekarang."</p>
+        <cite>Kisah Para Rasul 7:4</cite>
+      </div>
+      <p class="closing-text" style="margin-bottom:24px">Terah mati di Haran. Abraham melanjutkan. Kamu sudah memilih untuk tidak mati di Haran.</p>
+
+      <div class="community-block">
+        <div class="community-icon">🕯️</div>
+        <p class="community-label">Delapan minggu. Kamu tidak seharusnya berjalan sendiri.</p>
+        <p class="community-desc">Abraham tidak berjalan sendiri — ia membawa Lot, Sara, dan segala yang dimilikinya. Perjalanan ini dirancang untuk ditempuh bersama. Jika ada sesuatu dari 8 minggu ini yang perlu didengar oleh seseorang yang mengerti — temukan komunitasmu di sini.</p>
+        <a href="https://sejarahpenebusan.com/komunitas" target="_blank" class="community-btn">Saya mau berjalan bersama →</a>
+      </div>
+
+      <div class="closing-links">
+        <button class="btn-outline" onclick="reviewJournal()">Baca Ulang Jurnalmu</button>
+        <button class="btn-outline" onclick="openLink('two-rivers-timeline.html')">Two Rivers Timeline</button>
+        <button class="btn-outline" onclick="openLink('self-assessment.html')">Self Assessment</button>
+        <button class="btn-outline" onclick="openLink('index.html')">← Beranda</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA — 8 WEEKS
+// ══════════════════════════════════════════
+
+const PHASES = [
+  {
+    id: 1,
+    eyebrow: 'Fase 1 · Minggu 1–2',
+    title: 'Keluar dari Mesir',
+    ref: 'Kejadian 4 · Silsilah Kain',
+    desc: 'Sebelum bisa maju, kamu perlu melihat dari mana kamu berasal. Silsilah Kain bukan cerita kuno — ini adalah peta peradaban yang kamu tinggalkan.',
+    class: 'phase-1',
+    weeks: [0, 1]
+  },
+  {
+    id: 2,
+    eyebrow: 'Fase 2 · Minggu 3–4',
+    title: 'Di Tepi Laut Merah',
+    ref: 'Kejadian 5 & 11 · Eber dan Pemisahan',
+    desc: 'Ada sungai yang harus diseberangi. Eber menyeberangi Efrat ketika semua orang membangun menara. Kata "Ibrani" lahir dari tindakan menyeberang itu.',
+    class: 'phase-2',
+    weeks: [2, 3]
+  },
+  {
+    id: 3,
+    eyebrow: 'Fase 3 · Minggu 5–6',
+    title: 'Di Padang Gurun',
+    ref: 'Kejadian 5 · Silsilah Set',
+    desc: 'Padang gurun bukan hukuman — ini adalah tempat pembentukan. Sepuluh nama dari Adam sampai Nuh bukan sekedar silsilah. Mereka adalah para saksi yang berjalan bersama Allah dalam keheningan.',
+    class: 'phase-3',
+    weeks: [4, 5]
+  },
+  {
+    id: 4,
+    eyebrow: 'Fase 4 · Minggu 7–8',
+    title: 'Di Depan Kanaan',
+    ref: 'Kejadian 12–22 · Empat Pemisahan Abraham',
+    desc: 'Kanaan sudah terlihat. Tapi masuk membutuhkan sesuatu yang lebih dari sekadar berjalan. Abraham menyeberangi empat batas sebelum bisa menerima janji sepenuhnya.',
+    class: 'phase-4',
+    weeks: [6, 7]
+  }
+];
+
+const WEEKS = [
+  // ─── WEEK 1 ───
+  {
+    num: 1,
+    phase: 0,
+    title: 'Peradaban Lamekh',
+    subtitle: 'Mengenali dari mana kamu berasal',
+    bacaan: 'Kejadian 4:1–24 · Bab 8–9 buku Park',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Sebelum kamu bisa keluar dari "Mesir", kamu perlu melihatnya dengan jelas. Kejadian 4 bukan tentang orang-orang jahat di masa lalu. Ini adalah peta dari sistem yang kita hidupi setiap hari.</p>
+<p>Lamekh, keturunan ketujuh dari Kain, memiliki empat anak: <strong>Jabal</strong> (ekonomi dan kepemilikan), <strong>Yubal</strong> (hiburan dan musik), <strong>Tubal-kain</strong> (teknologi dan senjata), dan <strong>Naamah</strong> (kecantikan sebagai komoditas). Empat pilar peradaban tanpa Allah — bukan di masa Lamekh saja, tapi hari ini.</p>
+<p>Park menulis: silsilah Kain tiba-tiba berhenti setelah Lamekh. Peradaban yang tampak paling maju — terhenti di puncaknya. Bukan karena tidak sukses, tapi karena sukses tanpa Allah selalu berakhir di sini.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Woe to those who go down to Egypt for help and rely on horses, who trust in chariots because they are many and in horsemen because they are very strong, but do not look to the Holy One of Israel or consult the Lord!"',
+        ref: 'Yesaya 31:1'
+      },
+      {
+        type: 'question',
+        text: 'Dari empat anak Lamekh — ekonomi, hiburan, teknologi, penampilan — mana yang paling besar pengaruhnya dalam hidupmu minggu ini? Bukan secara abstrak. Secara konkret: berapa jam, berapa banyak pikiranmu ada di sana?'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Tulis jujur di sini. Tidak ada yang membaca kecuali kamu...'
+      }
+    ]
+  },
+
+  // ─── WEEK 2 ───
+  {
+    num: 2,
+    phase: 0,
+    title: 'Tanah Nod',
+    subtitle: 'Hidup yang mengembara tanpa tujuan',
+    bacaan: 'Kejadian 4:16 · Kejadian 3 · Bab 8 buku Park',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Kain pergi ke tanah <strong>Nod</strong> — yang dalam bahasa Ibrani berarti "pengembaraan", "tanpa tujuan", "tidak menetap". Ini bukan nama geografis biasa. Ini adalah deskripsi kondisi jiwa setiap orang yang hidup di luar hadirat Allah.</p>
+<p>Park mencatat: manusia tidak langsung mati setelah jatuh. Tapi mereka hidup dalam kondisi Nod — aktif, produktif, bahkan membangun kota — tapi selalu mengembara. Ada yang hilang yang tidak bisa diisi oleh apapun yang mereka bangun.</p>
+<p>Israel yang membaca Kejadian ini di padang gurun mengerti Nod. Mereka juga mengembara. Tapi padang gurun mereka adalah karena penghakiman Allah atas ketidakpercayaan — sedangkan Nod adalah pilihan Kain untuk pergi dari hadirat Allah. Dua jenis pengembaraan. Dua tujuan yang berbeda.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Engkau telah menjadikan kami untuk Engkau sendiri, dan hati kami gelisah sampai ia beristirahat dalam Engkau."',
+        ref: 'Agustinus, Confessions I.1'
+      },
+      {
+        type: 'question',
+        text: 'Di area mana dalam hidupmu kamu merasakan "Nod" — aktif, mungkin bahkan produktif, tapi ada kegelisahan yang tidak bisa diam? Bukan tentang kesibukan. Tentang arah.'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Jujurlah. Tidak ada jawaban yang salah di sini...'
+      }
+    ]
+  },
+
+  // ─── WEEK 3 ───
+  {
+    num: 3,
+    phase: 1,
+    title: 'Menyeberangi Sungai',
+    subtitle: 'Eber dan arti menjadi "Ibrani"',
+    bacaan: 'Kejadian 11:14–17 · Bab 11 buku Park (Eber)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Di tengah kurva umur yang terus turun setelah Babel, ada satu anomali: <strong>Eber</strong>. Umurnya naik — 464 tahun, lebih panjang dari generasi sebelum dan sesudahnya. Park menulis bahwa ini bukan kebetulan biologis. Ini adalah catatan spiritual.</p>
+<p>Eber menyeberangi Sungai Efrat ketika semua orang sedang membangun menara. Ia memisahkan diri dari arus zamannya. Dan dari namanya lahirlah kata <em>Ibrani</em> (Hebrew) — bukan nama etnis, tapi deskripsi tindakan: <em>"orang yang menyeberang"</em>.</p>
+<p>Menjadi Ibrani berarti pernah menyeberangi sesuatu. Ada arus yang harus ditinggalkan. Ada sungai yang harus diseberangi. Bukan karena itu mudah — tapi karena ada sesuatu di seberang yang tidak bisa ditemukan di sisi ini.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Abram, orang Ibrani itu, memberitahukan hal ini..."',
+        ref: 'Kejadian 14:13'
+      },
+      {
+        type: 'question',
+        text: '"Ibrani" berarti sudah menyeberang. Sungai apa yang Allah sedang minta kamu seberangi sekarang — arus budaya, kebiasaan, lingkaran sosial, cara berpikir — yang selama ini kamu tahu perlu ditinggalkan tapi belum dilakukan?'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Tuliskan sungai yang perlu diseberangi itu dengan nama yang konkret...'
+      }
+    ]
+  },
+
+  // ─── WEEK 4 ───
+  {
+    num: 4,
+    phase: 1,
+    title: 'Haran',
+    subtitle: 'Zona antara Ur dan Kanaan',
+    bacaan: 'Kejadian 11:31–12:5 · Bab 11 buku Park (Terah)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p><strong>Terah</strong> adalah karakter paling berbahaya dalam seluruh silsilah — bukan karena ia jahat, tapi karena ia hampir benar. Ia tahu panggilan Allah. Bahkan ia yang mengambil inisiatif untuk pergi dari Ur. Tapi ia berhenti di <strong>Haran</strong>.</p>
+<p>Haran bukan Ur. Bukan tempat penyembahan berhala yang penuh. Tapi juga bukan Kanaan. Haran adalah kota perdagangan yang makmur — nyaman, familiar, <em>"cukup baik"</em>. Dan Terah mati di sana pada usia 205 tahun.</p>
+<p>Park menekankan: Kejadian 11:32 mencatat kematian Terah dengan penekanan khusus — seolah Musa ingin pembaca berhenti dan bertanya, <em>"Apakah ini yang akan terjadi padamu juga?"</em> Setelah Terah mati, barulah Abraham melanjutkan perjalanan yang Terah mulai.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Dan Terah mati di Haran."',
+        ref: 'Kejadian 11:32'
+      },
+      {
+        type: 'question',
+        text: 'Di mana "Haran"-mu? Sebuah kondisi, posisi, hubungan, atau kebiasaan yang cukup baik sehingga kamu berhenti melangkah lebih jauh — bukan karena itu salah, tapi karena itu nyaman. Berikan nama yang spesifik.'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Jangan jawab secara umum. Tuliskan Haran-mu yang konkret...'
+      }
+    ]
+  },
+
+  // ─── WEEK 5 ───
+  {
+    num: 5,
+    phase: 2,
+    title: 'Berjalan dengan Allah',
+    subtitle: 'Henokh dan apa yang benar-benar penting',
+    bacaan: 'Kejadian 5:21–24 · Bab 10 buku Park (Henokh)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Di tengah silsilah yang penuh dengan <em>"dan ia mati"</em> — ada satu kalimat yang berbeda: <em>"Henokh bergaul dengan Allah, lalu ia tidak ada lagi, sebab ia telah diangkat oleh Allah."</em></p>
+<p>Henokh tidak terkenal. Tidak membangun kota seperti Kain. Tidak menciptakan sesuatu yang dicatat. Ia hidup di zaman yang sama dengan kekerasan Lamekh dan kemerosotan peradaban. Tapi ia memilih arah yang berlawanan selama 300 tahun.</p>
+<p>Park mencatat: Henokh mulai berjalan bersama Allah setelah kelahiran anaknya Metusalah. Sesuatu terjadi di situ — mungkin ia melihat wajah anaknya dan untuk pertama kalinya benar-benar takut akan kematian dan kekekalan. Dan dari ketakutan itu lahirlah 300 tahun keintiman dengan Allah.</p>
+<p>Pertanyaan Minggu ini bukan tentang apa yang kamu capai. Tapi tentang apakah kamu sedang berjalan bersama Allah — atau sekedar berjalan di sekitar agenda agama.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Henokh bergaul dengan Allah, lalu ia tidak ada lagi, sebab ia telah diangkat oleh Allah."',
+        ref: 'Kejadian 5:24'
+      },
+      {
+        type: 'question',
+        text: 'Henokh tidak melakukan hal besar. Ia hanya berjalan bersama Allah. Apakah itu cukup bagimu — atau kamu masih membutuhkan pencapaian dan pengakuan untuk merasa hidupmu bermakna? Jawab jujur, bukan yang seharusnya.'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Ini mungkin pertanyaan yang paling sulit dalam 8 minggu ini...'
+      }
+    ]
+  },
+
+  // ─── WEEK 6 ───
+  {
+    num: 6,
+    phase: 2,
+    title: 'Metusalah dan Ketabahan',
+    subtitle: '969 tahun — tidak ada catatan, hanya kesetiaan',
+    bacaan: 'Kejadian 5:25–27 · Bab 10 buku Park (Metusalah)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Metusalah hidup 969 tahun — terpanjang dalam sejarah manusia. Dan tidak ada satu kalimat pun tentang apa yang ia lakukan. Tidak ada khotbah yang dicatat. Tidak ada mukjizat. Tidak ada kepahlawanan.</p>
+<p>Namanya sendiri adalah nubuatan: <em>"Ketika ia mati, maka akan datang."</em> Ia adalah jam penghakiman yang berjalan. Setiap tahun ia menua adalah satu tahun lagi kasih karunia Allah menunda. Dan ia mati di tahun yang sama banjir dimulai.</p>
+<p>Park menulis: fungsi Metusalah adalah untuk <em>bertahan</em>. Untuk menjaga garis iman tetap hidup. Untuk memastikan Lamekh lahir, Nuh lahir, bahtera bisa dibangun. Ia adalah infrastruktur tersembunyi dari rencana keselamatan Allah.</p>
+<p>Ada panggilan yang tidak terlihat besar — tapi tanpanya, tidak ada yang besar bisa terjadi. Pertanyaan minggu ini: bisakah kamu menerima itu sebagai cukup?</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Tetapi orang yang bertahan sampai pada kesudahannya akan selamat."',
+        ref: 'Matius 24:13'
+      },
+      {
+        type: 'question',
+        text: 'Mungkin panggilanmu sekarang bukan untuk melakukan hal yang besar — tapi untuk bertahan. Untuk menjaga nyala tetap hidup. Untuk menjadi infrastruktur bagi seseorang yang lebih muda. Apa yang membuat itu sulit untuk diterima?'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Tuliskan apa yang sebenarnya kamu rasakan tentang "ketabahan tanpa pengakuan"...'
+      }
+    ]
+  },
+
+  // ─── WEEK 7 ───
+  {
+    num: 7,
+    phase: 3,
+    title: 'Ur dan Terahmu',
+    subtitle: 'Pemisahan pertama: dari identitas yang diwarisi',
+    bacaan: 'Kejadian 12:1–5 · Kisah Para Rasul 7:2–4 · Bab 13 buku Park (Pemisahan I)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Abraham menerima panggilan Allah saat masih di Ur. Tapi ia tidak pergi sendirian — Terah ikut, bahkan Terah yang memimpin. Mereka berangkat bersama dari Ur menuju Kanaan. Tapi Terah berhenti di Haran.</p>
+<p>Park menyoroti sesuatu yang mengejutkan dalam Kisah Para Rasul 7:4: Abraham meninggalkan Haran <em>"setelah bapanya mati."</em> Tapi Terah hidup 60 tahun lebih setelah Abraham pergi. Kata "mati" di sini dalam bahasa Yunani berarti <strong>kematian simbolik</strong> — Abraham melepaskan ikatan filial kepada bapanya, meskipun Terah masih hidup.</p>
+<p>Inilah pemisahan pertama yang paling mendasar: memisahkan diri dari identitas yang diwarisi — agama keluarga, harapan orang tua, cara pandang budaya yang diterima tanpa diuji sendiri di hadapan Allah. Bukan memberontak. Tapi mengambil alih imannya sendiri.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Oleh iman Abraham taat, ketika ia dipanggil untuk berangkat ke negeri yang akan diterimanya menjadi milik pusaka, lalu ia berangkat dengan tidak mengetahui tempat yang ia tujui."',
+        ref: 'Ibrani 11:8'
+      },
+      {
+        type: 'question',
+        text: 'Apa yang kamu warisi dari keluarga, budaya, atau lingkungan rohanimu yang belum pernah kamu uji sendiri di hadapan Allah? Bukan untuk ditolak — tapi untuk diuji. Apa yang kamu percaya karena diajarkan, bukan karena kamu sendiri yang menemukannya?'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Ini bukan tentang meragukan iman — ini tentang memilikinya sendiri...'
+      }
+    ]
+  },
+
+  // ─── WEEK 8 ───
+  {
+    num: 8,
+    phase: 3,
+    title: 'Lot, Ismael, dan Ishak',
+    subtitle: 'Tiga pemisahan terakhir — semakin dalam, semakin sakit',
+    bacaan: 'Kejadian 13 · 21 · 22 · Bab 13 buku Park (Pemisahan II–IV)',
+    content: [
+      {
+        type: 'text',
+        label: 'Untuk Minggu Ini',
+        text: `<p>Tiga pemisahan terakhir Abraham — dan setiap kali, yang harus dilepaskan semakin berharga:</p>
+<p><strong>Lot (Pemisahan II):</strong> Bukan musuh — saudara seperjuangan, orang beriman yang telah berjalan bersama Abraham dalam masa terberat. Tapi matanya selalu ke lembah yang subur. Park menulis: yang paling sulit bukan berpisah dari yang jelas salah, tapi dari yang <em>hampir benar</em>.</p>
+<p><strong>Ismael (Pemisahan III):</strong> Bukan dosa Abraham — tapi hasil dari ketidaksabarannya. Tujuh belas tahun cinta dan investasi. Park: "Rasa sakit seperti dagingnya sendiri dicabut." Ini tentang melepaskan apa yang kita bangun dengan tangan kita sendiri, yang baik menurut kita, tapi bukan kehendak Allah.</p>
+<p><strong>Ishak (Pemisahan IV):</strong> Bukan rencana Abraham — ini murni anugerah Allah. Anak perjanjian. Dan Allah meminta dia dikembalikan. Park: "Ini bukan tentang melepaskan dosa. Ini tentang mengembalikan berkat kepada yang memberi." Ujian tertinggi: bahkan berkat Allah bisa menjadi berhala.</p>`
+      },
+      {
+        type: 'scripture',
+        text: '"Dengan bersumpah Aku berjanji, demikianlah firman Tuhan, sungguh karena engkau telah berbuat demikian dan engkau tidak segan-segan untuk menyerahkan anakmu yang tunggal kepada-Ku, Aku akan memberkati engkau berlimpah-limpah..."',
+        ref: 'Kejadian 22:16–17'
+      },
+      {
+        type: 'question',
+        text: 'Dari tiga ini — Lot (orang yang menarikmu ke "lembah yang subur"), Ismael (rencanamu sendiri yang kamu pertahankan), Ishak (berkat Allah yang kamu pegang terlalu erat) — mana yang paling terasa seperti milikmu? Berikan nama yang konkret, bukan yang abstrak.'
+      },
+      {
+        type: 'journal',
+        placeholder: 'Ini adalah pertanyaan terakhir dari 8 minggu perjalanan ini. Jangan buru-buru...',
+        minChars: 30
+      }
+    ]
+  }
+];
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+
+let currentWeek = 0;
+const STORAGE_KEY = 'jurnal-padang-gurun';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : { entries: {}, started: false };
+  } catch(e) { return { entries: {}, started: false }; }
+}
+
+function saveState(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function getEntry(weekIdx) {
+  const s = loadState();
+  return s.entries[weekIdx] || '';
+}
+
+function setEntry(weekIdx, text) {
+  const s = loadState();
+  s.entries[weekIdx] = text;
+  saveState(s);
+}
+
+function isWeekUnlocked(weekIdx) {
+  if (weekIdx === 0) return true;
+  const entry = getEntry(weekIdx - 1);
+  return entry && entry.trim().length >= 20;
+}
+
+function isWeekDone(weekIdx) {
+  const entry = getEntry(weekIdx);
+  return entry && entry.trim().length >= 20;
+}
+
+function getProgress() {
+  let done = 0;
+  for (let i = 0; i < 8; i++) { if (isWeekDone(i)) done++; }
+  return done;
+}
+
+function allDone() { return getProgress() === 8; }
+
+// ══════════════════════════════════════════
+// NAV DOTS
+// ══════════════════════════════════════════
+
+function renderNavDots() {
+  const el = document.getElementById('navDots');
+  el.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot';
+    if (isWeekDone(i)) d.classList.add('done');
+    else if (i === currentWeek && isWeekUnlocked(i)) d.classList.add('active');
+    else if (!isWeekUnlocked(i)) d.classList.add('locked');
+    d.title = `Minggu ${i+1}`;
+    d.onclick = () => { if (isWeekUnlocked(i)) goToWeek(i); };
+    el.appendChild(d);
+  }
+}
+
+// ══════════════════════════════════════════
+// VIEWS
+// ══════════════════════════════════════════
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+  document.getElementById('view-' + id).classList.add('on');
+  window.scrollTo(0, 0);
+}
+
+function startJourney() {
+  const s = loadState();
+  s.started = true;
+  saveState(s);
+  showView('journey');
+  goToWeek(0);
+}
+
+function openLink(url) { window.location.href = url; }
+
+function reviewJournal() {
+  // Switch back to journey to review
+  showView('journey');
+  goToWeek(0);
+}
+
+// ══════════════════════════════════════════
+// PHASE BANNER
+// ══════════════════════════════════════════
+
+function renderPhaseBanner(weekIdx) {
+  const week = WEEKS[weekIdx];
+  const phase = PHASES[week.phase];
+  const banner = document.getElementById('phaseBanner');
+  banner.className = 'phase-banner ' + phase.class;
+  document.getElementById('phaseEyebrow').textContent = phase.eyebrow;
+  document.getElementById('phaseTitle').textContent = phase.title;
+  document.getElementById('phaseRef').textContent = phase.ref;
+  document.getElementById('phaseDesc').textContent = phase.desc;
+}
+
+// ══════════════════════════════════════════
+// WEEK TABS
+// ══════════════════════════════════════════
+
+function renderWeekTabs(activeIdx) {
+  const el = document.getElementById('weekTabs');
+  el.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'week-tab';
+    const done = isWeekDone(i);
+    const unlocked = isWeekUnlocked(i);
+
+    if (done) btn.classList.add('done');
+    if (i === activeIdx) btn.classList.add('active');
+    if (!unlocked) btn.classList.add('locked');
+
+    let inner = `Minggu ${i+1}`;
+    if (done) inner += ` <span class="tab-check">✓</span>`;
+    else if (!unlocked) inner += ` <span class="tab-lock">🔒</span>`;
+    btn.innerHTML = inner;
+
+    btn.onclick = () => {
+      if (unlocked) goToWeek(i);
+    };
+    el.appendChild(btn);
+  }
+}
+
+// ══════════════════════════════════════════
+// WEEK CONTENT
+// ══════════════════════════════════════════
+
+function renderWeekContent(weekIdx) {
+  const week = WEEKS[weekIdx];
+  const unlocked = isWeekUnlocked(weekIdx);
+  const done = isWeekDone(weekIdx);
+  const el = document.getElementById('weekContent');
+
+  if (!unlocked) {
+    el.innerHTML = `
+      <div class="locked-week">
+        <div class="locked-icon">🔒</div>
+        <h3 class="locked-title">Minggu ${weekIdx+1} belum terbuka</h3>
+        <p class="locked-text">Selesaikan Minggu ${weekIdx} terlebih dahulu — tulis minimal 20 karakter di jurnal minggu sebelumnya. Perjalanan ini tidak bisa di-skip.</p>
+      </div>`;
+    return;
+  }
+
+  let html = `
+    <div class="week-header">
+      <div class="week-number">Minggu ${week.num} dari 8 · ${WEEKS[week.phase] ? PHASES[week.phase].title : ''}</div>
+      <h2 class="week-title">${week.title}</h2>
+      <p class="week-subtitle">${week.subtitle}</p>
+      <p style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-light)">Bacaan: ${week.bacaan}</p>
+    </div>`;
+
+  const savedEntry = getEntry(weekIdx);
+  let hasJournal = false;
+
+  week.content.forEach((item, idx) => {
+    if (item.type === 'text') {
+      html += `
+        <div class="section-card">
+          <div class="section-label teal">${item.label}</div>
+          <div class="section-text">${item.text}</div>
+        </div>`;
+    } else if (item.type === 'scripture') {
+      html += `
+        <div class="scripture">
+          <p>${item.text}</p>
+          <cite>${item.ref}</cite>
+        </div>`;
+    } else if (item.type === 'question') {
+      html += `
+        <div class="question-card">
+          <div class="question-label">Pertanyaan Minggu Ini</div>
+          <p class="question-text">${item.text}</p>
+        </div>`;
+    } else if (item.type === 'journal') {
+      hasJournal = true;
+      const minChars = item.minChars || 20;
+      const charCount = savedEntry.length;
+      const isOk = savedEntry.trim().length >= minChars;
+      html += `
+        <div class="journal-card" id="journalCard">
+          <div class="journal-header">
+            <div class="journal-label">Jurnalmu</div>
+            <div class="journal-count ${isOk ? 'ok' : ''}" id="charCount">${isOk ? '✓ Tersimpan' : `${charCount} karakter`}</div>
+          </div>
+          <textarea class="journal-textarea" id="journalText" placeholder="${item.placeholder}"
+            oninput="onJournalInput(${weekIdx}, ${minChars})">${savedEntry}</textarea>
+          <div class="journal-footer">
+            <div class="journal-save-msg ${isOk ? 'show' : ''}" id="saveMsg">✓ Jurnalmu tersimpan otomatis</div>
+          </div>
+        </div>`;
+    }
+  });
+
+  // Show completion block if done, or slow gate if journal not done
+  if (done) {
+    const isLast = weekIdx === 7;
+    if (isLast && allDone()) {
+      html += `
+        <div class="week-complete">
+          <div class="complete-icon">🏔️</div>
+          <div class="complete-title">Delapan Minggu Selesai</div>
+          <p class="complete-text">Kamu sudah berjalan dari Mesir sampai di depan Kanaan. Ini bukan akhir perjalanan — tapi kamu sudah sampai di tempat yang berbeda dari ketika kamu mulai.</p>
+          <button class="btn-next" onclick="showView('closing')">Lihat Penutup →</button>
+        </div>`;
+    } else if (!isLast) {
+      html += `
+        <div class="week-complete">
+          <div class="complete-icon">✓</div>
+          <div class="complete-title">Minggu ${weekIdx+1} selesai</div>
+          <p class="complete-text">Jurnalmu tersimpan. Minggu ${weekIdx+2} sudah terbuka.</p>
+          <button class="btn-next" onclick="goToWeek(${weekIdx+1})">Lanjut ke Minggu ${weekIdx+2} →</button>
+        </div>`;
+    }
+  } else if (hasJournal) {
+    html += `
+      <div class="slow-gate" id="slowGate">
+        <div class="slow-gate-icon">✏️</div>
+        <div class="slow-gate-title">Tulis sebelum melanjutkan</div>
+        <p class="slow-gate-text">Minggu berikutnya terbuka setelah kamu menulis di jurnal di atas (minimal 20 karakter). Tidak bisa di-skip — bukan karena aturan, tapi karena ada jarak yang harus ditempuh.</p>
+      </div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// JOURNAL INPUT
+// ══════════════════════════════════════════
+
+let saveTimer = null;
+
+function onJournalInput(weekIdx, minChars) {
+  const textarea = document.getElementById('journalText');
+  const countEl = document.getElementById('charCount');
+  const saveMsg = document.getElementById('saveMsg');
+  const text = textarea.value;
+  const isOk = text.trim().length >= minChars;
+
+  countEl.textContent = isOk ? '✓ Tersimpan' : `${text.length} karakter`;
+  countEl.className = 'journal-count' + (isOk ? ' ok' : '');
+  saveMsg.className = 'journal-save-msg' + (isOk ? ' show' : '');
+
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    setEntry(weekIdx, text);
+    if (isOk) {
+      renderNavDots();
+      renderWeekTabs(weekIdx);
+      // Refresh completion area
+      const doneEl = document.querySelector('.slow-gate');
+      if (doneEl && isWeekDone(weekIdx)) {
+        renderWeekContent(weekIdx);
+      }
+    }
+  }, 500);
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+
+function goToWeek(weekIdx) {
+  if (!isWeekUnlocked(weekIdx)) return;
+  currentWeek = weekIdx;
+  showView('journey');
+  renderPhaseBanner(weekIdx);
+  renderWeekTabs(weekIdx);
+  renderWeekContent(weekIdx);
+  renderNavDots();
+
+  // Progress bar
+  const progress = ((getProgress()) / 8) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  // Scroll week tab into view
+  setTimeout(() => {
+    const activeTab = document.querySelector('.week-tab.active');
+    if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, 100);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+
+function init() {
+  const s = loadState();
+  renderNavDots();
+
+  if (s.started) {
+    // Find first incomplete or last done week
+    let startWeek = 0;
+    for (let i = 0; i < 8; i++) {
+      if (isWeekUnlocked(i)) startWeek = i;
+      if (!isWeekDone(i) && isWeekUnlocked(i)) { startWeek = i; break; }
+    }
+    if (allDone()) {
+      showView('closing');
+    } else {
+      showView('journey');
+      goToWeek(startWeek);
+    }
+  } else {
+    showView('hero');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
