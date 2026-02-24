@@ -79,12 +79,12 @@ h1 span{color:var(--teal)}
 
 /* Accordion */
 .accordion{margin-top:12px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.acc-btn{width:100%;text-align:left;background:#f5f5f5;border:none;padding:12px 15px;font-size:12px;font-weight:600;color:var(--sub);display:flex;justify-content:space-between;align-items:center;transition:background .15s,color .15s;-webkit-tap-highlight-color:transparent}
+.acc-btn{width:100%;text-align:left;background:#f5f5f5;border:none;padding:12px 15px;font-size:12px;font-weight:600;color:var(--sub);display:flex;justify-content:space-between;align-items:center;transition:background .15s,color .15s;-webkit-tap-highlight-color:transparent;min-height:48px}
 .acc-btn:hover,.acc-btn.open{background:var(--teal-lt);color:var(--teal-dk)}
 .acc-chev{width:14px;height:14px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;flex-shrink:0;margin-top:-4px}
 .acc-btn.open .acc-chev{transform:rotate(-135deg);margin-top:2px}
-.acc-body{display:none;padding:14px 16px;background:var(--card);font-size:12px;color:var(--sub);line-height:1.8}
-.acc-body.open{display:block}
+.acc-body{max-height:0;overflow:hidden;background:var(--card);font-size:12px;color:var(--sub);line-height:1.8;transition:max-height .3s ease,padding .3s ease;padding:0 16px}
+.acc-body.open{max-height:1000px;padding:14px 16px}
 .acc-step{display:flex;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-lt)}
 .acc-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
 .acc-num{width:22px;height:22px;background:var(--teal);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
@@ -103,7 +103,8 @@ h1 span{color:var(--teal)}
 .f-btn.fev.active{background:var(--gold);border-color:var(--gold)}
 .tbl-hint{font-size:10px;color:var(--dim)}
 
-.tbl-desktop-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:var(--shadow-sm)}
+/* Scrollbar hint for horizontal scroll */
+.tbl-desktop-wrap{overflow-x:auto;border-radius:var(--r);box-shadow:var(--shadow-sm);-webkit-overflow-scrolling:touch}
 .kron-tbl{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);font-size:13px}
 .kron-tbl thead{background:#f5f5f5}
 .kron-tbl th{padding:9px 11px;text-align:left;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);border-bottom:1.5px solid var(--border);white-space:nowrap}
@@ -187,7 +188,7 @@ body.show-am .m-am{display:block}
 .dc{background:var(--card);border-radius:16px 16px 0 0;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:slideUp .22s ease}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .dc-stripe{height:4px;width:100%;position:sticky;top:0}
-.dc-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.9);border:none;width:30px;height:30px;border-radius:50%;font-size:18px;color:var(--sub);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);z-index:10}
+.dc-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.9);border:none;width:44px;height:44px;border-radius:50%;font-size:20px;color:var(--sub);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);z-index:10}
 .dc-body{padding:18px 20px 24px}
 .dc-gen{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:3px}
 .dc-name{font-size:24px;font-weight:700;margin-bottom:2px}
@@ -252,7 +253,14 @@ body.show-am .m-am{display:block}
 .rbtn:hover{border-color:var(--teal);color:var(--teal)}
 .rbtn.show{display:inline-flex}
 
-/* ═══════════ FOOTER NAV ═══════════ */
+/* Scroll margin for anchor nav */
+[id]{scroll-margin-top:16px}
+
+/* Scrollbar hint for horizontal scroll */
+.tbl-desktop-wrap::-webkit-scrollbar{height:4px}
+.tbl-desktop-wrap::-webkit-scrollbar-track{background:var(--border-lt)}
+.tbl-desktop-wrap::-webkit-scrollbar-thumb{background:var(--teal-mid);border-radius:2px}
+.scroll-hint{display:none;font-size:10px;color:var(--dim);text-align:right;padding:4px 0 6px;letter-spacing:.3px}
 .footer-nav{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .nav-links{display:flex;gap:8px;flex-wrap:wrap}
 .nav-link{display:inline-flex;align-items:center;gap:5px;padding:8px 15px;border:1.5px solid var(--border);border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);text-decoration:none;background:var(--white);transition:all .15s}
@@ -317,7 +325,7 @@ body.show-am .m-am{display:block}
   .dc{border-radius:16px 16px 0 0;max-width:100%}
   .dc-stats{grid-template-columns:repeat(2,1fr)}
   .dc-name{font-size:21px}
-  .dc-close{width:34px;height:34px;font-size:20px}
+  .dc-close{width:44px;height:44px;font-size:20px;top:10px;right:10px}
   /* Footer */
   .footer-nav{flex-direction:column;align-items:stretch}
   .nav-links{flex-direction:column}
@@ -325,18 +333,32 @@ body.show-am .m-am{display:block}
   .footer-ref{text-align:center}
   .sec-title{font-size:10px;margin:22px 0 10px}
 }
-@media(max-width:360px){
+@media(max-width:400px){
   .tbl-filters{grid-template-columns:repeat(2,1fr)}
-  .f-btn{font-size:12px}
-  .jalur-eq{gap:2px}
+  .f-btn{font-size:12px;min-height:44px}
+  .jalur-eq{gap:2px;flex-direction:column;align-items:center}
+  .jeq-op{padding-top:0}
   .jeq-num{font-size:12px}
   .mode-btn{font-size:12px;padding:10px 4px}
+}
+@media(max-width:360px){
+  .mode-btn{font-size:11px;padding:8px 3px}
+}
+/* ═══════════ TABLET ═══════════ */
+@media(min-width:601px) and (max-width:768px){
+  .kron-tbl{font-size:12px}
+  .kron-tbl th{padding:8px 7px;font-size:9px}
+  .kron-tbl td{padding:8px 7px}
+  .calc-row{grid-template-columns:1fr 44px 78px;gap:5px}
+  .dc-stats{grid-template-columns:repeat(2,1fr)}
+  .scroll-hint{display:block}
 }
 @media(min-width:601px){
   .tbl-desktop-wrap{display:block}
   .tbl-mobile-wrap{display:none}
   .overlay{align-items:center;padding:20px}
   .dc{border-radius:14px}
+  .dc-close{width:44px;height:44px;font-size:20px}
 }
 </style>
 </head>
@@ -467,6 +489,7 @@ body.show-am .m-am{display:block}
   </div>
 
   <!-- Desktop table -->
+  <div class="scroll-hint">← Geser untuk melihat semua kolom →</div>
   <div class="tbl-desktop-wrap">
     <table class="kron-tbl">
       <thead>

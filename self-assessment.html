@@ -24,24 +24,14 @@
   --ink:         #1a1f1f;
   --mid:         #3a3d3d;
   --dim:         #6d6e70;
-
-  /* Section accent colours */
-  --s1-color:    var(--teal);
-  --s1-lt:       var(--teal-lt);
-  --s1-bd:       var(--teal-bd);
-  --s2-color:    var(--green);
-  --s2-lt:       var(--green-lt);
-  --s2-bd:       var(--green-bd);
-  --s3-color:    var(--teal-dark);
-  --s3-lt:       rgba(15,122,115,0.09);
-  --s3-bd:       rgba(15,122,115,0.28);
-  --s4-color:    var(--green-dark);
-  --s4-lt:       rgba(29,138,85,0.09);
-  --s4-bd:       rgba(29,138,85,0.28);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   background: var(--bg);
@@ -63,6 +53,24 @@ body::before {
     radial-gradient(ellipse 60% 60% at 90% 100%, rgba(43,182,115,0.05), transparent);
 }
 
+/* ── BACK BUTTON ── */
+.back-btn {
+  position: fixed; top: 16px; left: 16px; z-index: 200;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--dim);
+  background: rgba(255,255,255,0.92);
+  border: 1px solid #e8e9ea;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  display: inline-flex; align-items: center; gap: 4px;
+  min-height: 44px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.back-btn:hover { background: var(--teal-lt); border-color: var(--teal-bd); color: var(--teal); }
+
 /* ── PROGRESS BAR ── */
 .progress-strip {
   position: fixed; top: 0; left: 0; right: 0;
@@ -79,17 +87,30 @@ body::before {
 /* ── HERO ── */
 .hero {
   position: relative; z-index: 1;
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
-  padding: 80px 24px 100px;
+  padding: 100px 24px 80px;
+}
+
+/* Scroll hint arrow */
+.hero::after {
+  content: '↓';
+  position: absolute; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px; color: var(--teal); opacity: 0.45;
+  animation: bounce 2.2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
 }
 
 .hero-ornament {
   font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 3px; text-transform: uppercase;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--teal);
   margin-bottom: 32px;
   opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
@@ -97,10 +118,10 @@ body::before {
 
 .hero-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(52px, 10vw, 96px);
+  font-size: clamp(48px, 10vw, 96px);
   font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: -3px;
+  line-height: 1.0;
+  letter-spacing: -2px;
   color: var(--ink);
   margin-bottom: 24px;
   opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
@@ -118,12 +139,12 @@ body::before {
   color: var(--mid);
   max-width: 420px;
   line-height: 1.7;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   opacity: 0; animation: fadeUp 0.9s 0.55s forwards;
 }
 
 .hero-verse {
-  max-width: 440px;
+  max-width: 440px; width: 100%;
   font-size: 15px;
   color: var(--dim);
   line-height: 1.85;
@@ -132,32 +153,35 @@ body::before {
   padding: 16px 20px;
   text-align: left;
   border-radius: 0 8px 8px 0;
-  margin-bottom: 52px;
+  margin-bottom: 44px;
   opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
 }
 .hero-verse cite {
   display: block; font-style: normal;
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 2px;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.5px;
   color: var(--teal); margin-top: 10px;
   text-transform: uppercase;
 }
 
 .hero-sections {
-  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-  margin-bottom: 36px;
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 32px;
   opacity: 0; animation: fadeUp 0.9s 0.85s forwards;
+  max-width: 480px;
 }
 
 .hero-section-pill {
   font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
-  padding: 9px 18px;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 11px 16px;
+  min-height: 44px;
   border-radius: 100px; border: 1.5px solid;
   cursor: pointer; transition: all 0.22s;
   background: var(--white);
+  display: inline-flex; align-items: center;
 }
 .hero-section-pill.p1 { color: var(--teal);       border-color: var(--teal-bd); }
 .hero-section-pill.p2 { color: var(--green);      border-color: var(--green-bd); }
@@ -171,12 +195,14 @@ body::before {
 
 .start-btn {
   font-family: 'Inter', sans-serif;
-  font-size: 13px; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
   color: var(--white);
   background: var(--teal);
   border: none; border-radius: 100px;
-  padding: 16px 40px; cursor: pointer;
+  padding: 16px 44px;
+  min-height: 52px;
+  cursor: pointer;
   transition: all 0.22s;
   box-shadow: 0 4px 20px rgba(23,167,157,0.35);
   opacity: 0; animation: fadeUp 0.9s 1s forwards;
@@ -184,8 +210,8 @@ body::before {
 .start-btn:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(23,167,157,0.45); }
 
 .hero-note {
-  margin-top: 18px;
-  font-size: 13px; color: var(--dim);
+  margin-top: 16px;
+  font-size: 14px; color: var(--dim);
   opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
 }
 
@@ -193,13 +219,13 @@ body::before {
 .assessment-wrap {
   position: relative; z-index: 1;
   max-width: 700px; margin: 0 auto;
-  padding: 0 24px 120px;
+  padding: 0 24px 100px;
 }
 
 /* ── SECTION ── */
 .section {
-  margin-bottom: 96px;
-  opacity: 0; transform: translateY(28px);
+  margin-bottom: 88px;
+  opacity: 0; transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .section.visible { opacity: 1; transform: translateY(0); }
@@ -207,12 +233,12 @@ body::before {
 /* Large decorative number + rule */
 .section-rule {
   display: flex; align-items: center; gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 .section-rule-line { flex: 1; height: 1px; background: var(--grey-bd); }
 .section-num {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(52px, 8vw, 80px);
+  font-size: clamp(44px, 8vw, 80px);
   font-weight: 800; line-height: 1;
   letter-spacing: -2px;
   color: var(--teal); opacity: 0.15;
@@ -221,28 +247,29 @@ body::before {
 
 .section-eyebrow {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 3px; text-transform: uppercase;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
   color: var(--teal); margin-bottom: 10px; display: block;
 }
 
 .section-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(26px, 5vw, 48px);
+  font-size: clamp(24px, 5vw, 46px);
   font-weight: 800;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
-  color: var(--ink); margin-bottom: 6px;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--ink); margin-bottom: 8px;
 }
 
 .section-ref {
   font-size: 13px; color: var(--dim);
   margin-bottom: 24px; display: block;
+  line-height: 1.6;
 }
 
 /* ── CONTEXT BOX ── */
 .context-box {
-  padding: 22px 24px;
+  padding: 20px 22px;
   border-radius: 12px;
   margin-bottom: 28px;
   font-size: 15px; line-height: 1.85; color: var(--mid);
@@ -255,7 +282,7 @@ body::before {
 
 .context-label {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 700;
+  font-size: 11px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--grey); margin-bottom: 10px; display: block;
 }
@@ -264,13 +291,14 @@ body::before {
   border-left: 2px solid var(--grey-bd);
   padding-left: 14px;
   margin: 16px 0 0;
-  font-size: 14.5px; color: var(--dim); line-height: 1.85;
+  font-size: 14px; color: var(--dim); line-height: 1.85;
+  font-style: italic;
 }
 .context-park-quote cite {
   display: block; font-style: normal;
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1.5px; color: var(--teal);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1px; color: var(--teal);
   margin-top: 8px; text-transform: uppercase;
 }
 
@@ -281,28 +309,30 @@ body::before {
   font-family: 'Inter', sans-serif;
   font-size: clamp(17px, 3vw, 22px);
   font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.4;
+  letter-spacing: -0.4px;
+  line-height: 1.45;
   color: var(--ink); margin-bottom: 10px;
 }
 
 .question-sub {
-  font-size: 14px; color: var(--dim);
-  line-height: 1.75; margin-bottom: 16px;
+  font-size: 15px; color: var(--dim);
+  line-height: 1.8; margin-bottom: 16px;
 }
 
 .answer-area {
   width: 100%;
-  min-height: 120px;
+  min-height: 150px;
   font-family: 'Inter', sans-serif;
-  font-size: 15px; line-height: 1.75;
+  font-size: 15px; line-height: 1.8;
   color: var(--ink);
   background: var(--white);
   border: 1.5px solid var(--grey-bd);
   border-radius: 10px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   resize: vertical; outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
+  /* Prevent iOS zoom on focus (font < 16px) */
+  font-size: max(16px, 15px);
 }
 .answer-area:focus {
   border-color: var(--teal);
@@ -312,9 +342,9 @@ body::before {
 
 .saved-badge {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
-  color: var(--green); opacity: 0; margin-top: 6px; display: block;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--green); opacity: 0; margin-top: 8px; display: block;
   transition: opacity 0.4s;
 }
 .saved-badge.show { opacity: 1; }
@@ -322,7 +352,7 @@ body::before {
 /* ── SECTION DIVIDER ── */
 .section-divider {
   display: flex; align-items: center; gap: 20px;
-  margin: 64px 0;
+  margin: 56px 0;
 }
 .section-divider-line { flex: 1; height: 1px; background: var(--grey-bd); }
 .section-divider-dot {
@@ -335,7 +365,7 @@ body::before {
 .closing-wrap {
   position: relative; z-index: 1;
   text-align: center;
-  padding: 80px 24px 120px;
+  padding: 60px 24px 80px;
   border-top: 2px solid var(--teal);
   max-width: 700px; margin: 0 auto;
   opacity: 0; transform: translateY(20px);
@@ -345,7 +375,7 @@ body::before {
 
 .closing-ornament {
   font-size: 20px; letter-spacing: 8px;
-  color: var(--teal); margin-bottom: 28px; display: block;
+  color: var(--teal); margin-bottom: 24px; display: block;
   opacity: 0.5;
 }
 
@@ -353,7 +383,7 @@ body::before {
   font-family: 'Inter', sans-serif;
   font-size: clamp(28px, 5vw, 60px);
   font-weight: 800;
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
   line-height: 1.1;
   color: var(--ink); margin-bottom: 20px;
 }
@@ -361,84 +391,82 @@ body::before {
 
 .closing-body {
   font-size: 16px; color: var(--mid);
-  line-height: 1.9; max-width: 500px; margin: 0 auto 28px;
+  line-height: 1.9; max-width: 520px; margin: 0 auto 24px;
+  text-align: left;
 }
 
 .closing-statement {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 3vw, 26px);
+  font-size: clamp(17px, 3vw, 24px);
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   color: var(--teal);
-  margin: 36px 0;
-  line-height: 1.4;
-  padding: 20px 28px;
+  margin: 32px auto;
+  line-height: 1.45;
+  padding: 20px 24px;
   background: var(--teal-lt);
   border-radius: 12px;
   max-width: 500px;
-  margin-left: auto; margin-right: auto;
+  text-align: center;
 }
 
 .community-block {
-  margin: 32px 0 28px;
+  margin: 28px 0 24px;
   background: linear-gradient(135deg, #fdf8f2 0%, #fdf4ec 100%);
   border: 1px solid #e8ddd0;
   border-radius: 14px;
-  padding: 28px 28px 24px;
+  padding: 24px 24px 22px;
   text-align: center;
 }
-.community-icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
+.community-icon { font-size: 28px; margin-bottom: 12px; }
 .community-label {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 10px;
-  line-height: 1.4;
+  font-size: 16px; font-weight: 700;
+  color: var(--ink); margin-bottom: 10px; line-height: 1.4;
 }
 .community-desc {
-  font-size: 13px;
-  color: var(--dim);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  font-size: 14px; color: var(--dim);
+  line-height: 1.75; margin-bottom: 20px;
 }
 .community-btn {
-  display: inline-block;
+  display: inline-flex; align-items: center; justify-content: center;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px; font-weight: 700;
   color: #ffffff;
   background: #c97d3a;
   border: none;
-  padding: 12px 24px;
+  padding: 14px 28px;
+  min-height: 48px;
   border-radius: 9px;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, transform 0.15s;
   letter-spacing: 0.01em;
+  width: 100%;
+  max-width: 360px;
 }
-.community-btn:hover {
-  background: #b06a2b;
-  transform: translateY(-1px);
-}
+.community-btn:hover { background: #b06a2b; transform: translateY(-1px); }
 
 .closing-cta-wrap {
-  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-  margin-top: 44px;
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  margin-top: 36px;
 }
 
 .cta-btn {
   font-family: 'Inter', sans-serif;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase;
-  padding: 14px 28px; border-radius: 100px; cursor: pointer;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 14px 24px;
+  min-height: 48px;
+  border-radius: 100px; cursor: pointer;
   text-decoration: none; transition: all 0.22s; border: 1.5px solid;
+  display: inline-flex; align-items: center; justify-content: center;
 }
 .cta-btn.primary {
   color: var(--white); background: var(--teal); border-color: var(--teal);
   box-shadow: 0 4px 18px rgba(23,167,157,0.3);
+  font-size: 15px; padding: 17px 36px; min-height: 54px;
+  letter-spacing: 0.4px; text-transform: none;
+  width: 100%; max-width: 400px;
 }
 .cta-btn.primary:hover  { background: var(--teal-dark); border-color: var(--teal-dark); transform: translateY(-2px); }
 .cta-btn.secondary {
@@ -448,19 +476,21 @@ body::before {
 
 /* ── COMPLETION INDICATOR ── */
 .completion-bar {
-  position: fixed; bottom: 24px; right: 24px;
+  position: fixed; bottom: 24px; right: 16px;
   background: var(--white);
   border: 1px solid var(--teal-bd);
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 12px 16px;
   font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase;
   color: var(--dim);
   box-shadow: 0 6px 24px rgba(23,167,157,0.15);
   z-index: 50;
   transition: all 0.3s;
   opacity: 0;
+  /* Stays above keyboard on mobile */
+  max-width: calc(100vw - 32px);
 }
 .completion-bar.show { opacity: 1; }
 .completion-count {
@@ -471,10 +501,10 @@ body::before {
 
 /* ── CHAR COUNTER ── */
 .char-counter {
-  font-size: 11px; font-weight: 500; color: var(--dim);
+  font-size: 12px; font-weight: 500; color: var(--dim);
   margin-top: 6px; text-align: right;
   opacity: 0; transition: opacity 0.2s;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 .char-counter.active { opacity: 1; }
 .char-counter.met { color: var(--green); }
@@ -484,23 +514,73 @@ body::before {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media(max-width: 600px) {
-  .hero { padding: 60px 20px 80px; min-height: auto; padding-top: 100px; }
+/* ── TABLET (≤ 768px) ── */
+@media (max-width: 768px) {
+  .hero { padding: 88px 20px 72px; }
   .assessment-wrap { padding: 0 20px 80px; }
-  .completion-bar { bottom: 16px; right: 16px; }
-  .hero-title { letter-spacing: -2px; }
-  .section-title { letter-spacing: -1px; }
+  .closing-wrap { padding: 48px 20px 64px; }
+  .context-box { padding: 18px 18px; }
+  .community-block { padding: 20px 18px 18px; }
+  .section { margin-bottom: 72px; }
+  .section-divider { margin: 44px 0; }
+}
+
+/* ── MOBILE (≤ 600px) ── */
+@media (max-width: 600px) {
+  .hero { padding: 80px 18px 64px; min-height: auto; }
+  .hero-ornament { font-size: 11px; letter-spacing: 1.5px; margin-bottom: 24px; }
+  .hero-title { letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero-sub { margin-bottom: 24px; }
+  .hero-verse { font-size: 14px; padding: 14px 16px; margin-bottom: 32px; }
+  .hero-sections { gap: 7px; margin-bottom: 24px; }
+  .hero-section-pill {
+    font-size: 11px; padding: 10px 13px;
+    letter-spacing: 0.2px;
+  }
+
+  .assessment-wrap { padding: 0 18px 72px; }
+
+  .section { margin-bottom: 60px; }
+  .section-rule { margin-bottom: 22px; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 1.5px; }
+  .section-ref { font-size: 12px; }
+  .context-box { padding: 16px 16px; font-size: 14px; }
+  .context-label { font-size: 11px; }
+  .context-park-quote { font-size: 13.5px; padding-left: 12px; }
+  .context-park-quote cite { font-size: 11px; }
+  .question-sub { font-size: 14px; }
+  .answer-area { min-height: 140px; padding: 14px 14px; }
+  .section-divider { margin: 40px 0; }
+
+  .closing-wrap { padding: 40px 18px 56px; }
+  .closing-title { letter-spacing: -1px; }
+  .closing-body { font-size: 15px; text-align: left; }
+  .closing-statement { padding: 16px 18px; }
+  .community-block { padding: 18px 16px; }
+  .community-desc { font-size: 13px; }
+
+  .closing-cta-wrap { flex-direction: column; align-items: stretch; }
+  .cta-btn { text-align: center; justify-content: center; }
+
+  .completion-bar { bottom: 16px; right: 12px; left: 12px; text-align: center; }
+}
+
+/* ── SMALL MOBILE (≤ 380px) ── */
+@media (max-width: 380px) {
+  .hero-sections { gap: 6px; }
+  .hero-section-pill { font-size: 10px; padding: 9px 11px; }
+  .back-btn { font-size: 11px; padding: 9px 13px; }
 }
 
 @media print {
-  .progress-strip, .completion-bar, .start-btn, .hero-sections { display: none !important; }
+  .progress-strip, .completion-bar, .start-btn, .hero-sections, .back-btn { display: none !important; }
+  .section { opacity: 1 !important; transform: none !important; }
+  .closing-wrap { opacity: 1 !important; transform: none !important; }
 }
 </style>
 </head>
 <body>
-<div style="position:fixed;top:12px;left:16px;z-index:200">
-  <a href="index.html" style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#6d6e70;background:rgba(255,255,255,0.9);border:1px solid #e8e9ea;padding:6px 12px;border-radius:6px;text-decoration:none;backdrop-filter:blur(8px);display:inline-block">← Beranda</a>
-</div>
+<a href="index.html" class="back-btn">← Beranda</a>
 
 <div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
 
@@ -510,8 +590,8 @@ body::before {
   <h1 class="hero-title">Di Mana<em>Kamu?</em></h1>
   <p class="hero-sub">Empat pertanyaan. Empat pemisahan. Tidak ada jawaban yang benar.</p>
   <div class="hero-verse">
-    "Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan yang lalu-lalu. Tanyakanlah kepada bapamu, maka ia memberitahu engkau, kepada orang-orang tua, maka mereka mengatakannya kepadamu."
-    <cite>Ulangan 32:7</cite>
+    "Karena iman Abraham taat, ketika ia dipanggil untuk berangkat ke negeri yang akan diterimanya menjadi milik pusakanya, lalu ia berangkat dengan tidak mengetahui tempat yang ia tujui."
+    <cite>Ibrani 11:8</cite>
   </div>
   <div class="hero-sections">
     <button class="hero-section-pill p1" onclick="scrollTo('s1')">I · Pemisahan Pertama</button>
@@ -536,20 +616,20 @@ body::before {
 
     <span class="section-eyebrow">Pemisahan Pertama</span>
     <h2 class="section-title">Keluar dari negerimu</h2>
-    <span class="section-ref">Kejadian 12:1 · "Dari negerimu dan dari sanak saudaramu"</span>
+    <span class="section-ref">Kejadian 12:1 · "Dari negerimu, dari sanak saudaramu, dan dari rumah bapamu" · Pemisahan dari dunia & dari Terah</span>
 
     <div class="context-box rust">
       <span class="context-label">Konteks Park</span>
-      Allah tidak menyuruh Abraham pergi dari tempat yang buruk. Ur adalah peradaban terbesar di zamannya — kota dengan kuil, perpustakaan, perdagangan, dan keindahan. Perintah "keluar" bukan karena Ur jahat. Tapi karena Ur bukan Kanaan.
+      Allah tidak menyuruh Abraham pergi dari tempat yang buruk. Ur adalah pusat peradaban kuno — kota subur di tenggara Baghdad, pusat perdagangan sekaligus pusat penyembahan berhala. Perintah "keluar" bukan karena Ur jahat, tapi karena Ur bukan Kanaan. Park menekankan bahwa pemisahan pertama ini sebenarnya berlapis dua: dari tanah kelahiran, <em>dan</em> dari Terah — ayah Abraham yang tergoda tinggal di Haran. Baru setelah Abraham benar-benar meninggalkan rumah ayahnya, ia bisa memasuki Kanaan.
       <div class="context-park-quote">
-        "The first separation was from his environment — the land of his birth, the civilization that had shaped him. God called him not because Ur was the worst place, but because it was not the place God had appointed."
-        <cite>Abraham Park, The Genesis Genealogies</cite>
+        "Ur of the Chaldeans was a fertile land located southeast of Baghdad and was the center of the ancient civilization as well as the center of idolatry… It was only after Abraham had fully obeyed God's command to separate from his father's house that he was able to enter Canaan."
+        <cite>Abraham Park, The Genesis Genealogies, hlm. 202–203</cite>
       </div>
     </div>
 
     <div class="question-wrap">
       <div class="question-text">Apa "Ur"-mu — lingkungan, komunitas, atau cara hidup yang membentukmu, tapi yang kamu mulai rasakan bukan tempat yang Allah tuju?</div>
-      <div class="question-sub">Bukan berarti ia buruk. Bisa jadi sangat baik. Tapi ada sesuatu dalam dirimu yang tahu bahwa ini bukan titik akhir perjalananmu.</div>
+      <div class="question-sub">Bukan berarti ia buruk. Bisa jadi sangat baik — bahkan nyaman seperti Haran. Tapi ada sesuatu dalam dirimu yang tahu bahwa ini bukan titik akhir perjalananmu. Dan adakah "Terah" dalam hidupmu — seseorang atau sesuatu yang kamu hormati, yang diam-diam menahan langkahmu di "Haran" padahal Kanaan sudah menunggu?</div>
       <textarea class="answer-area" id="a1" placeholder="Tuliskan di sini — tidak harus lengkap, tidak harus rapi. Satu kata pun cukup untuk memulai." oninput="onInput('a1', 's1')"></textarea>
       <div class="char-counter" id="cc1"></div>
       <span class="saved-badge" id="sv1">✓ Tersimpan</span>
@@ -572,10 +652,10 @@ body::before {
 
     <div class="context-box gold">
       <span class="context-label">Konteks Park</span>
-      Lot bukan orang jahat. Ia percaya kepada Allah, ia ikut perjalanan Abraham, ia orang yang Park sebut "seiman." Tapi setiap kali ada keputusan, mata Lot mencari lembah yang subur — yang kelihatannya baik, yang menguntungkan, yang masuk akal secara duniawi. Bersama Lot, Abraham tidak bisa bergerak penuh ke arah Allah.
+      Lot bukan orang jahat. Ia percaya kepada Allah, ia ikut perjalanan Abraham melewati masa-masa paling sulit — dari Ur hingga Kanaan. Tapi Park menunjukkan bahwa Lot memiliki keserakahan duniawi. Setiap kali ada keputusan, matanya mencari lembah yang subur, yang menguntungkan, yang masuk akal secara duniawi. Pemisahan dari Lot mewakili pemisahan dari kecenderungan duniawi yang masih tersisa — ketidakstabilan yang berlanjut bahkan setelah pemisahan pertama dari dunia.
       <div class="context-park-quote">
-        "Lot was not wicked — he was a believer. But his perspective was always toward what appeared profitable. As long as Lot remained, Abraham could not fully separate himself to follow God's direction."
-        <cite>Abraham Park, The Genesis Genealogies</cite>
+        "Lot had possessed secular greed. He chose the valley of the Jordan… because it was well watered everywhere… God separated Abraham from such a person. This represents separation from lingering secular tendencies and continued instability even after initial separation from the world."
+        <cite>Abraham Park, The Genesis Genealogies, hlm. 203</cite>
       </div>
     </div>
 
@@ -599,21 +679,21 @@ body::before {
     </div>
 
     <span class="section-eyebrow">Pemisahan Ketiga</span>
-    <h2 class="section-title">Dari hasil tanganmu sendiri</h2>
+    <h2 class="section-title">Dari hasil usaha & rekayasamu sendiri</h2>
     <span class="section-ref">Kejadian 21:10–14 · Ismael dilepas</span>
 
     <div class="context-box green">
       <span class="context-label">Konteks Park</span>
-      Ismael bukan dosa Abraham yang memalukan. Ismael adalah usaha Abraham untuk membantu Allah — karena janji Allah terasa terlalu lama, terlalu tidak masuk akal. Abraham tidak meninggalkan Allah; ia mencoba membantu Allah. Ismael adalah buah dari iman yang tidak sabar. Dan itulah yang paling sulit dilepas — sesuatu yang lahir dari niat baik.
+      Ismael lahir dari usaha manusia — dari rekayasa Abraham dan Sara untuk membantu memenuhi janji Allah dengan cara mereka sendiri. Park menyebutnya lahir "by means of human effort and scheming." Tapi yang membuat pelepasan Ismael begitu menyakitkan adalah kasih Abraham yang nyata: ia sudah mencurahkan cintanya selama sekitar 17 tahun. "Dan hal itu sangat menyedihkan hati Abraham karena anaknya itu" (Kej 21:11). Park menyebut ini sebagai "the pain of having his flesh torn away" — rasa sakit terdalam dalam hidup Abraham.
       <div class="context-park-quote">
-        "Ishmael was not born of rebellion but of impatience — Abraham's attempt to fulfill God's promise by his own means. This is why it was so painful to release him: Ishmael was the fruit of Abraham's faith, however misdirected."
-        <cite>Abraham Park, The Genesis Genealogies</cite>
+        "God commanded Abraham to drive out Ishmael, the first son who had been born to him through his maidservant by means of human effort and scheming… This represents the level of faith with which we must surrender our own plans and powers to submit before the great will of God — a process through which we deny ourselves."
+        <cite>Abraham Park, The Genesis Genealogies, hlm. 203–204</cite>
       </div>
     </div>
 
     <div class="question-wrap">
       <div class="question-text">Apa "Ismael"-mu — sesuatu yang kamu bangun dengan usahamu sendiri, yang lahir dari niat baik dan bahkan dari iman, tapi yang kamu tahu dalam hati bukan kehendak Allah yang sesungguhnya?</div>
-      <div class="question-sub">Bisa berupa keputusan, hubungan, pekerjaan, pelayanan, atau identitas. Sesuatu yang terlalu berharga untuk dilepas — justru karena ia lahir dari bagian terbaik dari dirimu.</div>
+      <div class="question-sub">Bisa berupa keputusan, hubungan, pekerjaan, pelayanan, atau identitas. Sesuatu yang lahir dari usahamu sendiri — mungkin dengan niat baik, mungkin bahkan dari kepercayaan — tapi yang kamu tahu dalam hati adalah rencanamu, bukan rencana Allah. Dan sesuatu yang sudah kamu cintai terlalu lama untuk dilepas begitu saja.</div>
       <textarea class="answer-area" id="a3" placeholder="Ini yang paling sulit ditulis. Tidak perlu lengkap. Bahkan setengah kalimat yang jujur lebih berharga dari paragraf yang aman..." oninput="onInput('a3', 's3')"></textarea>
       <div class="char-counter" id="cc3"></div>
       <span class="saved-badge" id="sv3">✓ Tersimpan</span>
@@ -636,16 +716,16 @@ body::before {
 
     <div class="context-box purple">
       <span class="context-label">Konteks Park</span>
-      Ini pemisahan yang paling tidak masuk akal. Ishak bukan masalah — ia adalah berkat. Ia adalah penggenapan janji Allah sendiri. Abraham menunggu 25 tahun untuk Ishak. Dan sekarang Allah meminta Ishak. Park menunjukkan bahwa ini bukan tentang pengorbanan — ini tentang apakah Abraham mencintai berkat Allah lebih dari Allah sendiri.
+      Ini pemisahan yang paling tidak masuk akal. Ishak bukan masalah — ia adalah berkat. Ia adalah penggenapan janji Allah sendiri setelah 25 tahun menunggu. Park menulis bahwa bagi Abraham, pemisahan dari Ishak "was equivalent to death; it shook the very foundation of his existence." Tapi inilah puncak iman: mengembalikan kepada Allah apa yang memang berasal dari Allah — mengakui bahwa bahkan berkat pun bukan milik kita.
       <div class="context-park-quote">
-        "Isaac was not a sin to be confessed — he was a blessing to be surrendered. God was not taking away what was wrong. He was asking whether Abraham loved the Giver more than the gift."
-        <cite>Abraham Park, The Genesis Genealogies</cite>
+        "This was a display of mature faith — the ability to return to God what belongs to Him. In essence, he was confessing that even the blessings that had originally come from God ultimately belong to Him."
+        <cite>Abraham Park, The Genesis Genealogies, hlm. 204</cite>
       </div>
     </div>
 
     <div class="question-wrap">
       <div class="question-text">Apa "Ishak"-mu — berkat nyata dari Allah yang sudah kamu terima, yang kini tanpa sadar menjadi lebih penting dari Allah yang memberikannya?</div>
-      <div class="question-sub">Ini bukan tentang sesuatu yang buruk. Justru sebaliknya — sesuatu yang sangat baik, yang kamu syukuri, yang kamu doakan bertahun-tahun. Tapi ada momen ketika kamu menyadari bahwa ketakutanmu kehilangannya lebih besar dari kepercayaanmu kepada yang memberikannya.</div>
+      <div class="question-sub">Ini bukan tentang sesuatu yang buruk. Justru sebaliknya — sesuatu yang sangat baik, yang kamu syukuri, yang kamu doakan bertahun-tahun, yang memang datang dari Allah. Tapi Park bertanya: apakah kamu bisa mengakui bahwa berkat itu pun akhirnya milik Allah — dan bukan milikmu untuk digenggam selamanya?</div>
       <textarea class="answer-area" id="a4" placeholder="Tidak harus dijawab sekarang. Tapi jika ada sesuatu yang muncul ketika kamu membaca pertanyaan ini — tuliskan. Bahkan jika hanya satu nama." oninput="onInput('a4', 's4')"></textarea>
       <div class="char-counter" id="cc4"></div>
       <span class="saved-badge" id="sv4">✓ Tersimpan</span>
@@ -659,7 +739,7 @@ body::before {
   <span class="closing-ornament">✦ ✦ ✦</span>
   <h2 class="closing-title">Ini bukan <em>tes</em>.</h2>
   <p class="closing-body">Tidak ada skor. Tidak ada jawaban yang benar atau salah. Tidak ada yang menilai apa yang kamu tulis.</p>
-  <p class="closing-body">Yang ada hanyalah ini: kamu baru saja duduk bersama empat pertanyaan yang Abraham sendiri tidak bisa jawab dengan mudah. Ia butuh bertahun-tahun, beberapa perjalanan, dan satu gunung di Moria — untuk benar-benar melewati keempatnya.</p>
+  <p class="closing-body">Yang ada hanyalah ini: kamu baru saja duduk bersama empat pertanyaan yang Abraham sendiri tidak bisa jawab dengan mudah. Park menulis bahwa Abraham "by faith and fear of God, had overcome the pain of separation from his father Terah, his nephew Lot, his son Ishmael, and his son of the covenant Isaac. As a result, he achieved the apex of faith at last." Perjalanan itu butuh seumur hidup — dan setiap pemisahan lebih dalam dari yang sebelumnya.</p>
   <div class="closing-statement">Ini adalah undangan, bukan tuntutan.</div>
   <p class="closing-body">Jika ada satu pertanyaan yang terasa paling menusuk — kembalilah ke sana besok. Dan lusa. Biarkan ia tinggal cukup lama sampai ia tidak bisa diabaikan lagi.</p>
   <p class="closing-body" style="font-size:14px;color:var(--dim);margin-top:8px;">Mungkin ada seseorang yang bisa kamu ajak berjalan bersama dalam pertanyaan ini — bukan untuk memberi jawaban, tapi untuk duduk bersama dalam ketidaktahuan yang sama.</p>
@@ -672,9 +752,8 @@ body::before {
   </div>
 
   <div class="closing-cta-wrap">
-    <a href="index.html" class="cta-btn primary">← Beranda Ekosistem</a>
-    <a href="two-rivers-timeline.html" target="_blank" class="cta-btn secondary">Lihat Peta Dua Jalur ↗</a>
-    <a href="jurnal-padang-gurun.html" class="cta-btn secondary">🏕️ Jurnal Padang Gurun →</a>
+    <a href="jurnal-padang-gurun.html" class="cta-btn primary">🏕️ Mulai Jurnal Padang Gurun →</a>
+    <a href="index.html" class="cta-btn secondary">← Beranda Ekosistem</a>
   </div>
 </div>
 
@@ -797,6 +876,26 @@ function restore() {
 window.addEventListener('DOMContentLoaded', function() {
   restore();
   initObserver();
+
+  // Hide completion bar when virtual keyboard pops up on mobile
+  document.querySelectorAll('.answer-area').forEach(function(ta) {
+    ta.addEventListener('focus', function() {
+      if (window.innerWidth <= 600) {
+        var bar = document.getElementById('compBar');
+        bar.style.opacity = '0';
+        bar.style.pointerEvents = 'none';
+      }
+    });
+    ta.addEventListener('blur', function() {
+      var bar = document.getElementById('compBar');
+      if (bar.classList.contains('show')) {
+        setTimeout(function() {
+          bar.style.opacity = '';
+          bar.style.pointerEvents = '';
+        }, 350);
+      }
+    });
+  });
 });
 </script>
 </body>

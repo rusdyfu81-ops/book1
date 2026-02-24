@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Sepuluh Nama, Satu Kisah — Adam hingga Nuh</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
 
 /* ─── BRAND TOKENS ─── */
 :root {
@@ -41,7 +41,7 @@ html { scroll-behavior:smooth; font-size:16px; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   font-weight: 400;
@@ -59,6 +59,7 @@ body::before {
     radial-gradient(ellipse 55% 70% at 85% 95%, rgba(43,182,115,0.05), transparent);
   pointer-events:none;
   z-index:0;
+  will-change: transform;
 }
 
 /* ─── HEADER ─── */
@@ -72,7 +73,7 @@ header {
 }
 
 .htag {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 4px;
@@ -82,22 +83,22 @@ header {
 }
 
 .htitle {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 800;
+  font-family: 'Lora', serif;
+  font-size: clamp(42px, 7.5vw, 96px);
+  font-weight: 700;
   line-height: 0.95;
-  letter-spacing: -3px;
+  letter-spacing: -1px;
   color: var(--ink);
   margin-bottom: 20px;
 }
 
 .htitle em {
-  font-style: normal;
+  font-style: italic;
   color: var(--teal);
 }
 
 .hsub {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 17px;
   font-weight: 400;
   color: var(--dim);
@@ -109,21 +110,22 @@ header {
 .hquote {
   display: inline-block;
   max-width: 540px;
+  font-family: 'Lora', serif;
   font-size: 15px;
+  font-style: italic;
   color: var(--mid);
   line-height: 1.8;
   padding: 20px 28px;
   border-left: 3px solid var(--teal);
-  border-right: 3px solid var(--teal);
   background: var(--teal-lt);
-  border-radius: 4px;
-  text-align: center;
+  border-radius: 0 4px 4px 0;
+  text-align: left;
 }
 
 .hquote cite {
   display: block;
   font-style: normal;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -134,7 +136,7 @@ header {
 
 .inst {
   margin-top: 32px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 3px;
@@ -228,16 +230,17 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 22px;
+  padding: 20px 22px;
+  min-height: 64px;
 }
 
 .ncard-left { flex: 1; }
 
 .nname {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 3vw, 26px);
+  font-family: 'Lora', serif;
+  font-size: clamp(20px, 3vw, 26px);
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   color: var(--ink);
   line-height: 1.1;
   margin-bottom: 5px;
@@ -246,7 +249,7 @@ header {
 .name-row.open .nname { color: var(--teal-dark); }
 
 .nmeaning {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: var(--dim);
@@ -268,7 +271,7 @@ header {
   overflow: hidden;
   transition: max-height 0.65s cubic-bezier(.16,1,.3,1);
 }
-.name-row.open .ncard-body { max-height: 640px; }
+.name-row.open .ncard-body { max-height: 1200px; }
 
 .ncard-inner {
   padding: 0 22px 22px;
@@ -288,7 +291,7 @@ header {
 }
 
 .ncol-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -299,7 +302,7 @@ header {
 }
 
 .ncol-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14.5px;
   color: var(--mid);
   line-height: 1.78;
@@ -317,7 +320,7 @@ header {
 }
 
 .nprophecy-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -328,7 +331,7 @@ header {
 }
 
 .nprophecy-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   color: var(--mid);
   line-height: 1.75;
@@ -338,6 +341,7 @@ header {
 
 .npark-quote {
   margin-top: 12px;
+  font-family: 'Lora', serif;
   font-size: 13px;
   font-style: italic;
   color: var(--dim);
@@ -348,7 +352,7 @@ header {
 .npark-quote cite {
   display: block;
   font-style: normal;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -377,7 +381,7 @@ header {
 .ref-divider.show { opacity: 1; }
 .ref-line { flex: 1; height: 1px; background: var(--teal-bd); }
 .ref-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -403,18 +407,18 @@ header {
 }
 
 .ref-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(28px, 5vw, 60px);
-  font-weight: 800;
-  letter-spacing: -2px;
+  font-family: 'Lora', serif;
+  font-size: clamp(26px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
   color: var(--ink);
   margin-bottom: 24px;
-  line-height: 1.1;
+  line-height: 1.15;
 }
-.ref-title em { color: var(--teal); font-style: normal; }
+.ref-title em { color: var(--teal); font-style: italic; }
 
 .ref-body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   color: var(--mid);
   line-height: 1.85;
@@ -434,13 +438,13 @@ header {
 }
 
 .ref-name-tag {
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--dim);
-  padding: 4px 12px;
+  padding: 6px 14px;
   border: 1px solid var(--grey-bd);
   border-radius: 100px;
   transition: all 0.35s;
@@ -453,7 +457,7 @@ header {
 
 .ref-progress {
   margin-top: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -464,7 +468,7 @@ header {
 .reset-btn {
   display: none;
   margin: 24px auto 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -501,13 +505,13 @@ header {
 .sticky-nav.visible { transform: translateY(0); }
 
 .snav-back {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: var(--grey);
   background: none;
   border: 1px solid var(--grey-bd);
-  padding: 5px 12px;
+  padding: 7px 14px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
@@ -515,24 +519,26 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  min-height: 36px;
 }
 .snav-back:hover { color: var(--teal); border-color: var(--teal-bd); background: var(--teal-lt); }
 
 .snav-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
   color: var(--ink);
   letter-spacing: 0.2px;
 }
 
 .snav-progress {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 600;
   color: var(--teal);
   letter-spacing: 0.5px;
-  min-width: 72px;
+  min-width: 52px;
   text-align: right;
 }
 
@@ -542,10 +548,25 @@ header { padding-top: 96px; }
 /* mobile */
 @media(max-width:600px){
   .name-row { grid-template-columns: 52px 1fr; }
-  .gcircle { width: 36px; height: 36px; font-size: 9px; }
+  .gcircle { width: 44px; height: 44px; font-size: 10px; }
   .conn { padding-left: 25px; }
-  .htitle { letter-spacing: -2px; }
+  .htitle { letter-spacing: -0.5px; }
   .snav-title { display: none; }
+  .ncard-top { padding: 16px 16px; }
+  .ncard-inner { padding: 0 16px 18px; }
+  .ncol-text { font-size: 14px; }
+  .nprophecy { padding: 12px 14px; }
+  .nprophecy-text { font-size: 13.5px; }
+  .nmeaning { font-size: 11px; }
+  header { padding-left: 16px; padding-right: 16px; }
+  .hquote { padding: 16px 18px; font-size: 14px; }
+  .hsub { font-size: 15px; }
+}
+
+@media(max-width:380px){
+  .gcircle { width: 38px; height: 38px; font-size: 9px; }
+  .name-row { grid-template-columns: 46px 1fr; }
+  .conn { padding-left: 21px; }
 }
 </style>
 </head>
@@ -561,7 +582,7 @@ header { padding-top: 96px; }
 <header>
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0">
     <div class="htag">The Genesis Genealogies · Abraham Park · Bab 10</div>
-    <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:#6d6e70;background:#ffffff;border:1px solid #e8e9ea;padding:6px 14px;border-radius:6px;cursor:pointer">← Beranda</button>
+    <button onclick="window.location.href='index.html'" style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#6d6e70;background:#ffffff;border:1px solid #e8e9ea;padding:6px 14px;border-radius:6px;cursor:pointer">← Beranda</button>
   </div>
   <h1 class="htitle">Sepuluh Nama,<br><em>Satu Kisah</em></h1>
   <p class="hsub">Dari Adam hingga Nuh — setiap nama adalah saksi. Setiap makna, sekilas gambaran tentang Dia yang akan datang.</p>
@@ -575,7 +596,7 @@ header { padding-top: 96px; }
 <div class="names-wrap">
 
   <!-- 1. ADAM -->
-  <div class="name-row" id="r0" onclick="tog(0)">
+  <div class="name-row" id="r0" onclick="tog(0)" role="button" aria-expanded="false" aria-label="Adam — buka untuk membaca kesaksiannya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc0">I</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -950,14 +971,26 @@ header { padding-top: 96px; }
   </div>
 
   <!-- CTA after completion -->
-  <div id="next-cta" style="display:none;margin-top:28px;padding:28px 24px;background:#f4f5f6;border-radius:12px;text-align:center">
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin-bottom:6px">Kesepuluh saksi sudah didengar</p>
-    <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;line-height:1.6">Sekarang baca mereka dalam konteks penuhnya — atau lihat di mana mereka berdiri dalam peta besar dua jalur silsilah.</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
-      <button onclick="window.location.href='reading-journey.html'" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:11px 22px;border-radius:8px;cursor:pointer">📖 Reading Companion — Bab 10</button>
-      <button onclick="window.location.href='two-rivers-timeline.html'" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:11px 22px;border-radius:8px;cursor:pointer">🌊 Two Rivers Timeline</button>
+  <div id="next-cta" style="display:none;margin-top:28px;text-align:center">
+    <div style="padding:28px 24px;background:#f0faf9;border:1px solid rgba(23,167,157,0.2);border-radius:12px;margin-bottom:12px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#17a79d;margin-bottom:6px">Kesepuluh saksi sudah didengar</p>
+      <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;line-height:1.6">Sekarang baca mereka dalam konteks penuhnya — atau lihat di mana mereka berdiri dalam peta besar dua jalur silsilah.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
+        <button onclick="window.location.href='reading-journey.html'" style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:11px 22px;border-radius:8px;cursor:pointer">📖 Reading Companion — Bab 10</button>
+        <button onclick="window.location.href='two-rivers-timeline.html'" style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:11px 22px;border-radius:8px;cursor:pointer">🌊 Two Rivers Timeline</button>
+      </div>
+      <button onclick="window.location.href='index.html'" style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#6d6e70;background:transparent;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← Kembali ke Beranda</button>
     </div>
-    <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:12px;font-weight:500;color:#6d6e70;background:transparent;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← Kembali ke Beranda</button>
+
+    <div style="padding:28px 24px;background:#ffffff;border:1px solid #e0e0e0;border-radius:12px">
+      <p style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin-bottom:8px">Belum punya bukunya?</p>
+      <p style="font-family:'Lora',serif;font-size:18px;font-weight:700;color:#1a1f1f;margin-bottom:6px;line-height:1.3">The Genesis Genealogies</p>
+      <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;line-height:1.6">Kesepuluh nama yang baru kamu baca hanya Bab 10. Ada 14 bab lagi — dan setiap bab membuka lapisan baru. Buku ini adalah sumbernya.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a href="https://sejarahpenebusan.com/buku" target="_blank" style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:#ffffff;background:#17a79d;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">Beli Buku →</a>
+        <a href="https://sejarahpenebusan.com/buku" target="_blank" style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:12px 24px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">Info Buku ↗</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -974,15 +1007,26 @@ window.addEventListener('scroll', function() {
   }
 });
 
+// Keyboard support for accordion rows
+document.addEventListener('keydown', function(e) {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('name-row')) {
+    e.preventDefault();
+    var id = e.target.id.replace('r','');
+    tog(parseInt(id));
+  }
+});
+
 function tog(i) {
   var row = document.getElementById('r' + i);
   var isOpen = row.classList.contains('open');
   if (isOpen) {
     row.classList.remove('open');
+    row.setAttribute('aria-expanded', 'false');
     var idx = state.indexOf(i);
     if (idx > -1) state.splice(idx, 1);
   } else {
     row.classList.add('open');
+    row.setAttribute('aria-expanded', 'true');
     if (state.indexOf(i) === -1) state.push(i);
   }
   update();

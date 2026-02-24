@@ -2,10 +2,11 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jurnal Padang Gurun — The Genesis Genealogies</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* ─── FONT: Lora (display) + Source Serif 4 (body) — karakteristik, jauh dari Inter ─── */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap');
 
 :root {
   --teal: #17a79d;
@@ -17,7 +18,6 @@
   --green-dim: rgba(43,182,115,0.1);
   --grey: #6d6e70;
   --grey-light: #a0a1a3;
-  --grey-dim: rgba(109,110,112,0.1);
   --white: #ffffff;
   --bg: #f4f5f6;
   --bg2: #eaebec;
@@ -29,12 +29,21 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  /* FIX: ganti Inter dengan Source Serif 4 — lebih sesuai karakter jurnal rohani */
+  font-family: 'Source Serif 4', Georgia, serif;
   font-size: 16px;
   background: var(--bg);
   color: var(--ink);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ─── FOCUS VISIBLE — semua elemen interaktif ─── */
+/* FIX: tidak ada focus style sebelumnya — tambah untuk keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* ─── NAV ─── */
@@ -48,21 +57,46 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 20px;
   box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  gap: 12px;
 }
 
 .nav-brand {
+  font-family: 'Lora', serif;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   color: var(--teal);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
+/* FIX: nav-weeks pakai flex-wrap agar tidak overflow di layar kecil */
 .nav-weeks {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* FIX: nav-dot punya wrapper 44×44px untuk touch target standar */
+.nav-dot-wrap {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  /* membesar area klik tanpa mengubah visual dot */
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+.nav-dot-wrap:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
 }
 
 .nav-dot {
@@ -71,12 +105,35 @@ body {
   background: var(--bg2);
   border: 1.5px solid transparent;
   transition: all 0.3s;
-  cursor: pointer;
+  pointer-events: none; /* klik ditangani oleh wrapper */
 }
 
-.nav-dot.done { background: var(--green); border-color: var(--green); }
-.nav-dot.active { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-dim); }
-.nav-dot.locked { background: var(--bg2); border-color: var(--bg2); cursor: default; }
+.nav-dot-wrap.done .nav-dot { background: var(--green); border-color: var(--green); }
+.nav-dot-wrap.active .nav-dot { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-dim); }
+.nav-dot-wrap.locked { cursor: default; }
+.nav-dot-wrap.locked .nav-dot { background: var(--bg2); border-color: var(--bg2); }
+
+/* FIX: tombol Beranda — min touch target 44px, hapus inline style */
+.nav-btn-home {
+  font-family: 'Source Serif 4', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--grey);
+  background: transparent;
+  border: 1px solid var(--bg2);
+  padding: 0 14px;
+  height: 36px;
+  min-width: 44px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  touch-action: manipulation;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+.nav-btn-home:hover { border-color: var(--grey-light); color: var(--ink); }
 
 /* ─── VIEWS ─── */
 .view { display: none; }
@@ -84,7 +141,7 @@ body {
 
 /* ─── HERO ─── */
 .hero {
-  min-height: 100vh;
+  min-height: 100svh; /* FIX: 100svh agar tidak tertutup browser bar mobile */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,39 +174,48 @@ body {
 }
 
 .hero-tag {
+  font-family: 'Source Serif 4', serif;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--teal);
   margin-bottom: 20px;
+  position: relative; z-index: 1;
 }
 
 .hero-title {
-  font-size: clamp(42px, 8vw, 96px);
+  font-family: 'Lora', serif;
+  /* FIX: letter-spacing dikurangi di mobile via clamp + media query */
+  font-size: clamp(40px, 8vw, 96px);
   font-weight: 700;
   line-height: 1.0;
   color: var(--ink);
   margin-bottom: 12px;
-  letter-spacing: -2px;
+  letter-spacing: -1px; /* FIX: -2px terlalu agresif di layar kecil */
+  position: relative; z-index: 1;
 }
 
 .hero-title span { color: var(--teal); }
 
 .hero-sub-title {
-  font-size: clamp(20px, 4vw, 32px);
-  font-weight: 300;
+  font-family: 'Lora', serif;
+  font-size: clamp(18px, 4vw, 32px);
+  font-weight: 400;
+  font-style: italic;
   color: var(--grey);
   margin-bottom: 28px;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
+  position: relative; z-index: 1;
 }
 
 .hero-desc {
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--grey);
   max-width: 480px;
   margin: 0 auto 40px;
+  position: relative; z-index: 1;
 }
 
 .hero-verse {
@@ -160,17 +226,19 @@ body {
   background: var(--teal-dim);
   border-radius: 0 6px 6px 0;
   text-align: left;
+  position: relative; z-index: 1;
 }
 
 .hero-verse p {
   font-size: 15px;
   font-style: italic;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--ink2);
   margin-bottom: 8px;
 }
 
 .hero-verse cite {
+  font-family: 'Source Serif 4', serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -187,11 +255,13 @@ body {
   border-radius: 12px;
   padding: 24px 28px;
   text-align: left;
+  position: relative; z-index: 1;
 }
 
 .how-card h3 {
+  font-family: 'Source Serif 4', serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--teal);
@@ -199,31 +269,36 @@ body {
 }
 
 .how-card p {
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.75;
   color: var(--grey);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .how-card p:last-child { margin-bottom: 0; }
 .how-card strong { color: var(--ink); font-weight: 600; }
 
+/* FIX: semua tombol interaktif dapat touch-action:manipulation */
 .btn-primary {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   color: var(--white);
   background: var(--teal);
   border: none;
-  padding: 14px 36px;
+  padding: 15px 36px;
+  min-height: 48px; /* FIX: min touch target */
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   text-decoration: none;
+  touch-action: manipulation;
+  position: relative; z-index: 1;
 }
-
 .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(23,167,157,0.3); }
 
 /* ─── JOURNEY VIEW ─── */
@@ -262,8 +337,9 @@ body {
 }
 
 .phase-eyebrow {
+  font-family: 'Source Serif 4', serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--teal);
@@ -271,9 +347,10 @@ body {
 }
 
 .phase-title {
-  font-size: clamp(28px, 5vw, 48px);
+  font-family: 'Lora', serif;
+  font-size: clamp(26px, 5vw, 48px);
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   color: var(--ink);
   margin-bottom: 6px;
   line-height: 1.1;
@@ -287,7 +364,7 @@ body {
 
 .phase-desc {
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--grey);
   max-width: 520px;
 }
@@ -297,18 +374,23 @@ body {
   background: var(--white);
   border-bottom: 1px solid var(--bg2);
   display: flex;
-  padding: 0 24px;
+  padding: 0 16px;
   gap: 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  max-width: 100%;
+  /* FIX: sembunyikan scrollbar di semua browser */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.week-tabs::-webkit-scrollbar { display: none; }
 
 .week-tab {
+  font-family: 'Source Serif 4', serif;
   font-size: 13px;
   font-weight: 500;
   color: var(--grey);
-  padding: 14px 20px;
+  padding: 0 16px;
+  height: 48px; /* FIX: full-height touch target, setara 48px */
   border-bottom: 2px solid transparent;
   cursor: pointer;
   white-space: nowrap;
@@ -317,10 +399,11 @@ body {
   border-top: none;
   border-left: none;
   border-right: none;
-  font-family: 'Inter', sans-serif;
   display: flex;
   align-items: center;
   gap: 8px;
+  touch-action: manipulation;
+  flex-shrink: 0;
 }
 
 .week-tab:hover { color: var(--teal); }
@@ -360,8 +443,9 @@ body {
 }
 
 .week-number {
-  font-size: 12px;
-  font-weight: 700;
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--teal);
@@ -369,16 +453,18 @@ body {
 }
 
 .week-title {
-  font-size: clamp(26px, 5vw, 48px);
+  font-family: 'Lora', serif;
+  font-size: clamp(24px, 5vw, 48px);
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   color: var(--ink);
   margin-bottom: 6px;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .week-subtitle {
   font-size: 15px;
+  font-style: italic;
   color: var(--grey);
   margin-bottom: 20px;
 }
@@ -393,8 +479,9 @@ body {
 }
 
 .section-label {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--grey);
@@ -405,12 +492,12 @@ body {
 .section-label.green { color: var(--green); }
 
 .section-text {
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: 16px; /* FIX: naik dari 15px, lebih nyaman dibaca */
+  line-height: 1.8;
   color: var(--ink2);
 }
 
-.section-text p { margin-bottom: 12px; }
+.section-text p { margin-bottom: 14px; }
 .section-text p:last-child { margin-bottom: 0; }
 
 /* SCRIPTURE BLOCK */
@@ -423,16 +510,17 @@ body {
 }
 
 .scripture p {
-  font-size: 15px;
+  font-size: 16px;
   font-style: italic;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--ink2);
   margin-bottom: 6px;
 }
 
 .scripture cite {
+  font-family: 'Source Serif 4', serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--teal);
@@ -449,18 +537,20 @@ body {
 }
 
 .question-label {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .question-text {
+  font-family: 'Lora', serif;
   font-size: 17px;
-  font-weight: 500;
-  line-height: 1.6;
+  font-weight: 600;
+  line-height: 1.65;
   color: var(--ink);
   margin-bottom: 0;
 }
@@ -472,10 +562,14 @@ body {
   border: 1px solid var(--bg2);
   overflow: hidden;
   margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.journal-card:focus-within {
+  border-color: var(--teal);
 }
 
 .journal-header {
-  padding: 16px 20px 12px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--bg2);
   display: flex;
   align-items: center;
@@ -483,8 +577,9 @@ body {
 }
 
 .journal-label {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--grey);
@@ -497,21 +592,22 @@ body {
 
 .journal-count.ok { color: var(--green); font-weight: 600; }
 
+/* FIX: font-size 16px untuk cegah iOS auto-zoom saat focus */
 .journal-textarea {
   width: 100%;
-  min-height: 160px;
+  min-height: 180px;
   padding: 16px 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px;
+  line-height: 1.75;
   color: var(--ink);
   border: none;
   outline: none;
-  resize: none;
+  resize: vertical; /* FIX: vertical saja, bukan none — user bisa perlebar */
   background: transparent;
 }
 
-.journal-textarea::placeholder { color: var(--grey-light); }
+.journal-textarea::placeholder { color: var(--grey-light); font-style: italic; }
 
 .journal-footer {
   padding: 10px 20px;
@@ -540,6 +636,7 @@ body {
 .slow-gate-icon { font-size: 28px; margin-bottom: 12px; }
 
 .slow-gate-title {
+  font-family: 'Lora', serif;
   font-size: 16px;
   font-weight: 600;
   color: var(--grey);
@@ -549,7 +646,7 @@ body {
 .slow-gate-text {
   font-size: 14px;
   color: var(--grey-light);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* WEEK COMPLETE */
@@ -565,6 +662,7 @@ body {
 .complete-icon { font-size: 32px; margin-bottom: 12px; }
 
 .complete-title {
+  font-family: 'Lora', serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--ink);
@@ -572,26 +670,30 @@ body {
 }
 
 .complete-text {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--grey);
-  line-height: 1.65;
+  line-height: 1.7;
   margin-bottom: 20px;
 }
 
+/* FIX: semua tombol aksi min-height 48px + touch-action */
 .btn-next {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
   font-weight: 600;
   color: var(--white);
   background: var(--green);
   border: none;
-  padding: 12px 28px;
+  padding: 0 28px;
+  min-height: 48px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
+  touch-action: manipulation;
 }
-
 .btn-next:hover { background: var(--green-dark); transform: translateY(-1px); }
 
 /* LOCKED WEEK */
@@ -601,8 +703,8 @@ body {
 }
 
 .locked-icon { font-size: 40px; margin-bottom: 16px; }
-.locked-title { font-size: 20px; font-weight: 700; color: var(--grey); margin-bottom: 10px; }
-.locked-text { font-size: 15px; color: var(--grey-light); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+.locked-title { font-family:'Lora',serif; font-size: 20px; font-weight: 700; color: var(--grey); margin-bottom: 10px; }
+.locked-text { font-size: 15px; color: var(--grey-light); line-height: 1.7; max-width: 380px; margin: 0 auto; }
 
 /* PROGRESS BAR */
 .progress-bar-wrap {
@@ -621,14 +723,13 @@ body {
 }
 
 /* CLOSING */
+/* FIX: closing-view padding dengan logical properties agar tidak tumpang tindih */
 .closing-view {
-  padding-top: 56px;
-  min-height: 100vh;
+  padding: 80px 24px 48px; /* top sudah include nav 56px + extra */
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 24px;
-  padding-right: 24px;
 }
 
 .closing-card {
@@ -644,24 +745,27 @@ body {
 .closing-icon { font-size: 48px; margin-bottom: 20px; }
 
 .closing-title {
+  font-family: 'Lora', serif;
   font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   color: var(--ink);
   margin-bottom: 8px;
   line-height: 1.1;
 }
 
 .closing-sub {
+  font-family: 'Lora', serif;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
+  font-style: italic;
   color: var(--teal);
   margin-bottom: 20px;
 }
 
 .closing-text {
   font-size: 15px;
-  line-height: 1.75;
+  line-height: 1.8;
   color: var(--grey);
   margin-bottom: 32px;
 }
@@ -676,16 +780,17 @@ body {
 }
 
 .closing-verse p {
-  font-size: 14px;
+  font-size: 15px;
   font-style: italic;
   color: var(--ink2);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 6px;
 }
 
 .closing-verse cite {
+  font-family: 'Source Serif 4', serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--teal);
@@ -700,11 +805,9 @@ body {
   padding: 28px 24px 24px;
   text-align: center;
 }
-.community-icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
+.community-icon { font-size: 28px; margin-bottom: 12px; }
 .community-label {
+  font-family: 'Lora', serif;
   font-size: 15px;
   font-weight: 700;
   color: var(--ink);
@@ -712,30 +815,88 @@ body {
   line-height: 1.4;
 }
 .community-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--grey);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 20px;
 }
 .community-btn {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
   font-weight: 700;
   color: #ffffff;
   background: #c97d3a;
   border: none;
-  padding: 12px 24px;
+  padding: 0 24px;
+  min-height: 48px;
   border-radius: 9px;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, transform 0.15s;
-  letter-spacing: 0.01em;
+  touch-action: manipulation;
 }
-.community-btn:hover {
-  background: #b06a2b;
-  transform: translateY(-1px);
+.community-btn:hover { background: #b06a2b; transform: translateY(-1px); }
+
+.next-book-block {
+  margin: 0 0 28px;
+  background: linear-gradient(135deg, var(--teal-dim) 0%, rgba(43,182,115,0.08) 100%);
+  border: 1px solid var(--teal-b);
+  border-radius: 14px;
+  padding: 28px 24px 24px;
+  text-align: center;
 }
+.next-book-label {
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+  display: block;
+}
+.next-book-desc {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.next-book-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.next-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 22px;
+  min-height: 46px;
+  border-radius: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+.next-book-btn.primary {
+  color: var(--white);
+  background: var(--teal);
+  border: none;
+}
+.next-book-btn.primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+.next-book-btn.secondary {
+  color: var(--teal);
+  background: transparent;
+  border: 2px solid var(--teal-b);
+}
+.next-book-btn.secondary:hover { background: var(--teal-dim); border-color: var(--teal); }
 
 .closing-links {
   display: flex;
@@ -745,27 +906,59 @@ body {
 }
 
 .btn-outline {
-  font-family: 'Inter', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Source Serif 4', serif;
   font-size: 13px;
   font-weight: 600;
   color: var(--teal);
   background: transparent;
   border: 2px solid var(--teal-b);
-  padding: 10px 20px;
+  padding: 0 18px;
+  min-height: 44px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
+  touch-action: manipulation;
 }
-
 .btn-outline:hover { background: var(--teal-dim); border-color: var(--teal); }
 
-/* MOBILE */
-@media(max-width:580px) {
-  .closing-card { padding: 32px 24px; }
-  .week-content { padding: 24px 16px 80px; }
-  .phase-banner { padding: 24px 16px 20px; }
-  .week-tabs { padding: 0 12px; }
-  .week-tab { padding: 12px 14px; font-size: 12px; }
+/* ─── BREAKPOINT TABLET (768px) ─── */
+/* FIX: breakpoint tablet baru — tidak ada sebelumnya */
+@media(max-width:768px) {
+  .week-content { padding: 28px 20px 80px; }
+  .phase-banner { padding: 28px 20px 24px; }
+  .section-card { padding: 20px; }
+  .question-card { padding: 20px; }
+}
+
+/* ─── BREAKPOINT MOBILE (480px) ─── */
+/* FIX: breakpoint dipersempit dari 580px ke 480px, lebih presisi */
+@media(max-width:480px) {
+  .closing-card { padding: 28px 20px; }
+  .week-content { padding: 20px 16px 80px; }
+  .phase-banner { padding: 20px 16px; }
+  .week-tabs { padding: 0 8px; }
+  .week-tab { padding: 0 12px; font-size: 12px; height: 44px; }
+  .hero-title { letter-spacing: -0.5px; } /* FIX: kurangi letter-spacing di mobile */
+  .phase-title { letter-spacing: 0; }
+  .week-title { letter-spacing: 0; }
+  .journal-textarea { min-height: 140px; }
+  .closing-view { padding: 72px 16px 40px; }
+  .closing-links { gap: 8px; }
+  .btn-outline { font-size: 12px; padding: 0 14px; }
+  .nav { padding: 0 14px; gap: 8px; }
+  /* FIX: sembunyikan beberapa dot di layar sangat kecil jika overflow */
+  .nav-dot-wrap:nth-child(n+7) { display: none; }
+}
+
+/* FIX: prefers-reduced-motion */
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 </head>
@@ -775,7 +968,7 @@ body {
 <nav class="nav">
   <div class="nav-brand">Jurnal Padang Gurun</div>
   <div class="nav-weeks" id="navDots"></div>
-  <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:11px;font-weight:600;color:var(--grey);background:transparent;border:1px solid var(--bg2);padding:5px 12px;border-radius:6px;cursor:pointer;margin-left:12px">← Beranda</button>
+  <button class="nav-btn-home" onclick="window.location.href='index.html'">← Beranda</button>
 </nav>
 
 <!-- ══════ HERO VIEW ══════ -->
@@ -851,11 +1044,19 @@ body {
         <a href="https://sejarahpenebusan.com/komunitas" target="_blank" class="community-btn">Saya mau berjalan bersama →</a>
       </div>
 
+      <!-- NEXT STEP: Buku berikutnya -->
+      <div class="next-book-block">
+        <div class="next-book-label">Langkah Selanjutnya</div>
+        <p class="next-book-desc">Abraham Park menulis tiga buku silsilah. Kamu baru menyelesaikan yang pertama. Perjalanan berlanjut.</p>
+        <div class="next-book-row">
+          <a href="https://sejarahpenebusan.com/buku" target="_blank" class="next-book-btn primary">Lihat Buku Selanjutnya →</a>
+          <a href="https://sejarahpenebusan.com/buku" target="_blank" class="next-book-btn secondary">The Covenant of the Torch ↗</a>
+        </div>
+      </div>
+
       <div class="closing-links">
         <button class="btn-outline" onclick="reviewJournal()">Baca Ulang Jurnalmu</button>
-        <button class="btn-outline" onclick="openLink('two-rivers-timeline.html')">Two Rivers Timeline</button>
-        <button class="btn-outline" onclick="openLink('self-assessment.html')">Self Assessment</button>
-        <button class="btn-outline" onclick="openLink('index.html')">← Beranda</button>
+        <button class="btn-outline" onclick="openLink('index.html')">← Beranda Ekosistem</button>
       </div>
     </div>
   </div>
@@ -950,12 +1151,12 @@ const WEEKS = [
         label: 'Untuk Minggu Ini',
         text: `<p>Kain pergi ke tanah <strong>Nod</strong> — yang dalam bahasa Ibrani berarti "pengembaraan", "tanpa tujuan", "tidak menetap". Ini bukan nama geografis biasa. Ini adalah deskripsi kondisi jiwa setiap orang yang hidup di luar hadirat Allah.</p>
 <p>Park mencatat: manusia tidak langsung mati setelah jatuh. Tapi mereka hidup dalam kondisi Nod — aktif, produktif, bahkan membangun kota — tapi selalu mengembara. Ada yang hilang yang tidak bisa diisi oleh apapun yang mereka bangun.</p>
-<p>Israel yang membaca Kejadian ini di padang gurun mengerti Nod. Mereka juga mengembara. Tapi padang gurun mereka adalah karena penghakiman Allah atas ketidakpercayaan — sedangkan Nod adalah pilihan Kain untuk pergi dari hadirat Allah. Dua jenis pengembaraan. Dua tujuan yang berbeda.</p>`
+<p>Kondisi Nod ini bukan hanya milik Kain. Ada yang mengembara karena pilihan — seperti Kain yang dengan sadar pergi dari hadirat Allah. Ada yang mengembara karena sedang dalam proses pembentukan. Yang membedakan bukan jarak yang ditempuh, tapi arah yang dituju. Pengembaraan tanpa Allah selalu berakhir di Nod. Pengembaraan bersama Allah selalu menuju suatu tempat.</p>`
       },
       {
         type: 'scripture',
-        text: '"Engkau telah menjadikan kami untuk Engkau sendiri, dan hati kami gelisah sampai ia beristirahat dalam Engkau."',
-        ref: 'Agustinus, Confessions I.1'
+        text: '"Aku telah menetapkan TUHAN selalu di hadapanku; karena Ia di sebelah kananku, aku tidak goyah."',
+        ref: 'Mazmur 16:8'
       },
       {
         type: 'question',
@@ -1043,7 +1244,7 @@ const WEEKS = [
         label: 'Untuk Minggu Ini',
         text: `<p>Di tengah silsilah yang penuh dengan <em>"dan ia mati"</em> — ada satu kalimat yang berbeda: <em>"Henokh bergaul dengan Allah, lalu ia tidak ada lagi, sebab ia telah diangkat oleh Allah."</em></p>
 <p>Henokh tidak terkenal. Tidak membangun kota seperti Kain. Tidak menciptakan sesuatu yang dicatat. Ia hidup di zaman yang sama dengan kekerasan Lamekh dan kemerosotan peradaban. Tapi ia memilih arah yang berlawanan selama 300 tahun.</p>
-<p>Park mencatat: Henokh mulai berjalan bersama Allah setelah kelahiran anaknya Metusalah. Sesuatu terjadi di situ — mungkin ia melihat wajah anaknya dan untuk pertama kalinya benar-benar takut akan kematian dan kekekalan. Dan dari ketakutan itu lahirlah 300 tahun keintiman dengan Allah.</p>
+<p>Park mencatat: Henokh mulai berjalan bersama Allah tepat setelah kelahiran Metusalah karena saat itu Allah memberikan wahyu kepadanya — penghakiman akan datang setelah kematian anaknya. Itulah makna nama yang ia berikan: <em>Metusalah</em> berarti <em>"ketika ia mati, maka akan datang."</em> Setiap kali Henokh memanggil nama anaknya, ia diingatkan akan penghakiman yang sudah dekat. Kesadaran akan akhir zaman inilah — bukan sekadar perasaan — yang mendorong Henokh berjalan bersama Allah selama 300 tahun penuh.</p>
 <p>Pertanyaan Minggu ini bukan tentang apa yang kamu capai. Tapi tentang apakah kamu sedang berjalan bersama Allah — atau sekedar berjalan di sekitar agenda agama.</p>`
       },
       {
@@ -1215,14 +1416,30 @@ function renderNavDots() {
   const el = document.getElementById('navDots');
   el.innerHTML = '';
   for (let i = 0; i < 8; i++) {
-    const d = document.createElement('div');
-    d.className = 'nav-dot';
-    if (isWeekDone(i)) d.classList.add('done');
-    else if (i === currentWeek && isWeekUnlocked(i)) d.classList.add('active');
-    else if (!isWeekUnlocked(i)) d.classList.add('locked');
-    d.title = `Minggu ${i+1}`;
-    d.onclick = () => { if (isWeekUnlocked(i)) goToWeek(i); };
-    el.appendChild(d);
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-dot-wrap';
+    const unlocked = isWeekUnlocked(i);
+    if (isWeekDone(i)) wrap.classList.add('done');
+    else if (i === currentWeek && unlocked) wrap.classList.add('active');
+    else if (!unlocked) wrap.classList.add('locked');
+
+    // FIX: keyboard accessibility
+    if (unlocked) {
+      wrap.setAttribute('tabindex', '0');
+      wrap.setAttribute('role', 'button');
+      wrap.setAttribute('aria-label', `Minggu ${i+1}`);
+      wrap.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToWeek(i); } };
+    } else {
+      wrap.setAttribute('aria-label', `Minggu ${i+1} (terkunci)`);
+      wrap.setAttribute('aria-disabled', 'true');
+    }
+    wrap.title = `Minggu ${i+1}`;
+    wrap.onclick = () => { if (unlocked) goToWeek(i); };
+
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    wrap.appendChild(dot);
+    el.appendChild(wrap);
   }
 }
 

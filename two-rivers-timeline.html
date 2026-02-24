@@ -2,211 +2,464 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Two Rivers — The Genesis Genealogies</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ─── RESET & BASE ─────────────────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{background:#f8faf9;color:#6d6e70;font-family:'Inter',sans-serif;overflow-x:hidden;font-size:16px;line-height:1.6}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:56px;background:#ffffff;border-bottom:2px solid #17a79d;box-shadow:0 2px 12px rgba(23,167,157,0.08)}
-.brand{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:2px;color:#17a79d;text-transform:uppercase;font-weight:600}
-.tabs{display:flex;gap:4px}
-.tab{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6d6e70;padding:7px 14px;border-radius:4px;cursor:pointer;border:1px solid transparent;background:none;font-weight:500;transition:all .2s}
-.tab:hover{color:#17a79d;background:rgba(23,167,157,0.07)}
-.tab.on{color:#17a79d;border-color:rgba(23,167,157,0.4);background:rgba(23,167,157,0.1)}
-
-/* VIEWS — no display:none in CSS at all */
-.view{padding-top:16px;min-height:600px}
-
-/* SECTION HEAD */
-.sh{text-align:center;padding:36px 20px 28px}
-.sh h2{font-family:'Inter',sans-serif;font-size:clamp(28px,5vw,60px);font-weight:300;color:#17a79d;margin-bottom:5px;letter-spacing:-1px}
-.sh p{font-size:15px;color:#6d6e70;font-style:italic}
-
-/* LEGEND */
-.pills{display:flex;gap:7px;padding:12px 16px;flex-wrap:wrap}
-.pill{display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid;font-weight:500}
-.pill.c{color:#e05555;border-color:rgba(224,85,85,0.3);background:rgba(224,85,85,0.08)}
-.pill.s{color:#2bb673;border-color:rgba(43,182,115,0.3);background:rgba(43,182,115,0.08)}
-.pill.e{color:#17a79d;border-color:rgba(23,167,157,0.3);background:rgba(23,167,157,0.08)}
-.pdot{width:5px;height:5px;border-radius:50%}
-.pill.c .pdot{background:#e05555}.pill.s .pdot{background:#2bb673}.pill.e .pdot{background:#17a79d}
-
-/* TIMELINE */
-.tlw{padding:0 12px 80px;max-width:860px;margin:0 auto}
-.tlg{display:grid;grid-template-columns:1fr 40px 1fr;gap:0}
-.col-h{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:10px 6px;margin-bottom:6px;border-radius:4px;font-weight:600}
-.col-h.c{color:#e05555;background:rgba(224,85,85,0.08);border-top:2px solid #e05555}
-.col-h.s{color:#2bb673;background:rgba(43,182,115,0.08);border-top:2px solid #2bb673}
-
-/* CARDS */
-.card{background:#ffffff;border:1px solid rgba(23,167,157,0.15);border-radius:6px;padding:14px 15px;margin:2px 0;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
-.card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .28s}
-.card.cc::after{background:#e05555}.card.sc::after{background:#2bb673}
-.card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(23,167,157,0.14)}
-.card:hover::after{transform:scaleX(1)}
-.card.cc:hover{border-color:rgba(224,85,85,0.3)}.card.sc:hover{border-color:rgba(43,182,115,0.3)}
-.card.hl{box-shadow:0 0 0 2px #17a79d,0 4px 20px rgba(23,167,157,0.15)}
-.cgen{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;font-weight:500}
-.card.cc .cgen{color:rgba(224,85,85,.55)}.card.sc .cgen{color:rgba(43,182,115,.55)}
-.cname{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.2px;margin-bottom:2px}
-.card.cc .cname{color:#e05555}.card.sc .cname{color:#2bb673}
-.cmean{font-size:12px;font-style:italic;color:#6d6e70;margin-bottom:5px}
-.cdesc{font-size:13px;color:#6d6e70;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.ctap{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:.5px;color:#17a79d;margin-top:7px;opacity:.7;font-weight:500}
-
-/* SPINE */
-.spine{display:flex;flex-direction:column;align-items:center;padding:2px 0}
-.sl{width:1px;flex:1;background:rgba(23,167,157,.2);min-height:10px}
-.sd{width:9px;height:9px;border-radius:50%;border:1.5px solid #17a79d;background:#f8faf9;flex-shrink:0;z-index:1}
-.sd.br{background:#17a79d;box-shadow:0 0 8px rgba(23,167,157,0.5)}
-.ce{margin:2px 0;opacity:0;pointer-events:none;min-height:70px}
-.tlfull{grid-column:1/-1}
-.jud{margin:16px 0;padding:16px 22px;background:linear-gradient(135deg,rgba(23,167,157,.06),rgba(43,182,115,.03));border:1px solid rgba(23,167,157,.25);border-radius:6px;text-align:center;cursor:pointer;transition:all .22s}
-.jud:hover{border-color:#17a79d;background:rgba(23,167,157,.08)}
-.jt{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;color:#17a79d;text-transform:uppercase;margin-bottom:4px;font-weight:600}
-.js{font-size:13px;color:#6d6e70;font-style:italic}
-.divr{margin:24px 0;display:flex;align-items:center;gap:10px}
-.dl{flex:1;height:1px;background:rgba(23,167,157,.15)}
-.dlb{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;color:#17a79d;text-transform:uppercase;padding:4px 12px;border:1px solid rgba(23,167,157,.25);border-radius:3px;white-space:nowrap;font-weight:500}
-.cutoff{margin:2px 0;padding:12px 14px;background:rgba(224,85,85,.04);border:1px solid rgba(224,85,85,.2);border-radius:6px;text-align:center;opacity:.6}
-.ct{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;color:#e05555;margin-bottom:5px;text-transform:uppercase;font-weight:500}
-.cx{font-size:12px;color:#6d6e70;font-style:italic;line-height:1.5}
-
-/* CHART */
-.chw{padding:20px 16px 80px;max-width:760px;margin:0 auto}
-.chi{text-align:center;margin-bottom:36px;padding:0 16px}
-.chi p{font-size:15px;font-style:italic;color:#6d6e70;line-height:1.7;max-width:500px;margin:0 auto}
-.chs{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#17a79d;margin-bottom:14px;padding-bottom:9px;border-bottom:2px solid rgba(23,167,157,.2);font-weight:600}
-.bch{margin-bottom:48px}
-.br{display:flex;align-items:center;gap:10px;margin-bottom:8px;cursor:pointer;transition:opacity .2s}
-.br:hover{opacity:.82}
-.bl{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.5px;min-width:92px;text-align:right;flex-shrink:0;font-weight:500}
-.bt{flex:1;height:28px;background:rgba(23,167,157,.06);border-radius:4px;position:relative;overflow:hidden}
-.bf{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:9px;transition:width .85s cubic-bezier(.16,1,.3,1)}
-.bv{font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.5px;white-space:nowrap;font-weight:500}
-.ba{position:absolute;right:7px;top:50%;transform:translateY(-50%);font-size:10px;font-style:italic;color:#17a79d;white-space:nowrap;font-weight:500}
-.br.sb .bl{color:#2bb673}.br.cb .bl{color:#e05555}.br.gb .bl{color:#17a79d}
-.br.sb .bf{background:linear-gradient(to right,#2bb673,rgba(43,182,115,.55))}
-.br.cb .bf{background:linear-gradient(to right,#e05555,rgba(224,85,85,.55))}
-.br.gb .bf{background:linear-gradient(to right,#17a79d,rgba(23,167,157,.45))}
-.chn{font-size:14px;font-style:italic;color:#6d6e70;line-height:1.75;padding:16px 20px;border-left:3px solid #2bb673;background:rgba(43,182,115,0.06);border-radius:0 6px 6px 0;margin-bottom:36px}
-
-/* SEPARATION */
-.spw{padding:20px 16px 80px;max-width:680px;margin:0 auto}
-.spi{text-align:center;margin-bottom:44px}
-.spi p{font-size:15px;font-style:italic;color:#6d6e70;line-height:1.7;max-width:460px;margin:0 auto 14px}
-.spj{position:relative;margin-bottom:52px}
-.spl{position:absolute;left:28px;top:38px;bottom:38px;width:2px;background:linear-gradient(to bottom,rgba(23,167,157,0.4),rgba(43,182,115,.08))}
-.spc{position:relative;margin-left:62px;margin-bottom:22px;background:#ffffff;border:1px solid rgba(23,167,157,.15);border-radius:8px;overflow:hidden;transition:all .22s;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.spc:hover{border-color:rgba(23,167,157,.4);box-shadow:0 6px 20px rgba(23,167,157,.1)}
-.spc.open .spb{display:block}
-.spn{position:absolute;left:-46px;top:20px;width:32px;height:32px;border-radius:50%;border:2px solid rgba(23,167,157,0.4);background:#ffffff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:12px;color:#17a79d;font-weight:700;z-index:1}
-.sph{padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.sph-l{flex:1}
-.splv{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#17a79d;margin-bottom:4px;font-weight:600}
-.sptitle{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;color:#17a79d;line-height:1.2;margin-bottom:3px}
-.spref{font-size:12px;color:#6d6e70;font-style:italic}
-.spchev{color:#17a79d;font-size:14px;transition:transform .28s;flex-shrink:0;margin-top:3px}
-.spc.open .spchev{transform:rotate(180deg)}
-.spb{display:none;padding:16px 18px 18px;border-top:1px solid rgba(23,167,157,.1)}
-.spwhat{font-size:15px;color:#6d6e70;line-height:1.75;margin-bottom:14px}
-.sppain{padding:14px 16px;background:rgba(23,167,157,.05);border-radius:6px;margin-bottom:12px;border:1px solid rgba(23,167,157,.1)}
-.sppain-l{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6d6e70;margin-bottom:5px;font-weight:600}
-.sppain-t{font-size:14px;font-style:italic;color:#6d6e70;line-height:1.6}
-.spq{margin-top:14px;padding:16px;background:rgba(43,182,115,0.07);border-left:3px solid #2bb673;border-radius:0 6px 6px 0}
-.spq-l{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#2bb673;margin-bottom:7px;font-weight:600}
-.spq p{font-size:14px;font-style:italic;line-height:1.65}
-.spsc{margin-top:12px;font-size:13px;font-style:italic;color:#6d6e70;line-height:1.65}
-.spsc cite{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;color:#17a79d;margin-top:5px;font-weight:500}
-.spcls{text-align:center;padding:36px 16px;border-top:1px solid rgba(23,167,157,.12)}
-.spcls h3{font-family:'Inter',sans-serif;font-size:clamp(20px,4vw,48px);font-weight:300;color:#6d6e70;margin-bottom:10px;line-height:1.3}
-.spcls h3 em{color:#17a79d;font-style:normal}
-.spcls p{font-size:14px;color:#6d6e70;font-style:italic}
-.spattern{background:#ffffff;border:1px solid rgba(23,167,157,.15);border-radius:8px;padding:22px;margin-bottom:36px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-.sp-pl{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#17a79d;margin-bottom:12px;font-weight:600}
-.sp-pc{font-size:15px;line-height:1.9;color:#6d6e70}
-.sp-pc span{color:#2bb673;font-weight:500}
-.sp-note{margin-top:14px;font-size:14px;font-style:italic;color:#6d6e70;border-left:3px solid #17a79d;padding-left:14px;line-height:1.65}
-
-/* PANEL */
-.overlay{position:fixed;inset:0;background:rgba(109,110,112,.3);opacity:0;pointer-events:none;transition:opacity .32s;z-index:200}
-.overlay.on{opacity:1;pointer-events:all}
-.panel{position:fixed;right:0;top:0;bottom:0;width:min(400px,100vw);background:#ffffff;border-left:2px solid rgba(23,167,157,.2);transform:translateX(100%);transition:transform .36s cubic-bezier(.16,1,.3,1);z-index:201;overflow-y:auto;padding:52px 24px 40px;box-shadow:-8px 0 40px rgba(23,167,157,.08)}
-.panel.on{transform:translateX(0)}
-.px{position:sticky;top:-52px;margin:-52px -24px 22px;height:52px;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;background:#ffffff;border-bottom:1px solid rgba(23,167,157,.15)}
-.px button{background:none;border:1px solid rgba(23,167,157,.25);color:#6d6e70;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.px button:hover{background:#17a79d;color:#ffffff;border-color:#17a79d}
-.pbadge{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;display:inline-block;margin-bottom:12px;font-weight:600}
-.pbadge.c{color:#e05555;background:rgba(224,85,85,0.08);border:1px solid rgba(224,85,85,0.3)}
-.pbadge.s{color:#2bb673;background:rgba(43,182,115,0.08);border:1px solid rgba(43,182,115,0.3)}
-.pbadge.e{color:#17a79d;background:rgba(23,167,157,0.08);border:1px solid rgba(23,167,157,0.3)}
-.pname{font-family:'Inter',sans-serif;font-size:clamp(32px,6vw,48px);font-weight:300;line-height:1.05;margin-bottom:3px;letter-spacing:-1px}
-.pname.c{color:#e05555}.pname.s{color:#2bb673}.pname.e{color:#17a79d}
-.pmean{font-size:15px;font-style:italic;color:#6d6e70;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid rgba(23,167,157,.12)}
-.psec{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin:18px 0 7px;font-weight:600}
-.pcont{font-size:15px;line-height:1.78;color:#6d6e70}
-.pcont p{margin-bottom:10px}
-.psc{margin-top:18px;padding:14px 16px;background:rgba(23,167,157,.05);border-radius:6px;font-size:14px;font-style:italic;color:#6d6e70;line-height:1.65;border:1px solid rgba(23,167,157,.12)}
-.psc cite{display:block;font-style:normal;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1px;color:#17a79d;margin-top:5px;font-weight:500}
-.pq{margin-top:22px;padding:18px;background:rgba(43,182,115,0.07);border-left:3px solid #2bb673;border-radius:0 6px 6px 0}
-.pql{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2bb673;margin-bottom:9px;font-weight:600}
-.pq p{font-size:15px;font-style:italic;line-height:1.65}
-
-/* HERO */
-.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 80px;background:linear-gradient(180deg,rgba(23,167,157,.04) 0%,transparent 100%)}
-.h-tag{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:3px;color:#17a79d;text-transform:uppercase;margin-bottom:24px;font-weight:600}
-.h-title{font-family:'Inter',sans-serif;font-size:clamp(56px,10vw,96px);font-weight:300;line-height:.95;margin-bottom:18px;color:#17a79d;letter-spacing:-3px}
-.h-title em{font-style:italic;color:#2bb673}
-.h-sub{font-size:clamp(15px,2.5vw,18px);color:#6d6e70;max-width:420px;line-height:1.7;font-style:italic;margin-bottom:44px}
-.h-verse{font-family:'Inter',sans-serif;font-size:15px;font-style:italic;color:#6d6e70;border-left:3px solid #17a79d;padding:12px 20px;text-align:left;max-width:380px;line-height:1.8;margin-bottom:52px;background:rgba(23,167,157,.04);border-radius:0 6px 6px 0}
-.h-verse cite{display:block;font-size:11px;letter-spacing:1.5px;font-style:normal;color:#17a79d;margin-top:7px;font-weight:600}
-.h-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.btn{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border-radius:6px;cursor:pointer;transition:all .22s;border:1px solid;font-weight:600}
-.btn-p{background:#17a79d;border-color:#17a79d;color:#ffffff}
-.btn-p:hover{background:#15968d}
-.btn-g{background:transparent;border-color:rgba(23,167,157,.35);color:#17a79d}
-.btn-g:hover{background:rgba(23,167,157,.07)}
-.closing{text-align:center;padding:90px 24px 70px;background:linear-gradient(180deg,transparent,rgba(43,182,115,.04))}
-.closing h2{font-family:'Inter',sans-serif;font-size:clamp(28px,5vw,60px);font-weight:300;line-height:1.2;margin-bottom:18px;color:#6d6e70;letter-spacing:-1px}
-.closing h2 em{color:#17a79d;font-style:normal}
-.closing p{font-size:15px;color:#6d6e70;font-style:italic;max-width:380px;margin:0 auto 36px}
-.cline{width:48px;height:2px;background:#2bb673;margin:0 auto 32px}
-.cdeut{font-family:'Inter',sans-serif;font-size:15px;font-style:italic;color:#6d6e70;max-width:360px;margin:0 auto;line-height:1.8}
-.cdeut cite{display:block;font-size:11px;font-style:normal;color:#17a79d;letter-spacing:1.5px;margin-top:9px;font-weight:600}
-
-@media(max-width:580px){
-  .ntab,.tab{font-size:9px;letter-spacing:.8px;padding:5px 8px}
-  .spc{margin-left:46px}
-  .spn{left:-32px;width:26px;height:26px;font-size:10px}
-  .spl{left:18px}
+:root{
+  --teal:#17a79d;--teal-light:rgba(23,167,157,.1);--teal-mid:rgba(23,167,157,.25);
+  --red:#d94f4f;--red-light:rgba(217,79,79,.09);--red-mid:rgba(217,79,79,.28);
+  --green:#2bb673;--green-light:rgba(43,182,115,.09);--green-mid:rgba(43,182,115,.3);
+  --ink:#1c1c1e;--muted:#6d6e70;--bg:#f7f9f8;--white:#ffffff;
+  --serif:'Crimson Pro',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --radius:8px;--card-shadow:0 2px 10px rgba(0,0,0,.06);
 }
+html,body{background:var(--bg);color:var(--muted);font-family:var(--sans);overflow-x:hidden;font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--sans);cursor:pointer}
+
+/* ─── NAV ───────────────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:90;
+  display:flex;align-items:center;gap:8px;
+  padding:0 12px;height:52px;
+  background:var(--white);
+  border-bottom:2px solid var(--teal);
+  box-shadow:0 2px 16px rgba(23,167,157,.07);
+}
+.brand{
+  font-family:var(--sans);font-size:11px;letter-spacing:2.5px;
+  color:var(--teal);text-transform:uppercase;font-weight:600;
+  white-space:nowrap;flex-shrink:0;
+}
+.nav-tabs{display:flex;gap:3px;flex:1;justify-content:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab{
+  font-family:var(--sans);font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);padding:8px 13px;border-radius:5px;
+  cursor:pointer;border:1px solid transparent;background:none;font-weight:500;
+  transition:all .2s;white-space:nowrap;min-height:36px;
+}
+.tab:hover{color:var(--teal);background:var(--teal-light)}
+.tab.on{color:var(--teal);border-color:var(--teal-mid);background:var(--teal-light)}
+.nav-home{
+  font-family:var(--sans);font-size:11px;letter-spacing:.8px;
+  color:var(--muted);padding:7px 11px;border-radius:5px;
+  border:1px solid rgba(109,110,112,.2);background:none;
+  transition:all .2s;white-space:nowrap;flex-shrink:0;
+}
+.nav-home:hover{border-color:var(--teal-mid);color:var(--teal)}
+
+/* ─── SECTION HEADER ────────────────────────────────────────── */
+.sh{text-align:center;padding:40px 20px 28px}
+.sh h2{font-family:var(--serif);font-size:clamp(30px,6vw,64px);font-weight:300;color:var(--teal);margin-bottom:6px;letter-spacing:-.5px;line-height:1.1}
+.sh p{font-size:15px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+
+/* ─── LEGEND PILLS ──────────────────────────────────────────── */
+.pills{display:flex;gap:8px;padding:10px 16px 16px;flex-wrap:wrap;justify-content:center}
+.pill{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--sans);font-size:11px;letter-spacing:.8px;text-transform:uppercase;
+  padding:7px 14px;border-radius:20px;border:1px solid;font-weight:500;
+}
+.pill.c{color:var(--red);border-color:var(--red-mid);background:var(--red-light)}
+.pill.s{color:var(--green);border-color:var(--green-mid);background:var(--green-light)}
+.pill.e{color:var(--teal);border-color:var(--teal-mid);background:var(--teal-light)}
+.pdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pill.c .pdot{background:var(--red)}.pill.s .pdot{background:var(--green)}.pill.e .pdot{background:var(--teal)}
+
+/* ─── TIMELINE WRAPPER ──────────────────────────────────────── */
+.tlw{padding:0 12px 80px;max-width:880px;margin:0 auto}
+
+/* DESKTOP: 3-col grid */
+.tlg{display:grid;grid-template-columns:1fr 36px 1fr;gap:0}
+.col-h{
+  font-family:var(--sans);font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;text-align:center;
+  padding:10px 6px;margin-bottom:8px;border-radius:5px;font-weight:600;
+}
+.col-h.c{color:var(--red);background:var(--red-light);border-top:2px solid var(--red)}
+.col-h.s{color:var(--green);background:var(--green-light);border-top:2px solid var(--green)}
+
+/* ─── CARDS ─────────────────────────────────────────────────── */
+.card{
+  background:var(--white);border:1px solid rgba(23,167,157,.13);
+  border-radius:var(--radius);padding:14px 15px;margin:3px 0;
+  cursor:pointer;transition:all .22s;position:relative;overflow:hidden;
+  box-shadow:var(--card-shadow);
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  transform:scaleX(0);transform-origin:left;transition:transform .28s;
+}
+.card.cc::before{background:var(--red)}.card.sc::before{background:var(--green)}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(23,167,157,.13)}
+.card:hover::before{transform:scaleX(1)}
+.card.cc:hover{border-color:var(--red-mid)}.card.sc:hover{border-color:var(--green-mid)}
+.card.hl{box-shadow:0 0 0 2px var(--teal),0 4px 20px rgba(23,167,157,.15)}
+/* Mobile label badge on card (hidden on desktop) */
+.card-badge{display:none;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.card.cc .card-badge{color:var(--red)}.card.sc .card-badge{color:var(--green)}
+
+.cgen{font-size:11px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;font-weight:500;opacity:.6}
+.card.cc .cgen{color:var(--red)}.card.sc .cgen{color:var(--green)}
+.cname{font-family:var(--serif);font-size:18px;font-weight:600;margin-bottom:2px;line-height:1.2}
+.card.cc .cname{color:var(--red)}.card.sc .cname{color:var(--green)}
+.cmean{font-size:12px;font-style:italic;color:var(--muted);margin-bottom:6px;font-family:var(--serif)}
+.cdesc{font-size:13px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ctap{
+  font-size:11px;letter-spacing:.5px;color:var(--teal);
+  margin-top:9px;opacity:.75;font-weight:500;display:flex;align-items:center;gap:3px;
+}
+
+/* ─── SPINE ──────────────────────────────────────────────────── */
+.spine{display:flex;flex-direction:column;align-items:center;padding:2px 0}
+.sl{width:1px;flex:1;background:rgba(23,167,157,.18);min-height:10px}
+.sd{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--teal);background:var(--bg);flex-shrink:0;z-index:1}
+.sd.br{background:var(--teal);box-shadow:0 0 10px rgba(23,167,157,.5)}
+.ce{margin:2px 0;opacity:0;pointer-events:none;min-height:60px}
+.tlfull{grid-column:1/-1}
+
+/* ─── JUDGMENT / DIVIDER ─────────────────────────────────────── */
+.jud{
+  margin:16px 0;padding:18px 22px;
+  background:linear-gradient(135deg,rgba(23,167,157,.05),rgba(43,182,115,.03));
+  border:1px solid var(--teal-mid);border-radius:var(--radius);
+  text-align:center;cursor:pointer;transition:all .22s;
+}
+.jud:hover{border-color:var(--teal);background:var(--teal-light)}
+.jt{font-size:11px;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:5px;font-weight:600}
+.js{font-size:14px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+.divr{margin:24px 0;display:flex;align-items:center;gap:10px}
+.dl{flex:1;height:1px;background:rgba(23,167,157,.13)}
+.dlb{
+  font-size:10px;letter-spacing:2px;color:var(--teal);text-transform:uppercase;
+  padding:5px 13px;border:1px solid var(--teal-mid);border-radius:3px;white-space:nowrap;font-weight:500;
+}
+.cutoff{
+  margin:3px 0;padding:13px 16px;
+  background:rgba(217,79,79,.04);border:1px solid var(--red-mid);
+  border-radius:var(--radius);text-align:center;opacity:.65;
+}
+.ct{font-size:10px;letter-spacing:1.5px;color:var(--red);margin-bottom:5px;text-transform:uppercase;font-weight:500}
+.cx{font-size:13px;color:var(--muted);font-style:italic;line-height:1.55;font-family:var(--serif)}
+
+/* ─── LIFESPAN CHART ─────────────────────────────────────────── */
+.chw{padding:20px 16px 80px;max-width:780px;margin:0 auto}
+.chi{text-align:center;margin-bottom:36px;padding:0 16px}
+.chi p{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto}
+.chs{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:16px;padding-bottom:10px;
+  border-bottom:2px solid rgba(23,167,157,.18);font-weight:600;
+}
+.bch{margin-bottom:48px}
+.br{display:flex;align-items:center;gap:10px;margin-bottom:9px;cursor:pointer;transition:opacity .2s;min-height:44px}
+.br:hover{opacity:.82}
+.bl{
+  font-size:12px;letter-spacing:.3px;
+  min-width:100px;text-align:right;flex-shrink:0;font-weight:500;
+}
+.bt{flex:1;height:30px;background:rgba(23,167,157,.06);border-radius:5px;position:relative;overflow:hidden}
+.bf{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;transition:width .9s cubic-bezier(.16,1,.3,1)}
+.bv{font-size:11px;color:rgba(255,255,255,.88);letter-spacing:.4px;white-space:nowrap;font-weight:600}
+.ba{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  font-size:10px;font-style:italic;color:var(--teal);font-weight:500;
+}
+/* on small screens, hide .ba */
+.br.sb .bl{color:var(--green)}.br.cb .bl{color:var(--red)}.br.gb .bl{color:var(--teal)}
+.br.sb .bf{background:linear-gradient(to right,var(--green),rgba(43,182,115,.5))}
+.br.cb .bf{background:linear-gradient(to right,var(--red),rgba(217,79,79,.5))}
+.br.gb .bf{background:linear-gradient(to right,var(--teal),rgba(23,167,157,.45))}
+.chn{
+  font-family:var(--serif);font-size:15px;font-style:italic;color:var(--muted);
+  line-height:1.8;padding:18px 22px;
+  border-left:3px solid var(--green);
+  background:var(--green-light);border-radius:0 var(--radius) var(--radius) 0;
+  margin-bottom:36px;
+}
+
+/* ─── FOUR SEPARATIONS ───────────────────────────────────────── */
+.spw{padding:20px 16px 80px;max-width:700px;margin:0 auto}
+.spi{text-align:center;margin-bottom:44px}
+.spi p{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);line-height:1.8;max-width:480px;margin:0 auto 14px}
+.spj{position:relative;margin-bottom:52px}
+.spl{position:absolute;left:28px;top:40px;bottom:40px;width:2px;background:linear-gradient(to bottom,var(--teal-mid),rgba(43,182,115,.08))}
+.spc{
+  position:relative;margin-left:64px;margin-bottom:22px;
+  background:var(--white);border:1px solid rgba(23,167,157,.13);
+  border-radius:var(--radius);overflow:hidden;
+  transition:all .22s;cursor:pointer;box-shadow:var(--card-shadow);
+}
+.spc:hover{border-color:var(--teal-mid);box-shadow:0 6px 22px rgba(23,167,157,.1)}
+.spc.open .spb{display:block}
+.spn{
+  position:absolute;left:-48px;top:18px;width:34px;height:34px;
+  border-radius:50%;border:2px solid var(--teal-mid);
+  background:var(--white);display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--teal);font-weight:700;z-index:1;
+}
+.sph{padding:18px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.sph-l{flex:1}
+.splv{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;font-weight:600}
+.sptitle{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--teal);line-height:1.2;margin-bottom:4px}
+.spref{font-size:13px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+.spchev{color:var(--teal);font-size:14px;transition:transform .28s;flex-shrink:0;margin-top:4px}
+.spc.open .spchev{transform:rotate(180deg)}
+.spb{display:none;padding:0 20px 20px;border-top:1px solid rgba(23,167,157,.08)}
+.spwhat{font-family:var(--serif);font-size:16px;color:var(--muted);line-height:1.8;margin:16px 0 14px}
+.sppain{padding:14px 16px;background:var(--teal-light);border-radius:6px;margin-bottom:12px;border:1px solid rgba(23,167,157,.1)}
+.sppain-l{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;font-weight:600}
+.sppain-t{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--muted);line-height:1.65}
+.spq{margin-top:14px;padding:16px 18px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 6px 6px 0}
+.spq-l{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;font-weight:600}
+.spq p{font-family:var(--serif);font-size:15px;font-style:italic;line-height:1.7}
+.spsc{margin-top:14px;font-family:var(--serif);font-size:14px;font-style:italic;color:var(--muted);line-height:1.65}
+.spsc cite{display:block;font-style:normal;font-size:10px;letter-spacing:1px;color:var(--teal);margin-top:5px;font-weight:500;font-family:var(--sans)}
+.spcls{text-align:center;padding:36px 16px;border-top:1px solid rgba(23,167,157,.1)}
+.spcls h3{font-family:var(--serif);font-size:clamp(22px,5vw,52px);font-weight:300;color:var(--muted);margin-bottom:10px;line-height:1.3}
+.spcls h3 em{color:var(--teal);font-style:normal}
+.spcls p{font-family:var(--serif);font-size:15px;color:var(--muted);font-style:italic}
+.spattern{background:var(--white);border:1px solid rgba(23,167,157,.13);border-radius:var(--radius);padding:22px;margin-bottom:36px;box-shadow:var(--card-shadow)}
+.sp-pl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;font-weight:600}
+.sp-pc{font-family:var(--serif);font-size:16px;line-height:2;color:var(--muted)}
+.sp-pc span{color:var(--green);font-weight:600}
+.sp-note{margin-top:14px;font-family:var(--serif);font-size:15px;font-style:italic;color:var(--muted);border-left:3px solid var(--teal);padding-left:16px;line-height:1.7}
+
+/* ─── DETAIL PANEL ───────────────────────────────────────────── */
+.overlay{position:fixed;inset:0;background:rgba(28,28,30,.35);opacity:0;pointer-events:none;transition:opacity .32s;z-index:200}
+.overlay.on{opacity:1;pointer-events:all}
+.panel{
+  position:fixed;right:0;top:0;bottom:0;width:min(420px,100vw);
+  background:var(--white);border-left:2px solid rgba(23,167,157,.18);
+  transform:translateX(100%);transition:transform .36s cubic-bezier(.16,1,.3,1);
+  z-index:201;overflow-y:auto;padding:0;
+  box-shadow:-8px 0 48px rgba(23,167,157,.1);
+}
+.panel.on{transform:translateX(0)}
+.px{
+  position:sticky;top:0;height:54px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;background:var(--white);
+  border-bottom:1px solid rgba(23,167,157,.12);z-index:1;
+}
+.px-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500}
+.px button{
+  background:none;border:1px solid rgba(23,167,157,.25);color:var(--muted);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.px button:hover{background:var(--teal);color:var(--white);border-color:var(--teal)}
+#pc{padding:24px 24px 48px}
+.pbadge{
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 11px;border-radius:3px;display:inline-block;margin-bottom:14px;font-weight:600;
+}
+.pbadge.c{color:var(--red);background:var(--red-light);border:1px solid var(--red-mid)}
+.pbadge.s{color:var(--green);background:var(--green-light);border:1px solid var(--green-mid)}
+.pbadge.e{color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid)}
+.pname{font-family:var(--serif);font-size:clamp(34px,7vw,52px);font-weight:300;line-height:1.05;margin-bottom:4px;letter-spacing:-.5px}
+.pname.c{color:var(--red)}.pname.s{color:var(--green)}.pname.e{color:var(--teal)}
+.pmean{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(23,167,157,.1)}
+.psec{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:20px 0 8px;font-weight:600}
+.pcont{font-family:var(--serif);font-size:16px;line-height:1.82;color:var(--muted)}
+.pcont p{margin-bottom:12px}
+.psc{
+  margin-top:20px;padding:16px 18px;background:var(--teal-light);
+  border-radius:var(--radius);font-family:var(--serif);font-size:15px;
+  font-style:italic;color:var(--muted);line-height:1.7;border:1px solid rgba(23,167,157,.1);
+}
+.psc cite{display:block;font-style:normal;font-size:10px;letter-spacing:1px;color:var(--teal);margin-top:6px;font-weight:500;font-family:var(--sans)}
+.pq{margin-top:24px;padding:18px 20px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0}
+.pql{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;font-weight:600}
+.pq p{font-family:var(--serif);font-size:16px;font-style:italic;line-height:1.7}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero{
+  min-height:80vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:60px 24px 80px;
+  background:linear-gradient(180deg,rgba(23,167,157,.04) 0%,transparent 60%);
+}
+.h-tag{font-size:11px;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:24px;font-weight:600}
+.h-title{font-family:var(--serif);font-size:clamp(60px,12vw,100px);font-weight:300;line-height:.9;margin-bottom:20px;color:var(--teal);letter-spacing:-2px}
+.h-title em{font-style:italic;color:var(--green)}
+.h-sub{font-family:var(--serif);font-size:clamp(16px,2.5vw,19px);color:var(--muted);max-width:440px;line-height:1.75;font-style:italic;margin-bottom:44px}
+.h-verse{
+  font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);
+  border-left:3px solid var(--teal);padding:14px 22px;text-align:left;
+  max-width:400px;line-height:1.85;margin-bottom:52px;
+  background:rgba(23,167,157,.04);border-radius:0 var(--radius) var(--radius) 0;
+}
+.h-verse cite{display:block;font-family:var(--sans);font-size:10px;letter-spacing:1.5px;font-style:normal;color:var(--teal);margin-top:8px;font-weight:600}
+.h-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{
+  font-family:var(--sans);font-size:12px;letter-spacing:.8px;text-transform:uppercase;
+  padding:13px 26px;border-radius:var(--radius);cursor:pointer;transition:all .22s;border:1px solid;font-weight:600;
+  min-height:48px;
+}
+.btn-p{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.btn-p:hover{background:#15958b}
+.btn-g{background:transparent;border-color:var(--teal-mid);color:var(--teal)}
+.btn-g:hover{background:var(--teal-light)}
+.closing{text-align:center;padding:80px 24px 60px;background:linear-gradient(180deg,transparent,rgba(43,182,115,.04))}
+.closing h2{font-family:var(--serif);font-size:clamp(30px,6vw,64px);font-weight:300;line-height:1.2;margin-bottom:18px;color:var(--muted);letter-spacing:-.5px}
+.closing h2 em{color:var(--teal);font-style:normal}
+.closing p{font-family:var(--serif);font-size:16px;color:var(--muted);font-style:italic;max-width:380px;margin:0 auto 36px}
+.cline{width:48px;height:2px;background:var(--green);margin:0 auto 32px}
+.cdeut{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);max-width:380px;margin:0 auto;line-height:1.85}
+.cdeut cite{display:block;font-family:var(--sans);font-size:10px;font-style:normal;color:var(--teal);letter-spacing:1.5px;margin-top:9px;font-weight:600}
+
+/* ─── CTA BLOCKS ─────────────────────────────────────────────── */
+.cta-block{background:#f2f5f3;padding:44px 24px;text-align:center;border-top:1px solid rgba(23,167,157,.13)}
+.cta-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.cta-desc{font-family:var(--serif);font-size:15px;color:var(--muted);margin-bottom:22px;font-style:italic;line-height:1.65}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:440px;margin:0 auto}
+.btn-cta{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  padding:13px 24px;border-radius:var(--radius);cursor:pointer;border:none;
+  transition:all .22s;min-height:48px;
+}
+.btn-cta.primary{color:var(--white);background:var(--teal)}
+.btn-cta.primary:hover{background:#15958b}
+.btn-cta.secondary{color:var(--muted);background:var(--white);border:1px solid #dde0dd}
+.btn-cta.secondary:hover{border-color:var(--teal-mid)}
+.btn-cta.outline{color:var(--teal);background:var(--teal-light);border:2px solid var(--teal-mid)}
+.btn-cta.outline:hover{background:rgba(23,167,157,.15)}
+.btn-ghost{
+  font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);
+  background:transparent;border:none;padding:10px 16px;border-radius:6px;
+  cursor:pointer;text-decoration:underline;text-underline-offset:3px;margin-top:10px;
+  min-height:44px;
+}
+
+/* ─── BOOK CTA ───────────────────────────────────────────────── */
+.book-cta{background:var(--white);border-top:2px solid rgba(23,167,157,.18);padding:52px 24px;text-align:center}
+.book-cta-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.book-cta h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:10px;max-width:380px;margin-left:auto;margin-right:auto}
+.book-cta p{font-family:var(--serif);font-size:15px;color:var(--muted);line-height:1.7;max-width:400px;margin:0 auto 28px;font-style:italic}
+.book-cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto 16px}
+.book-cta a{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--sans);font-size:13px;font-weight:700;
+  color:var(--white);background:var(--teal);
+  padding:14px 28px;border-radius:var(--radius);text-decoration:none;
+  transition:background .2s;min-height:48px;
+}
+.book-cta a:hover{background:#15958b}
+
+/* ─── MOBILE OVERRIDES ───────────────────────────────────────── */
+@media(max-width:600px){
+  /* Nav: hide brand text, center tabs */
+  .brand{display:none}
+  nav{padding:0 8px;gap:4px}
+  .tab{font-size:10px;letter-spacing:.7px;padding:7px 10px}
+  .nav-home{font-size:10px;padding:7px 10px}
+
+  /* Timeline: stack vertically instead of side-by-side */
+  .tlg{
+    display:flex;flex-direction:column;gap:0;
+  }
+  /* Hide desktop spine & column headers */
+  .col-h,.spine,.ce{display:none}
+  .tlfull{width:100%}
+
+  /* Mobile: show card line badge */
+  .card-badge{display:block}
+  
+  /* Mobile: card full width with left border accent */
+  .card{margin:4px 0;border-radius:6px}
+  .card.cc{border-left:3px solid var(--red)}
+  .card.sc{border-left:3px solid var(--green)}
+
+  /* Mobile: add visual separator between Cain/Seth pairs */
+  .tl-pair{
+    display:flex;flex-direction:column;gap:0;
+    margin-bottom:6px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(23,167,157,.08);
+  }
+  .tl-pair:last-child{border-bottom:none}
+
+  /* Mobile flood/divider */
+  .jud{margin:12px 0;padding:14px 16px}
+  .divr{margin:16px 0}
+
+  /* After-flood cards: single column with left-border teal */
+  .card.tlfull-child{border-left:3px solid var(--teal)}
+
+  /* Bar chart label */
+  .bl{min-width:78px;font-size:11px}
+  .ba{display:none}
+  .bt{height:26px}
+
+  /* Separation section */
+  .spc{margin-left:50px}
+  .spn{left:-36px;width:28px;height:28px;font-size:11px;top:16px}
+  .spl{left:20px}
+  .sptitle{font-size:20px}
+
+  /* Hero */
+  .h-title{font-size:clamp(52px,14vw,80px)}
+  .h-verse{font-size:15px;padding:12px 16px}
+
+  /* Panel full-screen on mobile */
+  .panel{width:100vw;border-left:none}
+  #pc{padding:20px 20px 60px}
+}
+
+@media(min-width:601px) and (max-width:800px){
+  .tab{font-size:10px;letter-spacing:.8px;padding:6px 10px}
+  .brand{font-size:10px}
+  .bl{min-width:82px}
+}
+
+/* ─── TIMELINE PAIR WRAPPERS (for mobile grouping) ───────────── */
+/* These are inside .tlg on desktop (invisible), and used for mobile layout */
+.tl-flood-wrap{grid-column:1/-1}
+
+/* ─── ACCESSIBILITY ──────────────────────────────────────────── */
+.card:focus,.spc:focus,.jud:focus,.br:focus{
+  outline:2px solid var(--teal);outline-offset:2px;
+}
+.card,.spc,.jud,.br{
+  -webkit-user-select:none;user-select:none;
+}
+
+/* ─── SCROLL BEHAVIOR ────────────────────────────────────────── */
+html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
 
 <div class="overlay" id="ov" onclick="closePanel()"></div>
-<div class="panel" id="panel">
-  <div class="px"><button onclick="closePanel()">&#x2715;</button></div>
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Detail panel">
+  <div class="px">
+    <span class="px-title" id="panel-title">Details</span>
+    <button onclick="closePanel()" aria-label="Close panel">&#x2715;</button>
+  </div>
   <div id="pc"></div>
 </div>
 
-<nav>
-  <div class="brand">Two Rivers &middot; Genesis</div>
-  <div class="tabs">
-    <button class="tab on" id="tab-home" onclick="sv('home')">Overview</button>
-    <button class="tab" id="tab-tl" onclick="sv('tl')">Timeline</button>
-    <button class="tab" id="tab-ch" onclick="sv('ch')">Lifespans</button>
-    <button class="tab" id="tab-sp" onclick="sv('sp')">Separation</button>
+<nav role="navigation" aria-label="Main navigation">
+  <div class="brand">Two Rivers · Genesis</div>
+  <div class="nav-tabs" role="tablist">
+    <button class="tab on" id="tab-home" onclick="sv('home')" role="tab" aria-selected="true">Overview</button>
+    <button class="tab" id="tab-tl" onclick="sv('tl')" role="tab" aria-selected="false">Timeline</button>
+    <button class="tab" id="tab-ch" onclick="sv('ch')" role="tab" aria-selected="false">Lifespans</button>
+    <button class="tab" id="tab-sp" onclick="sv('sp')" role="tab" aria-selected="false">Separation</button>
   </div>
-<button class="tab" onclick="window.location.href='index.html'" style="margin-left:auto;border-color:rgba(23,167,157,0.3);color:#17a79d;">← Beranda</button>
+  <button class="nav-home" onclick="window.location.href='index.html'" aria-label="Back to home">← Beranda</button>
 </nav>
 
+<!-- ══════════════════════════════════════════════════════════════
+     HOME VIEW
+══════════════════════════════════════════════════════════════ -->
 <div id="view-home">
   <section class="hero">
-    <div class="h-tag">Genesis 4&ndash;5 &middot; 11 &middot; Abraham Park</div>
+    <div class="h-tag">Genesis 4–5 · 11 · Abraham Park</div>
     <h1 class="h-title">Two <em>Rivers</em></h1>
     <p class="h-sub">Since Adam, two lines have run in parallel. One builds a name for itself. One carries the name of God.</p>
     <div class="h-verse">
@@ -217,6 +470,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
       <button class="btn btn-p" onclick="sv('tl')">Explore the Timeline →</button>
     </div>
   </section>
+
   <section class="closing">
     <h2>Which river are <em>you</em> in?</h2>
     <p>Not a question of knowledge. A question about life.</p>
@@ -224,41 +478,56 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     <p class="cdeut">&ldquo;Stand by the ways and see and ask for the ancient paths, where the good way is, and walk in it.&rdquo;<cite>Jeremiah 6:16</cite></p>
   </section>
 
-  <!-- CTAs Overview -->
-  <div style="background:#f4f5f6;padding:40px 24px;text-align:center;border-top:1px solid rgba(23,167,157,0.15)">
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin-bottom:8px">Sudah punya bukunya?</p>
-    <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;font-style:italic">Baca bersama Reading Companion — bab per bab, dengan pertanyaan yang meresap.</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:400px;margin:0 auto">
-      <button onclick="window.location.href='reading-journey.html'" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:12px 24px;border-radius:8px;cursor:pointer">📖 Reading Companion</button>
-      <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#6d6e70;background:#ffffff;border:1px solid #e8e9ea;padding:12px 24px;border-radius:8px;cursor:pointer">← Beranda</button>
+  <div class="cta-block">
+    <p class="cta-label">Sudah punya bukunya?</p>
+    <p class="cta-desc">Baca bersama Reading Companion — bab per bab, dengan pertanyaan yang meresap.</p>
+    <div class="cta-row">
+      <button onclick="window.location.href='reading-journey.html'" class="btn-cta primary">📖 Reading Companion</button>
+      <button onclick="window.location.href='index.html'" class="btn-cta secondary">← Beranda</button>
+    </div>
+  </div>
+
+  <div class="book-cta">
+    <div class="book-cta-tag">Belum punya bukunya?</div>
+    <h3>The Genesis Genealogies — Abraham Park</h3>
+    <p>Ekosistem ini dirancang sebagai pendamping buku ini. Pengalaman paling dalam hanya bisa didapat dengan membaca Park langsung — bukan dari ringkasan.</p>
+    <div class="book-cta-row">
+      <a href="https://sejarahpenebusan.com/buku" target="_blank" class="btn-cta primary" style="color:#fff;background:var(--teal);border:none;border-radius:var(--radius);font-family:var(--sans);">Beli Buku →</a>
+      <a href="https://sejarahpenebusan.com/buku" target="_blank" class="btn-cta outline" style="font-family:var(--sans);">Info & Deskripsi ↗</a>
     </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════
+     TIMELINE VIEW
+══════════════════════════════════════════════════════════════ -->
 <div id="view-tl" style="display:none">
-<div class="sh"><h2>The Two Genealogies</h2><p>Two lines flowing side by side — tap any name to go deeper</p></div>
-  <div style="padding:0 12px 6px">
+  <div class="sh"><h2>The Two Genealogies</h2><p>Two lines flowing side by side — tap any name to go deeper</p></div>
+
+  <div style="padding:0 8px 4px">
     <div class="pills">
-      <div class="pill c"><div class="pdot"></div>Line of Cain — civilization without God</div>
-      <div class="pill s"><div class="pdot"></div>Line of Seth — the thread of faith</div>
+      <div class="pill c"><div class="pdot"></div>Line of Cain</div>
+      <div class="pill s"><div class="pdot"></div>Line of Seth</div>
       <div class="pill e"><div class="pdot"></div>Pivotal events</div>
     </div>
   </div>
 
-  <div class="sh" style="padding-top:20px"><h2 style="font-size:clamp(22px,4vw,36px)">Before the Flood</h2><p>Genesis 4–5 · Two rivers, nearly 1,000 years running in parallel</p></div>
+  <div class="sh" style="padding-top:16px"><h2 style="font-size:clamp(22px,5vw,38px)">Before the Flood</h2><p>Genesis 4–5 · Two rivers, nearly 1,000 years running in parallel</p></div>
 
-  <div class="tlw"><div class="tlg">
+  <div class="tlw"><div class="tlg" id="tl-prefood">
     <div class="col-h c">Line of Cain</div><div></div><div class="col-h s">Line of Seth</div>
 
     <!-- ADAM -->
-    <div class="card cc" onclick="op('adam-fall')">
+    <div class="card cc" onclick="op('adam-fall')" tabindex="0" role="button" aria-label="Adam — The Fall">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 1 · Gen 3</div><div class="cname">Adam — The Fall</div>
       <div class="cmean">"Man, mankind" — 930 years</div>
       <div class="cdesc">The first failure of separation. One tree set apart — and man did not keep the boundary. But God clothed them with skins — grace within judgment.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sd br"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('adam-seth')">
+    <div class="card sc" onclick="op('adam-seth')" tabindex="0" role="button" aria-label="Adam — The Witness">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 1 · Gen 5:5</div><div class="cname">Adam — The Witness</div>
       <div class="cmean">930 years — a living chain</div>
       <div class="cdesc">Adam lived until Lamech (gen. 9) was 56. Every patriarch from Seth to near-Noah heard the Eden account firsthand from him. The Word was never cut off.</div>
@@ -266,14 +535,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- CAIN / SETH -->
-    <div class="card cc" onclick="op('cain')">
+    <div class="card cc" onclick="op('cain')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 1 · Gen 4:17</div><div class="cname">Cain</div>
       <div class="cmean">"Gotten, received" — hope that betrayed</div>
       <div class="cdesc">Built the city of Enoch — civilization without God. Settled in Nod: "wandering." The reversed separation — away from God, not from sin.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('seth')">
+    <div class="card sc" onclick="op('seth')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 2 · Gen 4:26</div><div class="cname">Seth</div>
       <div class="cmean">"Appointed, foundation" — another seed</div>
       <div class="cdesc">Given in place of Abel. In his days men began to call upon the name of the Lord (Gen 4:26). The foundation of the line of faith.</div>
@@ -281,14 +552,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- ENOCH-CAIN / ENOSH -->
-    <div class="card cc" onclick="op('enoch-cain')">
+    <div class="card cc" onclick="op('enoch-cain')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 2 · Gen 4:17</div><div class="cname">Enoch (of Cain)</div>
       <div class="cmean">"Dedication, initiation"</div>
       <div class="cdesc">A city named after him — immortal in stone and architecture. Named by human hands. His name not in eternity.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('enosh')">
+    <div class="card sc" onclick="op('enosh')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 3 · Gen 5:9-11</div><div class="cname">Enosh</div>
       <div class="cmean">"Frail, mortal man"</div>
       <div class="cdesc">Acknowledges weakness — and only then calls upon God. The first separation: from the illusion of self-sufficiency. Men began to call upon the Lord.</div>
@@ -296,14 +569,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- IRAD / KENAN -->
-    <div class="card cc" onclick="op('irad')">
+    <div class="card cc" onclick="op('irad')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 3 · Gen 4:18</div><div class="cname">Irad</div>
       <div class="cmean">"Fleet, runner, boastful"</div>
       <div class="cdesc">Running from God. Living as though God does not see. The deepest pride: not arrogance before men, but life without God in practice.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('kenan')">
+    <div class="card sc" onclick="op('kenan')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 4 · Gen 5:12-14</div><div class="cname">Kenan</div>
       <div class="cmean">"Possession, belonging to God"</div>
       <div class="cdesc">Not his own — God's possession. Separation from the claim of ownership over one's own life. A congregation began forming in his days.</div>
@@ -311,14 +586,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- MEHUJAEL / MAHALALEL -->
-    <div class="card cc" onclick="op('mehujael')">
+    <div class="card cc" onclick="op('mehujael')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 4 · Gen 4:18</div><div class="cname">Mehujael</div>
       <div class="cmean">"Blotted out by God"</div>
       <div class="cdesc">The most fearful name in Cain's line. Erased from record and memory. Some lives God does not acknowledge — however great before men.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('mahalalel')">
+    <div class="card sc" onclick="op('mahalalel')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 5 · Gen 5:15-17</div><div class="cname">Mahalalel</div>
       <div class="cmean">"Praise of God, God who is praised"</div>
       <div class="cdesc">His mouth consecrated to God's praise. Perfect antithesis of Irad's self-boasting and the coming Lamech's violent song.</div>
@@ -326,29 +603,33 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- METHUSHAEL / JARED -->
-    <div class="card cc" onclick="op('methushael')">
+    <div class="card cc" onclick="op('methushael')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 5 · Gen 4:18</div><div class="cname">Methushael</div>
       <div class="cmean">"Man of Sheol" — or "Man of God"</div>
       <div class="cdesc">Two opposite meanings. His father hoped for "man of God." But Lamech, his son, reveals which path was chosen. A name cannot save you.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('jared')">
+    <div class="card sc" onclick="op('jared')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 6 · Gen 5:18-20</div><div class="cname">Jared</div>
       <div class="cmean">"Descent, he who comes down"</div>
       <div class="cdesc">In a world always reaching upward — Jared descends. Humbles himself. From Jared came Enoch. True humility produces extraordinary fruit.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
 
-    <!-- LAMECH-CAIN / ENOCH-SETH — GENERATION 7 CONTRAST -->
-    <div class="card cc hl" onclick="op('lamech-cain')">
+    <!-- LAMECH-CAIN / ENOCH-SETH — GEN 7 CONTRAST -->
+    <div class="card cc hl" onclick="op('lamech-cain')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain ⚠</div>
       <div class="cgen">Gen. 7 · Gen 4:19-24 ⚠</div><div class="cname">Lamech (of Cain)</div>
       <div class="cmean">"Strong youth, conqueror"</div>
       <div class="cdesc">Generation 7 from Cain. Polygamy. Kills for a wound. Sings of his own violence. Peak of civilization without God — all boundaries destroyed.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd br"></div><div class="sl"></div></div>
-    <div class="card sc hl" onclick="op('enoch-seth')">
+    <div class="card sc hl" onclick="op('enoch-seth')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth ✦</div>
       <div class="cgen">Gen. 7 · Gen 5:21-24 ✦</div><div class="cname">Enoch (of Seth)</div>
       <div class="cmean">"Dedicated, consecrated"</div>
       <div class="cdesc">Generation 7 from Seth. Walked with God 300 years. Did not die — taken by God. The only one in the genealogy who transcends death. Not by achievement, but by walking.</div>
@@ -356,14 +637,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- FOUR CHILDREN / METHUSELAH -->
-    <div class="card cc" onclick="op('four')">
+    <div class="card cc" onclick="op('four')" tabindex="0" role="button">
+      <div class="card-badge">Line of Cain</div>
       <div class="cgen">Gen. 8 · Gen 4:20-22</div><div class="cname">Four Children of Lamech</div>
       <div class="cmean">Jabal · Jubal · Tubal-cain · Naamah</div>
-      <div class="cdesc">Economy & trade. Music & entertainment. Technology & weaponry. Erotic beauty. Four pillars of civilization without God — not just ancient history. Today.</div>
+      <div class="cdesc">Economy &amp; trade. Music &amp; entertainment. Technology &amp; weaponry. Erotic beauty. Four pillars of civilization without God — not just ancient history. Today.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('methuselah')">
+    <div class="card sc" onclick="op('methuselah')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 8 · Gen 5:25-27</div><div class="cname">Methuselah</div>
       <div class="cmean">"When he dies, it shall come" · 969 years</div>
       <div class="cdesc">Longest life in Scripture. Not one recorded deed. His function: to endure. He died the year the flood began. 969 years of divine patience.</div>
@@ -371,9 +654,10 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- CUTOFF / LAMECH-SETH -->
-    <div class="cutoff"><div class="ct">— The Line Stops Here —</div><div class="cx">Cain's genealogy ends abruptly after Lamech. Civilization at its peak — suddenly cut off. No continuation.</div></div>
+    <div class="cutoff tlfull"><div class="ct">— The Line Stops Here —</div><div class="cx">Cain's genealogy ends abruptly after Lamech. Civilization at its peak — suddenly cut off. No continuation.</div></div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('lamech-seth')">
+    <div class="card sc" onclick="op('lamech-seth')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 9 · Gen 5:28-31</div><div class="cname">Lamech (of Seth)</div>
       <div class="cmean">"Despairing, brought low"</div>
       <div class="cdesc">Two Lamechs — same era, opposite mouths. One sings of murder. One prophesies: "This one will bring us rest." He named his son Noah.</div>
@@ -381,7 +665,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
 
     <!-- FLOOD -->
-    <div class="tlfull"><div class="jud" onclick="op('flood')">
+    <div class="tlfull"><div class="jud" onclick="op('flood')" tabindex="0" role="button" aria-label="The Flood">
       <div class="jt">⚡ The Flood — God's Judgment ⚡</div>
       <div class="js">When Methuselah died, the flood came · Noah: "rest, comfort" · Genesis 6–9</div>
     </div></div>
@@ -389,19 +673,21 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     <div class="tlfull"><div class="divr"><div class="dl"></div><div class="dlb">After the Flood</div><div class="dl"></div></div></div>
   </div><!-- end tlg pre-flood -->
 
-  <div class="sh" style="padding-top:8px"><h2 style="font-size:clamp(20px,4vw,28px)">After the Flood</h2><p>Genesis 11 · The falling lifespan curve — a spiritual graph, not biology</p></div>
+  <div class="sh" style="padding-top:8px"><h2 style="font-size:clamp(22px,4vw,32px)">After the Flood</h2><p>Genesis 11 · The falling lifespan curve — a spiritual graph, not biology</p></div>
 
   <div class="tlw" style="padding-top:0"><div class="tlg">
 
     <!-- BABEL / SHEM -->
-    <div class="card cc" onclick="op('babel')">
+    <div class="card cc" onclick="op('babel')" tabindex="0" role="button">
+      <div class="card-badge">Pivotal Event</div>
       <div class="cgen">Ham's line · Gen 11:1-9</div><div class="cname">Tower of Babel</div>
       <div class="cmean">"To make a name for ourselves"</div>
       <div class="cdesc">100 years after the flood, sin rises again. Three goals: reach heaven by human power, make a name, refuse to scatter as God commanded.</div>
       <div class="ctap">Tap to read ›</div>
     </div>
     <div class="spine"><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('shem')">
+    <div class="card sc" onclick="op('shem')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 11 · Gen 11:10-11</div><div class="cname">Shem</div>
       <div class="cmean">"Name, renown" · 600 years</div>
       <div class="cdesc">Son of Noah. "Blessed be the Lord, the God of Shem." Lived contemporaneous with 15 generations — a living bridge from Noah's flood to Abraham's call.</div>
@@ -411,7 +697,8 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     <!-- EBER -->
     <div class="ce"></div>
     <div class="spine"><div class="sl"></div><div class="sd br"></div><div class="sl"></div></div>
-    <div class="card sc hl" onclick="op('eber')">
+    <div class="card sc hl" onclick="op('eber')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth ✦ Anomaly</div>
       <div class="cgen">Gen. 14 · Gen 11:14-17 ✦</div><div class="cname">Eber</div>
       <div class="cmean">"One who crosses over" · 464 years ↑</div>
       <div class="cdesc">The only anomaly in the falling curve: his lifespan rises. Refused Babel. Crossed the Euphrates. The word "Hebrew" (Ibri) comes from his name.</div>
@@ -421,7 +708,8 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     <!-- PELEG -->
     <div class="ce"></div>
     <div class="spine"><div class="sl"></div><div class="sd" style="border-color:#b83232"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('peleg')">
+    <div class="card sc" onclick="op('peleg')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth ↓</div>
       <div class="cgen">Gen. 15 · Gen 11:18-19 ↓</div><div class="cname">Peleg</div>
       <div class="cmean">"Division, separation" · 239 years</div>
       <div class="cdesc">Lifespan drops 50% from Eber. His father named him "separation" hoping for holiness — he joined Babel instead. The same word can mean consecration or destruction.</div>
@@ -431,7 +719,8 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     <!-- REU-NAHOR -->
     <div class="ce"></div>
     <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('decline')">
+    <div class="card sc" onclick="op('decline')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth — Three Stages</div>
       <div class="cgen">Gen. 16-19 · Gen 11:20-32</div><div class="cname">Reu · Serug · Nahor</div>
       <div class="cmean">Friend · Firm tendril · Snorting/panting</div>
       <div class="cdesc">Three stages of faith's decline: prioritize human relationships → trust own strength → breathlessly chase the world. Nahor died youngest of all.</div>
@@ -440,8 +729,9 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
 
     <!-- TERAH -->
     <div class="ce"></div>
-    <div class="spine"><div class="sl"></div><div class="sd" style="border-color:#17a79d"></div><div class="sl"></div></div>
-    <div class="card sc" onclick="op('terah')">
+    <div class="spine"><div class="sl"></div><div class="sd"></div><div class="sl"></div></div>
+    <div class="card sc" onclick="op('terah')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth</div>
       <div class="cgen">Gen. 19 · Gen 11:31-32</div><div class="cname">Terah — Dies in Haran</div>
       <div class="cmean">"Delay, tarrying" · 205 years</div>
       <div class="cdesc">Knew the call. Even took the initiative to leave Ur. But stopped in Haran — prosperous, comfortable, not Ur but not Canaan. Died in "good enough."</div>
@@ -450,8 +740,9 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
 
     <!-- ABRAHAM -->
     <div class="ce"></div>
-    <div class="spine"><div class="sl"></div><div class="sd" style="background:#17a79d;border-color:#17a79d;box-shadow:0 0 12px rgba(23,167,157,0.5)"></div><div class="sl"></div></div>
-    <div class="card sc hl" onclick="op('abraham')">
+    <div class="spine"><div class="sl"></div><div class="sd" style="background:var(--teal);border-color:var(--teal);box-shadow:0 0 12px rgba(23,167,157,.5)"></div><div class="sl"></div></div>
+    <div class="card sc hl" onclick="op('abraham')" tabindex="0" role="button">
+      <div class="card-badge">Line of Seth ✦✦</div>
       <div class="cgen">Gen. 20 · Gen 12–22 ✦✦</div><div class="cname">Abraham</div>
       <div class="cmean">"Father of a multitude of nations"</div>
       <div class="cdesc">Four separations — each deeper than the last, each opening a deeper covenant with God. The starting point of the history of salvation.</div>
@@ -460,64 +751,70 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
 
   </div></div>
 
-  <!-- CTA Timeline → Lifespans -->
-  <div style="background:#f4f5f6;padding:40px 24px;text-align:center;border-top:1px solid rgba(23,167,157,0.15);margin-top:8px">
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin-bottom:8px">Selanjutnya</p>
-    <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;font-style:italic">Umur para patriark bukan data biologi — ini grafik spiritual tentang iman dan pemisahan.</p>
-    <button onclick="sv('ch')" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:12px 28px;border-radius:8px;cursor:pointer">Lihat Grafik Umur →</button>
+  <div class="cta-block">
+    <p class="cta-label">Selanjutnya</p>
+    <p class="cta-desc">Umur para patriark bukan data biologi — ini grafik spiritual tentang iman dan pemisahan.</p>
+    <div class="cta-row">
+      <button onclick="sv('ch')" class="btn-cta primary">Lihat Grafik Umur →</button>
+    </div>
   </div>
-</div>
-</div>
-<!-- end view-tl -->
+</div><!-- end view-tl -->
 
+<!-- ══════════════════════════════════════════════════════════════
+     LIFESPAN CHART VIEW
+══════════════════════════════════════════════════════════════ -->
 <div id="view-ch" style="display:none">
-<div class="sh"><h2>The Lifespan Graph</h2><p>Not biological data — a spiritual chart of faith and separation</p></div>
+  <div class="sh"><h2>The Lifespan Graph</h2><p>Not biological data — a spiritual chart of faith and separation</p></div>
   <div class="chw">
     <div class="chi"><p>"The abrupt decrease in human life span by half is directly related to sin... Eber enjoyed the blessing of longevity because he had protected his faith and distanced himself from sin even as the perverse movement to build the Tower of Babel had been well under way." — Abraham Park</p></div>
 
     <div class="bch">
       <div class="chs">Genesis 5 — Adam to Noah · Pre-Flood · The Age of Longevity</div>
-      <div class="br sb" onclick="op('adam-seth')"><div class="bl">Adam</div><div class="bt"><div class="bf" style="width:0%" data-w="96%"><div class="bv">930 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('seth')"><div class="bl">Seth</div><div class="bt"><div class="bf" style="width:0%" data-w="94.1%"><div class="bv">912 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('enosh')"><div class="bl">Enosh</div><div class="bt"><div class="bf" style="width:0%" data-w="93.4%"><div class="bv">905 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('kenan')"><div class="bl">Kenan</div><div class="bt"><div class="bf" style="width:0%" data-w="93.9%"><div class="bv">910 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('mahalalel')"><div class="bl">Mahalalel</div><div class="bt"><div class="bf" style="width:0%" data-w="92.4%"><div class="bv">895 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('jared')"><div class="bl">Jared</div><div class="bt"><div class="bf" style="width:0%" data-w="99.3%"><div class="bv">962 yrs</div></div></div></div>
-      <div class="br gb" onclick="op('enoch-seth')"><div class="bl">Enoch ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="37.7%"><div class="bv">365 yrs</div></div><div class="ba">Taken by God — did not die</div></div></div>
-      <div class="br sb" onclick="op('methuselah')"><div class="bl">Methuselah</div><div class="bt"><div class="bf" style="width:0%" data-w="100%"><div class="bv">969 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('lamech-seth')"><div class="bl">Lamech</div><div class="bt"><div class="bf" style="width:0%" data-w="80.2%"><div class="bv">777 yrs</div></div></div></div>
-      <div class="br sb" onclick="op('flood')"><div class="bl">Noah</div><div class="bt"><div class="bf" style="width:0%" data-w="98%"><div class="bv">950 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('adam-seth')" tabindex="0" role="button"><div class="bl">Adam</div><div class="bt"><div class="bf" style="width:0%" data-w="96%"><div class="bv">930 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('seth')" tabindex="0" role="button"><div class="bl">Seth</div><div class="bt"><div class="bf" style="width:0%" data-w="94.1%"><div class="bv">912 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('enosh')" tabindex="0" role="button"><div class="bl">Enosh</div><div class="bt"><div class="bf" style="width:0%" data-w="93.4%"><div class="bv">905 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('kenan')" tabindex="0" role="button"><div class="bl">Kenan</div><div class="bt"><div class="bf" style="width:0%" data-w="93.9%"><div class="bv">910 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('mahalalel')" tabindex="0" role="button"><div class="bl">Mahalalel</div><div class="bt"><div class="bf" style="width:0%" data-w="92.4%"><div class="bv">895 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('jared')" tabindex="0" role="button"><div class="bl">Jared</div><div class="bt"><div class="bf" style="width:0%" data-w="99.3%"><div class="bv">962 yrs</div></div></div></div>
+      <div class="br gb" onclick="op('enoch-seth')" tabindex="0" role="button"><div class="bl">Enoch ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="37.7%"><div class="bv">365 yrs</div></div><div class="ba">Taken by God — did not die</div></div></div>
+      <div class="br sb" onclick="op('methuselah')" tabindex="0" role="button"><div class="bl">Methuselah</div><div class="bt"><div class="bf" style="width:0%" data-w="100%"><div class="bv">969 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('lamech-seth')" tabindex="0" role="button"><div class="bl">Lamech</div><div class="bt"><div class="bf" style="width:0%" data-w="80.2%"><div class="bv">777 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('flood')" tabindex="0" role="button"><div class="bl">Noah</div><div class="bt"><div class="bf" style="width:0%" data-w="98%"><div class="bv">950 yrs</div></div></div></div>
     </div>
 
     <div class="chn">In Genesis 5, seven patriarchs lived over 900 years. These long lifespans were God's means of transmitting His Word directly — Adam himself was alive until Noah's father Lamech was 56. No generation was without a living witness.</div>
 
     <div class="bch">
       <div class="chs">Genesis 11 — Shem to Abraham · Post-Flood · The Falling Curve</div>
-      <div class="br sb" onclick="op('shem')"><div class="bl">Shem</div><div class="bt"><div class="bf" style="width:0%" data-w="62%"><div class="bv">600 yrs</div></div></div></div>
-      <div class="br sb"><div class="bl">Arpachshad</div><div class="bt"><div class="bf" style="width:0%" data-w="45.2%"><div class="bv">438 yrs</div></div></div></div>
-      <div class="br sb"><div class="bl">Shelah</div><div class="bt"><div class="bf" style="width:0%" data-w="44.7%"><div class="bv">433 yrs</div></div></div></div>
-      <div class="br gb" onclick="op('eber')"><div class="bl">Eber ↑ ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="47.9%"><div class="bv">464 yrs</div></div><div class="ba">Rose — crossed the Euphrates</div></div></div>
-      <div class="br cb" onclick="op('peleg')"><div class="bl">Peleg ↓</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div><div class="ba">−50% — joined Babel</div></div></div>
-      <div class="br cb" onclick="op('decline')"><div class="bl">Reu</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div></div></div>
-      <div class="br cb" onclick="op('decline')"><div class="bl">Serug</div><div class="bt"><div class="bf" style="width:0%" data-w="23.7%"><div class="bv">230 yrs</div></div></div></div>
-      <div class="br cb" onclick="op('decline')"><div class="bl">Nahor</div><div class="bt"><div class="bf" style="width:0%" data-w="15.3%"><div class="bv">148 yrs</div></div><div class="ba">Shortest — sudden death</div></div></div>
-      <div class="br sb" onclick="op('terah')"><div class="bl">Terah</div><div class="bt"><div class="bf" style="width:0%" data-w="21.2%"><div class="bv">205 yrs</div></div><div class="ba">Died in Haran</div></div></div>
-      <div class="br gb" onclick="op('abraham')"><div class="bl">Abraham ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="18.1%"><div class="bv">175 yrs</div></div></div></div>
+      <div class="br sb" onclick="op('shem')" tabindex="0" role="button"><div class="bl">Shem</div><div class="bt"><div class="bf" style="width:0%" data-w="62%"><div class="bv">600 yrs</div></div></div></div>
+      <div class="br sb" tabindex="0"><div class="bl">Arpachshad</div><div class="bt"><div class="bf" style="width:0%" data-w="45.2%"><div class="bv">438 yrs</div></div></div></div>
+      <div class="br sb" tabindex="0"><div class="bl">Shelah</div><div class="bt"><div class="bf" style="width:0%" data-w="44.7%"><div class="bv">433 yrs</div></div></div></div>
+      <div class="br gb" onclick="op('eber')" tabindex="0" role="button"><div class="bl">Eber ↑ ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="47.9%"><div class="bv">464 yrs</div></div><div class="ba">Rose — crossed Euphrates</div></div></div>
+      <div class="br cb" onclick="op('peleg')" tabindex="0" role="button"><div class="bl">Peleg ↓</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div><div class="ba">−50% — joined Babel</div></div></div>
+      <div class="br cb" onclick="op('decline')" tabindex="0" role="button"><div class="bl">Reu</div><div class="bt"><div class="bf" style="width:0%" data-w="24.7%"><div class="bv">239 yrs</div></div></div></div>
+      <div class="br cb" onclick="op('decline')" tabindex="0" role="button"><div class="bl">Serug</div><div class="bt"><div class="bf" style="width:0%" data-w="23.7%"><div class="bv">230 yrs</div></div></div></div>
+      <div class="br cb" onclick="op('decline')" tabindex="0" role="button"><div class="bl">Nahor</div><div class="bt"><div class="bf" style="width:0%" data-w="15.3%"><div class="bv">148 yrs</div></div><div class="ba">Shortest</div></div></div>
+      <div class="br sb" onclick="op('terah')" tabindex="0" role="button"><div class="bl">Terah</div><div class="bt"><div class="bf" style="width:0%" data-w="21.2%"><div class="bv">205 yrs</div></div><div class="ba">Died in Haran</div></div></div>
+      <div class="br gb" onclick="op('abraham')" tabindex="0" role="button"><div class="bl">Abraham ✦</div><div class="bt"><div class="bf" style="width:0%" data-w="18.1%"><div class="bv">175 yrs</div></div></div></div>
     </div>
 
     <div class="chn">The Eber anomaly is the key to reading this entire chart. Every other lifespan in Genesis 11 falls — yet Eber's rises above the generation before him. He crossed the Euphrates when others built Babel. The curve is not biology. It is a spiritual graph of separation and assimilation.</div>
   </div>
 
-  <!-- CTA Lifespans → Separation -->
-  <div style="background:#f4f5f6;padding:40px 24px;text-align:center;border-top:1px solid rgba(23,167,157,0.15)">
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6d6e70;margin-bottom:8px">Selanjutnya</p>
-    <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;font-style:italic">Di balik semua angka ini ada satu pertanyaan: seberapa dalam kamu bersedia dipisahkan?</p>
-    <button onclick="sv('sp')" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:12px 28px;border-radius:8px;cursor:pointer">Empat Pemisahan Abraham →</button>
+  <div class="cta-block">
+    <p class="cta-label">Selanjutnya</p>
+    <p class="cta-desc">Di balik semua angka ini ada satu pertanyaan: seberapa dalam kamu bersedia dipisahkan?</p>
+    <div class="cta-row">
+      <button onclick="sv('sp')" class="btn-cta primary">Empat Pemisahan Abraham →</button>
+    </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════
+     FOUR SEPARATIONS VIEW
+══════════════════════════════════════════════════════════════ -->
 <div id="view-sp" style="display:none">
-<div class="sh"><h2>The Four Separations</h2><p>The work of separation in Abraham's life — Ch. 13, Abraham Park</p></div>
+  <div class="sh"><h2>The Four Separations</h2><p>The work of separation in Abraham's life — Ch. 13, Abraham Park</p></div>
   <div class="spw">
     <div class="spi">
       <p>"In reality, the history of Israel began with God's command for separation... The work of separation, however, is always accompanied by pain. It cannot be carried out or even understood without painful tears." — Abraham Park</p>
@@ -527,7 +824,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
       <div class="spl"></div>
 
       <!-- I -->
-      <div class="spc" id="sp1" onclick="tsp('sp1')">
+      <div class="spc" id="sp1" onclick="tsp('sp1')" tabindex="0" role="button" aria-expanded="false">
         <div class="spn">I</div>
         <div class="sph"><div class="sph-l">
           <div class="splv">First Separation · Genesis 12:1 · Acts 7:2–4</div>
@@ -543,7 +840,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
       </div>
 
       <!-- II -->
-      <div class="spc" id="sp2" onclick="tsp('sp2')">
+      <div class="spc" id="sp2" onclick="tsp('sp2')" tabindex="0" role="button" aria-expanded="false">
         <div class="spn">II</div>
         <div class="sph"><div class="sph-l">
           <div class="splv">Second Separation · Genesis 13</div>
@@ -559,7 +856,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
       </div>
 
       <!-- III -->
-      <div class="spc" id="sp3" onclick="tsp('sp3')">
+      <div class="spc" id="sp3" onclick="tsp('sp3')" tabindex="0" role="button" aria-expanded="false">
         <div class="spn">III</div>
         <div class="sph"><div class="sph-l">
           <div class="splv">Third Separation · Genesis 21</div>
@@ -575,7 +872,7 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
       </div>
 
       <!-- IV -->
-      <div class="spc" id="sp4" onclick="tsp('sp4')">
+      <div class="spc" id="sp4" onclick="tsp('sp4')" tabindex="0" role="button" aria-expanded="false">
         <div class="spn">IV</div>
         <div class="sph"><div class="sph-l">
           <div class="splv">Fourth Separation · Genesis 22</div>
@@ -609,18 +906,16 @@ nav{position:sticky;top:0;z-index:90;display:flex;align-items:center;justify-con
     </div>
   </div>
 
-  <!-- CTA Separation — Book Purchase -->
-  <div style="background:#ffffff;border-top:2px solid rgba(23,167,157,0.2);padding:48px 24px;text-align:center">
-    <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#17a79d;margin-bottom:12px">Perjalanan ini baru dimulai</p>
-    <h3 style="font-family:Inter,sans-serif;font-size:22px;font-weight:700;color:#1a1a1b;line-height:1.3;margin-bottom:8px;max-width:400px;margin-left:auto;margin-right:auto">Baca lebih dalam bersama<br>Abraham Park</h3>
-    <p style="font-size:14px;color:#6d6e70;line-height:1.65;max-width:380px;margin:0 auto 28px;font-style:italic">Apa yang kamu lihat di sini hanya peta. Bukunya adalah perjalanan itu sendiri — ditulis seorang bapak rohani untuk generasi yang belum mengenal leluhurnya.</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto 20px">
-      <a href="https://sejarahpenebusan.com/product/seri-1-silsilah-di-kitab-kejadian/" target="_blank" style="display:inline-block;font-family:Inter,sans-serif;font-size:13px;font-weight:700;color:#ffffff;background:#17a79d;border:none;padding:14px 28px;border-radius:8px;cursor:pointer;text-decoration:none;letter-spacing:0.3px">📗 Beli Buku — Seri 1</a>
-      <button onclick="window.location.href='reading-journey.html'" style="font-family:Inter,sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:14px 24px;border-radius:8px;cursor:pointer">📖 Reading Companion</button>
+  <div class="book-cta">
+    <p class="book-cta-tag">Perjalanan ini baru dimulai</p>
+    <h3>Baca lebih dalam bersama Abraham Park</h3>
+    <p>Apa yang kamu lihat di sini hanya peta. Bukunya adalah perjalanan itu sendiri — ditulis seorang bapak rohani untuk generasi yang belum mengenal leluhurnya.</p>
+    <div class="book-cta-row">
+      <a href="https://sejarahpenebusan.com/product/seri-1-silsilah-di-kitab-kejadian/" target="_blank" rel="noopener">📗 Beli Buku — Seri 1</a>
+      <button onclick="window.location.href='reading-journey.html'" class="btn-cta outline">📖 Reading Companion</button>
     </div>
-    <button onclick="window.location.href='index.html'" style="font-family:Inter,sans-serif;font-size:12px;font-weight:500;color:#6d6e70;background:transparent;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← Kembali ke Beranda</button>
+    <button onclick="window.location.href='index.html'" class="btn-ghost">← Kembali ke Beranda</button>
   </div>
-</div>
 </div>
 
 <script>
@@ -733,7 +1028,7 @@ function op(id){
   var sc='';
   if(d.sc){
     var em=d.sc.indexOf('\u2014');
-    sc='<div class="psc">"'+(em>-1?d.sc.slice(0,em).trim():d.sc)+'"'+(em>-1?'<cite>\u2014 '+d.sc.slice(em+1).trim()+'</cite>':'')+'</div>';
+    sc='<div class="psc">\u201c'+(em>-1?d.sc.slice(0,em).trim():d.sc)+'\u201d'+(em>-1?'<cite>\u2014 '+d.sc.slice(em+1).trim()+'</cite>':'')+'</div>';
   }
   document.getElementById('pc').innerHTML=
     '<div class="pbadge '+d.t+'">'+lbl+'</div>'+
@@ -742,15 +1037,30 @@ function op(id){
     '<div class="psec">What This Means</div>'+
     '<div class="pcont">'+d.c+'</div>'+sc+
     '<div class="pq"><div class="pql">A Question for You</div><p>'+d.q+'</p></div>';
-  document.getElementById('panel').classList.add('on');
-  document.getElementById('ov').classList.add('on');
-  document.body.style.overflow='hidden';
+  document.getElementById('panel-title').textContent=d.n;
+
+  // iOS-safe scroll lock
+  var panel=document.getElementById('panel');
+  var ov=document.getElementById('ov');
+  panel.classList.add('on');
+  ov.classList.add('on');
+  document.body.style.top='-'+window.scrollY+'px';
+  document.body.style.position='fixed';
+  document.body.style.width='100%';
+  panel.scrollTop=0;
 }
 
 function closePanel(){
-  document.getElementById('panel').classList.remove('on');
-  document.getElementById('ov').classList.remove('on');
-  document.body.style.overflow='';
+  var panel=document.getElementById('panel');
+  var ov=document.getElementById('ov');
+  panel.classList.remove('on');
+  ov.classList.remove('on');
+  // Restore scroll position (iOS fix)
+  var scrollY=document.body.style.top;
+  document.body.style.position='';
+  document.body.style.top='';
+  document.body.style.width='';
+  window.scrollTo(0,parseInt(scrollY||'0')*-1);
 }
 
 var VIEWS=['home','tl','ch','sp'];
@@ -760,12 +1070,12 @@ function sv(id){
     var v=document.getElementById('view-'+VIEWS[i]);
     var t=document.getElementById('tab-'+VIEWS[i]);
     if(v) v.style.display='none';
-    if(t) t.classList.remove('on');
+    if(t){t.classList.remove('on');t.setAttribute('aria-selected','false');}
   }
   var el=document.getElementById('view-'+id);
   var tb=document.getElementById('tab-'+id);
   if(el) el.style.display='block';
-  if(tb) tb.classList.add('on');
+  if(tb){tb.classList.add('on');tb.setAttribute('aria-selected','true');}
   window.scrollTo(0,0);
   if(id==='ch') setTimeout(animBars,300);
 }
@@ -775,8 +1085,14 @@ function tsp(id){
   if(!c)return;
   var was=c.classList.contains('open');
   var all=document.querySelectorAll('.spc');
-  for(var i=0;i<all.length;i++) all[i].classList.remove('open');
-  if(!was) c.classList.add('open');
+  for(var i=0;i<all.length;i++){
+    all[i].classList.remove('open');
+    all[i].setAttribute('aria-expanded','false');
+  }
+  if(!was){
+    c.classList.add('open');
+    c.setAttribute('aria-expanded','true');
+  }
 }
 
 function animBars(){
@@ -785,12 +1101,26 @@ function animBars(){
     (function(b,n){
       var w=b.getAttribute('data-w');
       b.style.width='0%';
-      setTimeout(function(){b.style.width=w;},100+n*60);
+      setTimeout(function(){b.style.width=w;},80+n*55);
     })(bars[i],i);
   }
 }
 
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closePanel();});
+// Keyboard navigation
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closePanel();
+});
+
+// Keyboard click for [tabindex] elements
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'||e.key===' '){
+    var t=e.target;
+    if(t.getAttribute('tabindex')==='0'&&t.getAttribute('role')==='button'){
+      e.preventDefault();
+      t.click();
+    }
+  }
+});
 </script>
 </body>
 </html>
