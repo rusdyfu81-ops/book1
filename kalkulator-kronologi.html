@@ -1008,7 +1008,7 @@ function verifyB(){
   if(!isNaN(mesir)&&!isNaN(yakub)&&!isNaN(ishak)){const ib=1446+mesir+yakub+ishak;setText('rB-ishak-age','+ '+ishak+' thn');setText('rB-ishak-born',ib+' SM');}
   if(!isNaN(mesir)&&!isNaN(yakub)&&!isNaN(ishak)&&!isNaN(abr)){const ab=1446+mesir+yakub+ishak+abr;setText('rB-abr-age','+ '+abr+' thn');setText('rB-tot',ab+' SM',ab===2166);}
   const bn=document.getElementById('bnB');bn.classList.add('show');
-  if(n===4){bn.className='banner show ok';bn.innerHTML='✓ Sempurna! <strong>2166 SM</strong> — itulah tahun kelahiran Abraham, dihitung dari Alkitab sendiri. (Abraham Park, hal. 141–142)';document.getElementById('rbB').classList.add('show');}
+  if(n===4){bn.className='banner show ok';bn.innerHTML='✓ Sempurna! <strong>2166 SM</strong> — itulah tahun kelahiran Abraham, dihitung dari Alkitab sendiri. (Abraham Park, hal. 141–142)<br><br><em>Kamu baru menghitung mundur dari Salomo ke Abraham tanpa satu celah pun. Generasi mana dalam rantai ini yang membuatmu paling ingin berhenti dan bertanya lebih jauh?</em>';document.getElementById('rbB').classList.add('show');}
   else if(n>=2){bn.className='banner show part';bn.innerHTML=`${n} dari 4 benar. Cek yang masih merah.`;}
   else{bn.className='banner show err';bn.innerHTML='Periksa kembali. Semua angka ada di ayat yang tertera.';}
 }
@@ -1032,7 +1032,7 @@ function verifyC(){
   if(!isNaN(nab)){setText('rC-nab','+ '+nab+' thn');}
   if(!isNaN(ml)&&!isNaN(ln)&&!isNaN(nab)){const t=ml+ln+nab;setText('rC-tot',t+' thn',t===969);}
   const bn=document.getElementById('bnC');bn.classList.add('show');
-  if(n===3){bn.className='banner show ok';bn.innerHTML='✦ 187 + 182 + 600 = <strong>969 tahun</strong> — tepat umur Metusalah (Kej 5:27)! Ia mati <em>tepat tahun air bah datang</em>. Namanya terbukti: "Ketika ia mati, akhir dikirim."';document.getElementById('rbC').classList.add('show');}
+  if(n===3){bn.className='banner show ok';bn.innerHTML='✦ 187 + 182 + 600 = <strong>969 tahun</strong> — tepat umur Metusalah (Kej 5:27)! Ia mati <em>tepat tahun air bah datang</em>. Namanya terbukti: "Ketika ia mati, akhir dikirim."<br><br><em>Henokh menamai anaknya dengan nubuatan penghakiman ini — lalu setiap hari memanggil nama itu selama 300 tahun. Apa yang akan berubah dalam hidupmu jika setiap hari kamu diingatkan bahwa penghakiman sudah dekat?</em>';document.getElementById('rbC').classList.add('show');}
   else if(n>=1){bn.className='banner show part';bn.innerHTML=`${n} dari 3 benar.`;}
   else{bn.className='banner show err';bn.innerHTML='Cek Kejadian 5:25, 5:28–29, dan 7:6.';}
 }
