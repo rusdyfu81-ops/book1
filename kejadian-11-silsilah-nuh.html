@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Silsilah Nuh — Kejadian 11</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --teal:        #17a79d;
@@ -17,8 +18,8 @@
   --gray-light:  #f0f0f0;
   --gray-mid:    #d0d0d0;
   --white:       #ffffff;
-  --bg:          #FDF8F2;
-  --warm-card:   #FFFCF7;
+  --bg:          #f4f7f7;
+  --warm-card:   #f9fbfb;
   --text:        #222222;
   --text-sub:    #6d6e70;
   --flood:       #d94040;
@@ -42,10 +43,10 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html,body { overflow-x: hidden; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: var(--fs-body); line-height: 1.5; min-height: 100vh; }
+body { background: var(--bg); color: var(--text); font-family: 'Nunito Sans', sans-serif; font-size: var(--fs-body); line-height: 1.5; min-height: 100vh; }
 
 /* HEADER */
-header { background: linear-gradient(160deg,#FAFFFE 0%,#F0FBFA 50%,#FDF8F2 100%); border-bottom: 1px solid var(--teal-mid); padding: 0 24px 24px; text-align: center; position: relative; }
+header { background: linear-gradient(160deg,#FAFFFE 0%,#F0FBFA 50%,#f4f7f7 100%); border-bottom: 1px solid var(--teal-mid); padding: 52px 24px 24px; text-align: center; position: relative; }
 header::before { content:''; display:block; height:4px; background:linear-gradient(90deg,var(--noah-color) 0%,var(--teal) 30%,var(--green) 55%,var(--babel) 75%,var(--gold) 90%,var(--indigo) 100%); margin-bottom:28px; }
 .logo-area { display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
 .site-logo { height:64px; width:auto; object-fit:contain; border-radius:6px; }
@@ -55,7 +56,7 @@ h1 span { color:var(--teal); }
 
 /* TABS */
 .mode-bar { display:flex; justify-content:center; margin:20px auto 0; max-width:460px; border:1.5px solid var(--teal); border-radius:6px; overflow:hidden; }
-.mode-btn { flex:1; padding:10px 14px; background:none; border:none; border-right:1.5px solid var(--teal); color:var(--teal); font-family:'DM Sans',sans-serif; font-size:var(--fs-small); font-weight:600; cursor:pointer; transition:background 0.18s,color 0.18s; }
+.mode-btn { flex:1; padding:10px 14px; background:none; border:none; border-right:1.5px solid var(--teal); color:var(--teal); font-family:'Nunito Sans',sans-serif; font-size:var(--fs-small); font-weight:600; cursor:pointer; transition:background 0.18s,color 0.18s; }
 .mode-btn:last-child { border-right:none; }
 .mode-btn.active { background:var(--teal); color:var(--white); }
 .mode-btn:hover:not(.active) { background:var(--teal-light); }
@@ -77,7 +78,7 @@ h1 span { color:var(--teal); }
 input[type=range] { -webkit-appearance:none; width:100%; height:5px; background:var(--gray-light); border-radius:3px; outline:none; cursor:pointer; margin-bottom:2px; }
 input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:24px; height:24px; border-radius:50%; background:var(--teal); border:2.5px solid var(--white); box-shadow:0 1px 5px rgba(23,167,157,0.35); cursor:pointer; }
 .slider-presets { display:flex; gap:6px; flex-wrap:wrap; margin-top:12px; }
-.preset-btn { padding:4px 12px; background:var(--gray-light); border:1px solid var(--gray-mid); border-radius:4px; color:var(--text-sub); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.15s; }
+.preset-btn { padding:4px 12px; background:var(--gray-light); border:1px solid var(--gray-mid); border-radius:4px; color:var(--text-sub); font-family:'Nunito Sans',sans-serif; font-size:11px; font-weight:500; cursor:pointer; transition:all 0.15s; }
 .preset-btn:hover { background:var(--teal-light); color:var(--teal); border-color:var(--teal); }
 .preset-btn.babel-preset { border-color:var(--babel); color:var(--babel); }
 .preset-btn.babel-preset:hover { background:var(--babel-light); }
@@ -162,7 +163,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:24px; h
 .result-insight { font-size:var(--fs-small); color:var(--text-sub); line-height:1.7; padding-top:12px; border-top:1px solid var(--gray-light); }
 .compare-list-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .section-label { font-size:11px; font-weight:600; letter-spacing:1.5px; color:var(--text-sub); text-transform:uppercase; }
-.clear-btn { background:none; border:1px solid var(--gray-mid); color:var(--text-sub); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; padding:4px 12px; border-radius:4px; cursor:pointer; transition:all 0.15s; }
+.clear-btn { background:none; border:1px solid var(--gray-mid); color:var(--text-sub); font-family:'Nunito Sans',sans-serif; font-size:11px; font-weight:600; padding:4px 12px; border-radius:4px; cursor:pointer; transition:all 0.15s; }
 .clear-btn:hover { border-color:var(--teal); color:var(--teal); }
 .pname.sel-a { color:var(--compare-a) !important; }
 .pname.sel-b { color:var(--compare-b) !important; }
@@ -317,6 +318,14 @@ body.dark ::-webkit-scrollbar-thumb:hover { background:var(--teal); }
 </style>
 </head>
 <body>
+<!-- UNIFIED NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
+  <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
+  <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
+  <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Kejadian 11 — Silsilah Nuh</span>
+  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
+</nav>
+
 
 <header>
   <div class="logo-area">

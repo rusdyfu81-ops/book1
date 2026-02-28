@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Two Rivers - The Genesis Genealogies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --teal: #17a79d;
@@ -17,10 +18,10 @@
   --green-mid: rgba(43,182,115,.3);
   --ink: #1c1c1e;
   --muted: #6d6e70;
-  --bg: #f7f9f8;
+  --bg: #f4f7f7;
   --white: #ffffff;
-  --serif: Georgia, 'Times New Roman', serif;
-  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+  --sans: 'Nunito Sans', -apple-system, sans-serif;
   --radius: 8px;
   --shadow: 0 2px 10px rgba(0,0,0,.06);
 }
@@ -43,28 +44,22 @@ button { font-family: var(--sans); cursor: pointer; }
 p { margin-bottom: 0.75em; }
 p:last-child { margin-bottom: 0; }
 
-/* NAV */
-nav {
+/* INTERNAL TAB NAV (below unified nav) */
+nav[role="navigation"] {
   position: sticky;
-  top: 0;
-  z-index: 100;
+  top: 52px;
+  z-index: 99;
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 0 12px;
-  height: 52px;
+  height: 48px;
   background: var(--white);
   border-bottom: 2px solid var(--teal);
   box-shadow: 0 2px 16px rgba(23,167,157,.07);
 }
 .brand {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--teal);
-  text-transform: uppercase;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
+  display: none; /* handled by unified nav */
 }
 .nav-tabs {
   display: flex;
@@ -94,17 +89,8 @@ nav {
 .tab:hover { color: var(--teal); background: var(--teal-light); }
 .tab.active { color: var(--teal); border-color: var(--teal-mid); background: var(--teal-light); }
 .btn-home {
-  font-size: 11px;
-  color: var(--muted);
-  padding: 7px 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(109,110,112,.2);
-  background: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all .2s;
+  display: none; /* handled by unified nav */
 }
-.btn-home:hover { border-color: var(--teal-mid); color: var(--teal); }
 
 /* VIEWS */
 .view { display: none; }
@@ -336,7 +322,7 @@ nav {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 24px 80px;
+  padding: 80px 24px 80px;
   background: linear-gradient(180deg, rgba(23,167,157,.04) 0%, transparent 60%);
 }
 .hero-tag {
@@ -1009,6 +995,14 @@ nav {
 </style>
 </head>
 <body>
+<!-- UNIFIED NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
+  <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
+  <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
+  <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Two Rivers Timeline</span>
+  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
+</nav>
+
 
 <div class="overlay" id="overlay" onclick="closePanel()"></div>
 <div class="panel" id="panel" role="dialog" aria-modal="true">

@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Di Mana Kamu? — The Genesis Genealogies</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ── DESIGN TOKENS ── */
 :root {
@@ -36,7 +37,7 @@
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   font-weight: 400;
@@ -53,28 +54,15 @@ body::before {
     radial-gradient(ellipse 60% 60% at 90% 100%, rgba(43,182,115,0.05), transparent);
 }
 
-/* ── BACK BUTTON ── */
+/* ── BACK BUTTON — hidden, unified nav has Beranda ── */
 .back-btn {
-  position: fixed; top: 16px; left: 16px; z-index: 200;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px; font-weight: 600;
-  color: var(--dim);
-  background: rgba(255,255,255,0.92);
-  border: 1px solid #e8e9ea;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  backdrop-filter: blur(8px);
-  display: inline-flex; align-items: center; gap: 4px;
-  min-height: 44px;
-  transition: background 0.2s, border-color 0.2s;
+  display: none;
 }
-.back-btn:hover { background: var(--teal-lt); border-color: var(--teal-bd); color: var(--teal); }
 
 /* ── PROGRESS BAR ── */
 .progress-strip {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 3px; z-index: 100;
+  position: fixed; top: 52px; left: 0; right: 0;
+  height: 3px; z-index: 999;
   background: rgba(23,167,157,0.15);
 }
 .progress-fill {
@@ -108,7 +96,7 @@ body::before {
 }
 
 .hero-ornament {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--teal);
@@ -117,7 +105,7 @@ body::before {
 }
 
 .hero-title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(48px, 10vw, 96px);
   font-weight: 800;
   line-height: 1.0;
@@ -158,7 +146,7 @@ body::before {
 }
 .hero-verse cite {
   display: block; font-style: normal;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 1.5px;
   color: var(--teal); margin-top: 10px;
@@ -173,7 +161,7 @@ body::before {
 }
 
 .hero-section-pill {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 0.5px;
   padding: 11px 16px;
@@ -194,7 +182,7 @@ body::before {
 .hero-section-pill.p4:hover { background: rgba(29,138,85,0.09); }
 
 .start-btn {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px; font-weight: 700;
   letter-spacing: 1px; text-transform: uppercase;
   color: var(--white);
@@ -237,7 +225,7 @@ body::before {
 }
 .section-rule-line { flex: 1; height: 1px; background: var(--grey-bd); }
 .section-num {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(44px, 8vw, 80px);
   font-weight: 800; line-height: 1;
   letter-spacing: -2px;
@@ -246,14 +234,14 @@ body::before {
 }
 
 .section-eyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--teal); margin-bottom: 10px; display: block;
 }
 
 .section-title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(24px, 5vw, 46px);
   font-weight: 800;
   letter-spacing: -1px;
@@ -281,7 +269,7 @@ body::before {
 .context-box.purple { background: rgba(29,138,85,0.09);         border-color: var(--green-dark); }
 
 .context-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--grey); margin-bottom: 10px; display: block;
@@ -296,7 +284,7 @@ body::before {
 }
 .context-park-quote cite {
   display: block; font-style: normal;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 1px; color: var(--teal);
   margin-top: 8px; text-transform: uppercase;
@@ -306,7 +294,7 @@ body::before {
 .question-wrap { margin-bottom: 24px; }
 
 .question-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(17px, 3vw, 22px);
   font-weight: 700;
   letter-spacing: -0.4px;
@@ -322,7 +310,7 @@ body::before {
 .answer-area {
   width: 100%;
   min-height: 150px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 15px; line-height: 1.8;
   color: var(--ink);
   background: var(--white);
@@ -341,7 +329,7 @@ body::before {
 .answer-area::placeholder { color: var(--dim); opacity: 0.45; }
 
 .saved-badge {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 0.8px; text-transform: uppercase;
   color: var(--green); opacity: 0; margin-top: 8px; display: block;
@@ -380,7 +368,7 @@ body::before {
 }
 
 .closing-title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(28px, 5vw, 60px);
   font-weight: 800;
   letter-spacing: -1.5px;
@@ -396,7 +384,7 @@ body::before {
 }
 
 .closing-statement {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: clamp(17px, 3vw, 24px);
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -429,7 +417,7 @@ body::before {
 }
 .community-btn {
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px; font-weight: 700;
   color: #ffffff;
   background: #c97d3a;
@@ -452,7 +440,7 @@ body::before {
 }
 
 .cta-btn {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 13px; font-weight: 700;
   letter-spacing: 0.8px; text-transform: uppercase;
   padding: 14px 24px;
@@ -481,7 +469,7 @@ body::before {
   border: 1px solid var(--teal-bd);
   border-radius: 12px;
   padding: 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 0.8px; text-transform: uppercase;
   color: var(--dim);
@@ -580,6 +568,14 @@ body::before {
 </style>
 </head>
 <body>
+<!-- UNIFIED NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
+  <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
+  <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
+  <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Di Mana Kamu? — Self Assessment</span>
+  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
+</nav>
+
 <a href="index.html" class="back-btn">← Beranda</a>
 
 <div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
