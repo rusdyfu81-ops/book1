@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setelah Membaca — The Genesis Genealogies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --teal:       #1DADA8;
+  --teal-dark:  #0f8078;
+  --teal-dim:   rgba(29,173,168,0.10);
+  --teal-bd:    rgba(29,173,168,0.28);
+  --gold:       #C9A84C;
+  --gold-dim:   rgba(201,168,76,0.10);
+  --gold-bd:    rgba(201,168,76,0.28);
+  --ink:        #1a1f1e;
+  --ink2:       #383d3c;
+  --mid:        #5a5f5e;
+  --dim:        #8a8f8e;
+  --bg:         #f5f4f0;
+  --white:      #ffffff;
+  --border:     #e4e2dc;
+  --card-bg:    #fdfcf9;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── ATMOSFER ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 5% 10%, rgba(29,173,168,0.06), transparent),
+    radial-gradient(ellipse 60% 60% at 95% 90%, rgba(201,168,76,0.05), transparent);
+}
+
+/* ── WRAPPER ── */
+.page {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.hero-ornament {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 1s 0.4s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.hero-subtitle {
+  font-family: 'Lora', serif;
+  font-size: clamp(16px, 3vw, 22px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--mid);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s 0.55s forwards;
+}
+
+.hero-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: fadeUp 1s 0.65s forwards;
+}
+
+.hero-body {
+  font-family: 'Lora', serif;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink2);
+  max-width: 520px;
+  text-align: center;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 1s 0.75s forwards;
+}
+
+.scroll-hint {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s 1s forwards;
+}
+
+.scroll-arrow {
+  font-size: 18px;
+  color: var(--teal);
+  animation: bounce 2.2s ease-in-out infinite;
+}
+
+/* ── SECTION LABEL ── */
+.section-block {
+  margin-top: 80px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-eyebrow {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--mid);
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+/* ── SKALA KASIH KARUNIA ── */
+.scale-group {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.scale-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  transition: border-color 0.2s;
+}
+
+.scale-item.active {
+  border-color: var(--teal-bd);
+  background: var(--white);
+}
+
+.scale-label {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.scale-track {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.scale-btn {
+  flex: 1;
+  height: 44px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scale-btn:hover {
+  border-color: var(--teal-bd);
+  color: var(--teal);
+  background: var(--teal-dim);
+}
+
+.scale-btn.selected {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--white);
+  box-shadow: 0 2px 12px rgba(29,173,168,0.3);
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+}
+
+.scale-labels span {
+  font-size: 11px;
+  color: var(--dim);
+  font-weight: 500;
+}
+
+/* ── HIGHLIGHT MOMEN ── */
+.momen-input {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.7;
+  resize: none;
+  min-height: 100px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.momen-input:focus {
+  border-color: var(--teal-bd);
+  background: var(--white);
+}
+
+.momen-input::placeholder {
+  color: var(--dim);
+  font-style: italic;
+}
+
+/* ── LANGKAH SELANJUTNYA ── */
+.steps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.steps-category {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.steps-cat-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.steps-cat-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.steps-cat-title {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.steps-cat-desc {
+  font-size: 13px;
+  color: var(--mid);
+  margin-left: auto;
+  font-weight: 400;
+}
+
+.steps-list {
+  padding: 16px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  text-decoration: none;
+  transition: all 0.18s;
+  cursor: pointer;
+}
+
+.step-card:hover {
+  border-color: var(--teal-bd);
+  background: var(--teal-dim);
+  transform: translateX(3px);
+}
+
+.step-card.gold:hover {
+  border-color: var(--gold-bd);
+  background: var(--gold-dim);
+}
+
+.step-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.step-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.step-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.step-name {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  display: block;
+}
+
+.step-sub {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.4;
+  display: block;
+  margin-top: 2px;
+}
+
+.step-arrow {
+  font-size: 14px;
+  color: var(--teal);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.step-card.gold .step-arrow {
+  color: var(--gold);
+}
+
+/* ── PENUTUP ── */
+.closing {
+  margin-top: 80px;
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(150deg, #1a2a29 0%, #0f1f1e 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,173,168,0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.closing::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.closing-ornament {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+
+.closing-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.3;
+  position: relative; z-index: 1;
+}
+
+.closing-body {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+  max-width: 420px;
+  margin: 0 auto 32px;
+  position: relative; z-index: 1;
+}
+
+.closing-verse {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 360px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative; z-index: 1;
+}
+
+.closing-verse cite {
+  display: block;
+  font-style: normal;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: 10px;
+}
+
+/* ── ANIMASI ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(7px); }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 520px) {
+  .page { padding: 0 16px 80px; }
+  .steps-cat-desc { display: none; }
+  .closing { padding: 48px 24px; }
+  .scale-track { gap: 5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- NAV BACK -->
+  <div style="padding:24px 0 0;display:flex;align-items:center;justify-content:space-between;">
+    <a href="reading-journey.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--teal);text-decoration:none;letter-spacing:.5px;opacity:0.8;transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
+      ← Reading Companion
+    </a>
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--mid);text-decoration:none;letter-spacing:.5px;opacity:0.6;transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+      Ekosistem ↗
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ornament">The Genesis Genealogies · Selesai Dibaca</div>
+    <h1 class="hero-title">Kamu sudah<br><em>melihatnya.</em></h1>
+    <p class="hero-subtitle">Sekarang — apa yang mau kamu lakukan dengan itu?</p>
+    <div class="hero-divider"></div>
+    <p class="hero-body">
+      Tidak semua orang mau duduk cukup lama untuk melihat apa yang ada di balik silsilah-silsilah ini. Kamu sudah melakukannya. Sebelum melanjutkan, luangkan satu menit untuk mencatat apa yang terjadi dalam dirimu.
+    </p>
+    <div class="scroll-hint">
+      <span>Lanjutkan ke bawah</span>
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- BAGIAN 1: REFLEKSI -->
+  <section class="section-block" id="b1">
+    <div class="section-eyebrow">01 · Refleksi</div>
+    <h2 class="section-title">Apa yang kamu alami?</h2>
+    <p class="section-desc">Tiga pertanyaan singkat — tidak ada jawaban yang benar atau salah.</p>
+
+    <div class="scale-group">
+
+      <!-- Skala 1 -->
+      <div class="scale-item" id="si1">
+        <div class="scale-label">Seberapa besar kasih karunia yang kamu rasakan saat membaca buku ini?</div>
+        <div class="scale-track">
+          <button class="scale-btn" onclick="selectScale('sk1', 1, this)">1</button>
+          <button class="scale-btn" onclick="selectScale('sk1', 2, this)">2</button>
+          <button class="scale-btn" onclick="selectScale('sk1', 3, this)">3</button>
+          <button class="scale-btn" onclick="selectScale('sk1', 4, this)">4</button>
+          <button class="scale-btn" onclick="selectScale('sk1', 5, this)">5</button>
+        </div>
+        <div class="scale-labels">
+          <span>Biasa saja</span>
+          <span>Sangat dalam</span>
+        </div>
+      </div>
+
+      <!-- Skala 2 -->
+      <div class="scale-item" id="si2">
+        <div class="scale-label">Apakah ada momen yang mengharukan — sesuatu yang membuat kamu berhenti dan tidak bisa melanjutkan begitu saja?</div>
+        <div class="scale-track">
+          <button class="scale-btn" onclick="selectScale('sk2', 1, this)">1</button>
+          <button class="scale-btn" onclick="selectScale('sk2', 2, this)">2</button>
+          <button class="scale-btn" onclick="selectScale('sk2', 3, this)">3</button>
+          <button class="scale-btn" onclick="selectScale('sk2', 4, this)">4</button>
+          <button class="scale-btn" onclick="selectScale('sk2', 5, this)">5</button>
+        </div>
+        <div class="scale-labels">
+          <span>Tidak ada</span>
+          <span>Banyak sekali</span>
+        </div>
+      </div>
+
+      <!-- Skala 3 -->
+      <div class="scale-item" id="si3">
+        <div class="scale-label">Seberapa mungkin kamu merekomendasikan buku ini kepada seseorang yang kamu sayangi?</div>
+        <div class="scale-track">
+          <button class="scale-btn" onclick="selectScale('sk3', 1, this)">1</button>
+          <button class="scale-btn" onclick="selectScale('sk3', 2, this)">2</button>
+          <button class="scale-btn" onclick="selectScale('sk3', 3, this)">3</button>
+          <button class="scale-btn" onclick="selectScale('sk3', 4, this)">4</button>
+          <button class="scale-btn" onclick="selectScale('sk3', 5, this)">5</button>
+        </div>
+        <div class="scale-labels">
+          <span>Tidak mungkin</span>
+          <span>Pasti akan</span>
+        </div>
+      </div>
+
+      <!-- Momen bebas -->
+      <div class="scale-item" id="si4">
+        <div class="scale-label">Kalau ada satu hal baru yang kamu temukan — sesuatu yang tidak kamu ketahui sebelum membaca — apa itu?</div>
+        <textarea class="momen-input" id="momenInput" placeholder="Tuliskan dengan kata-katamu sendiri. Tidak harus panjang." rows="3" oninput="onMomenInput()"></textarea>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BAGIAN 2: LANGKAH SELANJUTNYA -->
+  <section class="section-block" id="b2">
+    <div class="section-eyebrow">02 · Langkah Selanjutnya</div>
+    <h2 class="section-title">Ke mana kamu ingin pergi?</h2>
+    <p class="section-desc">Pilih satu atau lebih — atau semuanya. Tidak ada urutan yang harus diikuti.</p>
+
+    <div class="steps-grid">
+
+      <!-- UNTUK SAYA -->
+      <div class="steps-category">
+        <div class="steps-cat-header">
+          <span class="steps-cat-icon">🌿</span>
+          <span class="steps-cat-title">Untuk saya sendiri</span>
+          <span class="steps-cat-desc">Menggali lebih dalam</span>
+        </div>
+        <div class="steps-list">
+
+          <a class="step-card" href="https://sejarahpenebusan.com/shop/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">📚</span>
+              <div class="step-text">
+                <span class="step-name">Lanjut ke buku seri berikutnya</span>
+                <span class="step-sub">Seri History of Redemption terdiri dari beberapa buku — lihat selengkapnya</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/shop/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">🔄</span>
+              <div class="step-text">
+                <span class="step-name">Baca ulang buku ini</span>
+                <span class="step-sub">Park menulis bahwa tidak ada yang bisa dilihat hanya dalam satu kali baca</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/komunitas" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">📖</span>
+              <div class="step-text">
+                <span class="step-name">Ikut Bible Study</span>
+                <span class="step-sub">Belajar lebih dalam dengan panduan dan sesama pembaca</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/komunitas" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">🎓</span>
+              <div class="step-text">
+                <span class="step-name">Menjadi pengajar</span>
+                <span class="step-sub">Bagi yang ingin membantu orang lain melihat apa yang Park lihat</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- UNTUK ORANG LAIN -->
+      <div class="steps-category">
+        <div class="steps-cat-header">
+          <span class="steps-cat-icon">🕊️</span>
+          <span class="steps-cat-title">Untuk orang lain</span>
+          <span class="steps-cat-desc">Berbagi apa yang kamu temukan</span>
+        </div>
+        <div class="steps-list">
+
+          <a class="step-card gold" href="https://sejarahpenebusan.com/shop/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">🎁</span>
+              <div class="step-text">
+                <span class="step-name">Beli buku dan bagikan ke seseorang</span>
+                <span class="step-sub">Hadiah yang bukan sekadar buku — ada sesuatu yang mungkin berubah</span>
+              </div>
+            </div>
+            <span class="step-arrow" style="color:var(--gold)">→</span>
+          </a>
+
+          <a class="step-card" href="https://www.instagram.com/sejarahpenebusan/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">📲</span>
+              <div class="step-text">
+                <span class="step-name">Bagikan konten komunitas</span>
+                <span class="step-sub">Follow dan share konten IG @sejarahpenebusan ke orang-orang di sekitarmu</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/komunitas" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">🤝</span>
+              <div class="step-text">
+                <span class="step-name">Bergabung dengan komunitas</span>
+                <span class="step-sub">Ada pekerjaan besar yang sedang dikerjakan — dan ada tempat untukmu di sana</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card gold" href="https://sejarahpenebusan.com/donasi" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">💛</span>
+              <div class="step-text">
+                <span class="step-name">Mendukung pekerjaan ini</span>
+                <span class="step-sub">Donasi untuk membantu lebih banyak orang bisa membaca dan menemukan sendiri</span>
+              </div>
+            </div>
+            <span class="step-arrow" style="color:var(--gold)">→</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- UNTUK ANAK -->
+      <div class="steps-category">
+        <div class="steps-cat-header">
+          <span class="steps-cat-icon">🌱</span>
+          <span class="steps-cat-title">Untuk anak-anak</span>
+          <span class="steps-cat-desc">Meneruskan ke generasi berikutnya</span>
+        </div>
+        <div class="steps-list">
+
+          <a class="step-card" href="https://sejarahpenebusan.com/shop/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">📗</span>
+              <div class="step-text">
+                <span class="step-name">Buku anak — ada</span>
+                <span class="step-sub">Versi khusus anak-anak dari seri History of Redemption, tersedia di toko</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/shop/" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">🎨</span>
+              <div class="step-text">
+                <span class="step-name">Buku aktiviti anak</span>
+                <span class="step-sub">Dirancang supaya anak-anak bisa aktif mengeksplorasi — bukan hanya membaca</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+          <a class="step-card" href="https://sejarahpenebusan.com/komunitas" target="_blank">
+            <div class="step-card-left">
+              <span class="step-icon">👨‍👧</span>
+              <div class="step-text">
+                <span class="step-name">Cara mengajar anak</span>
+                <span class="step-sub">Ada panduan dan instruksi untuk orang tua dan guru yang ingin mengajarkan ini</span>
+              </div>
+            </div>
+            <span class="step-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PENUTUP -->
+  <div class="closing section-block" id="b3">
+    <span class="closing-ornament">✦ Selesai ✦</span>
+    <h2 class="closing-title">Ini baru permulaan.</h2>
+    <p class="closing-body">Park menghabiskan 40 tahun di depan teks yang sama sebelum menulis satu kalimat pun. Kamu baru saja mengambil langkah pertama. Langkah berikutnya terserah kamu.</p>
+    <div class="closing-verse">
+      "Karena begitu besar kasih Allah akan dunia ini, sehingga Ia telah mengaruniakan Anak-Nya yang tunggal."
+      <cite>Yohanes 3:16</cite>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Skala ──
+var scales = {};
+
+function selectScale(key, val, btn) {
+  scales[key] = val;
+  var track = btn.parentElement;
+  track.querySelectorAll('.scale-btn').forEach(function(b) {
+    b.classList.remove('selected');
+  });
+  btn.classList.add('selected');
+
+  // aktifkan border kartu
+  var item = track.closest('.scale-item');
+  if (item) item.classList.add('active');
+
+  saveData();
+}
+
+// ── Momen input ──
+var momenTimer = null;
+function onMomenInput() {
+  clearTimeout(momenTimer);
+  momenTimer = setTimeout(saveData, 600);
+  var item = document.getElementById('si4');
+  if (item) item.classList.add('active');
+}
+
+// ── Simpan ke localStorage ──
+function saveData() {
+  try {
+    var d = {
+      sk1: scales['sk1'] || null,
+      sk2: scales['sk2'] || null,
+      sk3: scales['sk3'] || null,
+      momen: (document.getElementById('momenInput') || {}).value || ''
+    };
+    localStorage.setItem('sp-buku1-cermin-v1', JSON.stringify(d));
+  } catch(e) {}
+}
+
+function loadData() {
+  try {
+    var raw = localStorage.getItem('sp-buku1-cermin-v1');
+    if (!raw) return;
+    var d = JSON.parse(raw);
+
+    // restore scales
+    ['sk1','sk2','sk3'].forEach(function(key, i) {
+      if (d[key]) {
+        var si = document.getElementById('si' + (i+1));
+        if (!si) return;
+        var btns = si.querySelectorAll('.scale-btn');
+        var val = d[key];
+        if (btns[val-1]) {
+          btns[val-1].classList.add('selected');
+          si.classList.add('active');
+          scales[key] = val;
+        }
+      }
+    });
+
+    // restore momen
+    if (d.momen) {
+      var ta = document.getElementById('momenInput');
+      if (ta) {
+        ta.value = d.momen;
+        var si4 = document.getElementById('si4');
+        if (si4) si4.classList.add('active');
+      }
+    }
+  } catch(e) {}
+}
+
+// ── Intersection Observer ──
+function initObserver() {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section-block').forEach(function(el) {
+    obs.observe(el);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  loadData();
+  initObserver();
+});
+</script>
+</body>
+</html>

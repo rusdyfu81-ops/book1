@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reading Companion — The Genesis Genealogies</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   /* New Brand Palette */
@@ -22,7 +21,7 @@
   --grey-light: rgba(109,110,112,0.10);
   --grey-border: rgba(109,110,112,0.22);
   --white: #ffffff;
-  --bg: #f4f7f7;
+  --bg: #f5f7f7;
   --bg-card: #ffffff;
   --ink: #1a1f1f;
   --mid: #3d4040;
@@ -46,7 +45,7 @@
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
+html { scroll-behavior:smooth; font-size:16px; overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -55,6 +54,7 @@ body {
   font-size: 16px;
   line-height: 1.7;
   font-weight: 400;
+  overflow-x: hidden;
 }
 
 /* ============ PRINT ============ */
@@ -73,7 +73,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 100px 32px 60px;
+  padding: 80px 32px;
   position: relative;
   border-bottom: 1px solid var(--teal-border);
   background: linear-gradient(160deg, rgba(23,167,157,0.06) 0%, rgba(43,182,115,0.04) 50%, transparent 100%);
@@ -293,9 +293,9 @@ body {
 
 /* ============ CHAPTER BLOCK ============ */
 .chapter-block {
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto 48px;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .chapter-card {
@@ -363,6 +363,33 @@ body {
   font-size: 14px;
   color: var(--dim);
   line-height: 1.65;
+  display: none; /* dipindah ke dalam body */
+}
+
+.park-insight-block {
+  margin: 20px 0 24px;
+  background: rgba(23,167,157,0.05);
+  border: 1px solid rgba(23,167,157,0.18);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 18px;
+}
+.park-insight-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.park-insight-text {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.72;
 }
 
 .ch-chev {
@@ -380,7 +407,7 @@ body {
   overflow: hidden;
   transition: max-height 0.7s cubic-bezier(.16,1,.3,1);
 }
-.chapter-card.open .ch-body { max-height: 2400px; }
+.chapter-card.open .ch-body { max-height: 9999px; }
 
 .ch-inner { padding: 24px; }
 
@@ -544,10 +571,10 @@ body {
 /* ============ STICKY PROGRESS BAR ============ */
 .progress-bar {
   position: fixed;
-  top: 52px; left: 0; right: 0;
+  top: 0; left: 0; right: 0;
   height: 3px;
   background: rgba(23,167,157,0.15);
-  z-index: 999;
+  z-index: 100;
 }
 .progress-fill {
   height: 100%;
@@ -603,12 +630,103 @@ body {
 .part4 .ch-tag, .part4 .section-eyebrow, .part4 .part-label { color: var(--green); }
 .part5 .ch-tag, .part5 .section-eyebrow, .part5 .part-label { color: var(--grey); }
 
-/* responsive */
-@media(max-width: 600px) {
-  .ch-header { gap: 12px; }
-  .ch-num { font-size: 18px; min-width: 28px; }
-  .ch-inner { padding: 16px; }
-  .print-btn { display: none; }
+/* ============ VERIFY GRID (park section) ============ */
+.verify-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.verify-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.28);
+  border-radius: 10px;
+}
+
+.verify-num {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 20px;
+  color: #7a5c00;
+  flex-shrink: 0;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.verify-content { flex: 1; }
+
+.verify-klaim {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.verify-cara {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+
+.verify-tag {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7a5c00;
+  opacity: 0.8;
+}
+
+/* ============ TEKS BUKA (per chapter) ============ */
+.teks-buka {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.28);
+  border-left: 3px solid #c9a84c;
+  border-radius: 0 8px 8px 0;
+}
+
+.teks-buka-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7a5c00;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.teks-buka-ayat {
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.teks-buka-catatan {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.teks-buka-catatan em {
+  font-style: italic;
+  color: var(--mid);
+}
+
+/* howto icons — 4 cols on desktop */
+@media(min-width:560px) {
+  .howto-icons { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* SVG styles */
@@ -807,6 +925,63 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
   .reading-progress-panel { display: none; }
   .ch-read-row { padding: 10px 16px; }
   .notes-inner { padding: 12px 16px 16px; }
+
+  /* Wider layout on small screens */
+  .chapter-block { padding: 0 12px; margin-bottom: 28px; }
+  .ch-inner { padding: 16px; }
+
+  /* Print button — smaller, don't overlap content */
+  .print-btn {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+
+  /* Part header — less padding */
+  .part-header { padding: 36px 16px 28px; }
+  .part-title { font-size: clamp(20px, 5vw, 32px); letter-spacing: -0.5px; }
+  .part-thesis { font-size: 14px; }
+
+  /* How to icons — 2 cols on medium mobile */
+  .howto-icons { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .howto h2 { font-size: clamp(22px, 6vw, 40px); }
+  .howto { padding: 48px 16px; }
+
+  /* Cover */
+  .cover { padding: 60px 16px; }
+  .cover-nav { gap: 6px; }
+  .cover-nav a { font-size: 10px; padding: 6px 12px; }
+
+  /* Slow gate — prevent text overflow */
+  .slow-gate-header { flex-direction: column; gap: 8px; }
+  .gate-question { font-size: 14px; }
+  .gate-textarea { font-size: 14px; }
+
+  /* Soft gate */
+  .soft-gate { padding: 14px 14px; }
+  .soft-gate-textarea { font-size: 14px; }
+
+  /* SVG diagrams — ensure they don't overflow */
+  .diagram-svg-wrap { overflow-x: auto; }
+  .diagram-svg-wrap svg { min-width: 500px; }
+
+  /* Q items */
+  .q-text { font-size: 14px; }
+  .q-dot { width: 22px; height: 22px; font-size: 11px; flex-shrink: 0; }
+
+  /* notes textarea */
+  .notes-textarea { font-size: 14px; }
+
+  /* consequence block */
+  .consequence-text { font-size: 14px; }
+
+  /* Park insight */
+  .park-insight-text { font-size: 14px; }
+
+  /* ch-header */
+  .ch-title { font-size: 14px; }
+  .ch-num { width: 32px; height: 32px; font-size: 14px; flex-shrink: 0; }
 }
 @media print {
   .notes-panel, .ch-read-row, .reading-progress-panel { display: none !important; }
@@ -1132,17 +1307,217 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 
 .gate-saved { font-family: 'Nunito Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1px; color: var(--green); opacity: 0; transition: opacity 0.4s; display: block; margin-top: 5px; text-transform: uppercase; }
 .gate-saved.show { opacity: 1; }
+
+/* ============ SOFT GATE (observasi mandiri) ============ */
+.soft-gate {
+  margin: 16px 0 20px;
+  padding: 14px 16px;
+  background: rgba(201,168,76,0.06);
+  border: 1px dashed rgba(201,168,76,0.45);
+  border-radius: 8px;
+}
+.soft-gate-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7a5c00;
+  margin-bottom: 8px;
+  display: block;
+}
+.soft-gate-prompt {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.soft-gate-textarea {
+  width: 100%;
+  min-height: 70px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 6px;
+  padding: 10px 12px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.soft-gate-textarea:focus { border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+.soft-gate-textarea::placeholder { color: var(--dim); opacity: 0.5; }
+.soft-gate-hint {
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 6px;
+  display: block;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.soft-gate-hint.ready { color: var(--teal); opacity: 1; }
+
+/* ============ COLLAPSIBLE PARK INSIGHT ============ */
+details.park-insight-details {
+  margin: 20px 0 24px;
+}
+details.park-insight-details summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(23,167,157,0.05);
+  border: 1px solid rgba(23,167,157,0.18);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  list-style: none;
+  user-select: none;
+  transition: background 0.2s;
+}
+details.park-insight-details summary::-webkit-details-marker { display: none; }
+details.park-insight-details summary::after {
+  content: '▸ Buka';
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--teal);
+  text-transform: none;
+}
+details.park-insight-details[open] summary::after { content: '▾ Tutup'; }
+details.park-insight-details summary:hover { background: rgba(23,167,157,0.09); }
+details.park-insight-details .park-insight-body {
+  padding: 14px 18px 16px;
+  background: rgba(23,167,157,0.04);
+  border: 1px solid rgba(23,167,157,0.18);
+  border-top: none;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 0 8px 0;
+}
+.park-insight-body .park-insight-text {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.72;
+}
+
+/* ============ INTERPRETIVE DISCLAIMER ============ */
+.diagram-disclaimer {
+  font-size: 12px;
+  color: var(--dim);
+  font-style: italic;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-left: 2px solid rgba(109,110,112,0.3);
+  opacity: 0.8;
+}
+
+/* ============ CONSEQUENCE BLOCK ============ */
+.consequence-block {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(15,122,115,0.07) 0%, rgba(43,182,115,0.05) 100%);
+  border-left: 3px solid var(--teal-dark);
+  border-radius: 0 6px 6px 0;
+}
+.consequence-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  margin-bottom: 8px;
+}
+.consequence-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--mid);
+  font-style: italic;
+}
+.consequence-text em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--teal-dark);
+}
+
+/* ============ VERIFICATION WORKSHEET ============ */
+.verify-block {
+  margin: 20px 0;
+  padding: 18px 20px;
+  background: rgba(15,122,115,0.05);
+  border: 1.5px solid rgba(15,122,115,0.2);
+  border-radius: 8px;
+}
+.verify-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.verify-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(15,122,115,0.1);
+}
+.verify-step:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.verify-step-num {
+  min-width: 24px;
+  height: 24px;
+  background: var(--teal-dark);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.verify-step-text {
+  font-size: 13.5px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+.verify-step-text strong {
+  color: var(--teal-dark);
+}
+.verify-step-text em {
+  font-style: italic;
+}
+.verify-result {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(43,182,115,0.08);
+  border-left: 3px solid var(--green);
+  border-radius: 0 4px 4px 0;
+  font-size: 13.5px;
+  color: var(--mid);
+  font-style: italic;
+}
 </style>
 </head>
 <body>
-<!-- UNIFIED NAV -->
-<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
-  <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
-  <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
-  <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Reading Companion</span>
-  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
-</nav>
-
 
 <div class="progress-bar no-print"><div class="progress-fill" id="prog"></div></div>
 <button class="print-btn no-print" onclick="window.print()">⎙ Cetak / Simpan PDF</button>
@@ -1164,7 +1539,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
     <a href="#part3">Part 3</a>
     <a href="#part4">Part 4</a>
     <a href="#part5">Part 5</a>
-    <a href="#tentang-park">Tentang Park</a>
+    <a href="#tentang-park">Tentang Pdt. Park</a>
     <a href="#howto">Cara Pakai</a>
   </nav>
 </div>
@@ -1173,42 +1548,67 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <!-- ============ PARK SECTION ============ -->
 <div class="park-section" id="tentang-park">
   <span class="section-eyebrow">Sebelum kamu mulai membaca</span>
-  <h2 style="font-family:'Nunito Sans',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:8px;color:var(--ink);line-height:1.1;">Siapa Abraham Park — dan mengapa ini penting</h2>
+  <h2 style="font-family:'Nunito Sans',sans-serif;font-size:clamp(24px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:8px;color:var(--ink);line-height:1.1;">Buku ini bukan tentang Pdt. Park.<br>Ini tentang Alkitab yang ia buka.</h2>
 
-  <p class="park-body">Buku ini bisa dengan mudah dibaca sebagai karya teologi — analisis akademis tentang silsilah Kejadian oleh seorang sarjana Korea. Tapi jika kamu membacanya seperti itu, kamu akan melewatkan apa yang paling penting di dalamnya.</p>
+  <p class="park-body">Buku ini membuat klaim-klaim yang spesifik tentang teks Alkitab. Bukan klaim teologis yang abstrak — melainkan klaim yang bisa dicek: angka-angka di Kejadian 5 dan 11, arti kata-kata dalam bahasa Ibrani, hubungan kronologis antara nama-nama yang tercatat.</p>
 
-  <div class="park-pull">Park tidak menulis ini dari perpustakaan. Ia menulisnya dari kamar doa — setelah menangis di hadapan teks selama bertahun-tahun sampai ia tidak bisa tidur.</div>
+  <div class="park-pull">Sebelum kamu memutuskan apakah Park benar — cek dulu apakah yang ia tunjuk memang ada di Alkitab. Buka Alkitabmu. Lihat sendiri.</div>
 
-  <p class="park-body">Lahir pada 1928, Abraham Park melayani sebagai gembala jemaat di Korea — sebuah negara yang keluar dari perang saudara dengan luka yang dalam dan identitas yang hancur. Jemaatnya bukan orang-orang yang punya waktu untuk studi akademis. Mereka adalah orang-orang yang bertanya: <em>di mana Allah dalam reruntuhan ini?</em></p>
+  <p class="park-body">Tiga contoh yang bisa kamu verifikasi sekarang, sebelum membaca satu halaman pun dari buku ini:</p>
 
-  <p class="park-body">Park membawa pertanyaan itu ke Alkitab. Bukan untuk mencari jawaban cepat — tapi untuk duduk bersama teks selama bertahun-tahun, sampai teks itu mulai berbicara dengan cara yang tidak pernah ia duga.</p>
+  <div class="verify-grid">
+    <div class="verify-item">
+      <div class="verify-num">①</div>
+      <div class="verify-content">
+        <div class="verify-klaim">Metusalah mati pada tahun yang sama dengan air bah.</div>
+        <div class="verify-cara">Cek sendiri: Kej 5:25–27 (umur Metusalah = 969 thn). Kej 5:25 + Kej 5:28 + Kej 7:6: Metusalah lahir saat Henokh 65 thn → Lamekh lahir saat Metusalah 187 thn → Nuh lahir saat Lamekh 182 thn → air bah saat Nuh 600 thn. Jumlah: 187+182+600 = 969. Tepat umur Metusalah.</div>
+        <div class="verify-tag">Angka di teks · bisa dihitung siapapun</div>
+      </div>
+    </div>
+    <div class="verify-item">
+      <div class="verify-num">②</div>
+      <div class="verify-content">
+        <div class="verify-klaim">Adam masih hidup ketika Lamekh — generasi ke-9 — berumur 56 tahun.</div>
+        <div class="verify-cara">Cek sendiri: Adam hidup 930 thn (Kej 5:5). Lamekh lahir di tahun ke-874 setelah Adam (jumlah usia beranak setiap generasi). 930 − 874 = 56. Mereka hidup dalam periode yang sama.</div>
+        <div class="verify-tag">Implikasi langsung dari angka-angka di Kej 5</div>
+      </div>
+    </div>
+    <div class="verify-item">
+      <div class="verify-num">③</div>
+      <div class="verify-content">
+        <div class="verify-klaim">Nama "Nuh" dalam bahasa Ibrani berarti istirahat atau penghiburan.</div>
+        <div class="verify-cara">Cek sendiri: Kej 5:29 — Lamekh sendiri menjelaskan mengapa ia memberi nama "Nuh": <em>"Anak ini akan memberi kepada kita penghiburan (נחם, <em>nakham</em>) dalam pekerjaan kita."</em> Teks memberikan tafsirannya sendiri.</div>
+        <div class="verify-tag">Ditafsirkan langsung oleh teks · Kej 5:29</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="park-body">Tiga contoh di atas bukan interpretasi Park. Itu data di Alkitab yang bisa diverifikasi oleh siapapun yang mau membuka dan menghitung. Pdt. Park membantu kamu <em>tahu di mana harus melihat</em> — tapi kebenaran atau ketidakbenaran klaim itu ada di Alkitab sendiri, bukan di otoritas Park.</p>
+
+  <p class="park-body">Ada juga klaim-klaim lain di buku ini yang sifatnya <em>interpretasi</em> — di mana para ahli bisa tidak sepakat. Ketika itu terjadi, companion ini akan menandainya. Tugasmu bukan percaya atau tidak percaya kepada Park. Tugasmu adalah membaca Alkitabnya sendiri dan menilai.</p>
 
   <div class="park-timeline">
     <div class="pt-item">
       <span class="pt-year">1957</span>
-      <span class="pt-text">Park mulai berkhotbah tentang silsilah Kejadian kepada jemaatnya. Bukan sebagai seri akademis — tapi sebagai pesan pastoral kepada orang-orang yang sedang dalam krisis.</span>
+      <span class="pt-text">Pdt. Park mulai berkhotbah tentang silsilah Kejadian kepada jemaatnya di Korea pasca-perang — orang-orang yang bertanya: <em>"di mana Allah dalam reruntuhan ini?"</em> Ia membawa pertanyaan itu ke Alkitab.</span>
     </div>
     <div class="pt-item">
       <span class="pt-year">1968</span>
-      <span class="pt-text">Park mengalami momen yang ia gambarkan hanya dengan dua kalimat: <em>"Air mata mengalir dan tidur pun tak bisa saya lakukan."</em> Ia berlutut di kamar doa dan menerima pemahaman yang tidak datang dari buku lain manapun.</span>
+      <span class="pt-text">Pdt. Park mengalami momen yang ia gambarkan dengan singkat: <em>"Air mata mengalir dan tidur pun tak bisa saya lakukan."</em> Bukan setelah membaca buku lain — tapi setelah berulang kali duduk bersama teks Kejadian itu sendiri.</span>
     </div>
     <div class="pt-item">
       <span class="pt-year">1983</span>
-      <span class="pt-text">Retreat khusus enam bulan di Pusat Retreat Pyung Kang Che-il. Park mengajar silsilah ini secara intensif kepada jemaatnya — dalam komunitas, dengan waktu, dengan pertanggungjawaban bersama. Pengalaman dulu. Komunitas dulu. Waktu dulu.</span>
+      <span class="pt-text">Retreat enam bulan khusus untuk mempelajari silsilah ini secara intensif. Bukan Pdt. Park mengajar teorinya — tapi jemaat membaca Alkitab bersama, dengan waktu yang cukup untuk menggali sendiri.</span>
     </div>
     <div class="pt-item">
       <span class="pt-year">2007</span>
-      <span class="pt-text">Empat puluh tahun setelah ia mulai berkhotbah, Park menerbitkan buku ini. Bukan karena ia akhirnya punya cukup pengetahuan. Tapi karena jemaatnya sudah cukup lama hidup di dalam kebenaran ini untuk membuktikan bahwa itu nyata.</span>
+      <span class="pt-text">Empat puluh tahun setelah mulai berkhotbah, Pdt. Park menerbitkan buku ini. Ia menulis: <em>"Saya hanya mengorganisir apa yang saya khotbahkan setelah berulang kali membaca Alkitab."</em> Sumber yang ia tunjuk selalu kembali ke Alkitab.</span>
     </div>
   </div>
 
-  <p class="park-body">Park sendiri menulis: <em>"Saya hanya mengorganisir apa yang saya khotbahkan melalui pencerahan Roh Kudus setelah berulang kali berlutut dalam doa dan membaca Alkitab berulang-ulang."</em></p>
-
-  <p class="park-body">Kalimat itu bukan kerendahan hati retoris. Itu adalah kunci untuk membaca buku ini dengan benar. Ketika kamu membaca analisis Park tentang umur para patriark, atau makna nama-nama dalam silsilah — kamu bukan sedang membaca argumen seorang akademisi. Kamu sedang mendengar kesaksian seorang gembala yang menemukan sesuatu yang mengubah cara ia memandang Allah, sejarah, dan jemaatnya — dan yang kemudian menghabiskan empat puluh tahun memverifikasi bahwa temuan itu benar.</p>
-
   <div class="park-closing-quote">
-    Baca buku ini seperti seseorang yang menerima surat dari bapak rohani yang sudah menua — bukan seperti seseorang yang mengevaluasi disertasi doktor. Pertanyaannya bukan <em>"apakah argumen ini valid?"</em> Pertanyaannya adalah <em>"apa yang ia lihat yang selama ini tersembunyi dari saya?"</em>
-    <cite>Catatan editorial — Reading Companion ini</cite>
+    Baca buku ini dengan Alkitab terbuka di sebelahnya. Setiap kali Pdt. Park merujuk sebuah ayat — buka ayatnya. Bukan untuk membuktikan Pdt. Park benar atau salah. Tapi karena <em>teks itu sendiri yang berhak berbicara</em> — Pdt. Park hanya menunjuk ke arahnya.
+    <cite>Prinsip reading companion ini</cite>
   </div>
 </div>
 
@@ -1223,24 +1623,29 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <!-- ============ HOW TO USE ============ -->
 <div class="howto" id="howto">
   <span class="section-eyebrow">Cara Menggunakan</span>
-  <h2>Companion, bukan pengganti</h2>
-  <p>Park menulis dengan kedalaman yang tidak bisa diringkas. Companion ini dirancang untuk <em>dibuka bersamaan</em> dengan buku — bukan dibaca sendirian.</p>
-  <p>Setiap bab punya tiga lapisan: peta visual argumen Park, tiga pertanyaan orientasi <em>sebelum</em> membaca, dan satu pertanyaan penghenti <em>setelah</em> membaca yang bersifat personal.</p>
+  <h2>Teks dulu. Buku kedua.</h2>
+  <p>Companion ini dirancang untuk dibuka <em>bersamaan</em> dengan dua hal sekaligus: buku Pdt. Park <em>dan</em> Alkitab. Bukan hanya satu.</p>
+  <p>Setiap bab punya empat lapisan: teks Alkitab yang perlu dibuka, peta visual argumen Pdt. Park, tiga pertanyaan orientasi <em>sebelum</em> membaca, dan satu pertanyaan penghenti <em>setelah</em> membaca.</p>
   <div class="howto-icons">
+    <div class="howto-icon-box" style="border-color:rgba(201,168,76,0.35);background:rgba(201,168,76,0.07);">
+      <span class="howto-icon">📖</span>
+      <span class="howto-icon-title" style="color:#7a5c00;">Buka Alkitabmu</span>
+      <div class="howto-icon-text">Setiap bab dimulai dengan teks yang perlu kamu buka dan baca sendiri — sebelum membaca Park. Ini bukan opsional. Ini urutan yang benar.</div>
+    </div>
     <div class="howto-icon-box">
       <span class="howto-icon">◈</span>
-      <span class="howto-icon-title">Sebelum Membaca</span>
-      <div class="howto-icon-text">Buka bagian orientasi. Baca 3 pertanyaan. Biarkan mereka membangun rasa ingin tahu, bukan menjawab lebih dulu.</div>
+      <span class="howto-icon-title">Sebelum Membaca Park</span>
+      <div class="howto-icon-text">Baca 3 pertanyaan orientasi. Biarkan mereka membangun rasa ingin tahu terhadap teks — bukan menjawab lebih dulu.</div>
     </div>
     <div class="howto-icon-box">
       <span class="howto-icon">⊕</span>
-      <span class="howto-icon-title">Saat Membaca</span>
-      <div class="howto-icon-text">Lihat diagram argumen sebagai panduan arah. Ini peta — bukan ringkasan. Park-lah yang menceritakan isinya.</div>
+      <span class="howto-icon-title">Saat Membaca Park</span>
+      <div class="howto-icon-text">Lihat diagram argumen sebagai peta. Setiap kali Pdt. Park merujuk ayat — cek ayatnya. Park menunjuk; teksnya yang berbicara.</div>
     </div>
     <div class="howto-icon-box">
       <span class="howto-icon">✦</span>
       <span class="howto-icon-title">Setelah Membaca</span>
-      <div class="howto-icon-text">Baca pertanyaan penghenti. Jangan terburu-buru menjawab. Ini undangan untuk diam sebentar bersama apa yang baru kamu baca.</div>
+      <div class="howto-icon-text">Baca pertanyaan penghenti. Ini bukan evaluasi Pdt. Park — ini undangan untuk duduk bersama apa yang baru kamu baca di teks.</div>
     </div>
   </div>
 </div>
@@ -1249,7 +1654,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <div id="part1" class="part-header part1">
   <span class="part-label">Bagian Pertama</span>
   <h2 class="part-title">Consider the Years of All Generations</h2>
-  <p class="part-thesis">Park membuka dengan nyanyian perpisahan Musa (Ul 32:7) — diucapkan kepada generasi kedua Israel, dua bulan sepuluh hari sebelum masuk Kanaan. Tiga perintah yang menjadi fondasi seluruh buku: <em>ingat, renungkan, tanyakan.</em></p>
+  <p class="part-thesis">Ulangan 32:7 — kata perpisahan Musa kepada generasi yang tidak mengalami sendiri apa yang harus mereka ingat. Tiga perintah: <em>ingat, renungkan, tanyakan.</em> Ini fondasi yang dipilih untuk membuka seluruh buku ini.</p>
 </div>
 
 <button class="expand-all-btn no-print" onclick="expandPart('p1')">Buka semua bab Part 1</button>
@@ -1261,12 +1666,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 1 · Bab 1</div>
         <div class="ch-title">Perintah Pertama: Ingat Hari-Hari Dahulu Kala</div>
-        <div class="ch-park-aim">Park menunjukkan bahwa "hari-hari dahulu kala" bukan sekadar masa lalu — melainkan sejarah yang ditandai oleh penggenapan janji Allah, dari kejatuhan Adam hingga 40 tahun di padang gurun. Yeremia menyebutnya "jalan kuno" (<em>Yer 6:16</em>) — jalan iman yang mengandung janji mesianis.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+        <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Ulangan 32:7 · Mazmur 90:1–2</div>
+          <div class="teks-buka-catatan">Baca Ul 32:7 dan catat: ada tiga kata kerja — <em>ingat, renungkan, tanyakan.</em> Ini bukan perintah yang sama. Apa bedanya? Baca Mzm 90 dan perhatikan bagaimana Musa berbicara tentang waktu. Pdt. Park akan menggunakan kedua teks ini sebagai fondasi Bab 1.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c1">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c1" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c1', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c1">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Kamu baru membaca Ulangan 32:7. Ada tiga kata kerja yang berbeda dalam satu ayat — <em>ingat, renungkan, tanyakan.</em> Tuliskan apa yang menurutmu menjadi perbedaan ketiga kata itu. Bukan jawaban yang benar — tapi kesan pertamamu.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Musa mengucapkan perintah ini kepada generasi yang <strong>tidak mengalami sendiri</strong> peristiwa-peristiwa yang harus mereka ingat. Baca Ul 32:7 sekali lagi dengan konteks itu. Apa yang aneh atau menantang dari perintah seperti itu?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Baca Mazmur 90:1–2 — ditulis Musa juga. Bandingkan cara Musa berbicara tentang waktu di sini dengan cara kita biasanya berbicara tentang masa lalu. Apa yang berbeda?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 160" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1290,25 +1717,19 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
           </svg>
         </div>
 
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item">
-            <div class="q-dot before">1</div>
-            <div class="q-text">Apa bedanya "mengingat masa lalu secara umum" dengan "mengingat sejarah keselamatan Allah"? Mengapa Park mulai dengan perbedaan ini?</div>
-          </div>
-          <div class="q-item">
-            <div class="q-dot before">2</div>
-            <div class="q-text">Perintah ini disampaikan kepada <strong>generasi kedua Israel</strong> — yang lahir di padang gurun, belum pernah mengalami Mesir atau mukjizat awal — dua bulan sebelum masuk Kanaan. Mengapa "mengingat" menjadi begitu kritis justru bagi mereka yang tidak mengalaminya sendiri?</div>
-          </div>
-          <div class="q-item">
-            <div class="q-dot before">3</div>
-            <div class="q-text">Kata "ingat" menyiratkan bahwa ada sesuatu yang bisa terlupakan. <strong>Apa yang paling mudah terlupakan</strong> dari sejarah keselamatan Allah dalam kehidupan sehari-hari?</div>
-          </div>
-        </div>
+        
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Ulangan 32:7 menyebut "hari-hari dahulu kala" sebagai sesuatu yang bisa <em>diingat, direnungkan, dan ditanyakan</em> — bukan hanya dibaca. Yeremia 6:16 menyebutnya "jalan kuno": jalur yang sudah ada sebelum kita, dan tidak perlu ditemukan ulang — hanya diikuti. Bab ini membuka pertanyaan: cara kamu membaca sejarah itu sendiri adalah masalah ketaatan, bukan hanya intelektualitas.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt"><strong>Sejarah mana dalam hidupmu</strong> — momen ketika Allah menepati janji-Nya — yang paling mudah kamu lupakan saat keadaan menjadi sulit? Park menunjukkan Allah sendiri menetapkan "hari-hari peringatan" dan benda-benda memorial agar Israel tidak lupa — <em>apa "memorial" yang Allah telah berikan dalam hidupmu?</em></div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat dalam teks ini yang tidak kamu perhatikan sendiri tadi?</strong> Catat satu hal spesifik. Kemudian: <em>adakah sesuatu dalam teks itu yang masih ingin kamu gali lebih dalam — yang Park tidak bahas, atau yang ingin kamu verifikasi sendiri?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika cara kita membaca sejarah adalah masalah ketaatan — bukan hanya intelektualitas — maka ini pertanyaannya: apa yang berubah dalam cara kamu mendekati silsilah-silsilah yang selama ini dilewati? Ul 32:7 tidak berkata <em>"boleh kamu ingat"</em> — ia berkata <em>"ingatlah."</em> Apa yang itu berarti bagimu, konkret, minggu ini?</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1322,12 +1743,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 1 · Bab 2</div>
         <div class="ch-title">Perintah Kedua: Renungkan Tahun-Tahun Segala Generasi</div>
-        <div class="ch-park-aim">Park membedakan "hari-hari dahulu" (keseluruhan sejarah keselamatan secara umum) dari "tahun-tahun segala generasi" (administrasi penebusan yang Allah kerjakan <em>di setiap generasi</em> secara spesifik). Silsilah adalah bentuk paling padat untuk mempresentasikan karya Allah itu.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Ulangan 32:7 · Yesaya 51:1–2</div>
+          <div class="teks-buka-catatan">Baca Ul 32:7 lagi — sekarang perhatikan perintah kedua: <em>"renungkan tahun-tahun segala generasi."</em> Lalu baca Yes 51:1–2. Perhatikan apa yang Allah minta Israel lakukan dengan Abraham. Pdt. Park akan menggunakan kedua teks ini untuk membedakan antara "mengingat" dan "merenungkan."</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c2">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c2" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c2', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c2">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Ulangan 32:7 lagi — sekarang fokus pada perintah kedua: <em>"renungkan tahun-tahun segala generasi."</em> Apa bedanya "tahun-tahun generasi" dengan "hari-hari dahulu kala" di bagian pertama ayat itu? Apa yang membuat kata "tahun-tahun" terasa berbeda?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Baca Yesaya 51:1–2. Allah menyuruh Israel "merenungkan" Abraham dan Sara — bukan sekadar "mengingat." Apa yang Allah ingin terjadi dalam diri Israel melalui perenungan itu? Apa konteks kesulitan yang sedang mereka hadapi saat perintah itu diberikan?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Kedua teks ini (Ul 32:7 dan Yes 51:1–2) menggunakan kata perintah yang aktif — bukan sekadar "ketahuilah." Mengapa perintah untuk <em>merenungkan</em> sejarah perlu diperintahkan? Seharusnya bukan hal yang otomatis terjadi?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 170" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1344,23 +1787,25 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <text x="280" y="107" text-anchor="middle" font-size="11" fill="#5a3a1e">→ Spesifik / terukur</text>
             <line x1="360" y1="85" x2="400" y2="85" stroke="rgba(23,167,157,0.35)" stroke-width="1.5" marker-end="url(#arr2)"/>
             <rect x="400" y="40" width="240" height="90" rx="4" fill="rgba(23,167,157,0.08)" stroke="rgba(23,167,157,0.25)" stroke-width="1"/>
-            <text x="520" y="63" text-anchor="middle" font-size="10" fill="#17a79d">Kesimpulan Park</text>
+            <text x="520" y="63" text-anchor="middle" font-size="10" fill="#17a79d">Kesimpulan Pdt. Park</text>
             <text x="520" y="81" text-anchor="middle" font-size="12" fill="#18140e">Silsilah = bentuk terpadat</text>
             <text x="520" y="97" text-anchor="middle" font-size="12" fill="#18140e">administrasi penebusan</text>
             <text x="520" y="113" text-anchor="middle" font-size="11" fill="#5a4e3e">Allah di setiap generasi</text>
             <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(23,167,157,0.5)"/></marker></defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park membedakan: "hari-hari dahulu" = seluruh sejarah keselamatan secara umum; "tahun-tahun generasi" = karya penebusan Allah di <em>setiap generasi secara spesifik.</em> Mengapa pembedaan ini penting — apa yang berubah cara kamu membaca silsilah?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menekankan kata kerja <em>"pertimbangkan / renungkan"</em> (<em>biyn</em> dalam Ibrani: "discern, have insight") — bukan sekadar tahu. <strong>Apa bedanya mengetahui sejarah generasi dengan sungguh-sungguh merenungkannya secara mendalam?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Yesaya 51:1–2 meminta Israel "renungkan Abraham bapamu dan Sara yang melahirkan kamu." Park menunjukkan bahwa tujuan perenungan itu bukan nostalgia — tapi membangun harapan di tengah situasi yang tampak mustahil. Apa situasi "mustahil" yang membutuhkan perenungan seperti itu dalam hidupmu?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Ulangan 32:7 memakai dua frasa berbeda: "hari-hari dahulu" dan "tahun-tahun segala generasi." Keduanya bukan sinonim — yang pertama bicara tentang keseluruhan sejarah, yang kedua tentang apa yang Allah kerjakan di setiap generasi secara spesifik. Silsilah adalah cara Alkitab merekam hal kedua itu: bukan hanya siapa yang lahir dari siapa, tapi apa yang Allah sedang kerjakan di tiap titik.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Jika kamu merenungkan <strong>"tahun-tahun generasimu"</strong> — orang tua, kakek-nenek, leluhur iman — warisan iman apa yang kamu terima yang belum pernah kamu benar-benar hargai?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa perbedaan yang ia lihat antara "mengingat" dan "merenungkan" yang tidak segera terlihat dari Alkitab sendiri?</strong> Apakah perbedaan itu kamu setujui setelah membaca ulang teksnya? <em>Adakah kata atau frasa lain dalam kedua teks itu yang ingin kamu selidiki lebih jauh?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika "tahun-tahun segala generasi" adalah catatan tentang apa yang Allah kerjakan di setiap titik — bukan sekadar daftar demografis — maka ini artinya: setiap generasi di Kejadian menyimpan satu fragmen dari rencana yang lebih besar. Melewati satu generasi berarti melewati satu bagian dari argumen Allah tentang dirinya sendiri.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1374,47 +1819,87 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 1 · Bab 3</div>
         <div class="ch-title">Perintah Ketiga: Tanyakan kepada Bapamu, Ia Akan Memberitahumu</div>
-        <div class="ch-park-aim">Perintah ketiga menutup tritunggal perintah Musa: iman tidak cukup hanya direnungkan — ia harus ditanyakan dan diceritakan. Park menekankan bahwa para patriark hidup luar biasa lama bukan kebetulan: umur panjang membentuk hikmat hidup yang hanya bisa diperoleh melalui pengalaman, bukan hanya pengetahuan.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
-        <span class="diagram-label">Peta Argumen</span>
-        <div class="diagram-svg-wrap">
-          <svg viewBox="0 0 680 180" width="100%" xmlns="http://www.w3.org/2000/svg">
-            <rect width="680" height="180" fill="#f0faf9"/>
-            <!-- three commands summary -->
-            <rect x="20" y="30" width="180" height="50" rx="3" fill="rgba(23,167,157,0.06)" stroke="rgba(23,167,157,0.2)" stroke-width="1"/>
-            <text x="110" y="52" text-anchor="middle" font-size="11" fill="#17a79d">Perintah 1: Ingat</text>
-            <text x="110" y="68" text-anchor="middle" font-size="11" fill="#5a4e3e">Memori personal</text>
-            <rect x="20" y="90" width="180" height="50" rx="3" fill="rgba(23,167,157,0.06)" stroke="rgba(23,167,157,0.2)" stroke-width="1"/>
-            <text x="110" y="112" text-anchor="middle" font-size="11" fill="#17a79d">Perintah 2: Renungkan</text>
-            <text x="110" y="128" text-anchor="middle" font-size="11" fill="#5a4e3e">Refleksi generasional</text>
-            <rect x="220" y="60" width="190" height="60" rx="3" fill="rgba(90,58,30,0.1)" stroke="rgba(90,58,30,0.35)" stroke-width="1.5"/>
-            <text x="315" y="84" text-anchor="middle" font-size="11" fill="#5a3a1e" font-weight="bold">Perintah 3: Tanyakan</text>
-            <text x="315" y="100" text-anchor="middle" font-size="12" fill="#18140e">Transmisi aktif iman</text>
-            <text x="315" y="116" text-anchor="middle" font-size="11" fill="#5a4e3e">dari generasi ke generasi</text>
-            <line x1="200" y1="55" x2="220" y2="80" stroke="rgba(23,167,157,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="200" y1="115" x2="220" y2="105" stroke="rgba(23,167,157,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="410" y1="90" x2="455" y2="90" stroke="rgba(23,167,157,0.4)" stroke-width="1.5" marker-end="url(#arr3)"/>
-            <rect x="455" y="55" width="195" height="70" rx="3" fill="rgba(23,167,157,0.08)" stroke="rgba(23,167,157,0.25)" stroke-width="1"/>
-            <text x="552" y="80" text-anchor="middle" font-size="10" fill="#17a79d">Implikasi bagi kita</text>
-            <text x="552" y="96" text-anchor="middle" font-size="12" fill="#18140e">Silsilah adalah bukti</text>
-            <text x="552" y="112" text-anchor="middle" font-size="12" fill="#18140e">bahwa iman itu diteruskan</text>
-            <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(23,167,157,0.5)"/></marker></defs>
-          </svg>
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Ulangan 32:7 · Kejadian 5:1–5</div>
+          <div class="teks-buka-catatan">Baca bagian akhir Ul 32:7 — perintah ketiga: <em>"tanyakan kepada bapamu."</em> Lalu buka Kej 5:1–5 dan baca lambat-lambat. Catat: berapa lama Adam hidup? Berapa generasi yang masih hidup saat ia meninggal? Pdt. Park akan menunjukkan implikasi kronologis dari angka-angka ini.</div>
         </div>
         <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menjelaskan bahwa "bapak" (<em>ab</em>) dan "tua-tua" bukan hanya orang tua kandung — melainkan para patriark iman dari semua generasi sebelumnya. <strong>Siapa "bapak iman" yang berbicara kepadamu melalui silsilah ini?</strong> Apa yang mereka ceritakan?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Para patriark hidup ratusan tahun — Park mengatakan ini bukan sekadar fakta biologis, tapi providensi Allah: <em>"bagi mereka, Firman Allah bukan hanya pengetahuan; ia adalah hikmat hidup yang berakar dalam."</em> Apa bedanya <strong>mengetahui</strong> dan <strong>menghidupi</strong> Firman?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Firman Allah disebut "tidak berubah" — dan justru karena itu, transmisi aktif dari generasi ke generasi menjadi tanggung jawab. Tanpa percakapan dan cerita, iman bisa menguap bahkan ketika teksnya masih tersedia. Kepada siapa kamu harus "menceritakan" apa yang Allah lakukan?</div></div>
         </div>
+        <div class="soft-gate no-print" id="sgate-c3">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c3" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c3', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c3">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Ulangan 32:7 untuk ketiga kalinya — sekarang fokus pada perintah ketiga: <em>"tanyakan kepada bapamu, ia akan memberitahumu; kepada tua-tuamu, mereka akan mengatakan kepadamu."</em> Mengapa "bertanya" disebut terpisah dari "mengingat" dan "merenungkan"? Apa yang hanya bisa diperoleh melalui bertanya yang tidak bisa diperoleh melalui membaca sendiri?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Buka Kejadian 5:1–5. Adam hidup 930 tahun. Ia mulai beranak pada usia 130 (Set lahir). Hitung: berapa generasi yang masih hidup saat Adam meninggal? Siapa yang bisa mendengar langsung dari Adam?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Dalam tradisi lisan, orang tua yang sudah tua menyimpan sesuatu yang tidak ada di Alkitab mana pun — pengalaman langsung. Tapi para patriark ini hidup ratusan tahun. Apa yang berubah dalam cara kamu membayangkan transmisi iman dari generasi ke generasi jika ada orang yang hidup 900 tahun?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
+        <span class="diagram-label">Peta Argumen</span>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 680 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="680" height="140" fill="#f0faf9"/>
+            <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(23,167,157,0.6)"/></marker></defs>
+
+            <!-- Step 1: Ingat -->
+            <rect x="12" y="40" width="148" height="60" rx="4" fill="rgba(23,167,157,0.07)" stroke="rgba(23,167,157,0.25)" stroke-width="1"/>
+            <text x="86" y="62" text-anchor="middle" font-size="9.5" fill="#17a79d" font-weight="700" letter-spacing="0.5">PERINTAH 1</text>
+            <text x="86" y="78" text-anchor="middle" font-size="12" fill="#18140e" font-weight="600">Ingat</text>
+            <text x="86" y="93" text-anchor="middle" font-size="10" fill="#5a4e3e">Memori personal</text>
+
+            <!-- Arrow 1→2 -->
+            <line x1="160" y1="70" x2="190" y2="70" stroke="rgba(23,167,157,0.55)" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Step 2: Renungkan -->
+            <rect x="190" y="40" width="148" height="60" rx="4" fill="rgba(23,167,157,0.07)" stroke="rgba(23,167,157,0.25)" stroke-width="1"/>
+            <text x="264" y="62" text-anchor="middle" font-size="9.5" fill="#17a79d" font-weight="700" letter-spacing="0.5">PERINTAH 2</text>
+            <text x="264" y="78" text-anchor="middle" font-size="12" fill="#18140e" font-weight="600">Renungkan</text>
+            <text x="264" y="93" text-anchor="middle" font-size="10" fill="#5a4e3e">Refleksi generasional</text>
+
+            <!-- Arrow 2→3 -->
+            <line x1="338" y1="70" x2="368" y2="70" stroke="rgba(23,167,157,0.55)" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Step 3: Tanyakan — highlighted -->
+            <rect x="368" y="28" width="148" height="84" rx="4" fill="rgba(90,58,30,0.09)" stroke="rgba(90,58,30,0.4)" stroke-width="1.8"/>
+            <text x="442" y="52" text-anchor="middle" font-size="9.5" fill="#5a3a1e" font-weight="700" letter-spacing="0.5">PERINTAH 3</text>
+            <text x="442" y="68" text-anchor="middle" font-size="12" fill="#18140e" font-weight="600">Tanyakan</text>
+            <text x="442" y="83" text-anchor="middle" font-size="10" fill="#5a4e3e">Transmisi aktif iman</text>
+            <text x="442" y="97" text-anchor="middle" font-size="10" fill="#5a4e3e">dari generasi ke generasi</text>
+
+            <!-- Arrow 3→Implikasi -->
+            <line x1="516" y1="70" x2="546" y2="70" stroke="rgba(23,167,157,0.55)" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+            <!-- Implikasi -->
+            <rect x="546" y="40" width="122" height="60" rx="4" fill="rgba(23,167,157,0.08)" stroke="rgba(23,167,157,0.2)" stroke-width="1"/>
+            <text x="607" y="62" text-anchor="middle" font-size="9.5" fill="#17a79d" font-weight="700" letter-spacing="0.5">IMPLIKASI</text>
+            <text x="607" y="78" text-anchor="middle" font-size="11" fill="#18140e">Iman itu</text>
+            <text x="607" y="93" text-anchor="middle" font-size="11" fill="#18140e">diteruskan</text>
+          </svg>
+        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Ulangan 32:7 memberi tiga perintah berbeda — ingat, renungkan, tanyakan. Urutan itu bukan kebetulan: ada sesuatu yang hanya bisa diperoleh dengan bertanya, bukan sekadar membaca atau berpikir sendiri. Para patriark ini hidup ratusan tahun — dan Park menunjukkan implikasi kronologisnya. Setelah kamu menghitung sendiri dari angka-angka di Kej 5, bandingkan hasilmu dengan apa yang Park tulis di buku ini.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Kepada siapa kamu <strong>belum pernah menceritakan</strong> apa yang Allah lakukan dalam hidupmu — padahal mereka perlu mendengarnya?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat tentang fungsi umur panjang para patriark yang tidak kamu pikirkan saat membaca Kej 5:1–5 tadi?</strong> Apakah implikasi kronologis yang ia tunjukkan bisa kamu verifikasi sendiri dari angka-angka di Alkitab? <em>Pertanyaan mana yang ingin kamu kejar lebih jauh — yang Park tidak sempat bahas?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika Adam yang hidup 930 tahun masih ada saat Lamekh — generasi ke-9 — lahir, maka transmisi iman bukan tradisi lisan yang bisa meleset atau terdistorsi. Itu adalah percakapan langsung. Jika itu benar, maka tidak ada seorang pun dari Adam hingga Nuh yang bisa berkata: <em>"Saya tidak tahu apa yang terjadi di taman itu."</em> Mereka bisa bertanya langsung.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1425,7 +1910,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <div id="part2" class="part-header part2">
   <span class="part-label">Bagian Kedua</span>
   <h2 class="part-title">God's Administration of Redemption and the Genesis Genealogies</h2>
-  <p class="part-thesis">Park membangun kerangka teologis: silsilah Genesis bukan daftar nama — melainkan arsip karya Allah dalam sejarah keselamatan, dengan Kristus sebagai puncaknya.</p>
+  <p class="part-thesis">Efesus 1:9–10 berbicara tentang <em>oikonomia</em> — rencana Allah yang dicanangkan sejak sebelum dunia ada. Bab-bab ini membangun kacamata untuk melihat silsilah bukan sebagai daftar nama, tapi sebagai arsip administrasi keselamatan yang bergerak menuju satu puncak.</p>
 </div>
 
 <button class="expand-all-btn no-print" onclick="expandPart('p2')">Buka semua bab Part 2</button>
@@ -1437,12 +1922,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 2 · Bab 4</div>
         <div class="ch-title">Administrasi Penebusan Allah</div>
-        <div class="ch-park-aim">Park memperkenalkan konsep kunci: Allah memiliki "Administrasi Sejarah Penebusan" (<em>oikonomia</em>, Ef 1:9–10) — rencana yang dicanangkan Bapa, digenapi Anak, dan diselesaikan Roh Kudus. Dimulai dari kejatuhan, berpusat pada Kristus sebagai apex, dan akan <em>disempurnakan pada Kedatangan Kedua.</em></div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Efesus 1:9–10 · Roma 8:19–23</div>
+          <div class="teks-buka-catatan">Baca Ef 1:9–10 perlahan — kata <em>oikonomia</em> (administrasi/rencana). Lalu baca Rm 8:19–23 dan perhatikan: siapa yang "mengerang"? Pdt. Park akan menggunakan kedua teks ini untuk membangun argumen bahwa penebusan bukan hanya tentang manusia.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c4">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c4" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c4', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c4">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Efesus 1:9–10 perlahan. Kata <em>oikonomia</em> diterjemahkan bermacam-macam: "rencana," "pengaturan," "dispensasi," "administrasi." Baca ayat itu lagi dengan masing-masing terjemahan itu. Mana yang paling mengena — dan mengapa?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Baca Roma 8:19–23. Ada tiga kelompok yang "mengerang" menunggu penyempurnaan. Siapa ketiga kelompok itu? Yang ketiga mungkin mengejutkan — baca ayat 26–27 untuk konfirmasi. Apa yang teks ini katakan tentang seberapa besar lingkup penebusan Allah?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Kedua teks ini (Ef 1:9–10 dan Rm 8:19–23) sama-sama menunjuk ke sesuatu yang <strong>belum selesai.</strong> Apa yang masih menunggu? Dan apa implikasi dari "yang belum selesai" itu bagi cara kita hidup sekarang?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 210" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1480,16 +1987,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <defs><marker id="arr4b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(44,74,110,0.5)"/></marker></defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Kata "administrasi" terdengar seperti istilah kantor. Tapi Park menggunakannya untuk Allah. <strong>Apa yang ingin ia sampaikan</strong> dengan menyebut karya Allah sebagai "Administrasi Sejarah Penebusan" (<em>oikonomia</em>, Ef 1:9–10)? Apa yang berbeda dari sekadar "rencana"?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menulis bahwa ruang lingkup penebusan bukan hanya manusia — tapi seluruh alam semesta (Rm 8:19–23). Ada "tiga jenis ratapan": alam ciptaan, orang-orang kudus, dan Roh Kudus sendiri. <strong>Apa arti bahwa Roh Kudus pun "mengerang" bagi penyempurnaan ini?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menekankan bahwa penebusan belum selesai — ia akan <em>disempurnakan</em> pada Kedatangan Kedua, saat tubuh dibangkitkan dan alam semesta dipulihkan. Bagaimana pengharapan ini mengubah cara kamu memandang hidup saat ini?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Efesus 1:9–10 memakai kata <em>oikonomia</em> — diterjemahkan bermacam-macam: rencana, pengaturan, administrasi. Yang menarik: kata ini adalah kata tata kelola, bukan kata perasaan. Allah bukan hanya hadir dalam sejarah — Ia <em>mengelola</em> sejarah. Rencana itu, kata Paulus, sudah ada sebelum dunia dijadikan dan akan selesai ketika segala sesuatu dikumpulkan kembali di dalam Kristus.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Park mengatakan kita dipanggil menjadi "bejana berharga Allah sampai pekerjaan penebusan-Nya selesai." Apakah kamu membaca hidupmu <strong>sebagai bagian dari administrasi yang belum selesai ini</strong> — atau seolah penebusan sudah tuntas dan tinggal menunggu?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>bagaimana ia menghubungkan konsep <em>oikonomia</em> dengan silsilah Kejadian — koneksi apa yang tidak kamu lihat sendiri dari kedua teks tadi?</strong> <em>Adakah klaim Park yang ingin kamu cek ulang ke Alkitab aslinya — atau dimensi yang belum ia bahas yang ingin kamu kejar?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika Allah bukan hanya <em>hadir</em> dalam sejarah tetapi <em>mengelola</em> sejarah — seperti yang kata <em>oikonomia</em> tunjukkan — maka ini artinya: tidak ada satu generasi pun yang terjadi di luar rencana. Termasuk generasimu sekarang. Pertanyaannya bukan apakah kamu ada dalam rencana itu — tapi apakah kamu hidup sesuai dengan posisimu di dalamnya.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1503,12 +2012,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 2 · Bab 5</div>
         <div class="ch-title">Karya Allah dalam Sejarah Penebusan dan Silsilah</div>
-        <div class="ch-park-aim">Park menghubungkan silsilah langsung dengan sejarah penebusan, dan memperkenalkan argumen kunci: ada <em>dua arus silsilah</em> yang berjalan paralel — garis iman (Set, Sem) yang terus berlanjut sampai Kristus, dan garis ketidakpercayaan (Kain, Ham, Ismael, Esau) yang pada akhirnya berhenti.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Matius 1:1–17 · Kejadian 4:17–24 vs Kejadian 5:1–32</div>
+          <div class="teks-buka-catatan">Buka Mat 1:1 dan catat frasa pembuka — <em>biblos geneseos.</em> Lalu bandingkan dua silsilah: baca Kej 4:17–24 (garis Kain) dan Kej 5:1–32 (garis Set) secara berdampingan. Apa yang langsung terasa berbeda — bukan hanya isinya, tapi cara menulisnya?</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c5">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c5" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c5', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c5">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Buka Matius 1:1 dan baca dua kata pertama dalam bahasa Yunani: <em>biblos geneseos.</em> Sekarang buka Kejadian 5:1 dalam Alkitab Indonesiamu dan baca kalimat pertamanya. Apakah ada sesuatu yang terasa familiar? Catat apa yang kamu perhatikan — tanpa dulu mencari penjelasan.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Baca Kejadian 4:17–24 (silsilah Kain) dan Kejadian 5:1–32 (silsilah Set) secara berdampingan. Buat dua kolom: apa yang dicatat untuk setiap orang di masing-masing silsilah? Format pencatatannya berbeda — apa yang masing-masing format itu sepertinya ingin kita perhatikan?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Silsilah Set berakhir di Nuh dan berlanjut. Silsilah Kain berhenti tiba-tiba di Kej 4:24 — tidak ada penutup, tidak ada kelanjutan. Apa kesan yang ditinggalkan oleh perbedaan cara kedua silsilah ini berakhir?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1540,16 +2071,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             </defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park berargumen bahwa ada dua arus silsilah yang berjalan paralel: garis iman (Set, Sem) yang terus berlanjut, dan garis ketidakpercayaan (Kain, Ham, Ismael, Esau) yang pada akhirnya terputus. <strong>Apa yang ini ajarkan tentang arah sejarah?</strong> Apakah sejarah berjalan "datar" atau ada dua arus yang berkelindan?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Silsilah garis iman ditulis dalam format vertikal yang terus-menerus tanpa putus — Park mengatakan ini disengaja untuk menunjukkan bahwa Allah tidak pernah kehilangan mata rantai penebusan-Nya. Bahkan ketika ada orang jahat di tengah jalur iman, rencana Allah tetap berjalan. <strong>Bagaimana ini menghibur atau menantangmu?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menyebut silsilah sebagai "struktur dan aliran sejarah penebusan." Garis iman berlanjut sampai Kristus (Mat 1:1); garis tak beriman berhenti tiba-tiba dan menghilang dari sejarah. Apa yang ini katakan tentang apa yang <em>sungguh bertahan</em> dalam sejarah?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Buka Matius 1:1. Dua kata pertama dalam Yunani: <em>biblos geneseos</em> — "kitab silsilah." Itu kata yang sama dengan Kejadian 5:1. Matius membuka Perjanjian Baru dengan kata yang menunjuk langsung ke tengah Kejadian. Alkitab sendiri yang menghubungkan keduanya — dan menunjukkan bahwa ada dua arus yang berjalan sejak Adam: satu yang berakhir, satu yang terus sampai Kristus.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Dalam "silsilah imanmu" sendiri — cerita keluargamu, komunitasmu — <strong>di mana kamu melihat tangan Allah yang menjaga benang iman tetap hidup?</strong></div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat dalam paralel Mat 1:1 dan Kej 5:1 yang melampaui apa yang kamu perhatikan sendiri tadi?</strong> Cek: apakah paralel itu memang ada jika kamu membuka kedua teks dalam bahasa aslinya atau terjemahan literal? <em>Apa yang masih ingin kamu selidiki tentang cara kedua silsilah itu ditulis?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika Matius sengaja membuka Perjanjian Baru dengan kata yang sama persis dengan Kejadian 5:1 — <em>biblos geneseos</em> — maka ini artinya: Alkitab sendiri yang menyatakan bahwa kedua teks itu adalah satu narasi berkelanjutan. Bukan dua bagian yang terpisah oleh berabad-abad. Ini bukan teologi — ini keputusan redaksional yang bisa diverifikasi siapa saja yang membuka teks Yunani.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1563,12 +2096,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 2 · Bab 6</div>
         <div class="ch-title">Silsilah dalam Kitab Kejadian</div>
-        <div class="ch-park-aim">Park memetakan 10 silsilah dalam Kejadian, memperkenalkan konsep <em>sepher toledoth</em>, dan memberikan <em>metodologi studi silsilah</em> — enam faktor yang membuka kekayaan tersembunyi di balik daftar nama: makna nama, rentang hidup, usia saat beranak, hubungan antar-generasi, nama yang disebut dua kali, dan penempatan historis.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 2:4 · 5:1 · 6:9 · 10:1 · 11:10 · 11:27</div>
+          <div class="teks-buka-catatan">Buka enam referensi ini dan baca frasa pembuka di masing-masingnya. Setiap kalimat mengandung kata yang sama dalam Ibrani: <em>toledoth</em> (silsilah/generasi). Pdt. Park akan menunjukkan bahwa seluruh Kejadian terstruktur di sekitar sepuluh kata ini — dengan Abraham sebagai titik tengah.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c6">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c6" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c6', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c6">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Buka enam referensi ini berturut-turut: Kej 2:4 · 5:1 · 6:9 · 10:1 · 11:10 · 11:27. Di setiap tempat, baca satu kalimat pembuka saja. Apakah ada kata atau frasa yang sama muncul berulang? Catat apa yang kamu temukan.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Dari enam referensi tadi, coba hitung: berapa total silsilah yang ada dalam Kejadian? Lalu perhatikan — di mana Abraham jatuh dalam hitungan itu? Apa yang kamu perhatikan tentang posisinya?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Hanya Kejadian 5:1 yang dimulai dengan kata <em>"kitab"</em> atau <em>"sepher"</em> — yang lain tidak. Mengapa satu silsilah mendapat penanda "kitab" sementara yang lain tidak? Apa yang itu mungkin menandakan tentang bobot atau fungsi silsilah itu?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 220" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1612,16 +2167,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <text x="340" y="188" text-anchor="middle" font-size="10" fill="#5a4e3e">Genesis 1–11 = 2.023 thn · Genesis 12–50 = ~280 thn · Total: ~2.300 thn dari Adam sampai Yusuf</text>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menunjukkan 10 silsilah terbagi <em>5 sebelum Abraham dan 5 sesudah Abraham</em> — ini bukan kebetulan. Abraham adalah titik pusat pembagian seluruh Kejadian. <strong>Apa yang ini katakan tentang posisi Abraham dalam rencana Allah?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menyebutkan enam faktor untuk mempelajari silsilah: makna nama, rentang hidup, usia saat beranak, hubungan antar-generasi, nama yang disebut dua kali, dan penempatan historis. Sebelum membaca, <strong>mana dari keenam faktor itu yang paling mengejutkanmu</strong> — karena kamu tidak pernah mempertimbangkannya sebelumnya?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Hanya silsilah Adam (5:1) yang disebut <em>sepher toledoth</em> — "kitab silsilah." Park menghubungkan ini dengan Mat 1:1 (<em>biblos geneseos</em> — kitab silsilah Yesus Kristus). Apa yang dinyatakan oleh paralel yang disengaja ini tentang hubungan Adam dan Kristus?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kejadian punya frasa pembuka yang berulang: "inilah keturunan" atau "inilah sejarah." Dalam bahasa Ibrani: <em>sepher toledoth</em>. Cek sendiri berapa kali frasa itu muncul di Kejadian — mulai dari Kej 2:4, 5:1, 6:9, 10:1, 11:10, 11:27. Setiap kemunculan menandai babak baru. Silsilah bukan daftar nama acak — ini adalah penanda struktur dari penulis yang sangat sadar akan apa yang ia tulis.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Park mengajarkan bahwa setiap nama dalam silsilah menyimpan kisah yang cukup untuk menjadi buku tersendiri (Yoh 21:25). <strong>Nama siapa dalam silsilah yang paling ingin kamu pelajari lebih dalam</strong> — dan mengapa nama itu menarik perhatianmu?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat tentang struktur kesepuluh silsilah yang tidak kamu perhatikan sendiri tadi — khususnya tentang Abraham sebagai titik tengah?</strong> Apakah kamu bisa memverifikasi struktur 5+5 itu sendiri dari daftar referensi di teks? <em>Mana dari enam faktor studi silsilah yang Pdt. Park sebut yang paling ingin kamu terapkan sendiri pada teks?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika <em>sepher toledoth</em> muncul tepat sepuluh kali di Kejadian dan setiap kemunculan menandai babak baru dalam rencana Allah — bukan sekadar divider naratif — maka ini artinya: Kejadian bukan kumpulan cerita yang dikompilasi. Ia adalah dokumen yang ditulis dengan struktur yang sangat sadar. Penulisnya tahu persis di mana ia berada dalam narasi yang lebih besar.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1635,13 +2192,45 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 2 · Bab 7</div>
         <div class="ch-title">Tahun-Tahun Generasi dalam Kejadian</div>
-        <div class="ch-park-aim">Park membela ineransi Alkitab dengan nuansa penting: ada silsilah yang <em>memang sengaja memiliki gaps</em> (seperti Mat 1 yang menghilangkan tiga raja demi tujuan teologis), namun Genesis 5 dan 11 adalah <em>silsilah kronologis tanpa celah</em> — karena tujuannya memang untuk mencatat urutan waktu nyata dari Adam sampai Abraham.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Matius 1:1–17 · Kejadian 5:1–32</div>
+          <div class="teks-buka-catatan">Buka Mat 1:1–17 dan hitung nama-namanya. Cek: berapa raja yang hilang antara Yoram dan Uzia? (Bandingkan dengan 2 Raj 8:24–15:7). Lalu buka Kej 5 dan coba tambahkan sendiri umur-umurnya. Pdt. Park akan berargumen bahwa kedua silsilah ini punya <em>tujuan yang berbeda</em> — dan itu menjelaskan mengapa yang satu punya gaps dan yang lain tidak.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c7">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c7" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c7', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c7">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Buka Matius 1:1–17 dan hitung nama-namanya sendiri. Ayat 17 membuat klaim tentang pola jumlah — baca ayat itu, lalu hitung ulang apakah klaimnya benar. Lalu buka 2 Raja-Raja dan cari raja-raja Yehuda antara Yoram dan Uzia. Apakah ada nama yang ada di 2 Raja-Raja tapi tidak muncul di Mat 1? Berapa yang hilang?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Sekarang buka Kejadian 5:3–32 dan coba tambahkan angka-angkanya: usia setiap patriark ketika beranak pertama, dari Adam sampai Nuh. Berapa total tahun dari Adam ke kelahiran Nuh? Apakah ada celah atau ketidakkonsistenan yang kamu temukan dalam penghitungan?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Kedua silsilah ini (Mat 1 dan Kej 5) adalah silsilah — tapi dari hasil observasimu sendiri tadi, apa yang berbeda antara cara keduanya bekerja? Apa yang bisa kamu simpulkan tentang <em>tujuan</em> masing-masing hanya dari mengamati strukturnya?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
+        <div style="margin-bottom:18px; padding:16px 18px; background:rgba(23,167,157,0.04); border:1.5px solid var(--teal-border); border-radius:8px;">
+          <span style="display:block; font-family:'Nunito Sans',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--teal-dark); margin-bottom:10px;">🔢 Kalkulator Kejadian 5 — Isi Sendiri dari Teks</span>
+          <p style="font-size:13px; color:var(--mid); margin-bottom:12px; line-height:1.65;">Buka Kejadian 5 dan masukkan usia setiap patriark ketika ia memiliki anak pertama (bukan umur penuh — hanya usia ketika anaknya lahir). Kalkulator ini akan menjumlahkan — tapi datanya harus kamu baca dari teks.</p>
+          <div id="gen5-rows" style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;"></div>
+          <div style="padding:10px 14px; background:var(--teal-light); border-radius:6px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span style="font-family:'Nunito Sans',sans-serif; font-size:12px; font-weight:600; color:var(--teal-dark);">Total tahun Adam → lahirnya Nuh:</span>
+            <span id="gen5-total" style="font-family:'Nunito Sans',sans-serif; font-size:18px; font-weight:700; color:var(--teal);">— tahun</span>
+          </div>
+          <p style="font-size:12px; color:var(--dim); margin-top:8px; font-style:italic;">Setelah selesai: bandingkan totalmu dengan apa yang Park hitung di bukunya. Apa yang berbeda — atau sama?</p>
+        </div>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 185" width="100%" xmlns="http://www.w3.org/2000/svg">
             <rect width="680" height="185" fill="#f0faf9"/>
@@ -1656,7 +2245,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <line x1="215" y1="80" x2="255" y2="80" stroke="rgba(44,74,110,0.35)" stroke-width="1.5" marker-end="url(#arr7b)"/>
             <!-- Center: Park's argument -->
             <rect x="255" y="25" width="175" height="110" rx="4" fill="rgba(44,74,110,0.09)" stroke="rgba(44,74,110,0.3)" stroke-width="1.5"/>
-            <text x="342" y="46" text-anchor="middle" font-size="10" fill="#2c4a6e" font-weight="600">Argumen Park</text>
+            <text x="342" y="46" text-anchor="middle" font-size="10" fill="#2c4a6e" font-weight="600">Argumen Pdt. Park</text>
             <text x="342" y="63" text-anchor="middle" font-size="11" fill="#18140e">Gen 5 &amp; Gen 11</text>
             <text x="342" y="79" text-anchor="middle" font-size="11" fill="#18140e">= Silsilah Kronologis</text>
             <text x="342" y="95" text-anchor="middle" font-size="10" fill="#2c4a6e">Tujuan: mencatat waktu</text>
@@ -1665,26 +2254,28 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <line x1="430" y1="80" x2="468" y2="80" stroke="rgba(23,167,157,0.4)" stroke-width="1.5" marker-end="url(#arr7c)"/>
             <!-- Right: result -->
             <rect x="468" y="35" width="190" height="90" rx="4" fill="rgba(23,167,157,0.08)" stroke="rgba(23,167,157,0.25)" stroke-width="1"/>
-            <text x="563" y="55" text-anchor="middle" font-size="10" fill="#17a79d">Hasil perhitungan</text>
-            <text x="563" y="72" text-anchor="middle" font-size="11" fill="#18140e">Adam → Banjir: 1.656 thn</text>
-            <text x="563" y="88" text-anchor="middle" font-size="11" fill="#18140e">Adam → Abraham: 2.083 thn</text>
-            <text x="563" y="104" text-anchor="middle" font-size="10" fill="#5a4e3e">Metusalah wafat tahun banjir</text>
+            <text x="563" y="55" text-anchor="middle" font-size="10" fill="#17a79d">Coba hitung sendiri</text>
+            <text x="563" y="72" text-anchor="middle" font-size="11" fill="#5a4e3e">Adam → Banjir: ___ thn</text>
+            <text x="563" y="88" text-anchor="middle" font-size="11" fill="#5a4e3e">Adam → Abraham: ___ thn</text>
+            <text x="563" y="104" text-anchor="middle" font-size="10" fill="#5a4e3e">dari Kej 5 &amp; 11</text>
             <defs>
               <marker id="arr7b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(44,74,110,0.5)"/></marker>
               <marker id="arr7c" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(23,167,157,0.5)"/></marker>
             </defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park membedakan dua jenis silsilah: (1) yang <em>sengaja memiliki gaps</em> karena tujuannya teologis (seperti Mat 1 yang menghilangkan tiga raja demi pola 14 generasi), dan (2) yang <em>tanpa gaps</em> karena tujuannya kronologis (Gen 5 dan 11). <strong>Mengapa pembedaan ini penting</strong> untuk tidak salah paham soal ineransi?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Jika angka-angka Gen 5 dan 11 akurat: Adam dan Nuh hidup di generasi yang tumpang tindih. Metusalah wafat di tahun yang sama dengan banjir besar. <strong>Apa yang berubah</strong> dalam cara kamu membaca kisah-kisah itu kalau kamu menyadari mereka bisa saling mengenal?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menggunakan pakar-pakar seperti Henry Morris dan Travis Freeman untuk mendukung posisinya. Mengapa ia merasa perlu mengutip pakar lain — bukan hanya mengandalkan argumennya sendiri? Apa yang itu ajarkan tentang cara mendekati perdebatan teologis yang serius?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Matius 1:17 mengklaim ada tiga kali empat belas generasi — tapi jika dihitung, ada nama yang tidak muncul (bandingkan dengan 2 Raja-Raja). Itu disengaja: Matius menulis silsilah teologis, bukan kronologis. Tapi Kejadian 5 dan 11 berbeda: ada angka-angka spesifik yang bisa dihitung silang. Jenis silsilah yang berbeda punya tujuan berbeda — dan Alkitab sendiri yang memberi petunjuk untuk membedakannya.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Adakah bagian Alkitab yang kamu "tunda kepercayaannya" karena terasa sulit atau tidak masuk akal? <strong>Apa yang menghambatmu untuk sungguh-sungguh mempercayainya?</strong></div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa argumen yang ia buat tentang perbedaan dua jenis silsilah yang tidak kamu simpulkan sendiri dari observasimu tadi?</strong> Apakah pembedaan itu terasa meyakinkan — dan apa yang perlu kamu cek lebih lanjut untuk menilainya? <em>Adakah pertanyaan tentang ineransi Alkitab yang belum terjawab setelah membaca bab ini?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika silsilah Matius 1 adalah silsilah teologis — sengaja melewatkan nama demi membentuk pola tiga kali empat belas — sementara Kejadian 5 dan 11 adalah silsilah kronologis dengan angka yang bisa dihitung silang, maka ini artinya: keduanya harus dibaca dengan cara yang berbeda. Membaca Kejadian 5 dengan asumsi yang sama seperti Matius 1 berarti salah alat. Dan angka di Kejadian 5 yang bisa diverifikasi secara matematis adalah klaim yang jauh lebih berani dari sekadar cerita.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1695,7 +2286,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <div id="part3" class="part-header part3">
   <span class="part-label">Bagian Ketiga</span>
   <h2 class="part-title">The Genealogy According to the Line of Cain</h2>
-  <p class="part-thesis">Jalur Kain bukan hanya kisah kejahatan — melainkan pola yang terus berulang: dari Kain ke Lamekh, dari Nimrod ke Babel, dari Ismail ke Esau. Park menunjukkan bahwa Alkitab menyebut semua ini dengan satu nama di akhir zaman: <em>Babel.</em></p>
+  <p class="part-thesis">Jalur Kain bukan hanya kisah kejahatan — melainkan pola yang terus berulang: dari Kain ke Lamekh, dari Nimrod ke Babel, dari Ismail ke Esau. Alkitab sendiri yang menyebut semua ini dengan satu nama di akhir zaman: <em>Babel.</em></p>
 </div>
 
 <button class="expand-all-btn no-print" onclick="expandPart('p3')">Buka semua bab Part 3</button>
@@ -1707,12 +2298,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 3 · Bab 8</div>
         <div class="ch-title">Keturunan Kain</div>
-        <div class="ch-park-aim">Park menelusuri enam generasi jalur Kain satu per satu melalui makna nama Ibrani mereka. Ia juga mengungkapkan tiga alasan mengapa Kain menjadi pembunuh — dan mengapa Kain adalah <em>model si jahat</em> yang terus berulang dalam sejarah, seperti yang Yesus jelaskan dalam perumpamaan gandum dan lalang (Mat 13).</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 4:1–24</div>
+          <div class="teks-buka-catatan">Baca Kej 4:1–24 secara lengkap — seluruh catatan keturunan Kain. Perhatikan: apa yang mereka bangun? Apa yang mereka ciptakan? Bagaimana Lamekh keturunan Kain berbicara tentang kekerasan di ayat 23–24? Pdt. Park akan membandingkan ini langsung dengan Lamekh garis Set di Kej 5:28–29.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c8">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c8" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c8', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c8">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Kejadian 4:1–24 dari awal sampai akhir — tanpa berhenti. Ini seluruh catatan keturunan Kain. Apa yang <strong>pertama kali kamu perhatikan</strong> tentang kisah-kisah yang dicatat? Apa yang ada di sana — dan apa yang tidak ada?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Di Kej 4:6–7, Allah berbicara langsung kepada Kain sebelum pembunuhan terjadi. Baca ulang percakapan itu dengan cermat. Apa yang Allah tawarkan? Apa respons Kain? Apa yang bisa berubah jika Kain memilih berbeda di titik itu?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Bandingkan Lamekh keturunan Kain (Kej 4:23–24) dengan Lamekh keturunan Set (Kej 5:28–29). Keduanya berbicara. Apa isi perkataan masing-masing? Apa yang perkataan itu ungkapkan tentang orientasi hidup masing-masing orang?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 240" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1756,16 +2369,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
           <span style="font-size:10.5px; font-weight:600; color:#5a1e2e;">6. Lamekh</span>
           <span style="font-size:9.5px; color:#5a4e3e; margin-left:8px;">"penakluk kuat" — poligami, pembunuhan normal, puncak kejahatan Kain · anak-anak: Jabal (ternak), Jubal (musik sensual), Tubal-kain (senjata), Naamah (kecantikan sensual)</span>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park mengidentifikasi <strong>tiga alasan mengapa Kain menjadi pembunuh</strong>: ia kehilangan iman, ia melewatkan kesempatan bertobat saat Allah memperingatkannya (Kej 4:6–7), dan ia "dari pihak yang salah" (1 Yoh 3:12). Mengapa tiga hal ini — bukan satu — yang Park tekankan? Apa yang masing-masing mengajarkan tentang bagaimana kejatuhan bekerja?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Park menggunakan perumpamaan gandum dan lalang (Mat 13:25–30) untuk menjelaskan Kain: <em>"musuh datang dan menabur lalang di antara gandum."</em> Park menyebut Kain sebagai <strong>model si jahat</strong> — pola yang terus berulang dari Yudas Iskariot, Ananias, sampai orang-orang Farisi. Pola apa tepatnya yang berulang itu?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Anak-anak Lamekh — Jabal (ternak/ekonomi), Jubal (musik sensual), Tubal-kain (senjata), Naamah (kecantikan sensual) — membangun peradaban yang canggih. Park bukan menyebut ini "kemajuan" tapi <strong>puncak peradaban tanpa Allah.</strong> Apa perbedaan antara kemajuan yang memuliakan Allah dan kemajuan yang menggeser-Nya?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kej 4:6–7: Allah berbicara langsung kepada Kain sebelum pembunuhan terjadi. Ada tawaran dan peringatan — dan Kain mengabaikannya. Lalu enam generasi setelahnya: nama-nama dalam bahasa Ibrani menggambarkan eskalasi yang konsisten. Lamekh, generasi keenam, berbicara tentang pembunuhan sebagai kebanggaan (Kej 4:23–24). Apa yang dimulai di satu titik menggulung menjadi budaya. Alkitab mencatat progres ini dengan sangat teliti.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Park bertanya: apakah ada dalam hidupmu yang kamu mulai, rencanakan, atau bangun — <strong>tanpa melibatkan Allah sejak awal?</strong> Kain memiliki iman di awal (ia membuat persembahan), tapi iman itu terkikis perlahan. Di titik mana dalam hidupmu kamu merasa iman mulai terkikis — dan kamu tidak langsung menyadarinya?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat dalam silsilah Kain yang tidak kamu perhatikan dari bacaan teksmu sendiri — khususnya tentang pola yang ia identifikasi?</strong> Apakah pola itu kamu setujui setelah melihat kembali teksnya? <em>Adakah detail dalam Kej 4 yang masih ingin kamu gali yang Park tidak bahas?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika Allah berbicara langsung kepada Kain sebelum pembunuhan — menawarkan jalan lain — dan Kain mengabaikannya, lalu dalam enam generasi pengabaian itu menjadi budaya kekerasan yang dirayakan, maka ini artinya: dosa bukan hanya keputusan pribadi. Ia memiliki trajektori generasional. Yang ditanam seseorang hari ini tidak hanya merusak dirinya — ia membentuk tanah yang akan ditinggali oleh keturunannya.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1779,12 +2394,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 3 · Bab 9</div>
         <div class="ch-title">Keturunan Dosa dalam Jalur Kain</div>
-        <div class="ch-park-aim">Park menunjukkan bahwa "semangat Kain" tidak berhenti pada Lamekh — ia terus berulang melalui Nimrod (tipe antikristus yang merampas jiwa manusia), Ismail (yang tangannya melawan semua orang), dan Esau (yang keturunannya hampir memusnahkan Israel). Di kitab Wahyu, seluruh garis ketidakpercayaan ini disebut dengan satu nama: <em>Babel.</em></div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 6:1–7 · 10:8–12</div>
+          <div class="teks-buka-catatan">Baca Kej 6:1–7 — apa yang terjadi ketika "anak-anak Allah" menikahi "anak-anak perempuan manusia"? Lalu baca Kej 10:8–12 tentang Nimrod. Pdt. Park akan menunjukkan bahwa pola di Kej 4 berlanjut jauh melewati garis Kain secara biologis.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c9">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c9" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c9', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c9">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Kejadian 6:1–7 perlahan. Siapa "anak-anak Allah" dan "anak-anak perempuan manusia" di ayat 2? Teks ini banyak diperdebatkan — apa interpretasi pertamamu hanya dari membaca teks itu sendiri, tanpa referensi luar?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Baca Kejadian 10:8–12 tentang Nimrod. Apa yang teks katakan tentang dia — secara harfiah? Kata "pahlawan" atau "gibor" di ayat 8–9 muncul dalam konteks apa? Apa kesan yang ditinggalkan teks ini tentang Nimrod — positif, negatif, atau ambigu?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Sekarang baca Kej 16:11–12 tentang Ismail dan Kej 25:22–23 tentang Esau dan Yakub. Dalam kedua kasus, Allah berbicara tentang dua keturunan yang akan bertentangan. Apa yang teks katakan — dan apa yang tidak ia katakan — tentang mengapa satu dipilih dan yang lain tidak?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 210" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1830,16 +2467,19 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <defs><marker id="arrc9" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(90,30,46,0.5)"/></marker></defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menyebut Nimrod sebagai <strong>"tipe antikristus"</strong> — bukan sekadar "orang jahat." Nimrod mendapat pengikut dengan melindungi orang dari binatang buas, lalu menggunakan kekuatan itu untuk mendewakan dirinya sendiri. Park melihat pola ini berulang: pemimpin yang mula-mula tampak sebagai pelindung, lalu menggeser Allah. <em>Pola ini kamu lihat di mana dalam sejarah atau konteks masa kini?</em></div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Ismail disebut "keledai liar — tangannya melawan semua orang" (Kej 16:12). Esau menikahi putri Ismail sehingga <strong>dua garis ketidakpercayaan bergabung secara biologis</strong>, dan dari Esau lahir Amalek — yang keturunannya (Haman) hampir memusnahkan seluruh Israel. Park tidak membahas Ismail dan Esau dengan empati sebagai "yang tidak terpilih" — ia membahas mereka sebagai kekuatan yang secara aktif melawan umat Allah. Apa perbedaan perspektif itu dalam cara kita membaca kisah-kisah ini?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menutup Bab 9 dengan poin yang sangat besar: dalam kitab Wahyu, seluruh garis ketidakpercayaan — Kain, Nimrod, Ismail, Esau — disebut dengan satu nama: <strong>"Babel"</strong> (Why 17:5; 18:2). Babel adalah simbol semua yang mengandalkan peradaban manusia dan menentang Allah, dan Babel akan <em>"jatuh, jatuh"</em> (Why 14:8; 18:2). Mengapa Park memandang perlu menghubungkan silsilah kuno ini dengan nubuat Wahyu?</div></div>
-        </div>
+        <p class="diagram-disclaimer">Diagram ini mewakili cara Park membaca hubungan antar teks — bukan satu-satunya cara yang valid. Koneksi Kain → Nimrod → Ismail → Esau → Babel adalah tafsiran teologis, bukan silsilah biologis yang berkesinambungan. Cek sendiri apakah setiap referensi teks mendukung garis yang digambar.</p>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Silsilah Kain berhenti setelah Lamekh — tapi bukan berarti polanya berhenti. Nimrod muncul di Kej 10 sebagai "pahlawan perkasa" yang mendirikan kerajaannya sendiri — termasuk Babel. Alkitab menarik garis dari Kain ke Nimrod ke Babel secara eksplisit. Dan di Wahyu, nama "Babel" kembali muncul sebagai simbol untuk sistem yang sama. Teks sendiri yang membuat koneksi ini — bukan hanya interpretasi.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Park mengatakan bahwa rencana yang dimulai tanpa Allah akan runtuh bahkan di puncak kesuksesannya — seperti silsilah Kain yang berhenti tiba-tiba, dan seperti Babel yang akan "jatuh, jatuh." <strong>Apa dalam hidupmu yang sedang kamu bangun dengan kekuatan sendiri</strong> — dan bagaimana kamu akan tahu sebelum "tiba-tiba berhenti"?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>koneksi apa yang ia buat antara Kain, Nimrod, Ismail, Esau, dan kitab Wahyu yang tidak kamu lihat sendiri dari teks-teks tadi?</strong> Apakah koneksi itu didukung langsung oleh teks — atau apakah ada bagian yang terasa lebih sebagai interpretasi Park? <em>Bagian mana yang ingin kamu verifikasi sendiri ke Alkitab aslinya?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika Alkitab menarik garis eksplisit dari Kain ke Nimrod ke Babel — dan nama "Babel" muncul kembali di Wahyu sebagai simbol sistem yang sama — maka ini artinya: masalah yang dimulai di Kejadian 4 belum selesai. Ia masih berjalan. Dan sistem yang membangun peradaban tanpa Allah bukan fenomena modern — ia adalah pola yang sudah diidentifikasi dan dicatat ribuan tahun sebelum kita lahir.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -1862,12 +2502,70 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 4 · Bab 10</div>
         <div class="ch-title">Silsilah dari Adam sampai Nuh (Generasi 1–10)</div>
-        <div class="ch-park-aim">Sepuluh nama dari Adam ke Nuh — Park menunjukkan bahwa setiap nama mencerminkan kondisi zaman dan harapan orang tua di tiap generasi. Umur panjang para patriark bukan kebetulan biologis: itu adalah <em>berkat khusus Allah bagi yang hidup saleh.</em> Dan di tengah delapan pengulangan "dan ia pun mati" — Henokh bersinar sebagai bayangan tiga peristiwa besar: kehidupan Kristus yang menyenangkan Bapa, kemenangan-Nya atas maut, dan transformasi orang kudus di Kedatangan Kedua.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 5:1–32</div>
+          <div class="teks-buka-catatan">Baca Kej 5 dari awal sampai akhir — satu kali tanpa berhenti. Hitung berapa kali kalimat <em>"dan ia pun mati"</em> muncul. Cari pengecualian. Perhatikan umur Metusalah (ayat 27) — dan ingat kapan air bah datang (Kej 7:6). Pdt. Park akan menunjukkan bahwa angka-angka ini bukan dekorasi.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="verify-block">
+          <div class="verify-title">🔢 Latihan Verifikasi — Hitung Sendiri dari Teks</div>
+          <div class="verify-step">
+            <div class="verify-step-num">1</div>
+            <div class="verify-step-text">Buka <strong>Kejadian 5</strong>. Kumpulkan angka-angka ini dari teks:<br>
+              — Usia Metusalah saat Lamekh lahir (ayat 25): <strong>___</strong> tahun<br>
+              — Usia Lamekh saat Nuh lahir (ayat 28): <strong>___</strong> tahun<br>
+              — Usia Nuh saat air bah datang (Kej 7:6): <strong>___</strong> tahun
+            </div>
+          </div>
+          <div class="verify-step">
+            <div class="verify-step-num">2</div>
+            <div class="verify-step-text">Jumlahkan ketiga angka itu:<br>
+              <strong>___ + ___ + ___ = ___</strong><br>
+              Ini adalah usia Metusalah ketika air bah datang, <em>dihitung dari angka-angka Kejadian 5.</em>
+            </div>
+          </div>
+          <div class="verify-step">
+            <div class="verify-step-num">3</div>
+            <div class="verify-step-text">Sekarang baca <strong>Kejadian 5:27</strong> — berapa umur total Metusalah?<br>
+              <strong>___</strong> tahun.<br>
+              Bandingkan dengan hasil hitunganmu di langkah 2.
+            </div>
+          </div>
+          <div class="verify-step">
+            <div class="verify-step-num">4</div>
+            <div class="verify-step-text">Apa yang kamu temukan? Apakah usia Metusalah di ayat 27 <em>sama atau lebih besar</em> dari hasil hitunganmu?<br>
+              Jika sama: Metusalah mati <em>tepat di tahun air bah dimulai.</em><br>
+              Jika lebih besar: ia hidup sampai <em>dalam tahun-tahun air bah.</em><br>
+              <em>Ini bukan tafsiran. Ini hasil matematika dari angka-angka yang sudah ada di teks.</em>
+            </div>
+          </div>
+          <div class="verify-result">
+            Jawaban: 187 + 182 + 600 = 969. Umur Metusalah: 969 tahun (Kej 5:27). Metusalah mati tepat di tahun air bah dimulai — tidak ada selisih satu tahun pun. Tidak ada pengarang manusia yang bisa mengarang konsistensi ini tanpa satu kali pun membuat kesalahan di seluruh silsilah.
+          </div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c10">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c10" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c10', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c10">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Kejadian 5 dari awal sampai akhir — satu kali, tanpa berhenti. Hitung berapa kali kalimat <em>"dan ia pun mati"</em> (atau padanannya) muncul. Lalu temukan: siapa yang <strong>tidak</strong> diakhiri dengan kalimat itu? Catat apa yang teks katakan tentang orang itu.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Coba hitung sendiri dari angka-angka di Kej 5: berapa umur Metusalah ketika air bah tiba? (Petunjuk: gunakan usia Metusalah saat Lamekh lahir + usia Lamekh saat Nuh lahir + usia Nuh saat air bah.) Bandingkan hasilnya dengan umur total Metusalah di ayat 27.</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Perhatikan Kej 5:29 — Lamekh menjelaskan mengapa ia memberi nama "Nuh" kepada anaknya. Baca kalimat penjelasannya. Apa yang nama itu katakan tentang kondisi dunia saat itu — dan tentang harapan apa yang Lamekh taruh pada anaknya?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 220" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1942,16 +2640,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <defs><marker id="arrg" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(30,74,45,0.4)"/></marker></defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menunjukkan bahwa Adam adalah <strong>pewarta Injil pertama</strong> — ia hidup 308 tahun bersama Henokh dan menceritakan pengalaman di Eden, rasa malu setelah dosa, janji Kej 3:15, dan pakaian kulit sebagai bayangan penebusan. Bagaimana kesaksian personal Adam berbeda dari pengetahuan teologis yang diwarisi tanpa pengalaman? Apa yang hilang ketika iman diteruskan hanya lewat konsep, bukan cerita?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Henokh diangkat tanpa mati — dan Park berkata ini membayangi <strong>tiga peristiwa sejarah penebusan</strong>: ① kehidupan Kristus yang menyenangkan Bapa, ② kemenangan Kristus atas maut melalui kebangkitan, ③ transformasi orang kudus di Kedatangan Kedua (1 Kor 15:50–54). Di tengah "dan ia pun mati" yang berulang delapan kali — apa yang ingin Allah tunjukkan melalui satu pengecualian dramatis ini?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park berargumen bahwa umur panjang para patriark Set bukan kebetulan biologis — melainkan <strong>berkat khusus Allah bagi yang hidup saleh</strong> (Ams 3:1–2; Ul 4:40; Mzm 91:16). Adam masih hidup ketika Lamekh lahir — generasi ke-9 — sehingga dapat menyaksikan langsung 308 tahun perjalanan iman Henokh. Apa yang berubah dalam cara kamu memahami kisah-kisah ini jika kamu menyadari bahwa para patriark itu saling mengenal dan berinteraksi langsung?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kej 5 diulang delapan kali: "dan ia pun mati." Satu kali berbeda. Baca ayat 24 perlahan. Lalu cek angka Metusalah (969 tahun, ayat 27) dan tanggal air bah (Kej 7:6). Hitung dari angka-angka di Kej 5: di tahun berapa setelah Adam Metusalah mati? Di tahun berapa air bah datang? Jika angkanya cocok — itu bukan kebetulan penulisan. Itu tanda bahwa penulis teks ini tahu lebih dari yang ia katakan secara eksplisit.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Henokh mulai berjalan dengan Allah pada usia 65 — setelah Metusalah lahir. Park mengamati bahwa <em>kelahiran seorang anak sering menjadi momen pertobatan orang tua.</em> <strong>Peristiwa apa dalam hidupmu yang memicu langkah iman yang sesungguhnya</strong> — bukan sekedar tahu tentang Allah, tapi sungguh-sungguh mulai berjalan bersama Dia?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa yang ia lihat dalam angka-angka Kej 5 yang melampaui apa yang kamu hitung sendiri tadi — khususnya tentang makna teologis di balik kronologi itu?</strong> Apakah perhitungan Metusalah yang kamu buat sendiri cocok dengan yang Park tunjukkan? <em>Benang mana dalam Kej 5 yang ingin kamu kejar lebih jauh — yang Park tidak sempat eksplorasi penuh?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika angka-angka di Kejadian 5 bisa dihitung silang dan Metusalah terbukti mati tepat di tahun air bah datang — bukan satu tahun sebelum, bukan satu tahun sesudah — maka ini artinya: tidak ada pengarang manusia yang bisa mengarang detail ini secara konsisten tanpa satu kali pun membuat kesalahan. Itu adalah tanda bahwa ada yang mengawasi seluruh teks ini dengan presisi yang melampaui kemampuan satu atau dua penulis manusia.</div>
+        </div>
         </div>
 
         <div class="tool-links no-print">
@@ -1978,7 +2678,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <div class="gate-label-wrap">
               <span class="gate-eyebrow">Pintu Berhenti · Bab 10</span>
               <div class="gate-question">Sepuluh nama — satu kesatuan rencana penebusan. Rencana apa yang kamu lihat Allah sedang kerjakan dalam hidupmu?</div>
-              <div class="gate-sub">Park menunjukkan bahwa sepuluh nama dari Adam ke Nuh, dipahami berurutan, membentuk satu kesatuan rencana sejarah penebusan Allah — bukan sekadar kode rahasia, melainkan catatan nyata karya Allah yang bekerja dari generasi ke generasi. Sebelum kamu lanjut, tuliskan ini: jika hidupmu adalah satu nama dalam silsilah iman — <strong>nama apa yang paling jujur menggambarkan musimmu sekarang, dan apa harapan yang kamu bawa ke generasi sesudahmu?</strong></div>
+              <div class="gate-sub">Pdt. Park menunjukkan bahwa sepuluh nama dari Adam ke Nuh, dipahami berurutan, membentuk satu kesatuan rencana sejarah penebusan Allah — bukan sekadar kode rahasia, melainkan catatan nyata karya Allah yang bekerja dari generasi ke generasi. Sebelum kamu lanjut, tuliskan ini: jika hidupmu adalah satu nama dalam silsilah iman — <strong>nama apa yang paling jujur menggambarkan musimmu sekarang, dan apa harapan yang kamu bawa ke generasi sesudahmu?</strong></div>
             </div>
           </div>
           <div class="gate-body">
@@ -2000,12 +2700,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 4 · Bab 11</div>
         <div class="ch-title">Silsilah dari Sem sampai Abraham (Generasi 11–20)</div>
-        <div class="ch-park-aim">Sepuluh generasi pasca-banjir — Park menunjukkan bagaimana setiap nama mencerminkan harapan orang tua di zamannya, namun kenyataan zamannya semakin menjauh dari Allah. Eber bersinar sebagai pengecualian yang setia. Puncak argumen Park: Abraham menerima <em>dua panggilan</em> — pertama di Ur, lalu di Haran setelah ia sempat berhenti di sana karena kasihnya kepada ayahnya — dan baru berangkat sepenuhnya pada usia 75 tahun.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 11:10–26</div>
+          <div class="teks-buka-catatan">Buka Kej 11:10–26 dan baca sambil mencatat umur setiap patriark. Bandingkan dengan Kej 5. Apa yang segera terlihat? (Petunjuk: lihat berapa lama mereka hidup vs patriark sebelum banjir.) Pdt. Park akan menunjukkan bahwa penurunan umur ini bukan kebetulan.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c11">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c11" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c11', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c11">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Buka Kejadian 11:10–26 dan buat daftar sederhana: nama setiap patriark, usia ketika beranak, dan umur total. Bandingkan dengan daftar serupa dari Kej 5. Apa yang <strong>segera terlihat</strong> berbeda antara dua daftar itu?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Perhatikan nama-nama di Kej 11:10–26 dan arti yang mungkin kamu ketahui atau bisa cari. Adakah nama yang terasa berbeda dari nama-nama di Kej 5 — lebih gelap, lebih ambigu, atau lebih sulit dimaknai secara positif? Catat observasimu.</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Baca Kej 11:27–32 — kisah Terah dan keluarganya. Perhatikan: Terah memulai perjalanan menuju Kanaan (ayat 31), tapi berhenti di Haran dan meninggal di sana. Apa yang teks tidak katakan tentang mengapa ia berhenti?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 210" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -2087,16 +2809,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             </defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Nama Peleg berarti "perpecahan" — dan di zamannya terjadi perpecahan di Babel (Kej 10:25). Park menunjukkan bahwa nama-nama patriark sering mencerminkan <em>peristiwa zamannya</em>, bukan hanya karakter pribadinya. <strong>Apa yang ini ajarkan tentang cara Allah bekerja dalam konteks sejarah</strong> — bahwa bahkan nama seorang anak bisa menjadi tanda zaman?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Eber berarti "yang menyeberang" — dan Park berargumen ia adalah satu-satunya patriark pasca-banjir yang sungguh-sungguh menghidupi makna namanya: ia menyeberangi Efrat, memisahkan diri dari dunia yang makin jauh dari Allah. Hasilnya: umurnya lebih panjang dari semua keturunannya. Nama "Ibrani" berasal dari namanya. <strong>Apa yang membuat Eber berbeda</strong> — dan apa yang bisa kamu pelajari dari cara ia merespons zamannya?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Abraham menerima <strong>dua panggilan</strong>: pertama di Ur (Kis 7:2–4), lalu di Haran setelah ia berhenti karena kasih kepada ayahnya Terah. Baru di usia 75 ia berangkat sepenuhnya. Park mengatakan Terah berarti "menunda" — dan memang itulah yang terjadi. Tapi Abraham akhirnya melepaskan Terah dan pergi. <em>Apa yang menghambat ketaatan penuhmu kepada panggilan Allah</em> — dan apakah itu layak disebut "kasih" atau sebenarnya lebih dekat ke "penundaan"?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kej 11: kurva umur turun terus setelah air bah — kecuali satu nama: Eber (464 tahun, lebih panjang dari generasi sebelum dan sesudahnya). Teks tidak memberi penjelasan. Itu pertanda yang perlu diperhatikan. Lalu lihat Kisah Para Rasul 7:2–4: Stefanus berkata Allah memanggil Abraham saat masih di <em>Ur</em> — bukan Haran. Tapi Kej 12:1 sepertinya bicara dari Haran. Ada dua panggilan. Alkitab sendiri yang memberikan datanya di dua tempat berbeda.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Abraham hidup 58 tahun sezaman dengan Nuh — dan 75 tahun bersama Ishak, 15 tahun bersama Yakub. Park menulis bahwa tugas utama Abraham dalam tenda-tendanya adalah <em>meneruskan iman</em> kepada keturunannya. <strong>Kepada siapa dalam hidupmu kamu sedang — atau harus — meneruskan iman itu secara konkret?</strong> Bukan hanya memberi contoh, tapi sungguh bercerita dan menyaksikannya?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>pola apa yang ia lihat dalam penurunan umur pasca-banjir yang tidak kamu simpulkan sendiri dari daftar yang kamu buat tadi?</strong> Apakah pola itu terlihat jelas di data teks — atau memerlukan interpretasi tambahan? <em>Apa yang masih ingin kamu selidiki tentang Terah dan nama-nama pasca-banjir yang Park tidak bahas cukup dalam?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika kurva penurunan umur pasca-banjir konsisten di seluruh generasi — kecuali Eber yang anomali — dan teks tidak memberi penjelasan, maka ini artinya: ada data yang sengaja disimpan tanpa tafsiran, menunggu pembaca yang mau membaca cukup teliti untuk menemukannya. Dan jika Stefanus di Kisah 7 menyebut panggilan Abraham di Ur sementara Kejadian 12 tampak berbicara dari Haran — itu bukan kontradiksi. Itu kedalaman yang hanya terlihat jika kamu membaca kedua teks dengan serius.</div>
+        </div>
         </div>
 
         <div class="tool-links no-print">
@@ -2119,7 +2843,7 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <div id="part5" class="part-header part5">
   <span class="part-label">Bagian Kelima</span>
   <h2 class="part-title">A New Work of Salvation</h2>
-  <p class="part-thesis">Park menutup buku dengan tiga gerakan: perbedaan dua jalur, prinsip pemisahan sebagai jantung iman, dan Abraham sebagai awal era baru keselamatan.</p>
+  <p class="part-thesis">Dua jalur berbeda dalam cara merespons Allah. Kej 12:1: satu kata — "pergilah." Dari perintah itu, tiga pemisahan berturut-turut, dan setiap pemisahan membuka lapisan iman yang lebih dalam. Abraham adalah awal, bukan akhir.</p>
 </div>
 
 <button class="expand-all-btn no-print" onclick="expandPart('p5')">Buka semua bab Part 5</button>
@@ -2131,12 +2855,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 5 · Bab 12</div>
         <div class="ch-title">Perbedaan Jalur Kain dan Jalur Set</div>
-        <div class="ch-park-aim">Park merangkum empat perbedaan mendasar antara dua silsilah — untuk menunjukkan bahwa perbedaan itu bukan tentang orang baik vs orang jahat, tapi tentang dua cara manusia merespons Allah.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+        <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 4:17–24 · Kejadian 5:1–32</div>
+          <div class="teks-buka-catatan">Baca kedua teks secara berdampingan. Perhatikan: apa yang dicatat tentang keturunan Kain? Apa yang dicatat tentang keturunan Set? Buat dua kolom kecil — satu untuk setiap jalur. Pdt. Park akan merangkum perbedaan ini menjadi empat kategori yang jelas.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c12">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c12" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c12', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c12">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Kamu sudah membaca Kej 4:17–24 dan Kej 5:1–32. Sekarang buat dua kolom sendiri: apa yang <strong>dicatat</strong> tentang keturunan Kain, dan apa yang dicatat tentang keturunan Set. Bukan interpretasi — hanya apa yang teks katakan secara harfiah.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Dalam silsilah Kain, ada banyak "pertama kali" — pertama mendirikan kota, pertama beternak, pertama bermain musik, pertama menempa logam. Dalam silsilah Set, tidak ada satupun "pertama kali." Apa yang perbedaan ini mungkin katakan tentang apa yang masing-masing pihak anggap penting untuk diingat?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Silsilah Kain berakhir dengan Lamekh berbicara tentang kekerasan (Kej 4:23–24). Silsilah Set berakhir dengan Nuh lahir dan Lamekh berbicara tentang penghiburan (Kej 5:28–29). Apa yang dua "akhir" yang berbeda ini katakan tentang ke mana masing-masing jalur menuju?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 185" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -2163,16 +2909,18 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <text x="520" y="168" text-anchor="middle" font-size="10" fill="#1e4a2d">Umur: panjang → berlanjut ke Kristus</text>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park merangkum perbedaan dua jalur ini bukan sebagai "orang baik vs orang jahat" — tapi sebagai dua cara merespons Allah. <strong>Apa bedanya dua perspektif itu</strong> dalam cara kita menilai diri sendiri?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Silsilah Set mencatat umur panjang setiap patriark — bukan prestasi atau penemuan mereka. Park melihat ini signifikan. <strong>Apa yang Allah nilai</strong> dalam mencatat berapa lama seseorang hidup, bukan apa yang ia ciptakan?</div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Kedua jalur ini berasal dari orang tua yang sama: Adam dan Hawa. Mereka berbagi leluhur, berbagi trauma, berbagi dunia. <strong>Apa yang membuat satu jalur terus dan yang lain berhenti?</strong></div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kej 4 dan Kej 5 bisa dibaca berdampingan. Buat dua kolom: apa yang dicatat tentang setiap orang di jalur Kain, dan apa yang dicatat tentang setiap orang di jalur Set. Perhatikan formatnya — bukan hanya isinya. Apa yang satu catat yang lain tidak? Pola pencatatan itu sendiri sudah berkata sesuatu tentang apa yang Allah anggap penting.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Jika hidupmu dicatat dalam sebuah silsilah — <strong>apa yang akan dicatat?</strong> Prestasi dan pencapaianmu, atau kesetiaan dan pertumbuhanmu dalam iman?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>apa kategori perbedaan yang ia rumuskan yang melampaui observasi kasarmu dari dua kolom tadi?</strong> Apakah kategori-kategori itu terasa didukung oleh teks — atau ada yang terasa lebih sebagai kesimpulan Park? <em>Perbedaan mana yang paling ingin kamu gali lebih jauh dari Alkitab sendiri?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika jalur Kain dicatat dengan pencapaian peradaban — ternak, musik, logam — sementara jalur Set hanya dicatat dengan nama, umur, dan satu kalimat sesekali tentang hubungan dengan Allah, maka ini artinya: Alkitab sedang membuat argumen tentang apa yang benar-benar layak untuk direkam. Peradaban jalur Kain lenyap dalam air bah. Yang bertahan adalah satu keluarga dari jalur yang tidak punya satu pun pencapaian yang tertulis. Seleksi pencatatan adalah pernyataan teologis.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -2186,12 +2934,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 5 · Bab 13</div>
         <div class="ch-title">Karya Pemisahan yang Kudus</div>
-        <div class="ch-park-aim">Park menyatakan bahwa sejarah Israel dimulai dengan perintah pemisahan (Kej 12:1). Namun argumen utama bab ini bukan hanya tentang Kej 12:1 — Park menguraikan <em>empat pemisahan besar</em> dalam kehidupan Abraham: ① dari tanah air dan Terah (Kej 12:1), ② dari Lot (Kej 13), ③ dari Ismail (Kej 21), ④ dari Ishak (Kej 22). Keempat pemisahan ini mewakili empat tingkatan iman Kristen — dan setiap tingkatan semakin menyakitkan dari yang sebelumnya.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Kejadian 12:1–3 · 12:10–20 · 13:1–18 · 22:1–18</div>
+          <div class="teks-buka-catatan">Baca Kej 12:1–3 dan catat berapa kali kata "keluar" atau perintah pemisahan muncul. Lalu baca ketiga teks lainnya secara cepat. Pdt. Park akan berargumen bahwa ada empat pemisahan besar dalam hidup Abraham — dan bahwa setiap pemisahan itu nyata secara historis, bukan metafora.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c13">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c13" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c13', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c13">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Baca Kejadian 12:1–3. Hitung berapa kali kata "keluar" atau perintah untuk bergerak muncul dalam tiga ayat itu. Lalu baca Kej 12:4 — apa yang Abraham lakukan? Apa yang tidak disebutkan teks tentang bagaimana ia membuat keputusan itu?</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Baca Kejadian 22:1–14. Ini adalah peristiwa yang dikenal — tapi baca dengan mata baru: di ayat mana Abraham mengetahui bahwa Allah akan menyediakan? Apa yang teks katakan tentang proses Abraham sampai ke titik itu?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Dalam Kej 12, 13, dan 22, ada tiga pemisahan besar dalam hidup Abraham. Dari teks yang kamu baca, apa yang setiap pemisahan itu <strong>minta dari Abraham secara konkret</strong> — apa yang harus ia tinggalkan, dan apa yang ia terima?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 230" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -2243,20 +3013,22 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <rect x="10" y="150" width="660" height="40" rx="3" fill="rgba(58,30,90,0.06)" stroke="rgba(58,30,90,0.2)" stroke-width="1"/>
             <text x="340" y="167" text-anchor="middle" font-size="9.5" fill="#3a1e5a">Kej 12:1 — "Keluarlah dari negerimu, dari sanak saudaramu, dan dari rumah bapamu"</text>
             <text x="340" y="183" text-anchor="middle" font-size="9" fill="#5a4e3e">Tiga tujuan di Kej 12:1 adalah perintah awal. Empat pemisahan Abraham adalah perjalanan seumur hidup merespons panggilan itu.</text>
-            <text x="340" y="218" text-anchor="middle" font-size="11" fill="#17a79d" font-style="italic">"Sejarah Israel dimulai dengan perintah Pemisahan yang Kudus." — Park</text>
+            <text x="340" y="218" text-anchor="middle" font-size="11" fill="#17a79d" font-style="italic">"Sejarah Israel dimulai dengan perintah Pemisahan yang Kudus." — Pdt. Park</text>
             <defs><marker id="arrp" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(58,30,90,0.4)"/></marker></defs>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menulis bahwa "dalam realitas, sejarah Israel dimulai dengan perintah pemisahan." Namun ia tidak berhenti pada Kej 12:1 — ia menguraikan <strong>empat pemisahan besar</strong> dalam kehidupan Abraham: dari tanah air/Terah, dari Lot, dari Ismail, dan dari Ishak. Mengapa Park menyebut keempat ini sebagai "empat tingkatan iman Kristen"? Apa yang membedakan tiap tingkatan dari yang sebelumnya?</div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Pemisahan dari Ishak (Kej 22) adalah puncak — Abraham harus mempersembahkan satu-satunya putra perjanjian, satu-satunya objek kasihnya tersisa. Park mengatakan ini "setara dengan kematian bagi Abraham, mengguncang fondasi keberadaannya." <strong>Mengapa justru pemisahan dari hal yang paling kita kasihi menjadi ujian iman tertinggi?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Pemisahan yang Kudus terdengar keras dan menyakitkan. Tapi Park menunjukkan bahwa itu bukan sekadar perintah menjauhi dunia secara fisik — ini tentang pemisahan orientasi hidup. <strong>Apa yang harus dilepaskan</strong> agar seseorang bisa benar-benar dipakai Allah?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Kej 12:1 dimulai dengan satu kata: "pergilah." Tapi "pergi" dari apa? Ayat itu merinci tiga lapisan: tanah air, keluarga, rumah bapamu. Lapis terdalam adalah yang terakhir disebut — bukan yang pertama. Perjalanan Abraham kemudian membuktikan bahwa pemisahan itu terjadi bertahap: dari Terah (Kej 11–12), lalu Lot (Kej 13), lalu Ismael (Kej 21), lalu Ishak (Kej 22). Teks sendiri yang membangun narasi empat tahap ini.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Adakah sesuatu yang Allah sudah lama memanggil kamu untuk <strong>"keluar darinya"</strong> — tapi kamu belum benar-benar merespons? Apa yang membuatmu masih di sana?</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>kerangka "empat pemisahan" yang ia rumuskan — seberapa jauh itu ada dalam teks sendiri, dan seberapa jauh itu adalah interpretasi Park atas teks?</strong> Apakah pembingkaian "empat tingkatan iman" membantu kamu membaca teks lebih dalam, atau terasa membatasi? <em>Aspek kehidupan Abraham mana yang masih ingin kamu gali yang Park tidak bahas?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika pemisahan Abraham terjadi dalam empat tahap selama puluhan tahun — dan Alkitab mencatat setiap tahap dengan nama, tempat, dan percakapan langsung dengan Allah — maka ini artinya: proses pembentukan seorang manusia oleh Allah tidak terjadi dalam satu momen dramatis. Ia terjadi dalam rentang waktu yang panjang, bertahap, dan sering kali menyakitkan. Dan setiap tahap itu <em>dicatat</em> — artinya setiap tahap itu penting, bukan hanya klimaksnya.</div>
+        </div>
         </div>
 
         <div class="slow-gate no-print" id="gate-c13">
@@ -2287,12 +3059,34 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
       <div class="ch-header-text">
         <div class="ch-tag">Part 5 · Bab 14 — Penutup</div>
         <div class="ch-title">Abraham dari Perspektif Sejarah Penebusan</div>
-        <div class="ch-park-aim">Park menutup buku dengan gambar besar: dua ribu tahun dari Adam ke Abraham adalah fondasi. Dari Abraham, Allah memulai babak baru yang akan berakhir pada Kristus. Silsilah adalah janji yang sedang bergerak.</div>
+        
       </div>
       <div class="ch-chev">▾</div>
     </div>
     <div class="ch-body">
       <div class="ch-inner">
+                <div class="teks-buka">
+          <span class="teks-buka-label">📖 Buka dulu sebelum membaca Park</span>
+          <div class="teks-buka-ayat">Matius 1:1–17 · Lukas 3:23–38</div>
+          <div class="teks-buka-catatan">Buka kedua silsilah Yesus secara berdampingan. Hitung nama. Catat di mana keduanya berbeda. Pdt. Park akan menunjukkan bahwa perbedaan ini bukan kesalahan — dan bahwa silsilah Kej 5 dan 11 adalah fondasi yang menghubungkan keduanya ke Adam.</div>
+        </div>
+        <div class="ch-divider"></div>
+        </div>
+        <div class="soft-gate no-print" id="sgate-c14">
+  <span class="soft-gate-label">✏ Sebelum lanjut — tuliskan dulu</span>
+  <p class="soft-gate-prompt">Apa satu hal yang kamu perhatikan dari teks yang baru kamu baca? Tulis apa saja — kesan pertama, pertanyaan, kata yang menarik. Tidak ada jawaban yang salah.</p>
+  <textarea class="soft-gate-textarea" id="sgate-ta-c14" placeholder="Tulis minimal satu observasi dari teks..." oninput="onSgateInput('c14', this)"></textarea>
+  <span class="soft-gate-hint" id="sgate-hint-c14">Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.</span>
+</div>
+<span class="q-section-label">Baca teks dulu · Tiga pertanyaan dari teks</span>
+        <div class="questions-before">
+          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Buka Matius 1:1–17 dan Lukas 3:23–38 secara berdampingan. Baca keduanya dari awal sampai akhir. Catat tiga perbedaan yang paling mencolok antara kedua silsilah itu — tanpa dulu mencari penjelasan.</div></div>
+          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Di Matius 1, silsilah berjalan dari Abraham ke Yesus. Di Lukas 3, berjalan dari Yesus ke Adam — bahkan sampai ke Allah. Apa yang perbedaan <em>arah</em> penulisan itu mungkin katakan tentang tujuan masing-masing silsilah?</div></div>
+          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Dari Kej 5 dan Kej 11 yang sudah kamu baca di bab-bab sebelumnya — apakah kamu bisa melacak benang dari Adam ke Abraham? Coba buat garis sederhana: Adam → Set → Enos → ... → Abraham. Berapa generasi? Lalu bandingkan dengan Mat 1 dan Luk 3 — di mana benang itu berlanjut?</div></div>
+        </div>
+        
+        <div class="ch-divider"></div>
+        <div class="ch-divider"></div>
         <span class="diagram-label">Peta Argumen</span>
         <div class="diagram-svg-wrap">
           <svg viewBox="0 0 680 175" width="100%" xmlns="http://www.w3.org/2000/svg">
@@ -2319,21 +3113,23 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
             <text x="630" y="122" text-anchor="middle" font-size="9" fill="#17a79d">Penggenapan</text>
             <!-- brace for genealogy scope -->
             <path d="M60,55 Q200,40 340,55" stroke="rgba(30,74,45,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
-            <text x="200" y="38" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Cakupan buku Park</text>
+            <text x="200" y="38" text-anchor="middle" font-size="9.5" fill="#1e4a2d">Cakupan buku Pdt. Park</text>
             <path d="M340,55 Q490,40 630,55" stroke="rgba(23,167,157,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
             <text x="485" y="38" text-anchor="middle" font-size="9.5" fill="#17a79d">Sisa kanon Alkitab</text>
           </svg>
         </div>
-        <div class="ch-divider"></div>
-        <span class="q-section-label">Sebelum membaca · Tiga pertanyaan orientasi</span>
-        <div class="questions-before">
-          <div class="q-item"><div class="q-dot before">1</div><div class="q-text">Park menyatakan bahwa "dosa terus berkembang biak sampai kelahiran Abraham" — dan justru di saat itulah Allah memulai karya keselamatan yang baru. <strong>Apa yang itu katakan tentang cara Allah bekerja?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">2</div><div class="q-text">Sepanjang dua ribu tahun dari Adam ke Abraham, Allah menjaga iman tetap hidup melalui orang-orang yang sering kali tidak kita kenal namanya. <strong>Apa yang itu sampaikan tentang peran "orang-orang biasa" dalam rencana Allah?</strong></div></div>
-          <div class="q-item"><div class="q-dot before">3</div><div class="q-text">Park menutup buku di Abraham — bukan di Kristus. Tapi ia menunjukkan arah menuju Kristus. <strong>Apa yang "belum selesai" dalam buku ini</strong> yang hanya bisa diselesaikan oleh sisa kanon Alkitab?</div></div>
-        </div>
+        
+        <details class="park-insight-details">
+  <summary>📖 Yang Park lihat setelah 40 tahun membaca teks ini</summary>
+  <div class="park-insight-body"><div class="park-insight-text">Dua ribu tahun. Dua puluh generasi. Dari Adam ke Abraham — dan Alkitab mencatat setiap nama, setiap umur, setiap transisi. Bukan karena informasinya menarik secara historis. Tapi karena tidak satu pun generasi yang terlewat oleh tangan yang sama. Setelah Abraham: Ishak, Yakub, dua belas suku, Musa, Daud — dan satu nama lagi di ujung garis Matius 1. Silsilah bukan catatan masa lalu. Itu janji yang sedang bergerak menuju penggenapan.</div></div>
+</details>
         <div class="q-after-box">
-          <span class="q-section-label after">Setelah membaca · Pertanyaan penghenti</span>
-          <div class="reflection-prompt">Setelah membaca seluruh buku Park — <strong>apa satu hal yang paling mengubah cara kamu memandang sejarah, hidupmu sendiri, atau Allah?</strong> Biarkan pertanyaan itu tinggal bersamamu.</div>
+          <span class="q-section-label after">Setelah membaca buku · Dua pertanyaan konfirmasi</span>
+          <div class="reflection-prompt">Setelah membaca buku: <strong>bagaimana ia menghubungkan silsilah Kej 5 dan 11 dengan dua silsilah Yesus di Matius dan Lukas — koneksi apa yang tidak kamu buat sendiri tadi?</strong> Apakah koneksi itu bisa kamu verifikasi dari teks? <em>Setelah membaca seluruh buku Pdt. Park, benang Alkitab mana yang paling ingin kamu kejar sendiri — yang Park buka tapi tidak habiskan?</em></div>
+        <div class="consequence-block">
+          <span class="consequence-label">⚖ Jika ini benar — apa artinya bagimu?</span>
+          <div class="consequence-text">Jika dua ribu tahun dan dua puluh generasi dari Adam ke Abraham dicatat satu per satu — setiap nama, setiap umur, setiap transisi — dan garis itu berlanjut ke Ishak, Yakub, Daud, dan berakhir di satu nama di Matius 1:16, maka ini artinya: kamu sedang membaca bukan hanya sejarah masa lalu. Kamu sedang membaca bukti bahwa ada yang merencanakan ujung cerita sebelum menulis awalnya. Jika itu benar — ini bukan buku sejarah biasa. Ini kesaksian dari Penulis yang masih hidup.</div>
+        </div>
         </div>
       </div>
     </div>
@@ -2344,10 +3140,10 @@ svg text { font-family: 'Nunito Sans', sans-serif; }
 <div class="conclusion-wrap">
   <div class="section-eyebrow" style="text-align:center">Kesimpulan</div>
   <h2 class="conc-title">Satu kisah.<br><em>Belum selesai.</em></h2>
-  <p class="conc-text">Park menutup bukunya bukan dengan jawaban — tapi dengan undangan. Sejarah penebusan yang ia lacak dari Adam sampai Abraham tidak berhenti di halaman terakhir. Ia berlanjut. Melalui Abraham, melalui Kristus — dan melalui setiap orang yang menerima Injil dan ditempatkan dalam silsilah iman yang sama.</p>
+  <p class="conc-text">Pdt. Park menutup bukunya bukan dengan jawaban — tapi dengan undangan. Sejarah penebusan yang ia lacak dari Adam sampai Abraham tidak berhenti di halaman terakhir. Ia berlanjut. Melalui Abraham, melalui Kristus — dan melalui setiap orang yang menerima Injil dan ditempatkan dalam silsilah iman yang sama.</p>
   <div class="conc-quote">
     "Sejarah penebusan Allah tidak terpisah dari sejarah dunia ini. Keduanya saling jalin. Sejarah penebusan telah berkembang dan terbuka sejak sebelum permulaan waktu sesuai kehendak Allah yang berkenan dan oleh kedaulatan-Nya yang mutlak."
-    <cite>Abraham Park, Kesimpulan</cite>
+    <cite>Pdt. Abraham Park, Kesimpulan</cite>
   </div>
   <p class="conc-text">Silsilah yang kamu baca adalah bukti bahwa tidak satu pun generasi terlupakan oleh Allah. Tidak satu pun nama yang dicatat sia-sia. Dan tidak satu pun masa di mana Allah kehilangan kendali atas benang yang Ia pegang.</p>
   <p class="conc-text" style="font-style:italic; color:var(--teal);">Kamu adalah bagian dari silsilah itu.</p>
@@ -2493,15 +3289,102 @@ function buildChapterExtras() {
   });
 }
 
-// ============ INIT ============
-document.addEventListener('DOMContentLoaded', function() {
-  buildChapterExtras();
-  updateReadingProgress();
-  restoreGates();
+// ============ SOFT GATES (observasi mandiri) ============
+var sgateTimers = {};
+
+function onSgateInput(chapterId, textarea) {
+  var hint = document.getElementById('sgate-hint-' + chapterId);
+  var hasText = textarea.value.trim().length >= 15;
+  if (hint) {
+    if (hasText) {
+      hint.classList.add('ready');
+      hint.textContent = '✓ Observasimu tersimpan. Sekarang pertanyaan-pertanyaan di bawah lebih bermakna.';
+    } else {
+      hint.classList.remove('ready');
+      hint.textContent = 'Tulis sesuatu terlebih dahulu — lalu pertanyaan-pertanyaan di bawah ini akan lebih bermakna.';
+    }
+  }
+  // autosave
+  clearTimeout(sgateTimers[chapterId]);
+  sgateTimers[chapterId] = setTimeout(function() {
+    appData.notes['sgate-' + chapterId] = textarea.value;
+    saveData(appData);
+  }, 700);
+}
+
+function restoreSgates() {
+  ['c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c12','c13','c14'].forEach(function(cid) {
+    var saved = appData.notes['sgate-' + cid] || '';
+    var ta = document.getElementById('sgate-ta-' + cid);
+    var hint = document.getElementById('sgate-hint-' + cid);
+    if (ta && saved) {
+      ta.value = saved;
+      if (saved.trim().length >= 15 && hint) {
+        hint.classList.add('ready');
+        hint.textContent = '✓ Observasimu tersimpan. Sekarang pertanyaan-pertanyaan di bawah lebih bermakna.';
+      }
+    }
+  });
+}
+
+// ============ GEN 5 CALCULATOR ============
+var gen5Patriarchs = [
+  { name: 'Adam', ref: 'Kej 5:3', placeholder: 'usia Adam ketika Set lahir' },
+  { name: 'Set', ref: 'Kej 5:6', placeholder: 'usia Set ketika Enos lahir' },
+  { name: 'Enos', ref: 'Kej 5:9', placeholder: 'usia Enos ketika Kenan lahir' },
+  { name: 'Kenan', ref: 'Kej 5:12', placeholder: 'usia Kenan ketika Mahalaleel lahir' },
+  { name: 'Mahalaleel', ref: 'Kej 5:15', placeholder: 'usia Mahalaleel ketika Yared lahir' },
+  { name: 'Yared', ref: 'Kej 5:18', placeholder: 'usia Yared ketika Henokh lahir' },
+  { name: 'Henokh', ref: 'Kej 5:21', placeholder: 'usia Henokh ketika Metusalah lahir' },
+  { name: 'Metusalah', ref: 'Kej 5:25', placeholder: 'usia Metusalah ketika Lamekh lahir' },
+  { name: 'Lamekh', ref: 'Kej 5:28', placeholder: 'usia Lamekh ketika Nuh lahir' },
+];
+
+function initGen5Calc() {
+  var container = document.getElementById('gen5-rows');
+  if (!container) return;
+
+  var savedVals = {};
+  try { savedVals = JSON.parse(appData.notes['gen5-vals'] || '{}'); } catch(e) {}
+
+  gen5Patriarchs.forEach(function(p, i) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex; align-items:center; gap:10px; flex-wrap:wrap;';
+    var savedVal = savedVals[p.name] || '';
+    row.innerHTML =
+      '<label style="font-family:\'Nunito Sans\',sans-serif; font-size:13px; font-weight:600; color:var(--ink); min-width:120px; flex-shrink:0;">' + p.name + ' <span style="font-size:10px; color:var(--dim); font-weight:400;">(' + p.ref + ')</span></label>' +
+      '<input type="number" id="gen5-' + i + '" placeholder="' + p.placeholder + '" value="' + savedVal + '" min="1" max="999" style="width:80px; font-family:\'Nunito Sans\',sans-serif; font-size:14px; padding:6px 10px; border:1px solid var(--teal-border); border-radius:5px; outline:none; color:var(--ink); background:white;" oninput="updateGen5Total()">' +
+      '<span style="font-size:12px; color:var(--dim);">tahun ketika anak lahir</span>';
+    container.appendChild(row);
+  });
+
+  updateGen5Total();
+}
+
+function updateGen5Total() {
+  var total = 0;
+  var allFilled = true;
+  var vals = {};
+  gen5Patriarchs.forEach(function(p, i) {
+    var inp = document.getElementById('gen5-' + i);
+    if (!inp) return;
+    var v = parseInt(inp.value);
+    if (!isNaN(v) && v > 0) {
+      total += v;
+      vals[p.name] = inp.value;
+    } else {
+      allFilled = false;
+    }
+  });
+  var el = document.getElementById('gen5-total');
+  if (el) el.textContent = (total > 0 ? total : '—') + ' tahun';
+  // autosave
+  appData.notes['gen5-vals'] = JSON.stringify(vals);
+  saveData(appData);
+}
 
 
-// ============ SLOW GATES ============
-var gateTimers = {};
+
 
 function onGateInput(chapterId, textarea) {
   var btn = document.getElementById('gate-btn-' + chapterId);
@@ -2555,6 +3438,14 @@ function restoreGates() {
   });
 }
 
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', function() {
+  buildChapterExtras();
+  updateReadingProgress();
+  restoreGates();
+  restoreSgates();
+  initGen5Calc();
+
   // Inject reading progress panel
   var rpanel = document.createElement('div');
   rpanel.className = 'reading-progress-panel no-print';
@@ -2570,9 +3461,9 @@ function restoreGates() {
 <!-- ============ APPENDIX ============ -->
 <div class="appendix-link-wrap no-print" style="flex-direction:column;align-items:flex-start;gap:16px;border-top:1px solid var(--gold-border);margin-top:60px;">
   <span class="appendix-link-label" style="font-size:9px;">Setelah selesai membaca</span>
-  <a href="self-assessment.html" style="display:inline-flex;align-items:center;gap:12px;font-family:'Nunito Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--white);background:var(--teal);border:none;border-radius:8px;padding:14px 28px;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.background='var(--teal-dark)'" onmouseout="this.style.background='var(--teal)'">
-    <span style="font-size:18px;">✦</span>
-    <span>Di Mana Kamu? — Self-Assessment<br><span style="font-family:'Nunito Sans',sans-serif;font-size:12px;letter-spacing:0;text-transform:none;font-style:italic;opacity:0.85;">Empat pertanyaan · Empat pemisahan Abraham · Tanpa skor</span></span>
+  <a href="cermin-setelah-buku.html" style="display:inline-flex;align-items:center;gap:12px;font-family:'Nunito Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--white);background:var(--teal);border:none;border-radius:8px;padding:14px 28px;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.background='var(--teal-dark)'" onmouseout="this.style.background='var(--teal)'">
+    <span style="font-size:18px;">🪞</span>
+    <span>Cermin Setelah Buku<br><span style="font-family:'Nunito Sans',sans-serif;font-size:12px;letter-spacing:0;text-transform:none;font-style:italic;opacity:0.85;">Refleksi · Langkah selanjutnya · Simpan perjalananmu</span></span>
   </a>
   <div style="border-top:1px solid var(--gold-border);width:100%;padding-top:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
     <span class="appendix-link-label">Appendix · Untuk yang ingin menelusuri angka</span>

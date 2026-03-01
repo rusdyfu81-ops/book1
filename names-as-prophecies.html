@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 
-
 /* ─── BRAND TOKENS ─── */
 :root {
   --teal:        #17a79d;
@@ -28,12 +27,11 @@
   --mid:         #3a3e3e;
   --dim:         #6d6e70;
 
-  /* aliases so original markup vars still resolve */
-  --gold:        var(--teal);
-  --gold-faint:  var(--teal-lt);
-  --gold-border: var(--teal-bd);
-  --rust:        var(--teal-dark);
-  --parchment:   var(--white);
+  /* Category A — verifiable facts (gold) */
+  --gold-bg:     rgba(201,168,76,0.06);
+  --gold-bd:     rgba(201,168,76,0.28);
+  --gold-accent: #c9a84c;
+  --gold-text:   #8a7234;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -67,7 +65,7 @@ body::before {
 header {
   position: relative;
   text-align: center;
-  padding: 80px 24px 56px;
+  padding: 96px 24px 56px;
   z-index: 1;
   border-bottom: 1px solid var(--teal-bd);
   background: linear-gradient(170deg, rgba(23,167,157,0.05) 0%, transparent 55%);
@@ -103,7 +101,7 @@ header {
   font-size: 17px;
   font-weight: 400;
   color: var(--dim);
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto 32px;
   line-height: 1.75;
 }
@@ -133,6 +131,27 @@ header {
   color: var(--teal);
   margin-top: 10px;
   text-transform: uppercase;
+}
+
+/* verification orientation banner */
+.verify-banner {
+  max-width: 540px;
+  margin: 28px auto 0;
+  padding: 14px 20px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 8px;
+  text-align: left;
+}
+.verify-banner p {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  color: var(--gold-text);
+  line-height: 1.65;
+}
+.verify-banner p strong {
+  color: var(--gold-accent);
+  font-weight: 700;
 }
 
 .inst {
@@ -192,7 +211,7 @@ header {
   border: 1.5px solid var(--grey-bd);
   background: var(--white);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -272,74 +291,105 @@ header {
   overflow: hidden;
   transition: max-height 0.65s cubic-bezier(.16,1,.3,1);
 }
-.name-row.open .ncard-body { max-height: 1200px; }
+.name-row.open .ncard-body { max-height: 2000px; }
 
 .ncard-inner {
   padding: 0 22px 22px;
   border-top: 1px solid var(--teal-bd);
 }
 
-/* two-column layout */
-.ncols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 28px;
-  padding-top: 18px;
+/* ─── CATEGORY A — GOLD VERIFICATION PANEL ─── */
+.cat-a {
+  margin-top: 18px;
+  padding: 16px 18px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-bd);
+  border-radius: 8px;
 }
 
-@media(max-width:560px){
-  .ncols { grid-template-columns: 1fr; }
-}
-
-.ncol-label {
+.cat-a-label {
   font-family: 'Nunito Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 8px;
-  display: block;
+  color: var(--gold-accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.ncol-text {
+.cat-a-label::before {
+  content: '✦';
+  font-size: 9px;
+}
+
+.cat-a-ref {
   font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  color: var(--gold-text);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.cat-a-ref strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.cat-a-content {
+  font-family: 'Lora', serif;
   font-size: 14.5px;
   color: var(--mid);
-  line-height: 1.78;
+  line-height: 1.8;
 }
-.ncol-text strong { color: var(--ink); font-weight: 600; }
-.ncol-text em { font-style: italic; color: var(--teal-dark); }
+.cat-a-content strong { color: var(--ink); font-weight: 600; }
+.cat-a-content em { color: var(--teal-dark); font-style: italic; }
 
-/* prophecy block — full width */
-.nprophecy {
-  margin-top: 16px;
-  padding: 14px 18px;
+/* ─── CATEGORY B — PARK'S READING ─── */
+.cat-b {
+  margin-top: 14px;
+  padding: 16px 18px;
   background: var(--teal-lt);
   border-left: 3px solid var(--teal);
   border-radius: 0 8px 8px 0;
 }
 
-.nprophecy-label {
+.cat-b-label {
   font-family: 'Nunito Sans', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--teal);
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   display: block;
 }
 
-.nprophecy-text {
+.cat-b-text {
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 14px;
+  font-size: 14.5px;
+  color: var(--mid);
+  line-height: 1.78;
+}
+.cat-b-text strong { color: var(--ink); font-weight: 600; }
+.cat-b-text em { font-style: italic; color: var(--teal-dark); }
+
+/* Christological direction */
+.cat-b-direction {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(23,167,157,0.15);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13.5px;
   color: var(--mid);
   line-height: 1.75;
 }
-.nprophecy-text strong { font-style: normal; color: var(--ink); font-weight: 600; }
-.nprophecy-text em { color: var(--teal-dark); }
+.cat-b-direction strong { color: var(--ink); font-weight: 600; }
+.cat-b-direction em { color: var(--teal-dark); }
 
+/* Pdt. Park quote — supporting voice */
 .npark-quote {
   margin-top: 12px;
   font-family: 'Lora', serif;
@@ -419,7 +469,7 @@ header {
 .ref-title em { color: var(--teal); font-style: italic; }
 
 .ref-body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Lora', serif;
   font-size: 16px;
   color: var(--mid);
   line-height: 1.85;
@@ -427,6 +477,19 @@ header {
 }
 
 .ref-body + .ref-body { margin-top: -8px; }
+
+/* open question prompt */
+.ref-question {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #4a5050;
+  border-left: 3px solid rgba(23,167,157,0.3);
+  padding-left: 16px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  line-height: 1.85;
+}
 
 /* revealed name tags */
 .ref-names {
@@ -505,10 +568,6 @@ header {
 }
 .sticky-nav.visible { transform: translateY(0); }
 
-.snav-back {
-  display: none; /* handled by unified nav Beranda button */
-}
-
 .snav-title {
   font-family: 'Lora', serif;
   font-size: 13px;
@@ -528,9 +587,6 @@ header {
   text-align: right;
 }
 
-/* offset header to account for sticky nav */
-header { padding-top: 96px; }
-
 /* mobile */
 @media(max-width:600px){
   .name-row { grid-template-columns: 52px 1fr; }
@@ -540,13 +596,15 @@ header { padding-top: 96px; }
   .snav-title { display: none; }
   .ncard-top { padding: 16px 16px; }
   .ncard-inner { padding: 0 16px 18px; }
-  .ncol-text { font-size: 14px; }
-  .nprophecy { padding: 12px 14px; }
-  .nprophecy-text { font-size: 13.5px; }
-  .nmeaning { font-size: 11px; }
+  .cat-a { padding: 14px 14px; }
+  .cat-b { padding: 14px 14px; }
+  .cat-a-content { font-size: 14px; }
+  .cat-b-text { font-size: 14px; }
+  .cat-b-direction { font-size: 13px; }
   header { padding-left: 16px; padding-right: 16px; }
   .hquote { padding: 16px 18px; font-size: 14px; }
   .hsub { font-size: 15px; }
+  .verify-banner { margin-left: 0; margin-right: 0; }
 }
 
 @media(max-width:380px){
@@ -558,38 +616,39 @@ header { padding-top: 96px; }
 </head>
 <body>
 <!-- UNIFIED NAV -->
-<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif;overflow-x:auto">
   <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
   <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
   <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Sepuluh Nama, Satu Perjalanan</span>
-  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
+  <a href="kalkulator-kronologi.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 12px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Kalkulator</a>
+  <a href="two-rivers-timeline.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 12px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Two Rivers</a>
+  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Beranda</a>
 </nav>
 
 
 <!-- STICKY NAV -->
 <nav class="sticky-nav" id="stickyNav">
-  <button class="snav-back" onclick="window.location.href='index.html'">← Beranda</button>
   <span class="snav-title">Sepuluh Nama, Satu Perjalanan</span>
   <span class="snav-progress" id="snavProg">0 / 10</span>
 </nav>
 
 <header>
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0">
-    <div class="htag">The Genesis Genealogies · Abraham Park · Bab 10</div>
-    <button onclick="window.location.href='index.html'" style="font-family:'Nunito Sans',sans-serif;font-size:11px;font-weight:600;color:#6d6e70;background:#ffffff;border:1px solid #e8e9ea;padding:6px 14px;border-radius:6px;cursor:pointer">← Beranda</button>
-  </div>
+  <div class="htag">Kejadian 5 · Silsilah Adam hingga Nuh · Bab 10</div>
   <h1 class="htitle">Sepuluh Nama,<br><em>Satu Perjalanan</em></h1>
-  <p class="hsub">Dari Adam hingga Nuh — setiap nama adalah doa orang tua kepada anaknya, dan setiap doa mencerminkan kondisi iman zamannya.</p>
+  <p class="hsub">Kejadian 5 mencatat sepuluh generasi dari Adam hingga Nuh. Setiap nama mengandung makna — dan Pdt. Park melihat di dalamnya satu benang penebusan yang tak terputus.</p>
   <div class="hquote">
-    "Format silsilah dan makna nama-nama yang tercatat mengandung harapan dan antisipasi tentang bagaimana janji penebusan akan terungkap dari generasi ke generasi dan akhirnya digenapi melalui Yesus Kristus."
+    "Bagi bapa-bapa leluhur yang saleh dan merupakan orang-orang yang suka berdoa, memberi nama kepada anak-anak mereka adalah hal yang khidmat. Nama-nama itu kemungkinan besar mencerminkan pemahaman mereka akan kehendak Allah terhadap generasi mereka."
     <cite>Abraham Park, The Genesis Genealogies</cite>
   </div>
-  <p class="inst">↓ Buka setiap nama untuk mendengar doanya ↓</p>
+  <div class="verify-banner">
+    <p>Panel <strong>✦ emas</strong> = data dari teks Alkitab dan leksikon Ibrani. Panel <strong style="color:var(--teal)">teal</strong> = apa yang Pdt. Park lihat dari data itu.</p>
+  </div>
+  <p class="inst">↓ Buka setiap nama ↓</p>
 </header>
 
 <div class="names-wrap">
 
-  <!-- 1. ADAM -->
+  <!-- ═══════════════════ 1. ADAM ═══════════════════ -->
   <div class="name-row" id="r0" onclick="tog(0)" role="button" aria-expanded="false" aria-label="Adam — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc0">I</div></div>
     <div class="ncard">
@@ -602,20 +661,21 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Adam berasal dari akar kata Asyur <em>adamu</em>, yang berarti "membuat" atau "menciptakan." Manusia tidak pernah bisa menjadi pencipta; ia hanyalah ciptaan dan makhluk. Adam dibentuk dari debu tanah. Tanpa nafas Allah, esensi manusia hanyalah debu.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Adam menerima janji Allah — bahwa keturunan perempuan akan meremukkan kepala ular. Ia <strong>menyimpan pakaian dari kulit binatang</strong> sebagai tanda konfirmasi perjanjian, dan bersaksi kepada keturunannya tentang dunia sebelum dan sesudah dosa. Ia sungguh percaya bahwa keturunan yang dijanjikan pasti akan datang.</div>
-            </div>
+
+          <!-- CATEGORY A — What the text says -->
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:1–5</strong> · Kata Ibrani: <em>adam</em> (אָדָם) — dari akar <em>adamu</em> (Asyur), "membuat, menciptakan"</div>
+            <div class="cat-a-content">Nama Adam terkait dengan <em>adamah</em> (tanah). "TUHAN Allah membentuk manusia dari debu tanah, dan menghembuskan nafas hidup ke dalam hidungnya" <em>(Kej 2:7)</em>. Adam hidup 930 tahun. Ia beranak cucu "menurut gambar dan rupa-nya" melalui Set <em>(Kej 5:3)</em>.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Pengorbanan yang diperlukan untuk membuat pakaian dari kulit binatang bagi Adam merupakan bayangan awal dari <strong>pengorbanan Yesus Kristus di atas kayu salib.</strong> Iman Adam kepada keturunan yang dijanjikan — "keturunan perempuan" — adalah kesaksian manusia pertama tentang Mesias yang akan datang. <em>(Kej 3:15, 21)</em></div>
+
+          <!-- CATEGORY B — Pdt. Park's reading -->
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park melihat bahwa Adam menerima janji Allah (keturunan perempuan akan meremukkan kepala ular) dan <strong>menyimpan pakaian dari kulit binatang</strong> sebagai tanda konfirmasi perjanjian. Ia bersaksi kepada keturunannya tentang dunia sebelum dan sesudah dosa — percaya bahwa keturunan yang dijanjikan pasti akan datang.</div>
+            <div class="cat-b-direction">Pdt. Park membaca pengorbanan binatang untuk membuat pakaian kulit sebagai bayangan awal dari <strong>pengorbanan Kristus di kayu salib.</strong> Iman Adam kepada "keturunan perempuan" adalah kesaksian manusia pertama tentang Mesias. <em>(Kej 3:15, 21)</em></div>
           </div>
+
           <div class="npark-quote">"Adam menyimpan pakaian dari kulit binatang itu karena itulah konfirmasi perjanjian baginya. Ia sungguh percaya bahwa waktunya akan tiba ketika keturunan yang dijanjikan akan meremukkan kepala ular."<cite>Abraham Park, hal. 95</cite></div>
         </div>
       </div>
@@ -623,8 +683,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 2. SET -->
-  <div class="name-row" id="r1" onclick="tog(1)">
+  <!-- ═══════════════════ 2. SET ═══════════════════ -->
+  <div class="name-row" id="r1" onclick="tog(1)" role="button" aria-expanded="false" aria-label="Set — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc1">II</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -636,20 +696,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Set berasal dari kata yang berarti "meletakkan" dan "menempatkan." Adam menyadari bahwa Allah telah <strong>mengaruniakan</strong> kepadanya benih lain sebagai bagian dari tujuan penebusan-Nya. Set sungguh-sungguh merupakan ungkapan kasih karunia Allah yang berlimpah — karunia harapan dan penghiburan yang meluap.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Set menanggung <strong>gambar dan rupa Adam</strong> — membuktikan bahwa gambar Allah terus diturunkan melalui garis iman, bukan garis Kain. Melalui Set, karya Allah ditegakkan kembali dan berakar dalam. Janji itu akan terus berlanjut melalui keturunannya.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 4:25; 5:3–8</strong> · Kata Ibrani: <em>shet</em> (שֵׁת) — "meletakkan," "menempatkan"</div>
+            <div class="cat-a-content">Hawa berkata: "Allah telah <strong>mengaruniakan</strong> kepadaku anak lain sebagai ganti Habel" <em>(Kej 4:25)</em>. Set lahir saat Adam berusia 130 tahun, dan disebut lahir "menurut gambar dan rupa Adam" <em>(Kej 5:3)</em>. Set hidup 912 tahun. Set meninggal 112 tahun setelah Adam meninggal.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Set adalah "benih lain" yang dikaruniakan Allah sebagai pengganti Habel — gambaran dari <strong>Kristus, Adam yang kedua,</strong> yang datang untuk melakukan apa yang tidak bisa dilakukan Adam pertama. Sama seperti Set meneruskan gambar Allah, Kristus memulihkan gambar itu dalam semua orang yang percaya. <em>(Kej 4:25; 5:3; 1 Kor 15:45–47)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park melihat Set sebagai <strong>"benih lain"</strong> yang Allah karuniakan — bukan kebetulan, melainkan bagian dari tujuan penebusan. Melalui Set, bukan Kain, gambar Allah terus diturunkan. Nama Set juga berarti "fondasi" — harapan bahwa garis keturunan Mesias akan dimantapkan melalui jalur ini.</div>
+            <div class="cat-b-direction">Pdt. Park membaca Set sebagai gambaran <strong>Kristus, Adam yang kedua</strong> <em>(1 Kor 15:45–47)</em> — yang datang untuk melakukan apa yang tidak bisa dilakukan Adam pertama. Sama seperti Set meneruskan gambar Allah, Kristus memulihkan gambar itu.</div>
           </div>
+
           <div class="npark-quote">"Set sungguh-sungguh merupakan ungkapan kasih karunia Allah yang berlimpah dan karunia harapan serta penghiburan yang meluap."<cite>Abraham Park, hal. 99</cite></div>
         </div>
       </div>
@@ -657,8 +716,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 3. ENOS -->
-  <div class="name-row" id="r2" onclick="tog(2)">
+  <!-- ═══════════════════ 3. ENOS ═══════════════════ -->
+  <div class="name-row" id="r2" onclick="tog(2)" role="button" aria-expanded="false" aria-label="Enos — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc2">III</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -670,20 +729,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Enos berasal dari kata yang berarti <strong>"tak tersembuhkan"</strong> dan "sangat sakit." Nama ini mengungkapkan ketidakberdayaan total manusia dan kelemahannya yang sudah pasti — seperti seseorang yang merintih karena penyakit yang tak tersembuhkan. Set menamakan anaknya Enos, menyadari kerapuhan manusia tanpa Allah.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Pada zaman Enos, <strong>manusia mulai memanggil nama TUHAN.</strong> Dari kelemahan yang diakui, lahirlah penyembahan sejati. Nama Enos adalah pengakuan iman — dan dari pengakuan itulah, kebiasaan memanggil Allah menyebar bahkan ke daerah-daerah yang jauh.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 4:26; 5:6–11</strong> · Kata Ibrani: <em>enosh</em> (אֱנוֹשׁ) — dari akar yang berarti "tak tersembuhkan," "sangat sakit"</div>
+            <div class="cat-a-content">Enos, seperti Adam, bisa berarti "manusia" — tapi dengan nuansa <strong>kelemahan dan kefanaan</strong>. Teks mencatat: "Pada waktu itulah orang mulai memanggil nama TUHAN" <em>(Kej 4:26)</em>. Enos hidup 905 tahun.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Tindakan memanggil nama TUHAN, yang lahir dari generasi Enos, menunjuk langsung kepada keselamatan melalui Kristus — <strong>"Barangsiapa yang memanggil nama Tuhan, ia akan diselamatkan."</strong> Kondisi manusia yang tak tersembuhkan memerlukan tabib yang hanya dapat diutus Allah. <em>(Kej 4:26; Kis 2:21; Rm 10:13)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park melihat bahwa Set menamakan anaknya "Enos" sebagai <strong>pengakuan iman</strong> — pengakuan bahwa manusia tanpa Allah terlalu rapuh untuk mengatasi pencobaan dosa. Dari kelemahan yang diakui inilah lahir penyembahan sejati: "memanggil nama TUHAN" adalah awal hubungan personal antara Allah dan manusia.</div>
+            <div class="cat-b-direction">Pdt. Park menghubungkan "memanggil nama TUHAN" dari zaman Enos langsung ke <strong>"Barangsiapa yang memanggil nama Tuhan, ia akan diselamatkan"</strong> <em>(Kis 2:21; Rm 10:13)</em>. Kondisi manusia yang tak tersembuhkan memerlukan tabib yang hanya dapat diutus Allah.</div>
           </div>
+
           <div class="npark-quote">"Nama ini mengungkapkan ketidakberdayaan total manusia dan kelemahannya yang sudah pasti. Nama ini menyamakan keadaan manusia yang berdosa dengan kondisi seseorang yang merintih karena penyakit dan penderitaan yang tak tersembuhkan."<cite>Abraham Park, hal. 102</cite></div>
         </div>
       </div>
@@ -691,8 +749,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 4. KENAN -->
-  <div class="name-row" id="r3" onclick="tog(3)">
+  <!-- ═══════════════════ 4. KENAN ═══════════════════ -->
+  <div class="name-row" id="r3" onclick="tog(3)" role="button" aria-expanded="false" aria-label="Kenan — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc3">IV</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -704,29 +762,28 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Kenan berbagi akar kata dengan kata "sarang" — membuat sarang. Pada zamannya, manusia akhirnya <strong>membangun sarang iman.</strong> Kenan mungkin merupakan karunia tak terduga dari Allah, seorang anak yang lahir dengan penuh sukacita melalui penyelenggaraan-Nya.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Park menyatakan: <strong>"Kenan berarti 'belas kasihan yang ditemukan secara tak terduga.'"</strong> Gerakan penyembahan yang dimulai dari generasi Enos menemukan rumahnya yang kokoh — komunitas iman yang berakar dalam belas kasihan Allah. Yang terserak menjadi terhimpun.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:9–14</strong> · Kata Ibrani: <em>qenan</em> (קֵינָן) — berbagi akar dengan <em>qen</em>, "sarang"</div>
+            <div class="cat-a-content">Kenan lahir saat Enos berusia 90 tahun. Teks Kejadian 5 tidak mencatat narasi tambahan tentang Kenan selain data kelahiran dan kematiannya. Ia hidup 910 tahun. Akar kata namanya terkait dengan "sarang" dan "memiliki."</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Belas kasihan yang ditemukan secara tak terduga dalam diri Kenan menunjuk kepada <strong>Yesus Kristus — karunia Allah yang tak terduga bagi umat manusia.</strong> "Allah telah mengasihi kita dan memberikan karunia yang besar bernama Yesus Kristus." Ini tak terduga karena keselamatan diberikan tanpa jasa, sepenuhnya oleh kasih karunia. <em>(Kej 5:9–14)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park membaca nama ini sebagai <strong>"belas kasihan yang ditemukan secara tak terduga"</strong> — gerakan penyembahan yang dimulai dari generasi Enos menemukan rumah yang kokoh. Kenan mungkin merupakan karunia tak terduga dari Allah, yang melaluinya komunitas iman berakar dalam.</div>
+            <div class="cat-b-direction">Pdt. Park menghubungkan "karunia tak terduga" ini ke <strong>Yesus Kristus — karunia Allah yang tak terduga bagi umat manusia.</strong> Keselamatan diberikan tanpa jasa, sepenuhnya oleh kasih karunia <em>(Ef 2:8–9)</em>.</div>
           </div>
-          <div class="npark-quote">"Kenan mungkin merupakan karunia tak terduga dari Allah, seorang anak yang lahir dengan penuh sukacita melalui penyelenggaraan-Nya. Allah telah mengasihi kita dan memberikan karunia yang besar bernama Yesus Kristus."<cite>Abraham Park, hal. 105</cite></div>
+
+          <div class="npark-quote">"Kenan mungkin merupakan karunia tak terduga dari Allah, seorang anak yang lahir dengan penuh sukacita melalui penyelenggaraan-Nya."<cite>Abraham Park, hal. 105</cite></div>
         </div>
       </div>
     </div>
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 5. MAHALALEEL -->
-  <div class="name-row" id="r4" onclick="tog(4)">
+  <!-- ═══════════════════ 5. MAHALALEEL ═══════════════════ -->
+  <div class="name-row" id="r4" onclick="tog(4)" role="button" aria-expanded="false" aria-label="Mahalaleel — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc4">V</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -738,20 +795,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Mahalaleel adalah kata majemuk: <em>mahalal</em> (puji) + <em>El</em> (Allah). Artinya <strong>"puji-pujian kepada Allah"</strong> atau <strong>"Allah terpuji."</strong> Tindakan penyembahan resmi yang dimulai Enos berkembang lebih jauh menjadi pujian jemaat — penyembahan yang penuh kemuliaan di mana Allah berdiam.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Hanya Allah, yang menguasai seluruh sejarah, yang layak menerima pujian sejati. <strong>Pujian adalah kekuatan yang melepaskan kuasa Allah</strong> — ia merobohkan tembok Yerikho, mengusir roh-roh jahat, membuka pintu penjara. Nama Mahalaleel mengakui bahwa Allah saja yang berhak menerima segala kemuliaan.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:12–17</strong> · Kata Ibrani: <em>mahalal'el</em> (מַהֲלַלְאֵל) — kata majemuk: <em>mahalal</em> (puji) + <em>El</em> (Allah)</div>
+            <div class="cat-a-content">Nama ini secara leksikal berarti <strong>"puji-pujian kepada Allah"</strong> atau <strong>"Allah terpuji."</strong> Mahalaleel lahir saat Kenan berusia 70 tahun. Ia hidup 895 tahun. Seperti Kenan, teks Kejadian 5 tidak mencatat narasi tambahan tentang kehidupannya.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Pujian yang terjalin dalam nama ini menemukan tujuan tertingginya di dalam Kristus. Wahyu 5:12 — <strong>"Selayaklah Anak Domba yang telah disembelih itu, untuk menerima kuasa, dan kekayaan, dan hikmat, dan kekuatan, dan hormat, dan kemuliaan, dan puji-pujian!"</strong> Segala puji bermuara kepada-Nya. <em>(Why 5:12; 19:1–5)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park membaca nama ini sebagai bukti bahwa penyembahan yang dimulai dari generasi Enos <strong>berkembang menjadi pujian jemaat.</strong> Hanya Allah, yang menguasai seluruh sejarah, yang layak menerima pujian sejati. Nama Mahalaleel mengakui bahwa Allah saja yang berhak menerima segala kemuliaan.</div>
+            <div class="cat-b-direction">Pdt. Park mengarahkan pujian ini ke klimaksnya: <strong>"Selayaklah Anak Domba yang telah disembelih itu, untuk menerima kuasa, dan kekayaan, dan hikmat, dan kekuatan, dan hormat, dan kemuliaan, dan puji-pujian!"</strong> <em>(Why 5:12; 19:1–5)</em></div>
           </div>
+
           <div class="npark-quote">"Hanya Allah, yang menguasai seluruh sejarah, yang layak menerima pujian dan penyembahan sejati."<cite>Abraham Park, hal. 107</cite></div>
         </div>
       </div>
@@ -759,8 +815,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 6. YARED -->
-  <div class="name-row" id="r5" onclick="tog(5)">
+  <!-- ═══════════════════ 6. YARED ═══════════════════ -->
+  <div class="name-row" id="r5" onclick="tog(5)" role="button" aria-expanded="false" aria-label="Yared — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc5">VI</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -772,20 +828,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Yared berasal dari kata Ibrani yang berarti <strong>"membawa turun," "mengangkut,"</strong> atau "meletakkan ke bawah." Gerakan rohani untuk memuji Allah tidak terbatas pada segelintir orang, melainkan sudah meluas — praktik penyembahan telah berhasil diturunkan dari generasi ke generasi.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Makna alternatif Yared adalah <strong>"keturunan"</strong> — menunjuk kepada kerinduan akan benih perempuan. Nama ini mengandung harapan yang tertanam dalam akarnya: bahwa Allah, yang layak menerima segala puji, <em>akan turun</em> ke dunia ini dan menyelamatkan umat manusia dari bawah.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:15–20</strong> · Kata Ibrani: <em>yered</em> (יֶרֶד) — dari akar <em>yarad</em>, "turun," "membawa turun"</div>
+            <div class="cat-a-content">Yared lahir saat Mahalaleel berusia 65 tahun. Ia hidup <strong>962 tahun</strong> — usia kedua terpanjang dalam seluruh silsilah, hanya di bawah Metusalah. Arti dasar namanya adalah "turun" atau "membawa turun."</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Makna "datang ke bawah" mengantisipasi Inkarnasi — <strong>"Firman itu telah menjadi manusia dan diam di antara kita."</strong> Allah turun. Harapan yang tertanam dalam nama Yared digenapi ketika Yesus Kristus, Firman yang berinkarnasi, datang ke dunia ini. <em>(Yoh 1:14; Kej 5:15–20)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park membaca nama ini dalam dua arah: pertama, bahwa praktik penyembahan telah <strong>berhasil diturunkan dari generasi ke generasi.</strong> Kedua, makna alternatif "keturunan" — menunjuk kepada kerinduan akan benih perempuan yang dijanjikan. Nama ini mengandung harapan bahwa Allah <em>akan turun</em> ke dunia.</div>
+            <div class="cat-b-direction">Pdt. Park menghubungkan "turun" dengan Inkarnasi — <strong>"Firman itu telah menjadi manusia dan diam di antara kita"</strong> <em>(Yoh 1:14)</em>. Harapan yang tertanam dalam nama Yared digenapi ketika Yesus Kristus datang ke dunia.</div>
           </div>
+
           <div class="npark-quote">"Kerinduan akan benih perempuan itu juga terlihat dari makna alternatif nama Yared: 'keturunan.' Sebagai penggenapan harapan ini, Yesus Kristus, Firman yang berinkarnasi, datang ke dunia ini dan diam di antara umat manusia."<cite>Abraham Park, hal. 110</cite></div>
         </div>
       </div>
@@ -793,8 +848,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 7. HENOKH -->
-  <div class="name-row" id="r6" onclick="tog(6)">
+  <!-- ═══════════════════ 7. HENOKH ═══════════════════ -->
+  <div class="name-row" id="r6" onclick="tog(6)" role="button" aria-expanded="false" aria-label="Henokh — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc6">VII</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -806,20 +861,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Henokh adalah bentuk kata benda dari kata kerja yang berarti "mempersembahkan." Arti yang paling umum adalah <strong>"yang dipersembahkan"</strong> dan <strong>"yang dikuduskan."</strong> Akarnya berarti "menginspirasi" atau "mengajar." Yared menamakan anaknya "yang dikuduskan" karena keinginan untuk sepenuhnya menguduskannya bagi Allah sebagai buah sulung kehidupan imannya.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Henokh berjalan bersama Allah selama 300 tahun dan <strong>tidak mengalami kematian</strong> — "Allah mengambil dia." Dalam silsilah yang delapan kali ditandai dengan frasa "lalu ia mati," hanya Henokhlah yang memecah pola itu. Ia mendemonstrasikan kehidupan kekal yang seharusnya mungkin jika Adam tidak berdosa.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:21–24</strong> · Kata Ibrani: <em>chanokh</em> (חֲנוֹךְ) — dari <em>chanak</em>, "mempersembahkan," "menginisiasi"</div>
+            <div class="cat-a-content">Henokh hidup 365 tahun. Arti paling umum namanya: <strong>"yang dipersembahkan," "yang dikuduskan."</strong> Teks mencatat sesuatu yang unik: "Henokh berjalan dengan Allah, lalu ia tidak ada lagi, sebab ia telah diambil oleh Allah" <em>(Kej 5:24)</em>. Dalam silsilah yang delapan kali ditandai "lalu ia mati," <strong>hanya Henokh yang tidak mati.</strong></div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Henokh adalah <strong>gambaran awal Yesus Kristus, Anak Domba yang sepenuhnya dikuduskan di hadapan Allah</strong> untuk mati di atas kayu salib sebagai korban pendamaian. Dan kemenangannya atas kematian menunjuk kepada kebangkitan Kristus — Dia yang selamanya mengalahkan kuasa kematian bagi semua yang percaya. <em>(Kej 5:21–24; Yoh 1:29; 1 Kor 5:7)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park mencatat bahwa Henokh berjalan bersama Allah selama 300 tahun — dimulai setelah kelahiran Metusalah — dan melihat ini sebagai buah dari <strong>308 tahun hidup bersama Adam.</strong> Yared menamakan anaknya "yang dikuduskan" karena keinginan untuk sepenuhnya menguduskannya bagi Allah. Henokh mendemonstrasikan kehidupan kekal yang seharusnya mungkin jika Adam tidak berdosa.</div>
+            <div class="cat-b-direction">Pdt. Park membaca Henokh sebagai <strong>gambaran awal Yesus Kristus, Anak Domba yang sepenuhnya dikuduskan di hadapan Allah</strong> — dan kemenangannya atas kematian menunjuk kepada kebangkitan Kristus. <em>(Yoh 1:29; 1 Kor 5:7)</em></div>
           </div>
+
           <div class="npark-quote">"Henokh adalah gambaran awal Yesus Kristus, Anak Domba yang sepenuhnya dikuduskan di hadapan Allah untuk mati di atas kayu salib sebagai korban pendamaian bagi dosa umat manusia."<cite>Abraham Park, hal. 113</cite></div>
         </div>
       </div>
@@ -827,8 +881,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 8. METUSALAH -->
-  <div class="name-row" id="r7" onclick="tog(7)">
+  <!-- ═══════════════════ 8. METUSALAH ═══════════════════ -->
+  <div class="name-row" id="r7" onclick="tog(7)" role="button" aria-expanded="false" aria-label="Metusalah — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc7">VIII</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -840,20 +894,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Metusalah berarti <strong>"ketika ia mati, itulah yang akan datang."</strong> Henokh menerima ini sebagai wahyu ilahi saat kelahiran anaknya — air bah akan datang setelah kematian Metusalah. Ia hidup 969 tahun, paling panjang di antara semua manusia, dan meninggal pada tahun yang sama ketika air bah datang.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Henokh menamakan anaknya sesuai Firman <strong>untuk mempersiapkan iman yang siap menghadapi akhir zaman.</strong> Kesadaran akan penghakiman yang akan datang — yang terkandung dalam nama yang dipanggil Metusalah setiap hari — mendorong Henokh untuk berjalan bersama Allah. Kelahiran Metusalah adalah wahyu dan tanda Allah tentang penghakiman melalui air bah.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:25–27</strong> · Kata Ibrani: <em>methushelach</em> (מְתוּשֶׁלַח) — "ketika ia mati, itulah yang akan datang"</div>
+            <div class="cat-a-content">Metusalah hidup <strong>969 tahun</strong> — manusia yang paling panjang umurnya dalam catatan Alkitab. Hitungan yang bisa dicek sendiri: Metusalah berumur 187 tahun saat Lamekh lahir; Lamekh berumur 182 saat Nuh lahir; air bah datang saat Nuh berumur 600. Jadi: <strong>187 + 182 + 600 = 969</strong> — tepat tahun kematian Metusalah dan tahun air bah.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Penghakiman yang tertulis dalam nama Metusalah pada akhirnya menunjuk kepada <strong>penghakiman terakhir</strong> yang akan ditanggung Kristus di atas kayu salib — dan kepada hari ketika Ia akan menghakimi semua orang. Umur panjangnya berbicara tentang kesabaran Allah: setiap tahun adalah kasih karunia yang diperpanjang. <strong>Allah tidak lalai, melainkan sabar terhadap semua orang.</strong> <em>(2 Pet 3:9; Kej 5:25–27; 7:11)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park melihat bahwa Henokh menerima wahyu ilahi saat kelahiran Metusalah — <strong>air bah akan datang setelah kematian anak ini.</strong> Kesadaran akan penghakiman inilah yang mendorong Henokh berjalan bersama Allah. Dan setiap tahun kehidupan Metusalah yang panjang adalah kasih karunia yang diperpanjang.</div>
+            <div class="cat-b-direction">Pdt. Park mengarahkan ini ke dua arah: penghakiman yang akhirnya <strong>ditanggung Kristus di atas kayu salib,</strong> dan kesabaran Allah — <strong>"Ia sabar terhadap kamu, karena Ia menghendaki supaya jangan ada yang binasa"</strong> <em>(2 Pet 3:9; Kej 7:11)</em>.</div>
           </div>
+
           <div class="npark-quote">"Kelahiran Metusalah adalah wahyu dan tanda Allah tentang penghakiman melalui air bah."<cite>Abraham Park, hal. 120</cite></div>
         </div>
       </div>
@@ -861,8 +914,8 @@ header { padding-top: 96px; }
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 9. LAMEKH -->
-  <div class="name-row" id="r8" onclick="tog(8)">
+  <!-- ═══════════════════ 9. LAMEKH ═══════════════════ -->
+  <div class="name-row" id="r8" onclick="tog(8)" role="button" aria-expanded="false" aria-label="Lamekh — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc8">IX</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -874,29 +927,28 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Lamekh dari garis keturunan Set adalah <strong>seorang pria saleh — seorang pria yang berdoa.</strong> Ia tidak memberontak kepada Allah di bawah tekanan penderitaan dan kesengsaraan; sebaliknya, hal-hal itu justru memotivasi imannya. Ia sepenuhnya bersandar kepada Allah dan berharap kutuk itu akan diangkat melalui anaknya.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Lamekh <strong>dengan sungguh-sungguh mengantisipasi kedatangan Mesias.</strong> Ia merindukan berakhirnya keadaan manusia yang berduka akibat kejatuhan dan pemulihan Eden. Ia berharap seseorang akan mengangkat vonis mati yang telah dijatuhkan kepada manusia dan membuka jalan kembali kepada Allah — lalu ia menamakan anaknya sesuai harapan itu.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:25–31</strong> · Kata Ibrani: <em>lemekh</em> (לֶמֶךְ) — "pemuda yang kuat," "yang berkuasa"</div>
+            <div class="cat-a-content">Lamekh dari garis Set (bukan Lamekh dari garis Kain di Kej 4:23). Ia hidup 777 tahun. Teks mencatat ucapannya secara langsung: <strong>"Anak ini akan memberi kita penghiburan dalam pekerjaan kita dan dalam usaha tangan kita yang berat karena tanah yang terkutuk oleh TUHAN"</strong> <em>(Kej 5:29)</em>. Ini satu dari sedikit ucapan langsung yang dicatat dalam silsilah Kejadian 5.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Pengakuan Lamekh — "Orang ini akan memberi kita penghiburan dalam pekerjaan kita dan dalam usaha tangan kita" — adalah <strong>nubuat Mesias yang langsung.</strong> Park mencatat bahwa ia mungkin mengira anaknya Nuh adalah Mesias. Ia keliru soal orangnya, tetapi tidak keliru soal kerinduannya — yang akhirnya digenapi dalam Kristus. <em>(Kej 5:29; Yes 9:6; Yoh 14:27)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park melihat Lamekh sebagai <strong>seorang pria saleh — seorang pria yang berdoa.</strong> Ia tidak memberontak di bawah tekanan penderitaan; sebaliknya, penderitaan justru memotivasi imannya. Ia <strong>mengantisipasi kedatangan Mesias</strong> — dan menamakan anaknya sesuai harapan itu.</div>
+            <div class="cat-b-direction">Pdt. Park mencatat bahwa Lamekh mungkin mengira Nuh sendiri adalah Mesias. <strong>Ia keliru soal orangnya, tetapi tidak keliru soal kerinduannya</strong> — yang akhirnya digenapi dalam Kristus. <em>(Kej 5:29; Yes 9:6; Yoh 14:27)</em></div>
           </div>
-          <div class="npark-quote">"Lamekh ini adalah seorang pria saleh. Ia tidak memberontak kepada Allah atau menyerah di bawah tekanan penderitaan dan kesengsaraan; sebaliknya, hal-hal itu justru memotivasi imannya. Ia sepenuhnya bersandar kepada Allah dan berharap kutuk itu akan diangkat melalui anaknya."<cite>Abraham Park, hal. 123</cite></div>
+
+          <div class="npark-quote">"Lamekh ini adalah seorang pria saleh. Ia tidak memberontak kepada Allah atau menyerah di bawah tekanan penderitaan dan kesengsaraan; sebaliknya, hal-hal itu justru memotivasi imannya."<cite>Abraham Park, hal. 123</cite></div>
         </div>
       </div>
     </div>
   </div>
   <div class="conn"><div class="conn-line"></div></div>
 
-  <!-- 10. NUH -->
-  <div class="name-row" id="r9" onclick="tog(9)">
+  <!-- ═══════════════════ 10. NUH ═══════════════════ -->
+  <div class="name-row" id="r9" onclick="tog(9)" role="button" aria-expanded="false" aria-label="Nuh — buka untuk mendengar namanya" tabindex="0">
     <div class="gnum"><div class="gcircle" id="gc9">X</div></div>
     <div class="ncard">
       <div class="ncard-top">
@@ -908,20 +960,19 @@ header { padding-top: 96px; }
       </div>
       <div class="ncard-body">
         <div class="ncard-inner">
-          <div class="ncols">
-            <div>
-              <div class="ncol-label">Nama Ini</div>
-              <div class="ncol-text">Nama Nuh berasal dari kata Ibrani yang berarti <strong>"menetap," "menenangkan,"</strong> atau <strong>"beristirahat."</strong> Makna turunannya adalah "Sabat," "istirahat," dan "penghiburan." Keturunan yang saleh merindukan dengan sungguh-sungguh penghiburan Allah melalui kelahiran anak ini.</div>
-            </div>
-            <div>
-              <div class="ncol-label">Imannya</div>
-              <div class="ncol-text">Nama ini adalah <strong>"cerminan dari penyelenggaraan penebusan yang baru dinyatakan Allah."</strong> Masa penderitaan yang panjang telah berakhir; kini saatnya bagi penghiburan dan istirahat Allah. Nuh adalah suatu tipe — bayangan awal — dari Sang Juru Selamat yang memberikan penghiburan sejati kepada bumi ini.</div>
-            </div>
+
+          <div class="cat-a">
+            <div class="cat-a-label">Dari Alkitab</div>
+            <div class="cat-a-ref"><strong>Kejadian 5:28–32</strong> · Kata Ibrani: <em>noach</em> (נֹחַ) — "menetap," "menenangkan," "beristirahat"</div>
+            <div class="cat-a-content">Nuh lahir saat Lamekh berusia 182 tahun. Nama ini diberikan oleh ayahnya dengan harapan eksplisit: penghiburan dari kutuk tanah <em>(Kej 5:29)</em>. Makna turunan: "Sabat," "istirahat." Nuh hidup 950 tahun. Ia menjadi tokoh sentral dalam narasi air bah <em>(Kej 6–9)</em>.</div>
           </div>
-          <div class="nprophecy">
-            <span class="nprophecy-label">Di mana ini bermuara</span>
-            <div class="nprophecy-text">Nuh adalah <strong>gambaran dari Yesus Kristus yang diutus Allah.</strong> Sebagaimana Nuh membawa keluarganya melewati penghakiman ke dalam dunia baru, Kristus membawa semua yang percaya kepada-Nya melewati penghakiman ke dalam kehidupan kekal. "Yesus Kristus adalah Dia yang memberikan penghiburan dan ketenangan sejati kepada bumi ini." <em>(Kej 5:29; Yes 9:6; Yoh 14:27)</em></div>
+
+          <div class="cat-b">
+            <div class="cat-b-label">Apa yang Pdt. Park lihat →</div>
+            <div class="cat-b-text">Pdt. Park membaca nama ini sebagai <strong>"cerminan dari penyelenggaraan penebusan yang baru dinyatakan Allah."</strong> Masa penderitaan yang panjang telah berakhir; kini saatnya bagi penghiburan dan istirahat Allah. Keturunan yang saleh merindukan penghiburan ini dengan sungguh-sungguh melalui kelahiran Nuh.</div>
+            <div class="cat-b-direction">Pdt. Park melihat Nuh sebagai <strong>gambaran dari Yesus Kristus yang diutus Allah.</strong> Sebagaimana Nuh membawa keluarganya melewati penghakiman ke dalam dunia baru, Kristus membawa semua yang percaya melewati penghakiman ke dalam kehidupan kekal. <em>(Kej 5:29; Yes 9:6; Yoh 14:27)</em></div>
           </div>
+
           <div class="npark-quote">"Nama ini adalah cerminan dari penyelenggaraan penebusan yang baru dinyatakan Allah. Masa penderitaan yang panjang telah berakhir; kini saatnya bagi penghiburan dan ketenangan Allah."<cite>Abraham Park, hal. 127</cite></div>
         </div>
       </div>
@@ -941,12 +992,12 @@ header { padding-top: 96px; }
   <div class="ref-box" id="rbox">
     <div class="ref-title">Sepuluh generasi.<br><em>Satu kesaksian yang tak terputus.</em></div>
     <div class="ref-body">
-      Ini bukan sekadar catatan tentang orang-orang yang hidup dan mati. Park menulis bahwa silsilah-silsilah ini disusun sedemikian rupa sehingga makna nama-nama yang tercatat akan membawa "harapan dan antisipasi tentang bagaimana janji penebusan akan terungkap dari generasi ke generasi."
+      Kejadian 5 mencatat sepuluh nama dengan angka-angka yang presisi — usia saat melahirkan, total umur, tahun kematian. Data ini bukan hiasan. Kamu bisa menghitung sendiri siapa yang hidup sezaman dengan siapa, dan menemukan hal-hal yang mengejutkan.
     </div>
     <div class="ref-body">
-      Setiap nama adalah doa yang diucapkan melintasi berabad-abad — dari iman seorang ayah, ke dalam identitas anaknya, menuju Juru Selamat yang akan datang yang tidak satu pun dari mereka melihat-Nya secara penuh. Bersama-sama mereka membentuk rantai perjalanan iman dari Adam hingga air bah — membuktikan bahwa Allah tidak pernah kehilangan benang yang Ia pegang.
+      Pdt. Park melihat setiap nama sebagai doa yang diucapkan melintasi berabad-abad — dari iman seorang ayah, ke dalam identitas anaknya, menuju Juru Selamat yang akan datang. Bersama-sama mereka membentuk rantai perjalanan iman dari Adam hingga air bah.
     </div>
-    <div class="ref-body" style="font-style:italic;color:#4a5050;border-left:3px solid rgba(23,167,157,0.3);padding-left:16px;margin-top:8px">
+    <div class="ref-question">
       Nama mana dari sepuluh ini yang paling kamu rasakan kehadirannya?
     </div>
 
@@ -967,16 +1018,29 @@ header { padding-top: 96px; }
     <button class="reset-btn" id="rbtn" onclick="resetAll()">↺ Mulai Lagi</button>
   </div>
 
+  <!-- Beyond Pdt. Park invitation -->
+  <div id="beyond-park" style="display:none;margin-top:28px;text-align:center">
+    <div style="padding:28px 24px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:12px;margin-bottom:12px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-accent);margin-bottom:8px">Kejar lebih jauh dari Pdt. Park</p>
+      <p style="font-family:'Lora',serif;font-size:15px;color:var(--mid);line-height:1.7;margin-bottom:4px">Pdt. Park melihat satu benang dalam nama-nama ini — benang penebusan menuju Kristus. Tapi nama-nama ini juga membuka pertanyaan lain:</p>
+      <p style="font-family:'Lora',serif;font-size:14px;font-style:italic;color:#4a5050;line-height:1.7;margin-top:8px">Mengapa usia mereka menurun drastis setelah air bah? Apakah ada pola dalam angka-angka itu? Apa yang terjadi di generasi-generasi yang teksnya "diam" — Kenan, Mahalaleel, Yared?</p>
+    </div>
+  </div>
+
   <!-- CTA after completion -->
-  <div id="next-cta" style="display:none;margin-top:28px;text-align:center">
+  <div id="next-cta" style="display:none;margin-top:16px;text-align:center">
     <div style="padding:28px 24px;background:#f0faf9;border:1px solid rgba(23,167,157,0.2);border-radius:12px;margin-bottom:12px">
       <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#17a79d;margin-bottom:6px">Kesepuluh nama sudah didengar</p>
-      <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;line-height:1.6">Sekarang baca mereka dalam konteks penuhnya — atau lihat di mana mereka berdiri dalam peta besar silsilah dari Adam ke Abraham.</p>
+      <p style="font-size:14px;color:#6d6e70;margin-bottom:20px;line-height:1.6">Lihat angka-angka di balik nama-nama ini di Kalkulator Kronologi, atau baca mereka dalam konteks penuh silsilah.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
-        <button onclick="window.location.href='reading-journey.html'" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:11px 22px;border-radius:8px;cursor:pointer">📖 Reading Companion — Bab 10</button>
-        <button onclick="window.location.href='two-rivers-timeline.html'" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:11px 22px;border-radius:8px;cursor:pointer">🌊 Two Rivers Timeline</button>
+        <a href="kalkulator-kronologi.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:11px 22px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">🔢 Kalkulator Kronologi</a>
+        <a href="kejadian-5-silsilah-adam.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#ffffff;background:#17a79d;border:none;padding:11px 22px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">📋 Silsilah Kej. 5</a>
       </div>
-      <button onclick="window.location.href='index.html'" style="font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:500;color:#6d6e70;background:transparent;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← Kembali ke Beranda</button>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
+        <a href="reading-journey.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:11px 22px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">📖 Pendamping Baca — Bab 10</a>
+        <a href="two-rivers-timeline.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:2px solid rgba(23,167,157,0.3);padding:11px 22px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center">🌊 Two Rivers Timeline</a>
+      </div>
+      <a href="index.html" style="font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:500;color:#6d6e70;background:transparent;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← Kembali ke Beranda</a>
     </div>
 
     <div style="padding:28px 24px;background:#ffffff;border:1px solid #e0e0e0;border-radius:12px">
@@ -1062,7 +1126,9 @@ function update() {
     prog.textContent = n + ' dari 10 nama didengar';
     btn.classList.remove('show');
   }
+  var beyond = document.getElementById('beyond-park');
   var cta = document.getElementById('next-cta');
+  if (beyond) beyond.style.display = (n === 10) ? 'block' : 'none';
   if (cta) cta.style.display = (n === 10) ? 'block' : 'none';
 }
 

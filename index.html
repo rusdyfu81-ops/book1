@@ -111,7 +111,7 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
 .all-tools-inner{max-width:600px;margin:0 auto}
 .section-title{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--bg2)}
 .all-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
-.mini-card{background:var(--white);border:1px solid var(--bg2);border-radius:10px;padding:16px 18px;cursor:pointer;transition:all .2s;display:block}
+.mini-card{background:var(--white);border:1px solid var(--bg2);border-radius:10px;padding:16px 18px;cursor:pointer;transition:all .2s;display:block;text-decoration:none;color:inherit}
 .mini-card:hover{border-color:var(--teal-b);box-shadow:0 2px 12px rgba(23,167,157,.1);transform:translateY(-1px)}
 .mini-icon{font-size:20px;margin-bottom:8px}
 .mini-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3}
@@ -140,14 +140,14 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
   <img src="Logo_Sejarah_Penebusan-03.png" alt="Sejarah Penebusan" class="nav-logo" onerror="this.style.display='none'">
   <div class="nav-divider"></div>
   <div class="nav-brand">The Genesis Genealogies</div>
-  <div class="nav-sub">— Abraham Park</div>
+  <div class="nav-sub">— Pdt. Abraham Park</div>
 </nav>
 
 <section class="hero">
   <div class="hero-tag">Ekosistem Digital</div>
   <h1 class="hero-title">Bukan untuk<br><span>mengerti buku.</span></h1>
-  <p class="hero-author">The Genesis Genealogies — Abraham Park</p>
-  <p class="hero-desc">Tujuannya adalah <strong>bertemu dengan Allah</strong> yang ada di balik buku ini.<br>Perbedaan ini menentukan segalanya.</p>
+  <p class="hero-author">The Genesis Genealogies — Pdt. Abraham Park</p>
+  <p class="hero-desc">Tujuannya adalah <strong>mengenal Allah</strong> yang ada di dalam Alkitab.</p>
   <p class="hero-note">"Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan demi keturunan." — Ulangan 32:7</p>
 
   <div class="progress-dashboard" id="progressDash">
@@ -198,14 +198,22 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
       <div class="panel-head-desc">Mulai dari gambaran besar. Lihat bagaimana Allah menjaga satu garis iman dari Adam sampai Abraham — melewati banjir, menara Babel, dan setiap generasi yang hampir putus — dan rasakan mengapa silsilah ini bukan daftar nama.</div>
     </div>
     <div class="tool-grid">
-      <div class="tool-card primary" onclick="go('two-rivers-timeline.html')">
+      <a class="tool-card primary" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;">
         <div class="tool-num">🌊</div>
         <div class="tool-info"><div class="tool-name">Two Rivers Timeline</div><div class="tool-desc">Peta visual silsilah dari Adam sampai Abraham — garis iman yang terus mengalir meski diganggu, dan garis yang memilih arah lain.</div><span class="tool-tag teal">Orientasi · 15 menit</span></div>
-      </div>
-      <div class="tool-card" onclick="go('names-as-prophecies.html')">
+      </a>
+      <a class="tool-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;">
         <div class="tool-num">📜</div>
         <div class="tool-info"><div class="tool-name">Sepuluh Nama, Satu Perjalanan</div><div class="tool-desc">Sepuluh nama dari Adam sampai Nuh — setiap nama adalah doa orang tua kepada anaknya.</div><span class="tool-tag teal">Bab 10 · 10 menit</span></div>
-      </div>
+      </a>
+      <a class="tool-card" href="kejadian-5-silsilah-adam.html" onclick="go('kejadian-5-silsilah-adam.html');return false;">
+        <div class="tool-num">📋</div>
+        <div class="tool-info"><div class="tool-name">Silsilah Adam — Kejadian 5</div><div class="tool-desc">Data lengkap umur dan tahun hidup sepuluh patriark — lihat polanya langsung dari Alkitab.</div><span class="tool-tag grey">Referensi Kej 5</span></div>
+      </a>
+      <a class="tool-card" href="kejadian-11-silsilah-nuh.html" onclick="go('kejadian-11-silsilah-nuh.html');return false;">
+        <div class="tool-num">🏛️</div>
+        <div class="tool-info"><div class="tool-name">Silsilah Nuh — Kejadian 11</div><div class="tool-desc">Dari Sem sampai Abraham — pasca-Banjir, menuju Babel dan seterusnya.</div><span class="tool-tag grey">Referensi Kej 11</span></div>
+      </a>
     </div>
     <div class="panel-note"><p>Setelah melihat gambaran besar, kamu bisa memutuskan apakah ingin membaca bukunya. Jika ya, mulai dengan <strong>Reading Companion</strong> — bukan buku sendirian.</p></div>
     <div class="video-coming-soon">
@@ -219,13 +227,14 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
   <div class="tool-panel" id="panel-b">
     <div class="panel-head">
       <div class="panel-head-label">Untuk kamu yang sedang membaca</div>
-      <div class="panel-head-title">Buku Park butuh pendamping</div>
-      <div class="panel-head-desc">Bukan untuk menggantikan buku — tapi untuk menemaninya. Setiap bab punya peta argumen, pertanyaan sebelum membaca, dan satu pertanyaan yang tidak bisa dijawab secara intelektual.</div>
+      <div class="panel-head-title">Alkitab adalah tujuannya — Pdt. Park adalah teman baca</div>
+      <div class="panel-head-desc">Tools ini hadir bukan untuk menggantikan buku — tapi untuk menemanimu masuk lebih dalam ke Alkitab. Setiap bab punya peta argumen, pertanyaan sebelum membaca, dan satu pertanyaan yang tidak bisa dijawab secara intelektual.</div>
     </div>
     <div class="tool-grid">
-      <div class="tool-card primary" onclick="go('reading-journey.html')"><div class="tool-num">🗺️</div><div class="tool-info"><div class="tool-name">Reading Companion</div><div class="tool-desc">14 bab lengkap. Tiga pertanyaan sebelum membaca, satu pertanyaan sesudah. Progress tersimpan otomatis.</div><span class="tool-tag teal">Pendamping Utama · 14 Bab</span></div></div>
-      <div class="tool-card" onclick="go('two-rivers-timeline.html')"><div class="tool-num">🌊</div><div class="tool-info"><div class="tool-name">Two Rivers Timeline</div><div class="tool-desc">Referensi visual saat membaca Bab 8–13.</div><span class="tool-tag grey">Referensi Visual</span></div></div>
-      <div class="tool-card" onclick="go('names-as-prophecies.html')"><div class="tool-num">📜</div><div class="tool-info"><div class="tool-name">Sepuluh Nama, Satu Perjalanan</div><div class="tool-desc">Pendamping khusus untuk Bab 10.</div><span class="tool-tag grey">Referensi Bab 10</span></div></div>
+      <a class="tool-card primary" href="reading-journey.html" onclick="go('reading-journey.html');return false;"><div class="tool-num">🗺️</div><div class="tool-info"><div class="tool-name">Reading Companion</div><div class="tool-desc">14 bab lengkap. Tiga pertanyaan sebelum membaca, satu pertanyaan sesudah. Progress tersimpan otomatis.</div><span class="tool-tag teal">Pendamping Utama · 14 Bab</span></div></a>
+      <a class="tool-card" href="kalkulator-kronologi.html" onclick="go('kalkulator-kronologi.html');return false;"><div class="tool-num">🔢</div><div class="tool-info"><div class="tool-name">Kalkulator Kronologi</div><div class="tool-desc">Hitung sendiri tahun hidup para patriark dan lihat siapa yang hidup sezaman dengan siapa.</div><span class="tool-tag grey">Kalkulator Interaktif</span></div></a>
+      <a class="tool-card" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;"><div class="tool-num">🌊</div><div class="tool-info"><div class="tool-name">Two Rivers Timeline</div><div class="tool-desc">Referensi visual saat membaca Bab 8–13.</div><span class="tool-tag grey">Referensi Visual</span></div></a>
+      <a class="tool-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;"><div class="tool-num">📜</div><div class="tool-info"><div class="tool-name">Sepuluh Nama, Satu Perjalanan</div><div class="tool-desc">Pendamping khusus untuk Bab 10.</div><span class="tool-tag grey">Referensi Bab 10</span></div></a>
     </div>
   </div>
 
@@ -233,13 +242,11 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
   <div class="tool-panel" id="panel-c">
     <div class="panel-head">
       <div class="panel-head-label">Untuk kamu yang sudah selesai membaca</div>
-      <div class="panel-head-title">Mengerti belum berarti berubah</div>
-      <div class="panel-head-desc">Ini adalah gap yang paling berbahaya. Dua tools berikut dirancang khusus untuk menggerakkan dari pemahaman intelektual ke pergumulan yang nyata.</div>
+      <div class="panel-head-title">Sebelum melangkah lebih jauh — berhenti sejenak</div>
+      <div class="panel-head-desc">Tidak semua orang mau duduk cukup lama untuk melihat apa yang ada di balik silsilah-silsilah ini. Kamu sudah melakukannya. Luangkan satu menit untuk mencatat apa yang terjadi dalam dirimu.</div>
     </div>
-    <div class="panel-note"><p><strong>Urutan yang disarankan:</strong> Mulai dengan Self-Assessment untuk melihat di mana kamu berada — lalu lanjut ke Jurnal Padang Gurun selama 8 minggu.</p></div>
     <div class="tool-grid">
-      <div class="tool-card primary" onclick="go('self-assessment.html')"><div class="tool-num">🪞</div><div class="tool-info"><div class="tool-name">Di Mana Kamu?</div><div class="tool-desc">Empat pertanyaan. Empat pemisahan Abraham. Tidak ada skor. Hanya kejujuran.</div><span class="tool-tag teal">Self-Assessment · 20 menit</span></div></div>
-      <div class="tool-card" onclick="go('jurnal-padang-gurun.html')"><div class="tool-num">🏕️</div><div class="tool-info"><div class="tool-name">Jurnal Padang Gurun</div><div class="tool-desc">8 minggu, 4 fase perjalanan. Setiap minggu terkunci sampai kamu menulis.</div><span class="tool-tag green">Jurnal · 8 Minggu</span></div></div>
+      <a class="tool-card primary" href="cermin-setelah-buku.html" onclick="go('cermin-setelah-buku.html');return false;"><div class="tool-num">🪞</div><div class="tool-info"><div class="tool-name">Cermin Setelah Buku</div><div class="tool-desc">Refleksi singkat: apa yang kamu alami, apa yang berubah, dan langkah selanjutnya yang bisa kamu ambil.</div><span class="tool-tag teal">Refleksi · 10 menit</span></div></a>
     </div>
   </div>
 </section>
@@ -248,12 +255,13 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
   <div class="all-tools-inner">
     <div class="section-title">Semua Tools dalam Ekosistem Ini</div>
     <div class="all-grid">
-      <div class="mini-card" onclick="go('two-rivers-timeline.html')"><div class="mini-icon">🌊</div><div class="mini-name">Two Rivers Timeline</div><div class="mini-desc">Garis iman yang terus mengalir — dan apa yang terus mengganggunya</div></div>
-      <div class="mini-card" onclick="go('reading-journey.html')"><div class="mini-icon">🗺️</div><div class="mini-name">Reading Companion</div><div class="mini-desc">Pendamping 14 bab buku Park</div></div>
-      <div class="mini-card" onclick="go('names-as-prophecies.html')"><div class="mini-icon">📜</div><div class="mini-name">Sepuluh Nama</div><div class="mini-desc">Sepuluh doa orang tua — dari Adam sampai Nuh</div></div>
-      <div class="mini-card" onclick="go('self-assessment.html')"><div class="mini-icon">🪞</div><div class="mini-name">Di Mana Kamu?</div><div class="mini-desc">Empat pemisahan Abraham</div></div>
-      <div class="mini-card" onclick="go('jurnal-padang-gurun.html')"><div class="mini-icon">🏕️</div><div class="mini-name">Jurnal Padang Gurun</div><div class="mini-desc">Perjalanan 8 minggu</div></div>
-      <div class="mini-card" onclick="go('two-rivers-timeline.html')"><div class="mini-icon">📊</div><div class="mini-name">Grafik Umur Patriark</div><div class="mini-desc">Tab "Lifespans" di Two Rivers</div></div>
+      <a class="mini-card" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;"><div class="mini-icon">🌊</div><div class="mini-name">Two Rivers Timeline</div><div class="mini-desc">Garis iman yang terus mengalir — dan apa yang terus mengganggunya</div></a>
+      <a class="mini-card" href="reading-journey.html" onclick="go('reading-journey.html');return false;"><div class="mini-icon">🗺️</div><div class="mini-name">Reading Companion</div><div class="mini-desc">Pendamping 14 bab buku Pdt. Park</div></a>
+      <a class="mini-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;"><div class="mini-icon">📜</div><div class="mini-name">Sepuluh Nama</div><div class="mini-desc">Sepuluh doa orang tua — dari Adam sampai Nuh</div></a>
+      <a class="mini-card" href="cermin-setelah-buku.html" onclick="go('cermin-setelah-buku.html');return false;"><div class="mini-icon">🪞</div><div class="mini-name">Cermin Setelah Buku</div><div class="mini-desc">Refleksi singkat setelah selesai membaca</div></a>
+      <a class="mini-card" href="kalkulator-kronologi.html" onclick="go('kalkulator-kronologi.html');return false;"><div class="mini-icon">🔢</div><div class="mini-name">Kalkulator Kronologi</div><div class="mini-desc">Hitung sendiri umur dan tumpang tindih para patriark</div></a>
+      <a class="mini-card" href="kejadian-5-silsilah-adam.html" onclick="go('kejadian-5-silsilah-adam.html');return false;"><div class="mini-icon">📋</div><div class="mini-name">Silsilah Adam — Kej 5</div><div class="mini-desc">Sepuluh patriark pra-Banjir, data lengkap dari Alkitab</div></a>
+      <a class="mini-card" href="kejadian-11-silsilah-nuh.html" onclick="go('kejadian-11-silsilah-nuh.html');return false;"><div class="mini-icon">🏛️</div><div class="mini-name">Silsilah Nuh — Kej 11</div><div class="mini-desc">Dari Sem sampai Abraham, pasca-Banjir</div></a>
     </div>
     <div class="verse-footer">
       <p class="verse-text">"Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan demi keturunan. Tanyakanlah kepada bapamu, maka ia akan memberitahukan kepadamu."</p>
@@ -264,14 +272,12 @@ body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(
 
 <script>
 function readEcosystemProgress(){
-  var p={hasAny:false,reading:null,assessment:null,journal:null,resumeUrl:null};
+  var p={hasAny:false,reading:null,cermin:null,resumeUrl:null};
   try{
     var rc=localStorage.getItem('genesis-companion-v1');
     if(rc){var d=JSON.parse(rc),n=0;if(d.read)for(var k in d.read)if(d.read[k])n++;if(n>0){p.reading={done:n,total:14};p.hasAny=true;p.resumeUrl='reading-journey.html'}}
-    var sa=localStorage.getItem('genesis-assessment-v1');
-    if(sa){var d=JSON.parse(sa),n=0;if(d.progress)for(var k in d.progress)if(d.progress[k])n++;if(n>0){p.assessment={done:n,total:4};p.hasAny=true;if(!p.resumeUrl)p.resumeUrl='self-assessment.html'}}
-    var jp=localStorage.getItem('genesis-journal-v1');
-    if(jp){var d=JSON.parse(jp),n=0;if(d.entries)for(var i=0;i<8;i++)if(d.entries[i]&&d.entries[i].trim().length>=20)n++;if(n>0){p.journal={done:n,total:8};p.hasAny=true;p.resumeUrl='jurnal-padang-gurun.html'}}
+    var cm=localStorage.getItem('sp-buku1-cermin-v1');
+    if(cm){var d=JSON.parse(cm);if(d&&(d.sk1||d.sk2||d.sk3||d.momen)){p.cermin=true;p.hasAny=true;if(!p.resumeUrl)p.resumeUrl='cermin-setelah-buku.html'}}
   }catch(e){}
   return p;
 }
@@ -285,8 +291,7 @@ function renderProgressDashboard(){
   var items=document.getElementById('progressItems');
   var html='';
   if(p.reading){var pct=Math.round((p.reading.done/p.reading.total)*100);html+='<div class="progress-item"><div class="progress-item-label">Reading Companion</div><div class="progress-item-value">'+p.reading.done+' / '+p.reading.total+'</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:'+pct+'%"></div></div></div>'}
-  if(p.assessment){var pct=Math.round((p.assessment.done/p.assessment.total)*100);html+='<div class="progress-item"><div class="progress-item-label">Self-Assessment</div><div class="progress-item-value">'+p.assessment.done+' / '+p.assessment.total+'</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:'+pct+'%"></div></div></div>'}
-  if(p.journal){var pct=Math.round((p.journal.done/p.journal.total)*100);html+='<div class="progress-item"><div class="progress-item-label">Jurnal Padang Gurun</div><div class="progress-item-value">'+p.journal.done+' / '+p.journal.total+'</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:'+pct+'%"></div></div></div>'}
+  if(p.cermin){html+='<div class="progress-item"><div class="progress-item-label">Cermin Setelah Buku</div><div class="progress-item-value">✓</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:100%"></div></div></div>'}
   items.innerHTML=html;
   document.getElementById('resumeBtn').setAttribute('data-url',p.resumeUrl);
 }

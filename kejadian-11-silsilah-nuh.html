@@ -319,11 +319,13 @@ body.dark ::-webkit-scrollbar-thumb:hover { background:var(--teal); }
 </head>
 <body>
 <!-- UNIFIED NAV -->
-<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;background:#fff;border-bottom:1px solid #e8e9ea;display:flex;align-items:center;padding:0 16px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px;font-family:'Nunito Sans',-apple-system,sans-serif;overflow-x:auto">
   <img src="Logo_Sejarah_Penebusan-03.png" alt="SP" style="height:26px;width:auto;flex-shrink:0" onerror="this.style.display='none'">
   <div style="width:1px;height:22px;background:#e8e9ea;flex-shrink:0"></div>
   <span style="font-size:13px;font-weight:700;color:#17a79d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1">Kejadian 11 — Silsilah Nuh</span>
-  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s">Beranda</a>
+  <a href="kejadian-5-silsilah-adam.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 12px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Kej. 5</a>
+  <a href="kalkulator-kronologi.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 12px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Kalkulator</a>
+  <a href="index.html" style="font-size:11px;font-weight:600;color:#6d6e70;background:#f4f7f7;border:1px solid #e8e9ea;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0">Beranda</a>
 </nav>
 
 
@@ -428,6 +430,11 @@ body.dark ::-webkit-scrollbar-thumb:hover { background:var(--teal); }
   Sumber: Abraham Park, <em>The Genesis Genealogies</em> &nbsp;·&nbsp;
   Klik nama untuk detail
 </div>
+<div style="max-width:1100px;margin:0 auto;padding:0 24px 40px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+  <a href="kejadian-5-silsilah-adam.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:1.5px solid rgba(23,167,157,0.25);padding:10px 20px;border-radius:8px;text-decoration:none">← Silsilah Kej. 5</a>
+  <a href="names-as-prophecies.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:1.5px solid rgba(23,167,157,0.25);padding:10px 20px;border-radius:8px;text-decoration:none">Makna Sepuluh Nama →</a>
+  <a href="kalkulator-kronologi.html" style="font-family:'Nunito Sans',sans-serif;font-size:13px;font-weight:600;color:#17a79d;background:rgba(23,167,157,0.08);border:1.5px solid rgba(23,167,157,0.25);padding:10px 20px;border-radius:8px;text-decoration:none">Kalkulator Kronologi →</a>
+</div>
 
 <!-- Card -->
 <div class="card-overlay" id="overlay" onclick="maybeClose(event)">
@@ -464,11 +471,10 @@ const PEOPLE = [
     ref:"Kejadian 5:32; 6–9; 9:29", born:0, son:502, total:950,
     color:"#2563EB", colorTo:"#1e40af",
     notes:[
-      "<p>Nama Nuh berasal dari kata Ibrani <em>nuah</em> — \"beristirahat\", \"tenang\", \"penghiburan\". Lamekh memberi nama ini sebagai ungkapan iman: <em>\"Inilah yang akan memberi kita penghiburan dari pekerjaan kita\"</em> (Kej 5:29). Lamekh mengira Nuh adalah Mesias yang dijanjikan.</p>",
-      "<p class='highlight-noah'>📖 <strong>Abraham Park:</strong> Nuh adalah <em>tipe (bayangan)</em> Yesus Kristus — ia mempersiapkan bahtera dan menyelamatkan keluarganya dari hukuman Allah, seperti Kristus yang menyelamatkan umat-Nya. Nama Nuh juga mengandung makna Sabat — istirahat sejati.</p>",
-      "<p>Nuh memulai membangun bahtera setelah ketiga anaknya menikah, sekitar usia 500+ tahun. Pembangunan bahtera diperkirakan memakan waktu <strong>70–80 tahun</strong> (bukan 120 tahun seperti sering dipercaya). Selama itu Nuh menjadi <em>\"pemberita kebenaran\"</em> (2 Ptr 2:5) di tengah dunia yang penuh kejahatan.</p>",
-      "<p class='highlight-noah'>⚡ <strong>Fakta menakjubkan:</strong> Abraham lahir (Thn 892) ketika Nuh berumur <strong>892 tahun</strong> — mereka hidup bersamaan selama 58 tahun! Nuh wafat pada Thn 950, saat Abraham berumur 58 tahun. Iman Nuh kemungkinan besar mempengaruhi Abraham secara langsung.</p>",
-      "<p>Setelah banjir, Allah membuat <strong>perjanjian pelangi</strong> dengan Nuh sebagai nenek moyang kedua umat manusia (Kej 9:8–17). Nuh hidup 350 tahun setelah banjir dan meninggal pada umur 950 tahun.</p>"
+      "<p>Nama Nuh berasal dari kata Ibrani <em>nuah</em> — \"beristirahat\", \"tenang\", \"penghiburan\". Lamekh memberi nama ini sebagai ungkapan iman: <em>\"Inilah yang akan memberi kita penghiburan dari pekerjaan kita\"</em> (Kej 5:29).</p>",
+      "<p class='highlight-noah'>⚡ <strong>Fakta menakjubkan:</strong> Abraham lahir (Thn 892) ketika Nuh berumur <strong>892 tahun</strong> — mereka hidup bersamaan selama 58 tahun! Nuh wafat pada Thn 950, saat Abraham berumur 58 tahun.</p>",
+      "<p>Setelah banjir, Allah membuat <strong>perjanjian pelangi</strong> dengan Nuh sebagai nenek moyang kedua umat manusia (Kej 9:8–17). Nuh hidup 350 tahun setelah banjir dan meninggal pada umur 950 tahun.</p>",
+      "<p class='highlight-noah'><strong>Apa yang Pdt. Park lihat:</strong> Nuh adalah <em>tipe (bayangan)</em> Yesus Kristus — ia mempersiapkan bahtera dan menyelamatkan keluarganya dari hukuman Allah, seperti Kristus yang menyelamatkan umat-Nya. Nama Nuh juga mengandung makna Sabat — istirahat sejati. Pdt. Park berpendapat bahwa pembangunan bahtera memakan waktu sekitar <strong>70–80 tahun</strong>, bukan 120 tahun seperti sering dipercaya (interpretasi Pdt. Park, lihat Excursus 3 di buku).</p>"
     ],
     tags:["noah"]
   },
@@ -478,10 +484,10 @@ const PEOPLE = [
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
       "<p>Sem lahir 98 tahun <em>sebelum</em> banjir (Nuh berumur 502 tahun). Saat banjir (Thn 600), Sem berumur 98 tahun. Dua tahun setelah banjir (Thn 602) Sem memperanakkan Arpakhsad.</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Nama Sem berarti \"kehormatan\" dan \"ketenaran\" — bukan untuk kemuliaan diri sendiri, melainkan untuk memuliakan nama Allah. Nuh bernubuat: <em>\"Terpujilah TUHAN, Allah Sem\"</em> (Kej 9:26). Inilah satu-satunya kasus di mana Allah disebut sebagai Allah seseorang dalam Kejadian pra-Abraham.</p>",
       "<p>Sem menunjukkan hormat kepada ayahnya (Nuh) saat Ham mempermalukannya. Tindakan Sem yang berjalan mundur untuk menutupi Nuh mencerminkan kedalaman iman dan hormatnya (Kej 9:23).</p>",
-      "<p class='highlight'>⚡ <strong>Fakta luar biasa:</strong> Sem hidup 600 tahun — ia masih hidup ketika Abraham berumur <strong>150 tahun</strong>! Sem adalah jembatan hidup antara zaman Nuh dan zaman Abraham. Abraham mungkin mengenal Sem secara langsung dan menerima warisn iman dari padanya.</p>",
-      "<p>Allah Sem → Allah Eber → Allah Abraham: inilah alur pewarisan iman sepanjang silsilah ini (Kej 9:26; 10:21; Kel 3:6).</p>"
+      "<p class='highlight'>⚡ <strong>Fakta luar biasa:</strong> Sem hidup 600 tahun — ia masih hidup ketika Abraham berumur <strong>150 tahun</strong>! Sem adalah jembatan hidup antara zaman Nuh dan zaman Abraham.</p>",
+      "<p>Allah Sem → Allah Eber → Allah Abraham: inilah alur pewarisan iman sepanjang silsilah ini (Kej 9:26; 10:21; Kel 3:6).</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Nama Sem berarti \"kehormatan\" dan \"ketenaran\" — bukan untuk kemuliaan diri sendiri, melainkan untuk memuliakan nama Allah. Nuh bernubuat: <em>\"Terpujilah TUHAN, Allah Sem\"</em> (Kej 9:26). Inilah satu-satunya kasus di mana Allah disebut sebagai Allah seseorang dalam Kejadian pra-Abraham.</p>"
     ],
     tags:["oldest"]
   },
@@ -490,9 +496,9 @@ const PEOPLE = [
     ref:"Kejadian 11:12–13", born:602, son:35, total:438,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p>Arpakhsad adalah anak ketiga Sem — bukan anak pertama maupun kedua. Anak pertama (Elam) menjadi nenek moyang bangsa Elam yang sering menyerang Israel; anak kedua (Asur) menjadi nenek moyang bangsa Asyur yang menghancurkan Samaria. Allah memilih anak ketiga untuk meneruskan garis penebusan.</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Sem menamai anaknya Arpakhsad dengan harapan bahwa berkat dan batas rohani akan diteruskan kepada generasi berikutnya melaluinya. Nama \"perbatasan\" mencerminkan doa Sem agar iman terjaga dalam batas yang kudus.</p>",
-      "<p>Umur 438 tahun — sudah jauh lebih pendek dari nenek moyang pra-banjir (rata-rata 912 tahun). Ini adalah tanda awal bahwa kondisi dunia dan manusia berubah setelah banjir.</p>"
+      "<p>Arpakhsad adalah anak ketiga Sem — bukan anak pertama maupun kedua. Anak pertama (Elam) menjadi nenek moyang bangsa Elam; anak kedua (Asur) menjadi nenek moyang bangsa Asyur. Allah memilih anak ketiga untuk meneruskan garis penebusan.</p>",
+      "<p>Umur 438 tahun — sudah jauh lebih pendek dari nenek moyang pra-banjir (rata-rata 912 tahun). Ini adalah tanda awal bahwa kondisi dunia dan manusia berubah setelah banjir.</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Sem menamai anaknya Arpakhsad dengan harapan bahwa berkat dan batas rohani akan diteruskan kepada generasi berikutnya. Nama \"perbatasan\" mencerminkan doa Sem agar iman terjaga dalam batas yang kudus.</p>"
     ],
     tags:[]
   },
@@ -501,9 +507,9 @@ const PEOPLE = [
     ref:"Kejadian 11:14–15", born:637, son:30, total:433,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p>Nama Selah berasal dari kata Ibrani yang berarti \"mengutus\", \"mengirim ke luar\", atau \"tunas muda\". Arpakhsad memberi nama ini dengan harapan bahwa keturunan yang beriman akan dikirim ke seluruh penjuru bumi.</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Jika Arpakhsad menegakkan batas iman, maka Selah mengembangkan dan mengirim iman itu ke luar — seperti tunas yang tumbuh menjadi pohon besar. Ini sesuai perintah Allah setelah banjir: <em>\"Beranak-cuculah dan penuhi bumi\"</em> (Kej 9:1).</p>",
-      "<p>Umur 433 tahun — hampir sama dengan Arpakhsad, menunjukkan pola penurunan yang masih gradual pada generasi ini.</p>"
+      "<p>Nama Selah berasal dari kata Ibrani yang berarti \"mengutus\", \"mengirim ke luar\", atau \"tunas muda\".</p>",
+      "<p>Umur 433 tahun — hampir sama dengan Arpakhsad, menunjukkan pola penurunan yang masih gradual pada generasi ini.</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Arpakhsad memberi nama ini dengan harapan bahwa keturunan yang beriman akan dikirim ke seluruh penjuru bumi. Jika Arpakhsad menegakkan batas iman, maka Selah mengembangkan dan mengirim iman itu ke luar — seperti tunas yang tumbuh menjadi pohon besar. Ini sesuai perintah Allah setelah banjir: <em>\"Beranak-cuculah dan penuhi bumi\"</em> (Kej 9:1).</p>"
     ],
     tags:[]
   },
@@ -512,10 +518,10 @@ const PEOPLE = [
     ref:"Kejadian 11:16–17; 10:21", born:667, son:34, total:464,
     color:"#C0622A", colorTo:"#8B3A1A",
     notes:[
-      "<p>Nama Eber berasal dari kata Ibrani <em>abar</em> — \"menyeberangi sungai\". Dari nama inilah kata <strong>Ibrani</strong> (Hebrew) berasal — semua keturunan Eber disebut orang Ibrani. Abraham sendiri disebut \"Abram orang Ibrani\" (Kej 14:13), menunjukkan ia adalah keturunan Eber.</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Eber menyeberangi Sungai Efrat dari Mesopotamia menuju Haran dan mendirikan kota Ebla sebagai benteng iman ortodoks, saat Menara Babel sedang dibangun. Lebih dari 15.000 tablet tanah liat ditemukan di wilayah ini, membuktikan eksistensi Kerajaan Ebla yang luas.</p>",
-      "<p class='highlight-babel'>⚡ <strong>Anomali umur:</strong> Eber hidup 464 tahun — lebih panjang dari ayah dan kakeknya! Ini karena ia <em>memisahkan diri dari dosa Babel</em>. Alkitab berkata: <em>\"Umur orang fasik akan diperpendek\"</em> (Ams 10:27). Eber yang menjauh dari Babel mendapat perpanjangan umur sebagai berkat iman.</p>",
-      "<p>\"Allah Sem\" (Kej 9:26) → \"Allah anak-anak Eber\" (Kej 10:21) → \"Allah Abraham\" (Kel 3:6). Garis penebusan mengalir melalui Eber.</p>"
+      "<p>Nama Eber berasal dari kata Ibrani <em>abar</em> — \"menyeberangi sungai\". Dari nama inilah kata <strong>Ibrani</strong> (Hebrew) berasal — semua keturunan Eber disebut orang Ibrani. Abraham sendiri disebut \"Abram orang Ibrani\" (Kej 14:13).</p>",
+      "<p class='highlight-babel'>⚡ <strong>Anomali umur:</strong> Eber hidup 464 tahun — <em>lebih panjang</em> dari ayah dan kakeknya! Ini menyimpang dari pola penurunan umur yang konsisten di seluruh silsilah.</p>",
+      "<p>\"Allah Sem\" (Kej 9:26) → \"Allah anak-anak Eber\" (Kej 10:21) → \"Allah Abraham\" (Kel 3:6). Garis penebusan mengalir melalui Eber.</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Eber menyeberangi Sungai Efrat dari Mesopotamia menuju Haran dan mendirikan kota Ebla sebagai benteng iman ortodoks, saat Menara Babel sedang dibangun. Pdt. Park melihat anomali umur Eber sebagai berkat karena ia <em>memisahkan diri dari dosa Babel</em>: \"Umur orang fasik akan diperpendek\" (Ams 10:27), dan sebaliknya Eber yang menjauh mendapat perpanjangan umur.</p>"
     ],
     tags:["eber"]
   },
@@ -524,10 +530,10 @@ const PEOPLE = [
     ref:"Kejadian 11:18–19; 10:25", born:701, son:30, total:239,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p><em>\"Sebab pada zamannya bumi terbagi\"</em> (Kej 10:25) — merujuk pada peristiwa Menara Babel dan kebingungan bahasa. Nama Peleg yang berarti \"terbagi\" adalah bukti bahwa Babel terjadi tepat saat Peleg lahir (Thn 701).</p>",
-      "<p class='highlight-babel'>📖 <strong>Abraham Park:</strong> Eber memberi nama Peleg dengan harapan anaknya akan hidup kudus dan terpisah dari dunia berdosa. Namun Peleg mengecewakan — ia ikut serta dalam pembangunan Menara Babel bersama keturunan Ham. Akibatnya, umurnya <em>terpotong setengah</em>: dari 464 tahun (Eber) menjadi 239 tahun.</p>",
-      "<p class='highlight-babel'>⚡ <strong>Penurunan drastis:</strong> 464 → 239 tahun — turun hampir 50% dalam satu generasi! Ini adalah hukuman langsung atas dosa Babel. Mazmur 55:23: <em>\"Orang-orang berdarah dan penipu tidak akan sampai pada setengah umur mereka.\"</em></p>",
-      "<p>Fakta menarik: Peleg dan Abraham hidup bersamaan selama <strong>48 tahun</strong>. Abraham menyaksikan kematian dini Peleg di usia 239 tahun — pengalaman ini diduga menjadi bagian dari panggilan rohani Abraham.</p>"
+      "<p><em>\"Sebab pada zamannya bumi terbagi\"</em> (Kej 10:25) — merujuk pada peristiwa Menara Babel dan kebingungan bahasa. Nama Peleg yang berarti \"terbagi\" menandai bahwa Babel terjadi tepat saat Peleg lahir (Thn 701).</p>",
+      "<p class='highlight-babel'>⚡ <strong>Penurunan drastis:</strong> 464 → 239 tahun — turun hampir 50% dalam satu generasi! Bandingkan dengan Eber (ayahnya) yang hidup 464 tahun.</p>",
+      "<p>Fakta: Peleg dan Abraham hidup bersamaan selama <strong>48 tahun</strong>.</p>",
+      "<p class='highlight-babel'><strong>Apa yang Pdt. Park lihat:</strong> Eber memberi nama Peleg dengan harapan anaknya akan hidup kudus dan terpisah dari dunia berdosa. Namun Pdt. Park berpendapat bahwa Peleg ikut serta dalam pembangunan Menara Babel bersama keturunan Ham. Akibatnya, umurnya <em>terpotong setengah</em> — hukuman langsung atas dosa Babel. Mazmur 55:23: <em>\"Orang-orang berdarah dan penipu tidak akan sampai pada setengah umur mereka.\"</em></p>"
     ],
     tags:["babel"]
   },
@@ -536,9 +542,9 @@ const PEOPLE = [
     ref:"Kejadian 11:20–21", born:731, son:32, total:239,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p>Nama Rehu berasal dari kata yang berarti \"padang penggembalaan\", \"teman\", atau \"bergaul bersama\". Kemungkinan Rehu menjalani hidup nomaden, berpindah dari satu padang ke padang lain mencari rumput.</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Setelah bahasa dikacaukan di Babel, orang-orang membentuk komunitas baru berdasarkan kesamaan bahasa. Rehu kemungkinan memprioritaskan persahabatan dan hubungan manusiawi di atas hubungan dengan Allah. Ini adalah peringatan: persahabatan di luar Allah adalah jerat Iblis.</p>",
-      "<p>Umurnya sama persis dengan Peleg: 239 tahun — tanda bahwa pola dosa terus berlanjut. Abraham mendapat gelar \"sahabat Allah\" (2 Taw 20:7; Yak 2:23) — sesuatu yang tidak berhasil diraih Rehu.</p>"
+      "<p>Nama Rehu berasal dari kata yang berarti \"padang penggembalaan\", \"teman\", atau \"bergaul bersama\".</p>",
+      "<p>Umurnya sama persis dengan Peleg: 239 tahun — pola yang berlanjut. Abraham mendapat gelar \"sahabat Allah\" (2 Taw 20:7; Yak 2:23).</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Setelah bahasa dikacaukan di Babel, orang-orang membentuk komunitas baru berdasarkan kesamaan bahasa. Pdt. Park berpendapat bahwa Rehu memprioritaskan persahabatan dan hubungan manusiawi di atas hubungan dengan Allah — peringatan bahwa persahabatan di luar Allah bisa menjadi jerat.</p>"
     ],
     tags:[]
   },
@@ -547,9 +553,9 @@ const PEOPLE = [
     ref:"Kejadian 11:22–23", born:763, son:30, total:230,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p>Nama Serug berasal dari kata yang berarti \"sulur yang saling melilit\" dan \"busur panah\" — simbol kekuatan manusiawi dan militer. Setelah kekacauan Babel, Serug kemungkinan membangun kekuatan militer untuk melindungi komunitasnya.</p>",
-      "<p class='highlight-babel'>📖 <strong>Abraham Park:</strong> Serug mengandalkan kekuatan sendiri (busur dan panah) alih-alih Allah. Ini adalah dosa kesombongan yang sama dengan Nimrod. Mazmur 44:6: <em>\"Sebab bukan pada panahku aku percaya.\"</em> Iman sejati adalah kekuatan melalui Firman Allah, bukan kekuatan manusiawi.</p>",
-      "<p>Umur 230 tahun — terus menurun, mencerminkan kemerosotan rohani yang berkelanjutan setelah generasi Eber.</p>"
+      "<p>Nama Serug berasal dari kata yang berarti \"sulur yang saling melilit\" dan \"busur panah\" — simbol kekuatan manusiawi dan militer.</p>",
+      "<p>Umur 230 tahun — terus menurun, mencerminkan kemerosotan yang berkelanjutan setelah generasi Eber.</p>",
+      "<p class='highlight-babel'><strong>Apa yang Pdt. Park lihat:</strong> Pdt. Park berpendapat bahwa Serug mengandalkan kekuatan sendiri (busur dan panah) alih-alih Allah — dosa kesombongan yang sama dengan Nimrod. Mazmur 44:6: <em>\"Sebab bukan pada panahku aku percaya.\"</em></p>"
     ],
     tags:[]
   },
@@ -558,9 +564,9 @@ const PEOPLE = [
     ref:"Kejadian 11:24–25", born:793, son:29, total:148,
     color:"#17a79d", colorTo:"#0d6b63",
     notes:[
-      "<p>Nama Nahor berarti \"mendengus\", \"terengah-engah\", dan \"membara\" — menggambarkan seseorang yang selalu terburu-buru dan terengah-engah mengejar dunia. Nahor adalah kakek Abraham.</p>",
-      "<p class='highlight-babel'>📖 <strong>Abraham Park:</strong> Nahor memiliki ambisi duniawi yang besar — mengejar kekayaan, kehormatan, dan kesuksesan. Ia mendengus dan terengah-engah mengejar hal-hal duniawi sepanjang hidupnya. Allah mengambil nyawanya tiba-tiba pada usia 148 tahun — umur terpendek dalam silsilah ini. Lukas 12:20: <em>\"Hai orang bodoh, malam ini juga jiwamu akan diambil.\"</em></p>",
-      "<p>Nahor wafat hanya setahun setelah Peleg. Abraham berumur <strong>49 tahun</strong> ketika menyaksikan kematian dini Nahor. Dua kematian berturut-turut ini (Peleg dan Nahor) diduga menjadi faktor kuat yang mendorong Abraham merespons panggilan Allah.</p>"
+      "<p>Nama Nahor berarti \"mendengus\", \"terengah-engah\", dan \"membara\". Nahor adalah kakek Abraham.</p>",
+      "<p>Nahor wafat hanya setahun setelah Peleg. Abraham berumur <strong>49 tahun</strong> ketika Nahor wafat. Umur 148 tahun — terpendek dalam silsilah ini.</p>",
+      "<p class='highlight-babel'><strong>Apa yang Pdt. Park lihat:</strong> Pdt. Park melihat Nahor sebagai seseorang dengan ambisi duniawi yang besar — mengejar kekayaan dan kesuksesan, terengah-engah sepanjang hidupnya. Lukas 12:20: <em>\"Hai orang bodoh, malam ini juga jiwamu akan diambil.\"</em> Dua kematian berturut-turut (Peleg dan Nahor) yang disaksikan Abraham diduga menjadi faktor yang mendorong Abraham merespons panggilan Allah.</p>"
     ],
     tags:[]
   },
@@ -570,9 +576,9 @@ const PEOPLE = [
     color:"#8B5CF6", colorTo:"#6D3FD8",
     notes:[
       "<p>Nama Terah berarti \"tinggal\", \"menunda\", atau \"terlambat\" — dan hidupnya membuktikan arti namanya. Terah adalah ayah Abraham, Nahor, dan Haran. Ia adalah penyembah berhala (Yos 24:2).</p>",
-      "<p class='highlight'>📖 <strong>Abraham Park:</strong> Terah <em>mendengar</em> panggilan Allah kepada Abraham dan bahkan mengambil inisiatif membawa seluruh keluarga keluar dari Ur-Kasdim. Namun ia berhenti di Haran dan tidak pernah mencapai Kanaan. Ia meninggal di Haran pada umur 205 tahun — 40 tahun sebelum Abraham.</p>",
-      "<p class='highlight'>⚡ Terah hidup bersamaan dengan Nuh selama <strong>128 tahun</strong> — ia seharusnya memiliki akses langsung kepada iman leluhur. Namun ia tetap memilih penyembahan berhala. Ini adalah peringatan: kedekatan dengan orang beriman tidak menjamin iman seseorang.</p>",
-      "<p>Setelah Terah wafat, barulah Allah memanggil Abraham untuk kedua kalinya dari Haran: <em>\"Pergilah dari negerimu\"</em> (Kej 12:1). Dari titik ini, Abraham menjadi pusat sejarah penebusan.</p>"
+      "<p class='highlight'>⚡ Terah hidup bersamaan dengan Nuh selama <strong>128 tahun</strong> — ia seharusnya memiliki akses langsung kepada iman leluhur. Namun ia tetap memilih penyembahan berhala.</p>",
+      "<p>Setelah Terah wafat di Haran pada umur 205 tahun, barulah Allah memanggil Abraham untuk kedua kalinya: <em>\"Pergilah dari negerimu\"</em> (Kej 12:1).</p>",
+      "<p class='highlight'><strong>Apa yang Pdt. Park lihat:</strong> Terah <em>mendengar</em> panggilan Allah kepada Abraham dan bahkan mengambil inisiatif membawa seluruh keluarga keluar dari Ur-Kasdim. Namun ia berhenti di Haran dan tidak pernah mencapai Kanaan. Ia meninggal 40 tahun sebelum Abraham. Kedekatan dengan orang beriman tidak menjamin iman seseorang.</p>"
     ],
     tags:["terah"]
   },
@@ -582,10 +588,9 @@ const PEOPLE = [
     color:"#D4891A", colorTo:"#A86010",
     notes:[
       "<p>Awalnya bernama Abram (\"bapa yang mulia\"). Allah mengubah namanya menjadi Abraham (\"bapa segala bangsa\") saat berumur 99 tahun (Kej 17:5). Ia adalah generasi ke-20 dari Adam dan generasi ke-10 dari Nuh.</p>",
-      "<p class='highlight-gold'>📖 <strong>Abraham Park:</strong> Adam adalah bapa pertama umat manusia, Nuh adalah bapa dunia baru pasca-banjir, dan Abraham adalah bapa umat pilihan Israel — sekaligus bapa iman bagi semua yang percaya (Rm 4:11). Allah Sem → Allah Eber → Allah Abraham: rantai iman itu sampai kepada Abraham.</p>",
-      "<p class='highlight-gold'>⚡ <strong>Fakta menakjubkan:</strong> Saat Abraham lahir, Nuh masih hidup dan berumur 892 tahun! Mereka hidup bersama selama <strong>58 tahun</strong>. Sem masih hidup hingga Abraham berumur 150 tahun. Sepuluh generasi leluhur hidup sezaman dengan Abraham — semuanya menjadi saksi hidup sejarah penebusan.</p>",
-      "<p>Abraham dipanggil dua kali: pertama di Ur-Kasdim (Kis 7:2–3), kedua di Haran (Kej 12:1). Ia berangkat pada umur 75 tahun tanpa tahu ke mana ia pergi (Ibr 11:8). Ia hidup bersama Ishak selama <strong>75 tahun</strong> dan bersama Yakub selama <strong>15 tahun</strong> — mewariskan iman secara langsung kepada dua generasi.</p>",
-      "<p>Abraham meninggal pada umur 175 tahun — <em>\"dalam usia yang tinggi, tua dan kenyang umur\"</em> (Kej 25:8).</p>"
+      "<p class='highlight-gold'>⚡ <strong>Fakta menakjubkan:</strong> Saat Abraham lahir, Nuh masih hidup dan berumur 892 tahun — mereka hidup bersama selama <strong>58 tahun</strong>. Sem masih hidup hingga Abraham berumur 150 tahun.</p>",
+      "<p>Abraham dipanggil dua kali: pertama di Ur-Kasdim (Kis 7:2–3), kedua di Haran (Kej 12:1). Ia berangkat pada umur 75 tahun tanpa tahu ke mana ia pergi (Ibr 11:8). Ia hidup bersama Ishak selama <strong>75 tahun</strong> dan bersama Yakub selama <strong>15 tahun</strong>. Abraham meninggal pada umur 175 tahun — <em>\"dalam usia yang tinggi, tua dan kenyang umur\"</em> (Kej 25:8).</p>",
+      "<p class='highlight-gold'><strong>Apa yang Pdt. Park lihat:</strong> Adam adalah bapa pertama umat manusia, Nuh adalah bapa dunia baru pasca-banjir, dan Abraham adalah bapa umat pilihan Israel — sekaligus bapa iman bagi semua yang percaya (Rm 4:11). Allah Sem → Allah Eber → Allah Abraham: rantai iman itu sampai kepada Abraham.</p>"
     ],
     tags:["abr"]
   }
@@ -884,10 +889,10 @@ function renderCompare(){
     else if(ov>50) ins+=`Selama ${ov} tahun mereka hidup sezaman — cukup untuk mewariskan kisah leluhur secara langsung. `;
     else ins+=`Masa bersama ${ov} tahun cukup singkat, namun tetap ada kemungkinan transfer iman langsung. `;
   } else { ins+=`Kedua tokoh ini tidak pernah hidup di zaman yang sama — ada jarak ${Math.abs(ovS-ovE)} tahun di antara mereka.`; }
-  if(selA===0||selB===0) ins+=`<br><br><strong>Catatan (Abraham Park):</strong> Nuh masih hidup saat Abraham lahir! Mereka hidup bersamaan 58 tahun. Iman Nuh dapat diteruskan langsung kepada Abraham. Ini adalah "rantai iman hidup" yang tidak pernah terputus.`;
+  if(selA===0||selB===0) ins+=`<br><br><strong>Catatan (Pdt. Park):</strong> Nuh masih hidup saat Abraham lahir! Mereka hidup bersamaan 58 tahun. Iman Nuh dapat diteruskan langsung kepada Abraham. Ini adalah "rantai iman hidup" yang tidak pernah terputus.`;
   if(selA===1||selB===1) ins+=`<br><br><strong>Catatan:</strong> Sem hidup 600 tahun — ia adalah "jembatan hidup" dari zaman Nuh sampai Abraham. Sem masih hidup ketika Abraham berumur 150 tahun.`;
   if(selA===10||selB===10) ins+=`<br><br><strong>Catatan:</strong> Abraham adalah tujuan dari seluruh silsilah ini — dari "Allah Sem" → "Allah Eber" → "Allah Abraham" (Kel 3:6).`;
-  if(selA===4||selB===4)  ins+=`<br><br><strong>Catatan (Abraham Park):</strong> Eber menyeberangi Sungai Efrat, memisahkan diri dari dosa Babel. Nama "Ibrani" (Hebrew) berasal dari Eber — Abraham adalah keturunannya yang ketujuh.`;
+  if(selA===4||selB===4)  ins+=`<br><br><strong>Catatan (Pdt. Park):</strong> Eber menyeberangi Sungai Efrat, memisahkan diri dari dosa Babel. Nama "Ibrani" (Hebrew) berasal dari Eber — Abraham adalah keturunannya yang ketujuh.`;
   document.getElementById('resInsight').innerHTML=ins;
 }
 
