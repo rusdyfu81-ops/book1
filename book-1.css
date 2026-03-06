@@ -1,0 +1,17 @@
+/* ============================================================
+   BUKU 1 — Teal
+   History of Redemption · Abraham Park
+
+   Hanya berisi warna aksen. Semua style lain ada di design-system.css.
+
+   CARA PAKAI:
+   <link rel="stylesheet" href="../design-system.css">
+   <link rel="stylesheet" href="../book-css/book-1.css">
+   ============================================================ */
+
+:root {
+  --accent:      #17a79d;
+  --accent-dark: #0f8078;
+  --accent-dim:  rgba(23,167,157,.09);
+  --accent-b:    rgba(23,167,157,.25);
+}
