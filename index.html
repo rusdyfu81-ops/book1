@@ -2,318 +2,849 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>The Genesis Genealogies — Ekosistem Digital</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0F0A00">
+<title>BibleInsight · Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--teal:#17a79d;--teal-dark:#0f8078;--teal-dim:rgba(23,167,157,.09);--teal-b:rgba(23,167,157,.25);--green:#2bb673;--green-dark:#1f9058;--green-dim:rgba(43,182,115,.08);--grey:#6d6e70;--grey-light:#a0a1a3;--grey-dim:rgba(109,110,112,.08);--white:#fff;--bg:#f4f7f7;--bg2:#e8e9ea;--ink:#1a1a1b;--ink2:#3a3b3c;--font-body:'Nunito Sans',-apple-system,sans-serif;--font-display:'Lora',Georgia,serif;--radius:12px}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
-body{font-family:var(--font-body);font-size:16px;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+:root {
+  --ink: #0F0A00;
+  --ink2: #1C1408;
+  --gold: #D4A843;
+  --gold2: #F0C96A;
+  --gold3: #A07820;
+  --cream: #FBF5E6;
+  --cream2: #F0E4C8;
+  --cream3: #EDD9A3;
+  --muted: #9A8060;
+  --green: #2D6A4F;
+  --green-bg: #EAF4EE;
+  --red: #8B1A1A;
+  --red-bg: #FAEAEA;
+  --white: #FFFFFF;
+  --shadow-md: 0 8px 32px rgba(15,10,0,0.18);
+  --r: 20px;
+  --r-sm: 14px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;background:var(--white);border-bottom:1px solid var(--bg2);display:flex;align-items:center;padding:0 20px;box-shadow:0 1px 8px rgba(0,0,0,.05);gap:10px}
-.nav-logo{height:28px;width:auto;flex-shrink:0}
-.nav-divider{width:1px;height:24px;background:var(--bg2);flex-shrink:0}
-.nav-brand{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.3px;white-space:nowrap}
-.nav-sub{font-size:12px;font-weight:400;color:var(--grey-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-.hero{padding:100px 24px 60px;text-align:center;background:var(--white);position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--teal-dim) 0%,transparent 65%);pointer-events:none}
-.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,var(--green-dim) 0%,transparent 65%);pointer-events:none}
-.hero-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);background:var(--teal-dim);padding:5px 14px;border-radius:20px;margin-bottom:24px;position:relative;z-index:1}
-.hero-title{font-family:var(--font-display);font-size:clamp(36px,7vw,80px);font-weight:700;letter-spacing:-1.5px;line-height:1;color:var(--ink);margin-bottom:8px;position:relative;z-index:1}
-.hero-title span{color:var(--teal)}
-.hero-author{font-size:15px;font-weight:400;color:var(--grey);margin-bottom:24px;letter-spacing:.3px;position:relative;z-index:1}
-.hero-desc{font-size:17px;font-weight:300;line-height:1.65;color:var(--ink2);max-width:520px;margin:0 auto 16px;position:relative;z-index:1}
-.hero-desc strong{font-weight:600;color:var(--ink)}
-.hero-note{font-family:var(--font-display);font-size:14px;color:var(--grey);max-width:420px;margin:0 auto 40px;line-height:1.6;font-style:italic;position:relative;z-index:1}
-
-/* Progress Dashboard */
-.progress-dashboard{max-width:600px;margin:0 auto 32px;background:linear-gradient(135deg,rgba(23,167,157,.05),rgba(43,182,115,.03));border:1.5px solid var(--teal-b);border-radius:14px;padding:20px 24px;position:relative;z-index:1;display:none}
-.progress-dashboard.has-progress{display:block}
-.progress-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.progress-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal)}
-.progress-resume{font-size:12px;font-weight:600;color:var(--white);background:var(--teal);border:none;border-radius:8px;padding:8px 16px;cursor:pointer;transition:background .2s;min-height:36px;font-family:var(--font-body)}
-.progress-resume:hover{background:var(--teal-dark)}
-.progress-items{display:flex;gap:10px;flex-wrap:wrap}
-.progress-item{flex:1;min-width:120px;background:var(--white);border-radius:8px;padding:12px 14px;border:1px solid var(--bg2)}
-.progress-item-label{font-size:11px;font-weight:600;color:var(--grey);margin-bottom:4px}
-.progress-item-value{font-size:18px;font-weight:700;color:var(--teal)}
-.progress-item-bar{height:3px;background:var(--bg2);border-radius:2px;margin-top:6px;overflow:hidden}
-.progress-item-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:2px;transition:width .6s ease}
-
-/* Teaser */
-.teaser-section{max-width:600px;margin:0 auto 28px;position:relative;z-index:1}
-.teaser-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);text-align:center;margin-bottom:14px}
-.teaser-card{background:var(--white);border:1.5px solid var(--teal-b);border-radius:14px;padding:24px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.teaser-card:hover{box-shadow:0 6px 28px rgba(23,167,157,.14);transform:translateY(-2px)}
-.teaser-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--green))}
-.teaser-names{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.teaser-name{font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--teal);background:var(--teal-dim);padding:4px 10px;border-radius:6px;white-space:nowrap}
-.teaser-text{font-family:var(--font-display);font-size:15px;font-style:italic;color:var(--ink2);line-height:1.65;margin-bottom:10px}
-.teaser-cta{font-size:12px;font-weight:600;color:var(--teal);letter-spacing:.5px}
-
-/* Question / Persona */
-.question-section{max-width:600px;margin:0 auto;padding:0 0 16px;position:relative;z-index:1}
-.question-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:20px}
-.persona-cards{display:flex;flex-direction:column;gap:10px}
-.persona-card{background:var(--white);border:2px solid var(--bg2);border-radius:14px;padding:18px 20px;cursor:pointer;transition:all .22s;text-align:left;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden}
-.persona-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--bg2);transition:background .22s}
-.persona-card:hover{border-color:var(--teal-b);box-shadow:0 4px 20px rgba(23,167,157,.12);transform:translateY(-1px)}
-.persona-card:hover::before{background:var(--teal)}
-.persona-card.active{border-color:var(--teal);box-shadow:0 4px 24px rgba(23,167,157,.18)}
-.persona-card.active::before{background:var(--teal)}
-.persona-icon{font-size:24px;flex-shrink:0;width:40px;text-align:center}
-.persona-text{flex:1}
-.persona-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:2px}
-.persona-sub{font-size:13px;color:var(--grey);line-height:1.5}
-.persona-arrow{font-size:18px;color:var(--grey-light);transition:all .22s;flex-shrink:0}
-.persona-card:hover .persona-arrow,.persona-card.active .persona-arrow{color:var(--teal);transform:translateX(3px)}
-
-/* Tool Panels */
-.tool-panel{display:none;max-width:600px;margin:0 auto;padding-top:0}
-.tool-panel.on{display:block}
-.panel-head{padding:28px 0 20px;border-top:1px solid var(--bg2);margin-top:28px}
-.panel-head-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
-.panel-head-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-.3px}
-.panel-head-desc{font-size:14px;color:var(--grey);line-height:1.6}
-
-.tool-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.tool-card{background:var(--white);border:1px solid var(--bg2);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:flex-start;gap:14px;text-decoration:none;color:inherit;transition:all .2s;cursor:pointer;position:relative;overflow:hidden}
-.tool-card::after{content:'→';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--grey-light);transition:all .2s}
-.tool-card:hover{border-color:var(--teal-b);box-shadow:0 3px 16px rgba(23,167,157,.1);transform:translateY(-1px)}
-.tool-card:hover::after{color:var(--teal);transform:translateY(-50%) translateX(3px)}
-.tool-card.primary{border-color:var(--teal-b);background:linear-gradient(135deg,rgba(23,167,157,.04),var(--white))}
-.tool-card.primary::before{content:'MULAI DI SINI';position:absolute;top:12px;right:40px;font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--teal);background:var(--teal-dim);padding:3px 8px;border-radius:10px}
-.tool-num{width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px}
-.tool-card.primary .tool-num{background:var(--teal-dim)}
-.tool-info{flex:1;padding-right:28px}
-.tool-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
-.tool-desc{font-size:13px;color:var(--grey);line-height:1.5}
-.tool-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:5px}
-.tool-tag.teal{background:var(--teal-dim);color:var(--teal)}
-.tool-tag.green{background:var(--green-dim);color:var(--green-dark)}
-.tool-tag.grey{background:var(--grey-dim);color:var(--grey)}
-
-.panel-note{background:var(--teal-dim);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:28px}
-.panel-note p{font-size:13px;color:var(--ink2);line-height:1.65}
-.panel-note strong{font-weight:600;color:var(--ink)}
-
-.video-coming-soon{background:var(--white);border:1px dashed var(--bg2);border-radius:var(--radius);padding:20px 24px;text-align:center;margin-bottom:28px}
-.video-coming-icon{font-size:24px;margin-bottom:8px}
-.video-coming-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.video-coming-text{font-size:13px;color:var(--grey);line-height:1.5}
-
-/* All Tools */
-.all-tools{background:var(--bg);padding:60px 24px 80px}
-.all-tools-inner{max-width:600px;margin:0 auto}
-.section-title{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--bg2)}
-.all-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
-.mini-card{background:var(--white);border:1px solid var(--bg2);border-radius:10px;padding:16px 18px;cursor:pointer;transition:all .2s;display:block;text-decoration:none;color:inherit}
-.mini-card:hover{border-color:var(--teal-b);box-shadow:0 2px 12px rgba(23,167,157,.1);transform:translateY(-1px)}
-.mini-icon{font-size:20px;margin-bottom:8px}
-.mini-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3}
-.mini-desc{font-size:12px;color:var(--grey);line-height:1.5}
-.verse-footer{text-align:center;padding:40px 24px 20px;max-width:440px;margin:0 auto}
-.verse-text{font-family:var(--font-display);font-size:15px;font-style:italic;color:var(--grey);line-height:1.75;margin-bottom:10px}
-.verse-ref{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal)}
-
-@media(max-width:580px){
-  .hero{padding:80px 20px 48px}
-  .hero-desc{font-size:16px}
-  .all-grid{grid-template-columns:1fr}
-  .persona-card{gap:12px;padding:16px 18px}
-  .persona-icon{width:32px;font-size:20px}
-  .progress-items{flex-direction:column;gap:8px}
-  .progress-item{min-width:auto}
-  .nav-sub{display:none}
-  .teaser-names{gap:4px}
-  .teaser-name{font-size:12px;padding:3px 8px}
+  /* Accessibility sizing — default normal */
+  --fs-body: 15px;
+  --fs-label: 11px;
+  --fs-option: 15px;
+  --fs-question: 21px;
+  --fs-btn: 16px;
+  --pad-option: 16px 18px;
+  --pad-btn: 18px;
+  --opt-letter-size: 32px;
 }
+
+/* ── ACCESSIBLE MODE (added to <html>) ── */
+html.a11y {
+  --fs-body: 18px;
+  --fs-label: 13px;
+  --fs-option: 18px;
+  --fs-question: 24px;
+  --fs-btn: 18px;
+  --pad-option: 20px 20px;
+  --pad-btn: 22px;
+  --opt-letter-size: 40px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { font-size: var(--fs-body); }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ink);
+  color: var(--cream);
+  min-height: 100svh;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212,168,67,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(212,168,67,0.08) 0%, transparent 60%),
+    var(--ink);
+  pointer-events: none;
+}
+.bg-lines {
+  position: fixed; inset: 0; z-index: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(212,168,67,0.04) 39px, rgba(212,168,67,0.04) 40px);
+  pointer-events: none;
+}
+
+#app { position: relative; z-index: 1; min-height: 100svh; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── SCREENS ── */
+.screen { display: none; flex-direction: column; min-height: 100svh; min-height: 100vh; animation: screenIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both; }
+.screen.active { display: flex; }
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ══════════════════
+   SCREEN 1: REGISTER
+══════════════════ */
+#screen-register { padding: 0; justify-content: flex-end; }
+
+.splash-hero {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 24px 28px; text-align: center;
+}
+.splash-emblem {
+  width: 76px; height: 76px;
+  border: 2px solid var(--gold); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin-bottom: 22px;
+  position: relative; animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(212,168,67,0.2); }
+  50%      { box-shadow: 0 0 0 18px rgba(212,168,67,0); }
+}
+.splash-emblem::before {
+  content: ''; position: absolute; inset: -7px;
+  border: 1px solid rgba(212,168,67,0.22); border-radius: 50%;
+}
+.splash-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+.splash-title { font-family: 'Cormorant Garamond', serif; font-size: 54px; font-weight: 700; line-height: 1; letter-spacing: -1px; color: var(--white); margin-bottom: 8px; }
+.splash-title em { font-style: italic; color: var(--gold); }
+.splash-sub { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 270px; }
+
+.deadline-pill {
+  margin: 0 24px 24px;
+  background: rgba(212,168,67,0.08);
+  border: 1px solid rgba(212,168,67,0.22);
+  border-radius: 14px; padding: 13px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.dl-icon { font-size: 20px; flex-shrink: 0; }
+.dl-text { font-size: 13px; color: var(--cream2); line-height: 1.5; }
+.dl-text strong { color: var(--gold2); display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+
+.register-sheet {
+  background: var(--cream); border-radius: 28px 28px 0 0;
+  padding: 28px 24px calc(28px + var(--safe-bottom));
+  box-shadow: 0 -8px 40px rgba(15,10,0,0.4);
+}
+.sheet-handle { width: 36px; height: 4px; background: var(--cream3); border-radius: 2px; margin: 0 auto 26px; }
+.sheet-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+
+.field { margin-bottom: 16px; }
+.field > label {
+  display: block; font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.field input {
+  width: 100%; padding: 16px 18px;
+  background: var(--white); border: 1.5px solid var(--cream2);
+  border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-option); color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input::placeholder { color: var(--cream3); }
+.field input:focus { outline: none; border-color: var(--gold3); box-shadow: 0 0 0 3px rgba(212,168,67,0.12); }
+
+/* Group cards */
+.group-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.group-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  background: var(--white); border: 1.5px solid var(--cream2);
+  border-radius: var(--r-sm); cursor: pointer;
+  transition: all 0.2s; position: relative;
+}
+.group-card:active { transform: scale(0.985); }
+.group-card.selected { border-color: var(--gold3); background: #FFFBF0; }
+.group-card.selected::after {
+  content: '✓'; position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold3); font-weight: 700; font-size: 16px;
+}
+.gc-emoji { font-size: 26px; flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--cream); border-radius: 10px; }
+.gc-info { flex: 1; min-width: 0; }
+.gc-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.gc-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  width: 100%; padding: var(--pad-btn);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold3) 100%);
+  color: var(--ink); border: none; border-radius: var(--r-sm);
+  font-family: 'DM Sans', sans-serif; font-size: var(--fs-btn); font-weight: 600;
+  cursor: pointer; letter-spacing: 0.3px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-primary:active { transform: scale(0.97); }
+.btn-ghost {
+  width: 100%; padding: 15px;
+  background: transparent; color: var(--muted);
+  border: 1.5px solid var(--cream2); border-radius: var(--r-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+  cursor: pointer; margin-top: 10px; transition: all 0.2s;
+}
+.btn-ghost:active { background: var(--cream2); }
+
+/* ══════════════════
+   SCREEN 2: QUIZ
+══════════════════ */
+#screen-quiz { background: var(--cream); }
+
+.quiz-header {
+  background: var(--ink); padding: 20px 20px 28px; position: relative; overflow: hidden;
+}
+.quiz-header::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 20px; background: var(--cream); border-radius: 20px 20px 0 0;
+}
+.qh-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.qh-session { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.qh-timer {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(212,168,67,0.12); border: 1px solid rgba(212,168,67,0.25);
+  border-radius: 20px; padding: 7px 16px;
+  font-size: 16px; font-weight: 600; color: var(--gold2);
+  transition: all 0.3s; font-variant-numeric: tabular-nums;
+}
+.qh-timer.urgent {
+  background: rgba(139,26,26,0.22); border-color: rgba(139,26,26,0.4); color: #FF6B6B;
+  animation: urgentPulse 0.6s ease infinite;
+}
+@keyframes urgentPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+
+.progress-dots { display: flex; gap: 6px; }
+.p-dot { flex: 1; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: background 0.4s; }
+.p-dot.done { background: var(--gold3); }
+.p-dot.active { background: var(--gold2); }
+
+.quiz-body { flex: 1; padding: 28px 20px 16px; display: flex; flex-direction: column; overflow-y: auto; }
+.q-counter { font-size: var(--fs-label); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.q-text { font-family: 'Cormorant Garamond', serif; font-size: var(--fs-question); font-weight: 600; color: var(--ink); line-height: 1.45; margin-bottom: 24px; }
+
+.options-grid { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  display: flex; align-items: center; gap: 14px;
+  padding: var(--pad-option);
+  background: var(--white); border: 1.5px solid var(--cream2);
+  border-radius: var(--r-sm); cursor: pointer;
+  transition: all 0.18s; position: relative; overflow: hidden;
+  -webkit-user-select: none; user-select: none;
+}
+.option:active { transform: scale(0.984); }
+.opt-letter {
+  width: var(--opt-letter-size); height: var(--opt-letter-size);
+  border-radius: 8px; background: var(--cream); border: 1.5px solid var(--cream2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  flex-shrink: 0; transition: all 0.2s;
+}
+.opt-text { font-size: var(--fs-option); color: var(--ink2); line-height: 1.45; flex: 1; }
+
+.option.selected { border-color: var(--gold3); background: #FFFBF0; }
+.option.selected .opt-letter { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.option.correct { border-color: var(--green); background: var(--green-bg); }
+.option.correct .opt-letter { background: var(--green); border-color: var(--green); color: #fff; }
+.option.wrong { border-color: var(--red); background: var(--red-bg); }
+.option.wrong .opt-letter { background: var(--red); border-color: var(--red); color: #fff; }
+.option.disabled { cursor: default; }
+.option.disabled:not(.correct):not(.wrong) { opacity: 0.5; }
+
+.answer-feedback {
+  margin-top: 16px; padding: 14px 16px; border-radius: var(--r-sm);
+  font-size: var(--fs-label); font-weight: 500; line-height: 1.5; display: none;
+  animation: fadeUp 0.28s ease both;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.answer-feedback.show { display: block; }
+.answer-feedback.ok  { background: var(--green-bg); color: var(--green); border-left: 3px solid var(--green); font-size: 14px; }
+.answer-feedback.err { background: var(--red-bg); color: var(--red); border-left: 3px solid var(--red); font-size: 14px; }
+.feedback-big { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; }
+
+.quiz-footer {
+  padding: 14px 20px calc(20px + var(--safe-bottom));
+  background: var(--cream); border-top: 1px solid var(--cream2);
+}
+
+/* ══════════════════
+   SCREEN 3: RESULT
+══════════════════ */
+#screen-result { background: var(--ink); align-items: stretch; }
+
+.result-hero {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px 32px; text-align: center;
+}
+.result-ring {
+  width: 148px; height: 148px; border-radius: 50%;
+  margin: 0 auto 28px; position: relative;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+}
+.result-ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.result-ring-bg { stroke: rgba(212,168,67,0.12); fill: none; stroke-width: 6; }
+.result-ring-fill {
+  stroke: var(--gold); fill: none; stroke-width: 6; stroke-linecap: round;
+  stroke-dasharray: 432; stroke-dashoffset: 432;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1) 0.3s;
+  filter: drop-shadow(0 0 6px rgba(212,168,67,0.5));
+}
+.result-score-num { font-family: 'Cormorant Garamond', serif; font-size: 50px; font-weight: 700; color: var(--gold); line-height: 1; position: relative; z-index: 1; }
+.result-score-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); position: relative; z-index: 1; }
+
+.result-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.result-group { font-size: 13px; color: var(--gold); margin-bottom: 6px; }
+.result-msg { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+
+.result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+.stat-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,168,67,0.15); border-radius: 12px; padding: 16px 8px; text-align: center; }
+.stat-val { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; color: var(--gold2); line-height: 1; display: block; }
+.stat-key { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; display: block; }
+
+.result-sheet { background: var(--cream); border-radius: 28px 28px 0 0; padding: 28px 24px calc(28px + var(--safe-bottom)); }
+
+/* ══════════════════
+   SCREEN 4: LEADERBOARD
+══════════════════ */
+#screen-lb { background: var(--cream); }
+
+.lb-header { background: var(--ink); padding: 56px 20px 32px; position: relative; }
+.lb-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 24px; background: var(--cream); border-radius: 24px 24px 0 0; }
+.lb-back {
+  position: absolute; top: 20px; left: 20px;
+  width: 38px; height: 38px; background: rgba(255,255,255,0.08);
+  border: none; border-radius: 10px; color: var(--cream);
+  font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.lb-header-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.lb-header-sub { font-size: 13px; color: var(--muted); }
+
+.lb-tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 20px 20px 0; }
+.lb-tabs-wrap::-webkit-scrollbar { display: none; }
+.lb-tabs-inner { display: flex; gap: 8px; padding-bottom: 16px; width: max-content; }
+.lb-tab {
+  padding: 9px 18px; border: 1.5px solid var(--cream2); border-radius: 20px;
+  background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px;
+  font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+.lb-tab.active { background: var(--ink); border-color: var(--ink); color: var(--gold); }
+
+.lb-body { flex: 1; overflow-y: auto; padding: 4px 20px calc(24px + var(--safe-bottom)); }
+
+.podium { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 8px; margin-bottom: 20px; align-items: flex-end; }
+.podium-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; }
+.podium-avatar { border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2.5px solid transparent; flex-shrink: 0; }
+.podium-item:nth-child(1) .podium-avatar { width: 48px; height: 48px; font-size: 20px; border-color: #C0C0C0; background: #F5F5F5; }
+.podium-item:nth-child(2) .podium-avatar { width: 58px; height: 58px; font-size: 26px; border-color: #FFD700; background: #FFFBEA; }
+.podium-item:nth-child(3) .podium-avatar { width: 44px; height: 44px; font-size: 18px; border-color: #CD7F32; background: #FFF4EA; }
+.podium-name { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.podium-gname { font-size: 10px; color: var(--muted); }
+.podium-pts { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--gold3); }
+.podium-block { width: 100%; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.podium-item:nth-child(1) .podium-block { height: 44px; background: linear-gradient(180deg,#D8D8D8,#C0C0C0); }
+.podium-item:nth-child(2) .podium-block { height: 64px; background: linear-gradient(180deg,#FFE566,#FFD700); }
+.podium-item:nth-child(3) .podium-block { height: 32px; background: linear-gradient(180deg,#E8A060,#CD7F32); }
+
+.lb-list { display: flex; flex-direction: column; gap: 8px; }
+.lb-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; background: var(--white);
+  border-radius: var(--r-sm); border: 1.5px solid var(--cream2); transition: all 0.2s;
+}
+.lb-item.me { border-color: var(--gold3); background: #FFFBF0; }
+.lb-rank-num { width: 28px; font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; flex-shrink: 0; }
+.lb-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--cream); border: 1.5px solid var(--cream2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.lb-info { flex: 1; min-width: 0; }
+.lb-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.lb-group { font-size: 12px; color: var(--muted); }
+.lb-pts-wrap { text-align: right; flex-shrink: 0; }
+.lb-pts { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+.lb-pts-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; top: 20px; left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: var(--ink); color: var(--gold2);
+  border: 1px solid rgba(212,168,67,0.3); border-radius: 20px;
+  padding: 12px 24px; font-size: 14px; font-weight: 500;
+  z-index: 999; white-space: nowrap;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: var(--shadow-md);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── CONFETTI ── */
+.confetti-piece { position: fixed; width: 8px; height: 8px; border-radius: 2px; top: -10px; animation: confettiFall linear forwards; z-index: 500; pointer-events: none; }
+@keyframes confettiFall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+/* ── A11Y TOGGLE ── */
+.a11y-toggle {
+  position: fixed; bottom: calc(20px + var(--safe-bottom)); right: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(212,168,67,0.15); border: 1.5px solid rgba(212,168,67,0.3);
+  color: var(--gold2); font-size: 18px; cursor: pointer; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(15,10,0,0.3);
+}
+.a11y-toggle:active { transform: scale(0.9); }
+html.a11y .a11y-toggle { background: var(--gold); color: var(--ink); }
 </style>
 </head>
 <body>
+<div class="bg-layer"></div>
+<div class="bg-lines"></div>
+<div class="toast" id="toast"></div>
+<button class="a11y-toggle" onclick="toggleA11y()" title="Mode aksesibel">Aa</button>
 
-<nav class="nav">
-  <img src="Logo_Sejarah_Penebusan-03.png" alt="Sejarah Penebusan" class="nav-logo" onerror="this.style.display='none'">
-  <div class="nav-divider"></div>
-  <div class="nav-brand">The Genesis Genealogies</div>
-  <div class="nav-sub">— Pdt. Abraham Park</div>
-</nav>
+<div id="app">
 
-<section class="hero">
-  <div class="hero-tag">Ekosistem Digital</div>
-  <h1 class="hero-title">Bukan untuk<br><span>mengerti buku.</span></h1>
-  <p class="hero-author">The Genesis Genealogies — Pdt. Abraham Park</p>
-  <p class="hero-desc">Tujuannya adalah <strong>mengenal Allah</strong> yang ada di dalam Alkitab.</p>
-  <p class="hero-note">"Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan demi keturunan." — Ulangan 32:7</p>
-
-  <div class="progress-dashboard" id="progressDash">
-    <div class="progress-header">
-      <div class="progress-label">Perjalananmu</div>
-      <button class="progress-resume" id="resumeBtn" onclick="resumeJourney()">Lanjutkan →</button>
-    </div>
-    <div class="progress-items" id="progressItems"></div>
+<!-- ══ SCREEN 1: REGISTER ══ -->
+<div class="screen active" id="screen-register">
+  <div class="splash-hero">
+    <div class="splash-emblem">✦</div>
+    <div class="splash-tag">Sesi 3 · Quiz Aktif</div>
+    <h1 class="splash-title">Bible<em>Insight</em></h1>
+    <p class="splash-sub">Uji pemahamanmu, kumpulkan poin, dan bersaing di leaderboard</p>
   </div>
 
-  <div class="teaser-section" id="teaserSection">
-    <div class="teaser-label">Lihat sekilas apa yang ada di dalam</div>
-    <div class="teaser-card" onclick="go('names-as-prophecies.html')">
-      <div class="teaser-names">
-        <span class="teaser-name">Adam</span><span class="teaser-name">Set</span><span class="teaser-name">Enos</span><span class="teaser-name">Kenan</span><span class="teaser-name">Mahalaleel</span><span class="teaser-name">Yared</span><span class="teaser-name">Henokh</span><span class="teaser-name">Metusalah</span><span class="teaser-name">Lamekh</span><span class="teaser-name">Nuh</span>
-      </div>
-      <div class="teaser-text">Sepuluh nama dari Adam sampai Nuh — setiap nama adalah doa orang tua kepada anaknya. Bukan kode yang harus dipecahkan, tapi suara yang harus didengar.</div>
-      <div class="teaser-cta">Dengarkan kesepuluh nama ini →</div>
+  <div class="deadline-pill">
+    <div class="dl-icon">⏳</div>
+    <div class="dl-text">
+      <strong>Deadline Quiz</strong>
+      Minggu, 25 Mei 2026 · Pukul 23:59
     </div>
   </div>
 
-  <div class="question-section">
-    <div class="question-label">Di mana kamu dalam perjalanan ini?</div>
-    <div class="persona-cards">
-      <div class="persona-card" onclick="selectPersona('a')" id="card-a" tabindex="0" role="button">
-        <div class="persona-icon">👀</div>
-        <div class="persona-text"><div class="persona-title">Belum baca buku ini</div><div class="persona-sub">Baru dengar, ingin tahu lebih dulu sebelum mulai membaca</div></div>
-        <div class="persona-arrow">›</div>
-      </div>
-      <div class="persona-card" onclick="selectPersona('b')" id="card-b" tabindex="0" role="button">
-        <div class="persona-icon">📖</div>
-        <div class="persona-text"><div class="persona-title">Sedang atau baru mulai membaca</div><div class="persona-sub">Sudah beli buku, butuh pendamping bab per bab</div></div>
-        <div class="persona-arrow">›</div>
-      </div>
-      <div class="persona-card" onclick="selectPersona('c')" id="card-c" tabindex="0" role="button">
-        <div class="persona-icon">🤔</div>
-        <div class="persona-text"><div class="persona-title">Sudah selesai baca</div><div class="persona-sub">Mengerti isinya, tapi belum merasakan perubahannya</div></div>
-        <div class="persona-arrow">›</div>
+  <div class="register-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Siapa kamu?</div>
+
+    <div class="field">
+      <label>Nama Lengkap</label>
+      <input type="text" id="inp-name" placeholder="Tulis nama kamu..." autocomplete="name">
+    </div>
+
+    <div class="field">
+      <label>Pilih Grupmu</label>
+      <div class="group-grid" id="group-grid">
+        <!-- rendered by JS -->
       </div>
     </div>
+
+    <button class="btn-primary" onclick="startQuiz()">
+      Mulai Quiz <span style="font-size:18px">→</span>
+    </button>
+    <button class="btn-ghost" onclick="goLB()">🏆 Lihat Leaderboard</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: QUIZ ══ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-header">
+    <div class="qh-top">
+      <span class="qh-session">BibleInsight · Sesi 3</span>
+      <div class="qh-timer" id="timer">⏱ 30</div>
+    </div>
+    <div class="progress-dots" id="progress-dots"></div>
   </div>
 
-  <!-- Panel A -->
-  <div class="tool-panel" id="panel-a">
-    <div class="panel-head">
-      <div class="panel-head-label">Untuk kamu yang belum mulai</div>
-      <div class="panel-head-title">Dengar dulu — sebelum membaca</div>
-      <div class="panel-head-desc">Mulai dari gambaran besar. Lihat bagaimana Allah menjaga satu garis iman dari Adam sampai Abraham — melewati banjir, menara Babel, dan setiap generasi yang hampir putus — dan rasakan mengapa silsilah ini bukan daftar nama.</div>
-    </div>
-    <div class="tool-grid">
-      <a class="tool-card primary" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;">
-        <div class="tool-num">🌊</div>
-        <div class="tool-info"><div class="tool-name">Two Rivers Timeline</div><div class="tool-desc">Peta visual silsilah dari Adam sampai Abraham — garis iman yang terus mengalir meski diganggu, dan garis yang memilih arah lain.</div><span class="tool-tag teal">Orientasi · 15 menit</span></div>
-      </a>
-      <a class="tool-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;">
-        <div class="tool-num">📜</div>
-        <div class="tool-info"><div class="tool-name">Sepuluh Nama, Satu Perjalanan</div><div class="tool-desc">Sepuluh nama dari Adam sampai Nuh — setiap nama adalah doa orang tua kepada anaknya.</div><span class="tool-tag teal">Bab 10 · 10 menit</span></div>
-      </a>
-      <a class="tool-card" href="kejadian-5-silsilah-adam.html" onclick="go('kejadian-5-silsilah-adam.html');return false;">
-        <div class="tool-num">📋</div>
-        <div class="tool-info"><div class="tool-name">Silsilah Adam — Kejadian 5</div><div class="tool-desc">Data lengkap umur dan tahun hidup sepuluh patriark — lihat polanya langsung dari Alkitab.</div><span class="tool-tag grey">Referensi Kej 5</span></div>
-      </a>
-      <a class="tool-card" href="kejadian-11-silsilah-nuh.html" onclick="go('kejadian-11-silsilah-nuh.html');return false;">
-        <div class="tool-num">🏛️</div>
-        <div class="tool-info"><div class="tool-name">Silsilah Nuh — Kejadian 11</div><div class="tool-desc">Dari Sem sampai Abraham — pasca-Banjir, menuju Babel dan seterusnya.</div><span class="tool-tag grey">Referensi Kej 11</span></div>
-      </a>
-    </div>
-    <div class="panel-note"><p>Setelah melihat gambaran besar, kamu bisa memutuskan apakah ingin membaca bukunya. Jika ya, mulai dengan <strong>Reading Companion</strong> — bukan buku sendirian.</p></div>
-    <div class="video-coming-soon">
-      <div class="video-coming-icon">🎬</div>
-      <div class="video-coming-title">5 Video Pengantar sedang disiapkan</div>
-      <div class="video-coming-text">Lima sesi video yang merangkum inti buku — dari "Consider the Years" sampai "A New Work of Salvation." Nantikan segera.</div>
-    </div>
+  <div class="quiz-body" id="quiz-body">
+    <div class="q-counter" id="q-counter">Soal 1 dari 5</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options-grid" id="options-grid"></div>
+    <div class="answer-feedback" id="answer-feedback"></div>
   </div>
 
-  <!-- Panel B -->
-  <div class="tool-panel" id="panel-b">
-    <div class="panel-head">
-      <div class="panel-head-label">Untuk kamu yang sedang membaca</div>
-      <div class="panel-head-title">Alkitab adalah tujuannya — Pdt. Park adalah teman baca</div>
-      <div class="panel-head-desc">Tools ini hadir bukan untuk menggantikan buku — tapi untuk menemanimu masuk lebih dalam ke Alkitab. Setiap bab punya peta argumen, pertanyaan sebelum membaca, dan satu pertanyaan yang tidak bisa dijawab secara intelektual.</div>
-    </div>
-    <div class="tool-grid">
-      <a class="tool-card primary" href="reading-journey.html" onclick="go('reading-journey.html');return false;"><div class="tool-num">🗺️</div><div class="tool-info"><div class="tool-name">Reading Companion</div><div class="tool-desc">14 bab lengkap. Tiga pertanyaan sebelum membaca, satu pertanyaan sesudah. Progress tersimpan otomatis.</div><span class="tool-tag teal">Pendamping Utama · 14 Bab</span></div></a>
-      <a class="tool-card" href="kalkulator-kronologi.html" onclick="go('kalkulator-kronologi.html');return false;"><div class="tool-num">🔢</div><div class="tool-info"><div class="tool-name">Kalkulator Kronologi</div><div class="tool-desc">Hitung sendiri tahun hidup para patriark dan lihat siapa yang hidup sezaman dengan siapa.</div><span class="tool-tag grey">Kalkulator Interaktif</span></div></a>
-      <a class="tool-card" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;"><div class="tool-num">🌊</div><div class="tool-info"><div class="tool-name">Two Rivers Timeline</div><div class="tool-desc">Referensi visual saat membaca Bab 8–13.</div><span class="tool-tag grey">Referensi Visual</span></div></a>
-      <a class="tool-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;"><div class="tool-num">📜</div><div class="tool-info"><div class="tool-name">Sepuluh Nama, Satu Perjalanan</div><div class="tool-desc">Pendamping khusus untuk Bab 10.</div><span class="tool-tag grey">Referensi Bab 10</span></div></a>
-    </div>
+  <div class="quiz-footer">
+    <button class="btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none">
+      Lanjut <span style="font-size:18px">→</span>
+    </button>
   </div>
+</div>
 
-  <!-- Panel C -->
-  <div class="tool-panel" id="panel-c">
-    <div class="panel-head">
-      <div class="panel-head-label">Untuk kamu yang sudah selesai membaca</div>
-      <div class="panel-head-title">Sebelum melangkah lebih jauh — berhenti sejenak</div>
-      <div class="panel-head-desc">Tidak semua orang mau duduk cukup lama untuk melihat apa yang ada di balik silsilah-silsilah ini. Kamu sudah melakukannya. Luangkan satu menit untuk mencatat apa yang terjadi dalam dirimu.</div>
+<!-- ══ SCREEN 3: RESULT ══ -->
+<div class="screen" id="screen-result">
+  <div class="result-hero">
+    <div class="result-ring">
+      <svg viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <circle class="result-ring-bg" cx="74" cy="74" r="68"/>
+        <circle class="result-ring-fill" id="ring-fill" cx="74" cy="74" r="68"/>
+      </svg>
+      <div class="result-score-num" id="res-pts">0</div>
+      <div class="result-score-label">poin sesi ini</div>
     </div>
-    <div class="tool-grid">
-      <a class="tool-card primary" href="cermin-setelah-buku.html" onclick="go('cermin-setelah-buku.html');return false;"><div class="tool-num">🪞</div><div class="tool-info"><div class="tool-name">Cermin Setelah Buku</div><div class="tool-desc">Refleksi singkat: apa yang kamu alami, apa yang berubah, dan langkah selanjutnya yang bisa kamu ambil.</div><span class="tool-tag teal">Refleksi · 10 menit</span></div></a>
+    <div class="result-name" id="res-name">—</div>
+    <div class="result-group" id="res-group">—</div>
+    <div class="result-msg" id="res-msg">—</div>
+    <div class="result-stats">
+      <div class="stat-box"><span class="stat-val" id="res-correct">0</span><span class="stat-key">Benar</span></div>
+      <div class="stat-box"><span class="stat-val" id="res-wrong">0</span><span class="stat-key">Salah</span></div>
+      <div class="stat-box"><span class="stat-val" id="res-pct">0%</span><span class="stat-key">Akurasi</span></div>
     </div>
   </div>
-</section>
+  <div class="result-sheet">
+    <button class="btn-primary" onclick="goLB()">🏆 Lihat Leaderboard</button>
+    <button class="btn-ghost" onclick="goHome()">← Kembali ke Beranda</button>
+  </div>
+</div>
 
-<section class="all-tools">
-  <div class="all-tools-inner">
-    <div class="section-title">Semua Tools dalam Ekosistem Ini</div>
-    <div class="all-grid">
-      <a class="mini-card" href="two-rivers-timeline.html" onclick="go('two-rivers-timeline.html');return false;"><div class="mini-icon">🌊</div><div class="mini-name">Two Rivers Timeline</div><div class="mini-desc">Garis iman yang terus mengalir — dan apa yang terus mengganggunya</div></a>
-      <a class="mini-card" href="reading-journey.html" onclick="go('reading-journey.html');return false;"><div class="mini-icon">🗺️</div><div class="mini-name">Reading Companion</div><div class="mini-desc">Pendamping 14 bab buku Pdt. Park</div></a>
-      <a class="mini-card" href="names-as-prophecies.html" onclick="go('names-as-prophecies.html');return false;"><div class="mini-icon">📜</div><div class="mini-name">Sepuluh Nama</div><div class="mini-desc">Sepuluh doa orang tua — dari Adam sampai Nuh</div></a>
-      <a class="mini-card" href="cermin-setelah-buku.html" onclick="go('cermin-setelah-buku.html');return false;"><div class="mini-icon">🪞</div><div class="mini-name">Cermin Setelah Buku</div><div class="mini-desc">Refleksi singkat setelah selesai membaca</div></a>
-      <a class="mini-card" href="kalkulator-kronologi.html" onclick="go('kalkulator-kronologi.html');return false;"><div class="mini-icon">🔢</div><div class="mini-name">Kalkulator Kronologi</div><div class="mini-desc">Hitung sendiri umur dan tumpang tindih para patriark</div></a>
-      <a class="mini-card" href="kejadian-5-silsilah-adam.html" onclick="go('kejadian-5-silsilah-adam.html');return false;"><div class="mini-icon">📋</div><div class="mini-name">Silsilah Adam — Kej 5</div><div class="mini-desc">Sepuluh patriark pra-Banjir, data lengkap dari Alkitab</div></a>
-      <a class="mini-card" href="kejadian-11-silsilah-nuh.html" onclick="go('kejadian-11-silsilah-nuh.html');return false;"><div class="mini-icon">🏛️</div><div class="mini-name">Silsilah Nuh — Kej 11</div><div class="mini-desc">Dari Sem sampai Abraham, pasca-Banjir</div></a>
-    </div>
-    <div class="verse-footer">
-      <p class="verse-text">"Ingatlah hari-hari dahulu kala, perhatikanlah tahun-tahun keturunan demi keturunan. Tanyakanlah kepada bapamu, maka ia akan memberitahukan kepadamu."</p>
-      <div class="verse-ref">Ulangan 32:7</div>
-    </div>
+<!-- ══ SCREEN 4: LEADERBOARD ══ -->
+<div class="screen" id="screen-lb">
+  <div class="lb-header">
+    <button class="lb-back" onclick="goHome()">←</button>
+    <div class="lb-header-title">Leaderboard</div>
+    <div class="lb-header-sub">Akumulasi poin seluruh sesi</div>
   </div>
-</section>
+  <div class="lb-tabs-wrap">
+    <div class="lb-tabs-inner" id="lb-tabs"></div>
+  </div>
+  <div class="lb-body">
+    <div class="podium" id="lb-podium"></div>
+    <div class="lb-list" id="lb-list"></div>
+  </div>
+</div>
+
+</div>
 
 <script>
-function readEcosystemProgress(){
-  var p={hasAny:false,reading:null,cermin:null,resumeUrl:null};
-  try{
-    var rc=localStorage.getItem('genesis-companion-v1');
-    if(rc){var d=JSON.parse(rc),n=0;if(d.read)for(var k in d.read)if(d.read[k])n++;if(n>0){p.reading={done:n,total:14};p.hasAny=true;p.resumeUrl='reading-journey.html'}}
-    var cm=localStorage.getItem('sp-buku1-cermin-v1');
-    if(cm){var d=JSON.parse(cm);if(d&&(d.sk1||d.sk2||d.sk3||d.momen)){p.cermin=true;p.hasAny=true;if(!p.resumeUrl)p.resumeUrl='cermin-setelah-buku.html'}}
-  }catch(e){}
-  return p;
+// ─── GROUPS ──────────────────────────────────────────────────────────
+const GROUPS = [
+  {
+    id: 'G1', name: 'Yerusalem', emoji: '🏛️',
+    sub: 'Grup 1 · Usia 20–29 tahun',
+    hint: 'Generasi Z — lahir 1997–2006',
+    count: 33
+  },
+  {
+    id: 'G2', name: 'Antiokhia', emoji: '⚓',
+    sub: 'Grup 2 · Usia 30–45 tahun',
+    hint: 'Milenial — lahir 1981–1996',
+    count: 32
+  },
+  {
+    id: 'G3', name: 'Efesus', emoji: '🕍',
+    sub: 'Grup 3 · Usia 45–70 tahun',
+    hint: 'Gen X & Boomer — lahir 1956–1981',
+    count: 32
+  },
+  {
+    id: 'G4', name: 'Korintus', emoji: '🌊',
+    sub: 'Grup 4',
+    hint: '',
+    count: 32
+  },
+  {
+    id: 'G5', name: 'Galatia', emoji: '🌿',
+    sub: 'Grup 5',
+    hint: '',
+    count: 33
+  }
+];
+
+// ─── QUESTIONS ───────────────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    q: "Dalam Sesi 3, kitab apakah yang menjadi fokus utama tentang perjanjian Allah dengan Abraham?",
+    opts: ["Keluaran","Kejadian","Ulangan","Yosua"], ans: 1
+  },
+  {
+    q: "Janji Allah kepada Abraham mencakup tiga hal utama. Yang BUKAN bagian dari janji tersebut adalah...",
+    opts: ["Tanah perjanjian","Keturunan yang banyak","Hikmat yang luar biasa","Berkat bagi bangsa-bangsa"], ans: 2
+  },
+  {
+    q: "Kata Ibrani untuk 'perjanjian' yang sering muncul dalam hubungan Allah dengan umat-Nya adalah...",
+    opts: ["Shalom","Berith","Torah","Hesed"], ans: 1
+  },
+  {
+    q: "Tanda perjanjian antara Allah dan Abraham dalam Kejadian 17 adalah...",
+    opts: ["Pelangi","Sabat","Sunat","Persembahan domba"], ans: 2
+  },
+  {
+    q: "Konsep 'hesed' dalam Perjanjian Lama paling tepat diterjemahkan sebagai...",
+    opts: ["Hukuman yang adil","Kasih setia / kesetiaan perjanjian","Kekuatan ilahi","Kemarahan Allah"], ans: 1
+  }
+];
+
+// ─── LEADERBOARD DATA (demo) ──────────────────────────────────────────
+const EMOJIS = ['😊','🌟','📖','🙏','🌿','👑','🕊️','🌻','⭐','💫','🎯','✨'];
+let LEADERBOARD = [
+  { name:"Anita Wijaya",   group:"Yerusalem",  gid:'G1', pts:215, emoji:'🌟' },
+  { name:"Budi Santoso",   group:"Efesus",     gid:'G3', pts:200, emoji:'📖' },
+  { name:"Citra Lestari",  group:"Antiokhia",  gid:'G2', pts:195, emoji:'🕊️' },
+  { name:"David Kurnia",   group:"Yerusalem",  gid:'G1', pts:185, emoji:'🙏' },
+  { name:"Eka Putri",      group:"Korintus",   gid:'G4', pts:180, emoji:'🌿' },
+  { name:"Fajar Nugroho",  group:"Galatia",    gid:'G5', pts:175, emoji:'👑' },
+  { name:"Grace Halim",    group:"Antiokhia",  gid:'G2', pts:170, emoji:'✨' },
+  { name:"Hendra S.",      group:"Efesus",     gid:'G3', pts:162, emoji:'🌻' },
+  { name:"Indah Permata",  group:"Korintus",   gid:'G4', pts:155, emoji:'⭐' },
+  { name:"Joko Purnomo",   group:"Galatia",    gid:'G5', pts:148, emoji:'🎯' },
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────
+let S = {
+  name:'', groupId:'', groupName:'', emoji:'😊',
+  qi:0, score:0, correct:0, wrong:0,
+  answered:false, timeLeft:30, timer:null
+};
+
+// ─── INIT ─────────────────────────────────────────────────────────────
+function init() {
+  renderGroupCards();
+  renderLBTabs();
 }
 
-function renderProgressDashboard(){
-  var p=readEcosystemProgress();
-  if(!p.hasAny)return;
-  var dash=document.getElementById('progressDash');
-  dash.classList.add('has-progress');
-  document.getElementById('teaserSection').style.display='none';
-  var items=document.getElementById('progressItems');
-  var html='';
-  if(p.reading){var pct=Math.round((p.reading.done/p.reading.total)*100);html+='<div class="progress-item"><div class="progress-item-label">Reading Companion</div><div class="progress-item-value">'+p.reading.done+' / '+p.reading.total+'</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:'+pct+'%"></div></div></div>'}
-  if(p.cermin){html+='<div class="progress-item"><div class="progress-item-label">Cermin Setelah Buku</div><div class="progress-item-value">✓</div><div class="progress-item-bar"><div class="progress-item-fill" style="width:100%"></div></div></div>'}
-  items.innerHTML=html;
-  document.getElementById('resumeBtn').setAttribute('data-url',p.resumeUrl);
+function renderGroupCards() {
+  document.getElementById('group-grid').innerHTML = GROUPS.map(g => `
+    <div class="group-card" id="gc-${g.id}" onclick="selectGroup('${g.id}')">
+      <div class="gc-emoji">${g.emoji}</div>
+      <div class="gc-info">
+        <div class="gc-name">${g.name}</div>
+        <div class="gc-sub">${g.sub}${g.hint ? ' · ' + g.hint : ''}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
-function resumeJourney(){var btn=document.getElementById('resumeBtn');var url=btn.getAttribute('data-url');if(url)window.location.href=url}
-
-function selectPersona(id){
-  document.querySelectorAll('.persona-card').forEach(function(c){c.classList.remove('active')});
-  document.querySelectorAll('.tool-panel').forEach(function(p){p.classList.remove('on')});
-  document.getElementById('card-'+id).classList.add('active');
-  var panel=document.getElementById('panel-'+id);
-  panel.classList.add('on');
-  setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'start'})},80);
+function selectGroup(id) {
+  document.querySelectorAll('.group-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('gc-' + id).classList.add('selected');
+  S.groupId = id;
+  S.groupName = GROUPS.find(g => g.id === id).name;
 }
 
-function go(url){window.location.href=url}
+function renderLBTabs() {
+  document.getElementById('lb-tabs').innerHTML =
+    `<button class="lb-tab active" onclick="filterLB('all',this)">🌍 Semua</button>` +
+    GROUPS.map(g => `<button class="lb-tab" onclick="filterLB('${g.id}',this)">${g.emoji} ${g.name}</button>`).join('');
+}
 
-document.addEventListener('keydown',function(e){
-  if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('persona-card')){e.preventDefault();e.target.click()}
-});
+// ─── NAVIGATION ──────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollTop = 0;
+}
+function goHome() { clearInterval(S.timer); showScreen('screen-register'); }
+function goLB()   { showScreen('screen-lb'); filterLB('all', document.querySelector('.lb-tab')); }
 
-renderProgressDashboard();
+// ─── A11Y TOGGLE ─────────────────────────────────────────────────────
+function toggleA11y() {
+  const on = document.documentElement.classList.toggle('a11y');
+  showToast(on ? '🔍 Mode aksesibel ON' : 'Mode normal');
+}
+
+// ─── QUIZ FLOW ────────────────────────────────────────────────────────
+function startQuiz() {
+  S.name = document.getElementById('inp-name').value.trim();
+  if (!S.name)    { showToast('Tulis nama kamu dulu 😊'); return; }
+  if (!S.groupId) { showToast('Pilih grupmu dulu 😊'); return; }
+  S.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+  S.qi = 0; S.score = 0; S.correct = 0; S.wrong = 0;
+  buildDots();
+  showScreen('screen-quiz');
+  renderQ();
+}
+
+function buildDots() {
+  document.getElementById('progress-dots').innerHTML =
+    QUESTIONS.map((_,i) => `<div class="p-dot" id="pd-${i}"></div>`).join('');
+}
+
+function updateDots() {
+  QUESTIONS.forEach((_,i) => {
+    const d = document.getElementById(`pd-${i}`);
+    d.className = 'p-dot' + (i < S.qi ? ' done' : i === S.qi ? ' active' : '');
+  });
+}
+
+function renderQ() {
+  S.answered = false; S.timeLeft = 30;
+  clearInterval(S.timer);
+  const q = QUESTIONS[S.qi];
+  const letters = ['A','B','C','D'];
+
+  document.getElementById('q-counter').textContent = `Soal ${S.qi+1} dari ${QUESTIONS.length}`;
+  document.getElementById('q-text').textContent = q.q;
+
+  document.getElementById('options-grid').innerHTML = q.opts.map((opt,i) => `
+    <div class="option" id="opt-${i}" onclick="pick(${i})">
+      <div class="opt-letter">${letters[i]}</div>
+      <div class="opt-text">${opt}</div>
+    </div>
+  `).join('');
+
+  const fb = document.getElementById('answer-feedback');
+  fb.className = 'answer-feedback'; fb.innerHTML = '';
+  document.getElementById('next-btn').style.display = 'none';
+  updateDots();
+  startTimer();
+}
+
+function startTimer() {
+  const el = document.getElementById('timer');
+  el.classList.remove('urgent');
+  el.textContent = `⏱ ${S.timeLeft}`;
+  S.timer = setInterval(() => {
+    S.timeLeft--;
+    el.textContent = `⏱ ${S.timeLeft}`;
+    if (S.timeLeft <= 10) el.classList.add('urgent');
+    if (S.timeLeft <= 0) { clearInterval(S.timer); if (!S.answered) timeUp(); }
+  }, 1000);
+}
+
+function pick(idx) {
+  if (S.answered) return;
+  S.answered = true;
+  clearInterval(S.timer);
+  const q = QUESTIONS[S.qi];
+  const opts = document.querySelectorAll('.option');
+  const fb = document.getElementById('answer-feedback');
+  const bonus = S.timeLeft >= 20;
+  const ok = idx === q.ans;
+
+  opts.forEach(o => o.classList.add('disabled'));
+
+  if (ok) {
+    opts[idx].classList.add('correct');
+    const pts = 10 + (bonus ? 5 : 0);
+    S.score += pts; S.correct++;
+    fb.className = 'answer-feedback show ok';
+    fb.innerHTML = `<div class="feedback-big">+${pts} poin ${bonus ? '🚀' : '✓'}</div><div style="margin-top:4px">${bonus ? 'Bonus kecepatan +5 poin!' : 'Jawaban benar!'}</div>`;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    S.wrong++;
+    fb.className = 'answer-feedback show err';
+    fb.innerHTML = `Jawaban benar: <strong>${['A','B','C','D'][q.ans]}. ${q.opts[q.ans]}</strong>`;
+  }
+
+  const nb = document.getElementById('next-btn');
+  nb.style.display = 'flex';
+  nb.innerHTML = (S.qi < QUESTIONS.length-1)
+    ? 'Lanjut <span style="font-size:18px">→</span>'
+    : 'Lihat Hasil <span style="font-size:18px">→</span>';
+}
+
+function timeUp() {
+  S.answered = true; S.wrong++;
+  const q = QUESTIONS[S.qi];
+  document.querySelectorAll('.option').forEach(o => o.classList.add('disabled'));
+  document.querySelectorAll('.option')[q.ans].classList.add('correct');
+  const fb = document.getElementById('answer-feedback');
+  fb.className = 'answer-feedback show err';
+  fb.innerHTML = `⏰ Waktu habis! Jawaban benar: <strong>${['A','B','C','D'][q.ans]}. ${q.opts[q.ans]}</strong>`;
+  const nb = document.getElementById('next-btn');
+  nb.style.display = 'flex';
+  nb.innerHTML = (S.qi < QUESTIONS.length-1)
+    ? 'Lanjut <span style="font-size:18px">→</span>'
+    : 'Lihat Hasil <span style="font-size:18px">→</span>';
+}
+
+function nextQuestion() {
+  S.qi++;
+  if (S.qi < QUESTIONS.length) renderQ();
+  else showResult();
+}
+
+// ─── RESULT ───────────────────────────────────────────────────────────
+function showResult() {
+  showScreen('screen-result');
+  const pct = Math.round((S.correct / QUESTIONS.length) * 100);
+  const msgs = [[5,'🌟 Sempurna! Luar biasa!'],[4,'👏 Hebat! Hampir sempurna!'],[3,'💪 Bagus! Terus tingkatkan!'],[1,'📖 Pelajari lagi, ya!'],[0,'🙏 Jangan menyerah!']];
+  const msg = msgs.find(m => S.correct >= m[0])[1];
+
+  document.getElementById('res-pts').textContent = S.score;
+  document.getElementById('res-name').textContent = S.name;
+  document.getElementById('res-group').textContent = `${GROUPS.find(g=>g.id===S.groupId).emoji} ${S.groupName}`;
+  document.getElementById('res-msg').textContent = msg;
+  document.getElementById('res-correct').textContent = S.correct;
+  document.getElementById('res-wrong').textContent = S.wrong;
+  document.getElementById('res-pct').textContent = pct + '%';
+
+  // Animate ring (circumference = 2π×68 ≈ 427)
+  const circ = 2 * Math.PI * 68;
+  document.getElementById('ring-fill').style.strokeDasharray = circ;
+  document.getElementById('ring-fill').style.strokeDashoffset = circ;
+  setTimeout(() => {
+    document.getElementById('ring-fill').style.strokeDashoffset = circ - (circ * pct / 100);
+  }, 100);
+
+  if (pct >= 80) launchConfetti();
+
+  // Add to leaderboard
+  LEADERBOARD.push({ name: S.name, group: S.groupName, gid: S.groupId, pts: S.score + 130, emoji: S.emoji, isMe: true });
+  LEADERBOARD.sort((a,b) => b.pts - a.pts);
+}
+
+// ─── LEADERBOARD ─────────────────────────────────────────────────────
+function filterLB(gid, btn) {
+  document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const data = gid === 'all' ? LEADERBOARD : LEADERBOARD.filter(x => x.gid === gid);
+  renderPodium(data.slice(0,3));
+  renderList(data.slice(3,20));
+}
+
+function renderPodium(top) {
+  if (!top.length) { document.getElementById('lb-podium').innerHTML = ''; return; }
+  const order  = [top[1], top[0], top[2]].filter(Boolean);
+  const medals = ['🥈','🥇','🥉'];
+  const heights= ['44px','64px','32px'];
+  document.getElementById('lb-podium').innerHTML = order.map((p,i) => `
+    <div class="podium-item">
+      <div class="podium-avatar">${p.emoji}</div>
+      <div class="podium-name">${p.name.split(' ')[0]}</div>
+      <div class="podium-gname">${p.group}</div>
+      <div class="podium-pts">${p.pts} poin</div>
+      <div class="podium-block" style="height:${heights[i]}">${medals[i]}</div>
+    </div>`).join('');
+}
+
+function renderList(data) {
+  const el = document.getElementById('lb-list');
+  if (!data.length) { el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px;font-size:14px">Belum ada data lagi.</div>'; return; }
+  el.innerHTML = data.map((p,i) => `
+    <div class="lb-item${p.isMe?' me':''}">
+      <div class="lb-rank-num">${i+4}</div>
+      <div class="lb-avatar">${p.emoji}</div>
+      <div class="lb-info">
+        <div class="lb-name">${p.name}${p.isMe?' <span style="font-size:10px;background:var(--gold3);color:#fff;padding:1px 6px;border-radius:4px;font-weight:700;vertical-align:middle;margin-left:4px">KAMU</span>':''}</div>
+        <div class="lb-group">${p.group}</div>
+      </div>
+      <div class="lb-pts-wrap">
+        <div class="lb-pts">${p.pts}</div>
+        <div class="lb-pts-label">poin</div>
+      </div>
+    </div>`).join('');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── CONFETTI ────────────────────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#D4A843','#F0C96A','#2D6A4F','#8B1A1A','#ffffff','#C9A84C'];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.5}s;transform:rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 4000);
+  }
+}
+
+init();
 </script>
 </body>
 </html>
